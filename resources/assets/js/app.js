@@ -1,22 +1,21 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
+window.onload = function () {
+    var images = ["./images/Background/Bg1.jpg",
+        "./images/Background/Bg2.jpg",
+        "./images/Background/Bg3.jpg",
+        "./images/Background/Bg4.jpg"
+    ];
+    var imageHead = document.getElementById("banner-background");
+    var i = 0;
 
-window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+    function changeImage() {   
+        imageHead.style.background = 'linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url("' + images[i] + '")';
+        i = i + 1;
+        if (i == images.length) {
+            i =  0;
+        }
+        console.log('changed')
+    }
+    changeImage();
+    window.setInterval(changeImage, 5000);
+}

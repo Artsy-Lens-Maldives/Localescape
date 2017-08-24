@@ -1,9 +1,14 @@
-
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+//Misc
+@import "./components/misc";
+//Banner
+@import "./components/banner";
+//Card
+@import "./components/card";
+//Footer
+@import "./components/footer";
