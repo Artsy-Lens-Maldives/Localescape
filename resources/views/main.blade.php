@@ -84,7 +84,7 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript">
+    <script async type="text/javascript">
         $('.multiple-items').slick({
           dots: true,
           infinite: false,
