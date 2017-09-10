@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-    <script src="https://use.fontawesome.com/9866e075b3.js"></script>
+    
     @yield('css')
     <style type="text/css">
         .slick-prev:before, .slick-next:before{
@@ -39,8 +39,9 @@
         @include('partials.footer')
     </div>
     <!-- SCRIPTS -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/slick.min.js') }}"></script>
+    <script async src="{{ asset('js/app.js') }}"></script>
+    <script async src="{{ asset('js/slick.min.js') }}"></script>
+    <script async src="https://use.fontawesome.com/9866e075b3.js"></script>
     @yield('js')
 </body>
 </html>
