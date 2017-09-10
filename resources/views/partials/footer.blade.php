@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-                <img class="footer-image" src="http://via.placeholder.com/220x60" height="60" width="220">
+                <img class="footer-image" src="https://via.placeholder.com/220x60" height="60" width="220">
                 <p>Booking, reviews and advices on hotels, resorts, flights, vacation rentals, travel packages, and lots more!</p>
             </div>
             <div class="col-md-2 col-sm-6 col-xs-12">

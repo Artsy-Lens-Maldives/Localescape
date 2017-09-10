@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://cachecachevoyages.com/photos/guest-house-rasdhoo-island-maldives/guest-house-rasdhoo-island-maldives-scuba-diving.jpg');">
+                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
                     <div class="card-category">Rasdhoo</div>
                         <div class="card-description">
                             <h2>Rasdhoo View In</h2>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://www.cachecachevoyages.com/photos/guest-house-rasdhoo-island-maldives/guest-house-rasdhoo-island-maldives.jpg');">
+                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
                     <div class="card-category">Rasdhoo</div>
                         <div class="card-description">
                             <h2>Rasdhoo View In</h2>
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://www.cachecachevoyages.com/photos/guest-house-rasdhoo-island-maldives/guest-house-rasdhoo-island-maldives-local-guest-houses.jpg');">
+                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
                     <div class="card-category">Rasdhoo</div>
                         <div class="card-description">
                             <h2>Rasdhoo View In</h2>
@@ -89,7 +89,7 @@
           dots: true,
           infinite: false,
           slidesToShow: 3,
-          slidesToScroll: 3
+          slidesToScroll: 1
         });
     </script>
 @endsection

@@ -14,7 +14,6 @@ window.onload = function () {
         if (i == images.length) {
             i =  0;
         }
-        console.log('changed')
     }
     changeImage();
     window.setInterval(changeImage, 5000);
