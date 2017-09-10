@@ -18,3 +18,10 @@ window.onload = function () {
     changeImage();
     window.setInterval(changeImage, 5000);
 }
+
+$('.multiple-items').slick({
+    dots: false,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1
+  });
