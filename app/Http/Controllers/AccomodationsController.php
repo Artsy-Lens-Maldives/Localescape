@@ -2,19 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Hotels;
+use App\Accomodations;
 use Illuminate\Http\Request;
 
-class HotelsController extends Controller
+class AccomodationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $take = $request->take;
+        $type = $request->type;
+
+        if ($request->has('type') && $request->has('take')) {
+            return Accomodations::type($type)->take($take)->get();
+        }
+        if ($request->has('type')) {
+            return Accomodations::type($type)->get();
+        }
+        if ($request->has('take')) {
+            return Accomodations::take($take)->get();
+        }
+        return Accomodations::all();
     }
 
     /**
@@ -41,21 +53,21 @@ class HotelsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Hotels  $hotels
+     * @param  \App\Accomodations  $accomodations
      * @return \Illuminate\Http\Response
      */
-    public function show(Hotels $hotels)
+    public function show($type, Accomodations $accomodations)
     {
-        //
+        return $accomodations;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Hotels  $hotels
+     * @param  \App\Accomodations  $accomodations
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hotels $hotels)
+    public function edit(Accomodations $accomodations)
     {
         //
     }
@@ -64,10 +76,10 @@ class HotelsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hotels  $hotels
+     * @param  \App\Accomodations  $accomodations
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hotels $hotels)
+    public function update(Request $request, Accomodations $accomodations)
     {
         //
     }
@@ -75,10 +87,10 @@ class HotelsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Hotels  $hotels
+     * @param  \App\Accomodations  $accomodations
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hotels $hotels)
+    public function destroy(Accomodations $accomodations)
     {
         //
     }
