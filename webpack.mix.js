@@ -12,4 +12,11 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .styles([
+    'public/css/combine/bootstrap.min.css',
+    'public/css/combine/font-awesome.min.css',
+    'public/css/combine/zabuto_calendar.min.css',
+    'public/css/combine/owl.carousel.min.css',
+    'public/css/combine/elegant-fonts.css'
+], 'public/css/rest.css');

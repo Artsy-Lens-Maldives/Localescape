@@ -685,6 +685,12 @@ function previewImage(input) {
     }
 }
 
+var _latitude = 4.1744608;
+var _longitude = 73.5097978;
+var element = "map-item";
+var useAjax = true;
+bigMap(_latitude, _longitude, element, useAjax);
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
