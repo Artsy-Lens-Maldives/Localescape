@@ -47,14 +47,14 @@
             <div class="container">
                 <div class="primary-nav">
                     <div class="left">
-                        <a href="index.html" id="brand"><img src="/img/logo-invert.png" alt=""></a>
+                        <a href="{{ url('/') }}" id="brand"><img src="/img/logo-invert.png" alt=""></a>
                         <a class="nav-trigger" data-toggle="collapse" href="#primary-nav" aria-expanded="false" aria-controls="primary-nav"><i class="fa fa-navicon"></i></a>
                     </div>
                     <!--end left-->
-                    <div class="right">
+                    <div class="right" >
                         <nav id="primary-nav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li class="active"><a href="index.html">Home</a></li>
                                 <li><a href="about-us.html">About Us</a></li>
                                 <li>
                                     <a href="#" class="has-child">Listing</a>
@@ -63,7 +63,7 @@
                                         <li><a href="listing-matrix.html">Matrix Listing</a></li>
                                     </ul>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="#" class="has-child">Pages</a>
                                     <ul class="child-nav">
                                         <li><a href="404.html">404</a></li>
@@ -94,7 +94,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="contact-us.html">Contact Us</a></li>
-                                <li class="submit"><a href="submit.html"><span>Submit</span><i data-toggle="tooltip" data-placement="top" title="Submit"><img src="/assets/img/plus.png" alt=""></i></a></li>
+                                <li class="submit"><a href="submit.html"><span>Submit</span><i data-toggle="tooltip" data-placement="top" title="Submit"><img src="assets/img/plus.png" alt=""></i></a></li>
                             </ul>
                         </nav>
                         <!--end nav-->
@@ -105,4 +105,5 @@
             </div>
             <!--end container-->
         </header>
+        <!--end header-->
     </div>

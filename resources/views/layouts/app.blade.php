@@ -7,14 +7,15 @@
     <meta name="author" content="Mohamed Athik">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
     <title>Local Escape</title>
-
     <!-- CSS Files -->
-    <link href="/css/rest.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/app.css" type="text/css">
-</head>
+    <link href="/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/fonts/elegant-fonts.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/css/zabuto_calendar.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 <body>
     
 <div class="page-wrapper">
@@ -27,29 +28,44 @@
 <!--end page-wrapper-->
 <a href="#page-header" class="to-top scroll" data-show-after-scroll="600"><i class="arrow_up"></i></a>    
 
-    <!-- Script Tags -->
-    <script type="text/javascript">
-        [
-            'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js',
-            'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js',
-            'https://maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places',
-            '/js/infobox.js',
-            '/js/markerclusterer_packed.js',
-            '/js/richmarker-compiled.js',
-            '/js/markerwithlabel_packed.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js',
-            '/js/maps.js',
-            '/js/app.js'
-        ].forEach(function(src) {
-        var script = document.createElement('script');
-        script.src = src;
-        script.async = false; 
-        document.head.appendChild(script);
-        });
-    </script>
+<!-- Script Tags -->
+<script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places"></script>
+<script type="text/javascript" src="/js/infobox.js"></script>
+<script type="text/javascript" src="/js/markerclusterer_packed.js"></script>
+<script type="text/javascript" src="/js/richmarker-compiled.js"></script>
+<script type="text/javascript" src="/js/markerwithlabel_packed.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/js/icheck.min.js"></script>
+<script type="text/javascript" src="/js/owl.carousel.js"></script>
+<script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
+
+<script type="text/javascript" src="/js/maps.js"></script>
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<!--[if lte IE 9]>
+<script src="/js/ie.js"></script>
+<![endif]-->
+
+<script>
+    var _latitude = 48.47292127;
+    var _longitude = 4.28672791;
+    var element = "map-item";
+    var useAjax = true;
+    bigMap(_latitude,_longitude, element, useAjax);
+</script>
+
+
+<!-- <script type="text/javascript">
+    ['/js/app.js'].forEach(function(src) {
+    var script = document.createElement('script');
+    script.src = src;
+    script.async = false; 
+    document.head.appendChild(script);
+    });
+</script> -->
 </body>
 </html>
