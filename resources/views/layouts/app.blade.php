@@ -10,38 +10,53 @@
     
     <title>Local Escape</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="apple-mobile-web-app-title" content="Localescape">
-    <meta name="application-name" content="Localescape">
-    <meta name="theme-color" content="#ffffff">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-    
-    @yield('css')
-    <style type="text/css">
-        .slick-prev:before, .slick-next:before{
-            color: #3498db;
-        }
-    </style>
+    <!-- CSS Files -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/elegant-fonts.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/zabuto_calendar/1.2.1/zabuto_calendar.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/app.css" type="text/css">
 </head>
 <body>
-    <div id="root" class="global-wrap">
-        @include('partials.header')
-            @yield('content')
-        <div class="gap"></div>
-        @include('partials.footer')
+    
+<div class="page-wrapper">
+    @include('partials.header')
+    <div id="page-content">
+        @yield('content')
     </div>
-    <!-- SCRIPTS -->
-    <script async src="{{ asset('js/app.js') }}"></script>
-    <script async src="{{ asset('js/slick.min.js') }}"></script>
-    <script async src="https://use.fontawesome.com/9866e075b3.js"></script>
-    @yield('js')
+    @include('partials.footer')
+</div>
+<!--end page-wrapper-->
+<a href="#page-header" class="to-top scroll" data-show-after-scroll="600"><i class="arrow_up"></i></a>    
+
+    <!-- Script Tags -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js" integrity="sha256-xNJPayfMfO6lb77HhrsfSG/a2aH5mPdg920fRGceEFw=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places"></script>
+    <!--START No CDN -->
+    <script type="text/javascript" src="/js/infobox.js"></script>
+    <script type="text/javascript" src="/js/markerclusterer_packed.js"></script>
+    <script type="text/javascript" src="/js/richmarker-compiled.js"></script>
+    <script type="text/javascript" src="/js/markerwithlabel_packed.js"></script>
+    <!--END No CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js" integrity="sha256-TueWqYu0G+lYIimeIcMI8x1m14QH/DQVt4s9m/uuhPw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js" integrity="sha256-8HGN1EdmKWVH4hU3Zr3FbTHoqsUcfteLZJnVmqD/rC8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha256-4OK8Th0+5QJMThqlimytmqQvxjqMic4YATocjyuUh1w=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha256-4OK8Th0+5QJMThqlimytmqQvxjqMic4YATocjyuUh1w=" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script type="text/javascript" src="/js/maps.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>    
+
+    <script>
+        var _latitude = 4.1744608;
+        var _longitude = 73.5097978;
+        var element = "map-item";
+        var useAjax = true;
+        bigMap(_latitude,_longitude, element, useAjax);
+    </script>
 </body>
 </html>

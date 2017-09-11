@@ -1,40 +1,43 @@
-<footer class="main-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <img class="footer-image" src="https://via.placeholder.com/220x60" height="60" width="220">
-                <p>Booking, reviews and advices on hotels, resorts, flights, vacation rentals, travel packages, and lots more!</p>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                
-                <form action="" method="POST" role="form">
-                    <h4>Subscribe to Newsletter</h4>
-                    <div class="form-group">
-                        <label for="email_newletter">Enter your E-mail Address</label>
-                        <input type="email" class="form-control" name="email_newletter" id="email_newletter" placeholder="example@gmail.com">
+    <footer id="page-footer">
+        <div class="row-one">
+            <div class="container">
+                <div class="logos">
+                    <div class="logo">
+                        <a href="#"><img src="/assets/img/logo-1.png" alt=""></a>
                     </div>
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
-                </form>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <ul class="list-unstyled">
-                    <li>About Us</li>
-                    <li>Gallery</li>
-                    <li>Contact Us</li>
-                    <li>Blog</li>
-                    <li>Hotels</li>
-                    <li>Resorts</li>
-                    <li>Guest House</li>
-                    <li>Extranet - Photo Packages</li>
-                    <li>Extranet - Diving Packages</li>
-                    <li>Extranet - Accomodation</li>
-                </ul>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <h4>Have Questions?</h4>
-                <h3>+960-9555-544</h3>
-                <h3><a href="mailto:info@localescapemaldives.com">info@localescapemaldives.com</a></h3>
+                    <!--/ .logo-->
+                    <div class="logo">
+                        <a href="#"><img src="/assets/img/logo-2.png" alt=""></a>
+                    </div>
+                    <!--/ .logo-->
+                    <div class="logo">
+                        <a href="#"><img src="/assets/img/logo-3.png" alt=""></a>
+                    </div>
+                    <!--/ .logo-->
+                    <div class="logo">
+                        <a href="#"><img src="/assets/img/logo-4.png" alt=""></a>
+                    </div>
+                    <!--/ .logo-->
+                    <div class="logo">
+                        <a href="#"><img src="/assets/img/logo-5.png" alt=""></a>
+                    </div>
+                    <!--/ .logo-->
+                </div>
+                <!--/ .logos-->
             </div>
         </div>
-    </div>
-</footer>
+        <!--end row-one-->
+        <div class="row-two clearfix">
+            <div class="container">
+                <div class="copyright pull-left">(C) <?php echo date("Y"); ?> Local Escape, All Rights Reserved</div>
+                <div class="footer-nav pull-right">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">About Us</a>
+                    <a href="listing.html">Listing</a>
+                    <a href="contact-us.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="bg-transfer"><img src="/assets/img/footer-bg.jpg" alt=""></div>
+        </div>
+        <!--end row-two-->
+    </footer>

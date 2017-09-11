@@ -1,84 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="banner-background" class="banner" style="">
-        <div class="banner-content">
-            <h1>Local Escape</h1>
-            <p>Find Your Perfect Trip <br>
-            Search for hotels</p>
-            <form action="#" class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="Where">
+    <div class="container">
+        <!-- <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Listing</a></li>
+            <li class="active">Detail</li>
+        </ol> -->
+        <!-- end breadcrumb-->
+        <div class="main-content">
+            <!-- <div class="title">
+                <h1>404</h1>
+            </div> -->
+            <!--end title-->
+            <div class="error-message">
+                <h2>404</h2>
+                <div class="message">
+                    <h3>Page not found</h3>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="Check In">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="Check Out">
-                </div>
-                <div class="form-group">
-                    <select name="" id="" class="form-control input-lg">
-                        <option value="1">1 Guest</option>
-                        <option value="2">2 Guest</option>
-                        <option value="3">3 Guest</option>
-                        <option value="4">4 Guest</option>
-                        <option value="5">5 Guest</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Search">
+            </div>
+            <!--end error-message-->
+            <form class="labels-uppercase">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+
+                                    <input type="search" class="form-control" id="search" name="search" placeholder="Enter Search Keyword">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary ">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
-    </div>
-    <div class="gap"></div>
-    <div class="container">
-        <div class="row multiple-items">
-            <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
-                    <div class="card-category">Rasdhoo</div>
-                        <div class="card-description">
-                            <h2>Rasdhoo View In</h2>
-                        </div>
-                    <a class="card-link" href="#" ></a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
-                    <div class="card-category">Rasdhoo</div>
-                        <div class="card-description">
-                            <h2>Rasdhoo View In</h2>
-                        </div>
-                    <a class="card-link" href="#" ></a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449555.jpg');">
-                    <div class="card-category">Rasdhoo</div>
-                        <div class="card-description">
-                            <h2>Rasdhoo View In</h2>
-                        </div>
-                    <a class="card-link" href="#" ></a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
-                    <div class="card-category">Rasdhoo</div>
-                        <div class="card-description">
-                            <h2>Rasdhoo View In</h2>
-                        </div>
-                    <a class="card-link" href="#" ></a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://aff.bstatic.com/images/hotel/840x460/454/45449549.jpg');">
-                    <div class="card-category">Rasdhoo</div>
-                        <div class="card-description">
-                            <h2>Rasdhoo View In</h2>
-                        </div>
-                    <a class="card-link" href="#" ></a>
-                </div>
-            </div>
-        </div>
+        <!--end main-content-->
     </div>
 @endsection

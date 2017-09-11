@@ -1,58 +1,108 @@
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Local Escape</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                <li><a href="#">Hotels</a></li>
-                <li><a href="#">Resorts</a></li>
-                <li><a href="#">Guest House</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tours <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Tours</a></li>
-                        <li><a href="#">Photo Packages</a></li>
-                        <li><a href="#">Diving Packages</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                @if (Auth::guest())
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-                @else
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, {{ Auth::user()->name }} <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Dashboard</a></li>
-                        <li>
-                        <a href="{{ url('/customer/logout') }}"
-                            onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ url('/customer/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                        </li>
-                    </ul>
-                </li>
-                @endif
-            </ul>
-        </div><!-- /.navbar-collapse -->
+    <div id="page-header">
+        <header>
+            <div class="container">
+                <div class="secondary-nav">
+                    <div class="nav-trigger"><a data-toggle="collapse" href="#secondary-nav" aria-expanded="false" aria-controls="secondary-nav"><i class="fa fa-user"></i></a></div>
+                    <div id="secondary-nav">
+                        <nav>
+                            <div class="left opacity-60">
+                                <a href="phone:+9609999777"><i class="fa fa-phone"></i>+960 9999777</a>
+                                <a href="mailto:info@localescapemaldives.com"><i class="fa fa-envelope"></i>info@localescapemaldives.com</a>
+                            </div>
+                            <!--end left-->
+                            <div class="right">
+                                <div class="element">
+                                    <select>
+                                        <option>$</option>
+                                        <option>€</option>
+                                    </select>
+                                </div>
+                                <!--end element-->
+                                <div class="element">
+                                    <a href="#tab-sign-in" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Sign In</a>
+                                </div>
+                                <!--end element-->
+                                <div class="element">
+                                    <a href="#tab-register" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Register</a>
+                                </div>
+                                <!--end element-->
+                                <div class="element">
+                                    <select>
+                                        <option>EN</option>
+                                        <option>DE</option>
+                                        <option>RU</option>
+                                        <option>ES</option>
+                                    </select>
+                                </div>
+                                <!--end element-->
+                            </div>
+                            <!--end right-->
+                        </nav>
+                    </div>
+                </div>
+                <!--end secondary-nav-->
+            </div>
+            <!--end container-->
+            <hr>
+            <div class="container">
+                <div class="primary-nav">
+                    <div class="left">
+                        <a href="index.html" id="brand"><img src="/img/logo-invert.png" alt=""></a>
+                        <a class="nav-trigger" data-toggle="collapse" href="#primary-nav" aria-expanded="false" aria-controls="primary-nav"><i class="fa fa-navicon"></i></a>
+                    </div>
+                    <!--end left-->
+                    <div class="right">
+                        <nav id="primary-nav">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about-us.html">About Us</a></li>
+                                <li>
+                                    <a href="#" class="has-child">Listing</a>
+                                    <ul class="child-nav">
+                                        <li><a href="listing.html">List Listing</a></li>
+                                        <li><a href="listing-matrix.html">Matrix Listing</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active">
+                                    <a href="#" class="has-child">Pages</a>
+                                    <ul class="child-nav">
+                                        <li><a href="404.html">404</a></li>
+                                        <li>
+                                            <a href="#" class="has-child">Admin</a>
+                                            <ul class="child-nav">
+                                                <li><a href="edit.html">Edit Accommodation</a></li>
+                                                <li><a href="my-accommodations.html">My Accommodations</a></li>
+                                                <li><a href="profile.html">Profile</a></li>
+                                                <li><a href="reservations.html">Reservations</a></li>
+                                                <li><a href="reviews.html">Reviews</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="detail.html">Accommodation Detail</a></li>
+                                        <li><a href="become-an-affiliate.html">Become an Affiliate</a></li>
+                                        <li>
+                                            <a href="#" class="has-child">Blog</a>
+                                            <ul class="child-nav">
+                                                <li><a href="blog.html">Blog Listing</a></li>
+                                                <li><a href="blog-detail.html">Blog Detail</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="grid.html">Grid</a></li>
+                                        <li><a href="sticky-footer.html">Sticky Footer</a></li>
+                                        <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact-us.html">Contact Us</a></li>
+                                <li class="submit"><a href="submit.html"><span>Submit</span><i data-toggle="tooltip" data-placement="top" title="Submit"><img src="/assets/img/plus.png" alt=""></i></a></li>
+                            </ul>
+                        </nav>
+                        <!--end nav-->
+                    </div>
+                    <!--end right-->
+                </div>
+                <!--end primary-nav-->
+            </div>
+            <!--end container-->
+        </header>
     </div>
-</nav>
