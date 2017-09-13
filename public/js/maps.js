@@ -170,7 +170,7 @@ function bigMap(_latitude,_longitude, element, useAjax){
         }
         var geocoder = new google.maps.Geocoder();
         var map = new google.maps.Map(document.getElementById(element), {
-            zoom: 9,
+            zoom: 16,
             scrollwheel: true,
             center: new google.maps.LatLng(_latitude, _longitude),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
