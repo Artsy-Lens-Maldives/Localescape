@@ -28,7 +28,7 @@ function simpleMap(_latitude,_longitude, element, markerDrag){
     }
     var mapCenter = new google.maps.LatLng(_latitude,_longitude);
     var mapOptions = {
-        zoom: 9,
+        zoom: 16,
         center: mapCenter,
         disableDefaultUI: true,
         scrollwheel: true,

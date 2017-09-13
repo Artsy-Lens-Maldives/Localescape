@@ -31,7 +31,7 @@
 <!-- Script Tags -->
 <script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places"></script>
+<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places"></script>
 <script type="text/javascript" src="/js/infobox.js"></script>
 <script type="text/javascript" src="/js/markerclusterer_packed.js"></script>
 <script type="text/javascript" src="/js/richmarker-compiled.js"></script>
@@ -51,8 +51,8 @@
 <![endif]-->
 
 <script>
-    var _latitude = 48.47292127;
-    var _longitude = 4.28672791;
+    var _latitude = 4.1744154;
+    var _longitude = 73.5088892;
     var element = "map-item";
     var useAjax = true;
     bigMap(_latitude,_longitude, element, useAjax);
