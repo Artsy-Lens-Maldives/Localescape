@@ -19,3 +19,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/all', 'AccomodationsController@index');
+
+Route::get('/extranet/submit', function () {
+    return view('extranet.submit');
+});

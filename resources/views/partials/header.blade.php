@@ -54,47 +54,26 @@
                     <div class="right" >
                         <nav id="primary-nav">
                             <ul>
-                                <li class="active"><a href="index.html">Home</a></li>
-                                <li><a href="about-us.html">About Us</a></li>
+                                <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="{{ url('/hotels') }}">Hotels</a></li>
+                                <li><a href="{{ url('/resorts') }}">Resort</a></li>
+                                <li><a href="{{ url('/guest-house') }}">Guest House</a></li>
                                 <li>
-                                    <a href="#" class="has-child">Listing</a>
+                                    <a href="{{ url('/tours') }}" class="has-child">Tours</a>
                                     <ul class="child-nav">
-                                        <li><a href="listing.html">List Listing</a></li>
-                                        <li><a href="listing-matrix.html">Matrix Listing</a></li>
+                                        <li><a href="{{ url('/photo-pack') }}">Photo Package</a></li>
+                                        <li><a href="{{ url('/diving-pack') }}">Diving Package</a></li>
+                                        <li><a href="{{ url('/photo-pack') }}">Photo Package</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="{{ url('/blog') }}">Blog</a></li>
                                 <li>
-                                    <a href="#" class="has-child">Pages</a>
+                                    <a href="{{ url('/about-us') }}" class="has-child">About Us</a>
                                     <ul class="child-nav">
-                                        <li><a href="404.html">404</a></li>
-                                        <li>
-                                            <a href="#" class="has-child">Admin</a>
-                                            <ul class="child-nav">
-                                                <li><a href="edit.html">Edit Accommodation</a></li>
-                                                <li><a href="my-accommodations.html">My Accommodations</a></li>
-                                                <li><a href="profile.html">Profile</a></li>
-                                                <li><a href="reservations.html">Reservations</a></li>
-                                                <li><a href="reviews.html">Reviews</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="detail.html">Accommodation Detail</a></li>
-                                        <li><a href="become-an-affiliate.html">Become an Affiliate</a></li>
-                                        <li>
-                                            <a href="#" class="has-child">Blog</a>
-                                            <ul class="child-nav">
-                                                <li><a href="blog.html">Blog Listing</a></li>
-                                                <li><a href="blog-detail.html">Blog Detail</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="grid.html">Grid</a></li>
-                                        <li><a href="sticky-footer.html">Sticky Footer</a></li>
-                                        <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+                                        <li><a href="{{ url('/gallery') }}">Gallery</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact-us.html">Contact Us</a></li>
-                                <li class="submit"><a href="submit.html"><span>Submit</span><i data-toggle="tooltip" data-placement="top" title="Submit"><img src="assets/img/plus.png" alt=""></i></a></li>
+                                <li><a href="{{ url('/contact-us') }}">Contact Us</a></li>
                             </ul>
                         </nav>
                         <!--end nav-->
