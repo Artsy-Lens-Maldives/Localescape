@@ -61,9 +61,9 @@
                                 <li>
                                     <a href="{{ url('/tours') }}" class="has-child">Tours</a>
                                     <ul class="child-nav">
-                                        <li><a href="{{ url('/photo-pack') }}">Photo Package</a></li>
-                                        <li><a href="{{ url('/diving-pack') }}">Diving Package</a></li>
-                                        <li><a href="{{ url('/photo-pack') }}">Photo Package</a></li>
+                                        <li><a href="{{ url('/tours') }}">Tours</a></li>
+                                        <li><a href="{{ url('/diving-package') }}">Diving Package</a></li>
+                                        <li><a href="{{ url('/photo-package') }}">Photo Package</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{ url('/blog') }}">Blog</a></li>

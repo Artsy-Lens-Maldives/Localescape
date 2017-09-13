@@ -9,13 +9,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Local Escape</title>
     <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/all.css" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <link href="/fonts/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="/fonts/elegant-fonts.css" rel="stylesheet" type="text/css">
-    <link href='//fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="/css/zabuto_calendar.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    @yield('css')
 <body>
     
 <div class="page-wrapper">
@@ -43,20 +42,14 @@
 <script type="text/javascript" src="/js/owl.carousel.js"></script>
 <script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
 
+@yield('js')
+
 <script type="text/javascript" src="/js/maps.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>
 
 <!--[if lte IE 9]>
 <script src="/js/ie.js"></script>
 <![endif]-->
-
-<script>
-    var _latitude = 4.1744154;
-    var _longitude = 73.5088892;
-    var element = "map-item";
-    var useAjax = true;
-    bigMap(_latitude,_longitude, element, useAjax);
-</script>
 
 
 <!-- <script type="text/javascript">

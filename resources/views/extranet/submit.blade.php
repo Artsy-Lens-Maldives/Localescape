@@ -420,3 +420,10 @@
         </div>
         <!--end container-->
 @endsection     
+
+
+@section('js')
+
+<script type="text/javascript" src="/js/jQuery.MultiFile.min.js"></script>
+
+@endsection

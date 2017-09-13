@@ -37,7 +37,7 @@
                     <a href="contact-us.html">Contact Us</a>
                 </div>
             </div>
-            <div class="bg-transfer"><img src="assets/img/footer-bg.jpg" alt=""></div>
+            <div class="bg-transfer"><img src="/assets/img/footer-bg.jpg" alt=""></div>
         </div>
         <!--end row-two-->
     </footer>
