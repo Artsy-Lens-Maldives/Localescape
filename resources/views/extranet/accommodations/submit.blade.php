@@ -1,10 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.extranet')
 
 @section('content')
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Extranet</a></li>
+                <li><a href="#">Accommodations</a></li>
                 <li class="active">Submit</li>
             </ol>
             <!--end breadcrumb-->

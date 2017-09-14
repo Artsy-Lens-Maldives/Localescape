@@ -95,6 +95,39 @@ Route::get('/terms-and-conditions', function () {
     return view('about.terms-and-conditions');
 });
 
-Route::get('/extranet/submit', function () {
-    return view('extranet.submit');
+Route::prefix('extranet')->group(function () {
+    Route::get('/', function () {
+        return view('extranet.home');
+    });
+
+    Route::get('/home', function () {
+        return view('extranet.home');
+    });
+
+    Route::get('/profile', function () {
+        return view('extranet.profile');
+    });
+    
+    Route::prefix('accommodations')->group(function () {
+        Route::get('/', function () {
+            return view('extranet.accommodations.all');
+        });
+
+        Route::get('/add', function () {
+            return view('extranet.accommodations.submit');
+        });
+
+        Route::get('/edit', function () {
+            return view('extranet.accommodations.edit');
+        }); 
+        
+        Route::get('/bookings', function () {
+            return view('extranet.accommodations.bookings');
+        }); 
+
+        Route::get('/reviews', function () {
+            return view('extranet.accommodations.reviews');
+        }); 
+    });
+
 });
