@@ -77,19 +77,19 @@
                                         <h3>Address</h3>
                                         <div class="form-group">
                                             <label for="state">State</label>
-                                            <input type="text" class="form-control" id="state" name="state" value="Ohio">
+                                            <input type="text" class="form-control" id="state" name="state" value="Male">
                                         </div>
                                         <!--end form-group-->
                                         <div class="form-group">
                                             <label for="city">City</label>
-                                            <input type="text" class="form-control" id="city" name="city" value="Georgetown">
+                                            <input type="text" class="form-control" id="city" name="city" value="Male">
                                         </div>
                                         <!--end form-group-->
                                         <div class="row">
                                             <div class="col-md-8 col-sm-8">
                                                 <div class="form-group">
                                                     <label for="street">Street</label>
-                                                    <input type="text" class="form-control" id="street" name="street" value="2050 Sampson Street">
+                                                    <input type="text" class="form-control" id="street" name="street" value="Male Magu">
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -97,7 +97,7 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <div class="form-group">
                                                     <label for="zip">ZIP</label>
-                                                    <input type="text" class="form-control" id="zip" name="zip" pattern="\d*" value="80444">
+                                                    <input type="text" class="form-control" id="zip" name="zip" pattern="\d*" value="23020">
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
