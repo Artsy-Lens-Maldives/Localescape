@@ -390,7 +390,6 @@ a.icon i {
 }
 
 body {
-  background-color: #fffffa;
   color: #1f1f1f;
   font-size: 14px;
   font-family: 'Lato', sans-serif;
@@ -3826,7 +3825,7 @@ ul.half li {
 }
 
 .reservations table thead tr th:last-child {
-  text-align: right;
+  text-align: center;
 }
 
 .reservations table thead tr th:first-child {
