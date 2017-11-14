@@ -357,7 +357,7 @@ Headers:		'Lato', sans-serif;
   }
   
   body {
-    background-color: $color-neutral;
+    background-color: #fffffa;
     color: $color-dark;
     font-size: 14px;
     font-family: 'Lato', sans-serif;
@@ -1055,6 +1055,7 @@ Headers:		'Lato', sans-serif;
     margin-bottom: 10px;
     font-size: 12px;
     margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0);
   }
   
   .calendar {
@@ -3956,7 +3957,7 @@ Headers:		'Lato', sans-serif;
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: $color-neutral;
+    background-color: rgba(255, 255, 255, 0);
     position: relative;
   }
   .quick-navigation .wrapper:before {

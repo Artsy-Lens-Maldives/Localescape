@@ -29,29 +29,44 @@ $factory->define(App\Accomodations::class, function (Faker\Generator $faker) {
     $v = $types[$k];
 
     return [
-        'type' => $v,
         'user_id' => '1',
 
         'name' => $faker->company,
-        'location' => $faker->country,
-        'address' => $faker->streetAddress,
+        'type' => $v,
         'description' => $faker->paragraph($nbSentences = 6, $variableNbSentences = true),
-
+        'offer' => rand(0,1),
+        'offer_percentage' => rand(30,50),
+        'offer_notes' => 'Off Today!',
+        'receive_reviews' => rand(0,1),
+        'minimum_stay' => '1',
+        'price' => rand(100,1000),
+        
+        'address' => $faker->streetAddress,
         'email' => $faker->unique()->safeEmail,
-        'website' => $faker->freeEmailDomain,
         'phone' => $faker->e164PhoneNumber,
-
-        'price' => $faker->numberBetween($min = 5, $max = 50) . '00',
-        'rating' => $faker->numberBetween($min = 1, $max = 5),
-        'check_in_time' => $faker->time($format = 'H:i', $max = 'now'),
-        'check_out_time' => $faker->time($format = 'H:i', $max = 'now'),
+        'mobile_phone' => $faker->e164PhoneNumber,
+        'facebook_page' => 'facebook.com',
+        'twitter' => 'twitter.com',
+        'youtube' => 'youtube.com',
+        'website' => $faker->freeEmailDomain,
+        'latitude' => $faker->latitude($min = -90, $max = 90),
+        'longitude' => $faker->longitude($min = -180, $max = 180),
+        
+        'facilities' => '1, 2, 3, 4, 5, 6, 7',
 
         'cancellation' => $faker->paragraph($nbSentences = 5, $variableNbSentences = true),
         'charge_childeren' => $faker->paragraph($nbSentences = 5, $variableNbSentences = true),
         'pets' => $faker->paragraph($nbSentences = 5, $variableNbSentences = true),
-        'other_policies' => $faker->paragraph($nbSentences = 5, $variableNbSentences = true),
-
-        'nights_minimum' => '1',
-        'facilities' => '1, 2, 3, 4, 5, 6, 7',
+        'other_policies' => $faker->paragraph($nbSentences = 5, $variableNbSentences = true),        
+        
+        'early_check_in' => rand(0,1),
+        'check_in_from' => $faker->time($format = 'H:i', $max = 'now'),
+        'check_in_to' => $faker->time($format = 'H:i', $max = 'now'),
+        
+        'late_check_out' => rand(0,1),
+        'check_out_from' => $faker->time($format = 'H:i', $max = 'now'),
+        'check_out_to' => $faker->time($format = 'H:i', $max = 'now'),
+            
+        'top_acco' => rand(0,1),
     ];
 });
