@@ -7,91 +7,33 @@ use Illuminate\Http\Request;
 
 class AccomodationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function hotel()
     {
-        $take = $request->take;
-        $type = $request->type;
-
-        if ($request->has('type') && $request->has('take')) {
-            return Accomodations::type($type)->take($take)->get();
-        }
-        if ($request->has('type')) {
-            return Accomodations::type($type)->get();
-        }
-        if ($request->has('take')) {
-            return Accomodations::take($take)->get();
-        }
-        return Accomodations::all();
+        $type = "Hotels";
+        $accommodations = Accomodations::where('type', 'hotel')->paginate(15);
+        return view('accommodations.listings', compact('type', 'accommodations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function hotel_detail($slug)
     {
-        //
+        $type = "Hotel";
+        $accommodation = Accomodations::where('slug', $slug)->first();
+        return view('accommodations.details', compact('type', 'accommodation'));
+    }
+    
+    public function resort()
+    {
+        $type = "Resorts";
+        $accommodations = Accomodations::where('type', 'resort')->paginate(15);
+        return view('accommodations.listings', compact('type', 'accommodations'));
+    }
+    
+    public function guesthouse()
+    {
+        $type = "Guest House";
+        $accommodations = Accomodations::where('type', 'guest-house')->paginate(15);
+        return view('accommodations.listings', compact('type', 'accommodations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Accomodations  $accomodations
-     * @return \Illuminate\Http\Response
-     */
-    public function show($type, Accomodations $accomodations)
-    {
-        return $accomodations;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Accomodations  $accomodations
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Accomodations $accomodations)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Accomodations  $accomodations
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Accomodations $accomodations)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Accomodations  $accomodations
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Accomodations $accomodations)
-    {
-        //
-    }
 }

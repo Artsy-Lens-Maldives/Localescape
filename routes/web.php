@@ -14,87 +14,55 @@
 Route::get('/', function () {
     return view('main');
 });
-
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/all', 'Api/ApiAccomodationsController@index');
 
-Route::get('/all', 'AccomodationsController@index');
+// Accommodation Routes (Start)
+Route::get('/hotels', 'AccomodationsController@hotel');
+Route::get('/hotels/{slug}', 'AccomodationsController@hotel_detail');
 
-/*
-|--------------------------------------------------------------------------
-| Test Routes (Delete Later)
-|--------------------------------------------------------------------------
-*/
+Route::get('/resorts', 'AccomodationsController@resort');
+Route::get('/resorts/{slug}', 'AccomodationsController@resort_detail');
 
-Route::get('/hotels', function () {
-    $type = "Hotels";
-    return view('accommodations.all', compact('type'));
-});
+Route::get('/guest-house', 'AccomodationsController@guesthouse');
+Route::get('/guest-house/{slug}', 'AccomodationsController@guesthouse_detail');
+// Accommodation Routes (End)
 
-Route::get('/resorts', function () {
-    $type = "Resorts";
-    return view('accommodations.all', compact('type'));
-});
+Route::prefix('extranet')->group(function () {
+    Route::get('/', function () {
+        return view('extranet.home');
+    });
 
-Route::get('/guest-house', function () {
-    $type = "Guest House";
-    return view('accommodations.all', compact('type'));
-});
+    Route::get('/home', function () {
+        return view('extranet.home');
+    });
 
-Route::get('/hotels/detail', function () {
-    $type = "Hotels";
-    return view('accommodations.detail', compact('type'));
-});
+    Route::get('/profile', function () {
+        return view('extranet.profile');
+    });
+    
+    Route::prefix('accommodations')->group(function () {
+        Route::get('/', function () {
+            return view('extranet.accommodations.all');
+        });
 
-Route::get('/resorts/detail', function () {
-    $type = "Resorts";
-    return view('accommodations.detail', compact('type'));
-});
+        Route::get('/add', function () {
+            return view('extranet.accommodations.submit');
+        });
 
-Route::get('/guest-house/detail', function () {
-    $type = "Guest House";
-    return view('accommodations.detail', compact('type'));
-});
+        Route::get('/edit', function () {
+            return view('extranet.accommodations.edit');
+        }); 
+        
+        Route::get('/bookings', function () {
+            return view('extranet.accommodations.bookings');
+        }); 
 
-Route::get('/tours', function () {
-    $type = "Tours";
-    return view('tours.all', compact('type'));
-});
+        Route::get('/reviews', function () {
+            return view('extranet.accommodations.reviews');
+        }); 
+    });
 
-Route::get('/photo-package', function () {
-    $type = "Photo Package";
-    return view('tours.all', compact('type'));
-});
-
-Route::get('/diving-package', function () {
-    $type = "Diving Package";
-    return view('tours.all', compact('type'));
-});
-
-Route::get('/blog', function () {
-    return view('blog.all');
-});
-
-Route::get('/blog-detail', function () {
-    return view('blog.detail');
-});
-
-Route::get('/about-us', function () {
-    return view('about.about-us');
-});
-
-Route::get('/contact-us', function () {
-    return view('about.contact-us');
-});
-
-Route::get('/become-an-affiliate', function () {
-    return view('about.become-an-affiliate');
-});
-
-Route::get('/terms-and-conditions', function () {
-    return view('about.terms-and-conditions');
-});
-
-Route::get('/extranet/submit', function () {
-    return view('extranet.submit');
 });

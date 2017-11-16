@@ -47,6 +47,8 @@
 <script type="text/javascript" src="/js/maps.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>
 
+@yield('js-after')
+
 <!--[if lte IE 9]>
 <script src="/js/ie.js"></script>
 <![endif]-->
