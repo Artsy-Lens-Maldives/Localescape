@@ -60,7 +60,7 @@
                                             <div class="info">
                                                 <dl>
                                                     <dt>Phone:</dt>
-                                                    <dd>(123) 456 789</dd>
+                                                    <dd>(123) 456 777</dd>
                                                     <dt>Mobile Phone:</dt>
                                                     <dd>888 123 456 789</dd>
                                                     <dt>Email:</dt>
