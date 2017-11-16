@@ -43,7 +43,7 @@
                             <!--end col-md-7-->
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="object-type">Object Type</label>
+                                    <label for="object-type">Accommodation Type</label>
                                     <select class="framed width-100" name="type" id="object-type">
                                         <option value="">Select</option>
                                         <option value="1">Hotel</option>
@@ -153,6 +153,7 @@
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
+                            <br>
                             <!--end col-md-7-->
                             <div class="col-md-5">
                                 <h2>Contact Information</h2>

@@ -30,6 +30,14 @@ Route::get('/guest-house', 'AccomodationsController@guesthouse');
 Route::get('/guest-house/{slug}', 'AccomodationsController@guesthouse_detail');
 // Accommodation Routes (End)
 
+Route::get('/blog', function () {
+    return view('blog.all');
+});
+
+Route::get('/blog-detail', function () {
+    return view('blog.detail');
+});
+
 Route::prefix('extranet')->group(function () {
     Route::get('/', function () {
         return view('extranet.home');
@@ -66,6 +74,7 @@ Route::prefix('extranet')->group(function () {
     });
 
 });
+
 Route::group(['prefix' => 'extranet'], function () {
   Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'ExtranetAuth\LoginController@login');
