@@ -46,10 +46,10 @@
                                 <div class="form-group">
                                     <label for="object-type">Accommodation Type</label>
                                     <select class="framed width-100" name="type" id="object-type">
-                                        <option value="">Select</option>
-                                        <option value="1">Hotel</option>
-                                        <option value="2">Resort</option>
-                                        <option value="3">Guest House</option>
+                                        <option disabled>Select</option>
+                                        <option value="hotel">Hotel</option>
+                                        <option value="resort">Resort</option>
+                                        <option value="guest-house">Guest House</option>
                                     </select>
                                 </div>
                                 <!--end form-group-->
@@ -365,9 +365,6 @@
                         <div class="form-group center">
                             <button type="submit" class="btn btn-primary btn-rounded btn-xlarge">Submit Now</button>
                         </div>
-                    </section>
-                    <section>
-                        <div class="center"><a href="#" class="btn btn-framed btn-default btn-rounded">Preview</a></div>
                     </section>
                 </form>
                 <!--end form-->
