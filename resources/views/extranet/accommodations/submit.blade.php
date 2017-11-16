@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <!--end quick-navigation-->
-                <form class="form-submit labels-uppercase" id="form-submit" enctype="multipart/form-data">
+                <form class="form-submit labels-uppercase" id="form-submit" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <section id="main-information">
                         <div class="title">
                             <h2>Main Information</h2>
@@ -71,7 +72,7 @@
                                 <h3>Special Offer? <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="right" title="Have a special offer? Tick here and Enter the details"></i></h3>
                                 <div class="form-group-inline vertical-align-middle">
                                     <div class="form-group">
-                                        <label class="no-margin"><input type="checkbox" name="special_offer">Special Offer</label>
+                                        <label class="no-margin"><input type="checkbox" value="1" name="special_offer">Special Offer</label>
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group width-20">
@@ -89,25 +90,11 @@
                         </div>
                         <!--end row-->
                         <div class="row">
-                            <div class="col-md-7">
-                                <h3>Meal</h3>
-                                <ul class="checkboxes inline list-unstyled">
-                                    <li><label><input type="checkbox" name="1">Breakfast Included</label></li>
-                                    <li><label><input type="checkbox" name="2">Full meal</label></li>
-                                    <li><label><input type="checkbox" name="3">Own Meal</label></li>
-                                    <li><label><input type="checkbox" name="4">Breakfast & Dinner</label></li>
-                                    <li><label><input type="checkbox" name="5">Bed & Breakfast</label></li>
-                                    <li><label><input type="checkbox" name="6">All Inclusive</label></li>
-                                    <li><label><input type="checkbox" name="7">Ultra All Inclusive</label></li>
-                                </ul>
-                                <!--end checkboxes-->
-                            </div>
-                            <!--end col-md-7-->
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <h3>Receive Reviews<i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Tick Here if you want to turn off review emails about your accommodation."></i></h3>
-                                        <label><input type="checkbox" name="1">Receive Reviews in Email</label>
+                                        <h3>Receive Reviews<i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Tick Here if you want to turn off review emails about your accommodation. (Feature Comming Soon.)"></i></h3>
+                                        <label><input type="checkbox" name="receive_reviews" value="1">Receive Reviews in Email</label>
                                     </div>
                                     <!--end col-md-7-->
                                     <div class="col-md-5">
@@ -142,7 +129,7 @@
                                     <input type="text" class="form-control" id="longitude" name="longitude" hidden="">
                                 </div>
                                 <!--end map-->
-                                <h3>Position</h3>
+                                <!-- <h3>Position</h3>
                                 <ul class="checkboxes inline list-unstyled">
                                     <li><label><input type="checkbox" name="1">Near the beach</label></li>
                                     <li><label><input type="checkbox" name="2">Near the forest</label></li>
@@ -150,7 +137,7 @@
                                     <li><label><input type="checkbox" name="4">At he town center</label></li>
                                     <li><label><input type="checkbox" name="5">Isolated</label></li>
                                     <li><label><input type="checkbox" name="6">Private island</label></li>
-                                </ul>
+                                </ul> -->
                                 <!--end checkboxes-->
                             </div>
                             <br>
@@ -192,8 +179,8 @@
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group">
-                                        <label for="form-submit-skype">Skype</label>
-                                        <input type="text" class="form-control" id="form-submit-skype" name="skype" placeholder="your.hotel">
+                                        <label for="form-submit-skype">Webstite</label>
+                                        <input type="text" class="form-control" id="form-submit-skype" name="website" placeholder="www.hotel.com">
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -223,12 +210,12 @@
                             <div class="col-md-4">
                                 <h3>Bathroom</h3>
                                 <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="1">Shower</label></li>
-                                    <li><label><input type="checkbox" name="2">Bathtub</label></li>
-                                    <li><label><input type="checkbox" name="3">Free toiletries</label></li>
-                                    <li><label><input type="checkbox" name="4">Toilet</label></li>
-                                    <li><label><input type="checkbox" name="5">Hairdryer</label></li>
-                                    <li><label><input type="checkbox" name="6">Bathroom</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="1">Shower</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="2">Bathtub</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="3">Free toiletries</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="4">Toilet</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="5">Hairdryer</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="6">Bathroom</label></li>
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
@@ -236,9 +223,9 @@
                             <div class="col-md-4">
                                 <h3>Media & Technology</h3>
                                 <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="1">Satellite channels </label></li>
-                                    <li><label><input type="checkbox" name="2">TV</label></li>
-                                    <li><label><input type="checkbox" name="3"> Flat-screen TV</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="7">Satellite channels </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="8"> Flat-screen TV</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="9">TV</label></li>
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
@@ -246,10 +233,10 @@
                             <div class="col-md-4">
                                 <h3>Living Area</h3>
                                 <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="1">Desk</label></li>
-                                    <li><label><input type="checkbox" name="2">Sofa</label></li>
-                                    <li><label><input type="checkbox" name="3">Sitting area</label></li>
-                                    <li><label><input type="checkbox" name="4">Dining area</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="10">Desk</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="11">Sofa</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="12">Sitting area</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="13">Dining area</label></li>
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
@@ -260,18 +247,18 @@
                             <div class="col-md-4">
                                 <h3>Services</h3>
                                 <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="1">Room Service </label></li>
-                                    <li><label><input type="checkbox" name="2"> Packed Lunches </label></li>
-                                    <li><label><input type="checkbox" name="3">Car Rental </label></li>
-                                    <li><label><input type="checkbox" name="4">Shuttle Service</label></li>
-                                    <li><label><input type="checkbox" name="5">Airport Shuttle</label></li>
-                                    <li><label><input type="checkbox" name="6">24-Hour Front Desk </label></li>
-                                    <li><label><input type="checkbox" name="7">Tour Desk </label></li>
-                                    <li><label><input type="checkbox" name="8">Ticket Service </label></li>
-                                    <li><label><input type="checkbox" name="9">Baggage Storage </label></li>
-                                    <li><label><input type="checkbox" name="10">Concierge Service</label></li>
-                                    <li><label><input type="checkbox" name="11">Laundry </label></li>
-                                    <li><label><input type="checkbox" name="12">Dry Cleaning</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="14">Room Service </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="15"> Packed Lunches </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="16">Car Rental </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="17">Shuttle Service</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="18">Airport Shuttle</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="19">24-Hour Front Desk </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="20">Tour Desk </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="21">Ticket Service </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="22">Baggage Storage </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="23">Concierge Service</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="24">Laundry </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="25">Dry Cleaning</label></li>
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
@@ -279,31 +266,15 @@
                             <div class="col-md-4">
                                 <h3>General</h3>
                                 <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="1">Safe</label></li>
-                                    <li><label><input type="checkbox" name="2">Non-smoking Rooms</label></li>
-                                    <li><label><input type="checkbox" name="3">Family Rooms </label></li>
-                                    <li><label><input type="checkbox" name="4">Elevator</label></li>
-                                    <li><label><input type="checkbox" name="5">Airport Shuttle</label></li>
-                                    <li><label><input type="checkbox" name="6">24-Hour Front Desk</label></li>
-                                    <li><label><input type="checkbox" name="7">Soundproof Rooms </label></li>
-                                    <li><label><input type="checkbox" name="8">Heating</label></li>
-                                    <li><label><input type="checkbox" name="9">Iron </label></li>
-                                </ul>
-                                <!--end checkboxes-->
-                            </div>
-                            <!--end col-md-4-->
-                            <div class="col-md-4">
-                                <h3>Languages Spoken</h3>
-                                <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="1">English </label></li>
-                                    <li><label><input type="checkbox" name="2">Arabic</label></li>
-                                    <li><label><input type="checkbox" name="3">Azerbaijani</label></li>
-                                    <li><label><input type="checkbox" name="4">French</label></li>
-                                    <li><label><input type="checkbox" name="5">German</label></li>
-                                    <li><label><input type="checkbox" name="6">Italian</label></li>
-                                    <li><label><input type="checkbox" name="7">Russian</label></li>
-                                    <li><label><input type="checkbox" name="8">Spanish</label></li>
-                                    <li><label><input type="checkbox" name="9">Turkish</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="26">Safe</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="27">Non-smoking Rooms</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="28">Family Rooms </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="29">Elevator</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="30">Airport Shuttle</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="31">24-Hour Front Desk</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="32">Soundproof Rooms </label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="33">Heating</label></li>
+                                    <li><label><input type="checkbox" name="facilities[]" value="34">Iron </label></li>
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
@@ -361,7 +332,7 @@
                                             <!--end form-group-->
                                         </div>
                                         <!--end form-group-inline-->
-                                        <label><input type="checkbox" name="1">Early Check-in</label>
+                                        <label><input type="checkbox" value="1" name="early_check_in">Early Check-in</label>
                                     </div>
                                     <!--end col-md-6-->
                                     <div class="col-md-6">
@@ -379,7 +350,7 @@
                                             <!--end form-group-->
                                         </div>
                                         <!--end form-group-inline-->
-                                        <label><input type="checkbox" name="1">Late Check-out</label>
+                                        <label><input type="checkbox" value="1" name="late_check_out">Late Check-out</label>
                                     </div>
                                     <!--end col-md-6-->
                                 </div>

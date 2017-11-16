@@ -19,22 +19,28 @@
                             <th>Accommodation Name</th>
                             <th>Accommodation Type</th>
                             <th>Location</th>
+                            <th>Status</th>
                             <th>Created at</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($accommodations as $acco)
+
                         <tr class="reservation">
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>Test</td>
-                            <td>
-                                <a class="btn btn-danger" href="" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')">Delete</a>
-                                <a class="btn btn-warning" href="">Edit</a>
-                                <a class="btn btn-info" href="">Rooms</a>
+                            <td>{{ $acco->title }}</td>
+                            <td>{{ $acco->type }}</td>
+                            <td>{{ $acco->address }}</td>
+                            <td style="font-weight: bold; text-transform: capitalize;">{{ $acco->status }}</td>
+                            <td>{{ $acco->created_at->diffForHumans() }}</td>
+                            <td style="text-align: center;">
+                                <a style="margin:1px" class="btn btn-danger" href="" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')">Delete</a>
+                                <a style="margin:1px" class="btn btn-warning" href="">Edit</a>
+                                <a style="margin:1px" class="btn btn-info" href="">Rooms</a>
                             </td>
                         </tr>
+
+                        @endforeach
                         <!--end reservation-->
                         </tbody>
                     </table>

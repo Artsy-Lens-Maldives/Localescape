@@ -1,5 +1,8 @@
 <?php
 
+use App\Accomodations;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +17,12 @@
 Route::get('/', function () {
     return view('main');
 });
+
+Route::get('/all2', function () {
+    $flights = App\Accomodations::all();
+    return $flights;
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -53,11 +62,20 @@ Route::prefix('extranet')->group(function () {
     
     Route::prefix('accommodations')->group(function () {
         Route::get('/', function () {
-            return view('extranet.accommodations.all');
+            $accommodations = App\Accomodations::all();
+            return view('extranet.accommodations.all', compact('accommodations'));
         });
 
         Route::get('/add', function () {
             return view('extranet.accommodations.submit');
+        });
+
+        Route::post('/add', function (Request $request) {
+            $accommodations = Accomodations::create(Input::except('_token', 'files', 'facilities'));
+            $array = $request->facilities;
+            $accommodations->facilities = implode("," ,$array);
+            $accommodations->save();
+            return 'success';
         });
 
         Route::get('/edit', function () {

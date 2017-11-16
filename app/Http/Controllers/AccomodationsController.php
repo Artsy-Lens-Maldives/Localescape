@@ -35,5 +35,14 @@ class AccomodationsController extends Controller
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
 
+    public function create()
+    {
+        # code...
+    }
+
+    public function store(Request $request)
+    {
+        $accommodations = Accomodations::create(Input::except('_token', 'files'));
+    }
 
 }
