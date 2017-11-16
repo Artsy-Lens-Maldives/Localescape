@@ -66,3 +66,16 @@ Route::prefix('extranet')->group(function () {
     });
 
 });
+Route::group(['prefix' => 'extranet'], function () {
+  Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'ExtranetAuth\LoginController@login');
+  Route::post('/logout', 'ExtranetAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'ExtranetAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'ExtranetAuth\RegisterController@register');
+
+  Route::post('/password/email', 'ExtranetAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'ExtranetAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'ExtranetAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'ExtranetAuth\ResetPasswordController@showResetForm');
+});
