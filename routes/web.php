@@ -171,3 +171,13 @@ Route::group(['prefix' => 'extranet'], function () {
   Route::get('/password/reset', 'ExtranetAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'ExtranetAuth\ResetPasswordController@showResetForm');
 });
+
+Route::get('/admin/blog', function () {
+    $blogs = \App\blog::all();
+    return view('blog.view', compact('blogs'));
+});
+
+Route::get('/admin/dive/all', function () {
+    $dives = \App\dive::all();
+    return view('dive.view', compact('dives'));
+});
