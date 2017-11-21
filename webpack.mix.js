@@ -30,7 +30,6 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
         'node_modules/gentelella/build/css/custom.min.css',
     ], 'public/css/admin.css')
     .js([
-        'node_modules/gentelella/vendors/jquery/dist/jquery.min.js',
         'node_modules/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/gentelella/vendors/fastclick/lib/fastclick.js',
         'node_modules/gentelella/vendors/nprogress/nprogress.js',
