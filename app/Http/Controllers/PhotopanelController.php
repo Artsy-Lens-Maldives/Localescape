@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\photopanel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class PhotopanelController extends Controller
 {
