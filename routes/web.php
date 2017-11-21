@@ -48,9 +48,9 @@ Route::get('/blog/create', function () {
     return view('blog.create');
 });
 
-Route::get('/blog-detail', function () {
-    return view('blog.detail');
-});
+Route::get('/blog-detail', 'BlogController@create');
+
+Route::post('/blog-detail', 'BlogController@store');
 
 Route::prefix('extranet')->group(function () {
     Route::get('/', function () {
