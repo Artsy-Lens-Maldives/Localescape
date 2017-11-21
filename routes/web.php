@@ -44,6 +44,10 @@ Route::get('/blog', function () {
     return view('blog.all');
 });
 
+Route::get('/blog/create', function () {
+    return view('blog.create');
+});
+
 Route::get('/blog-detail', function () {
     return view('blog.detail');
 });
