@@ -181,3 +181,8 @@ Route::get('/admin/dive/all', function () {
     $dives = \App\dive::all();
     return view('dive.view', compact('dives'));
 });
+
+Route::get('/admin/photo/all', function () {
+    $photopanels = \App\photopanel::all();
+    return view('photo.view', compact('photopanels'));
+});
