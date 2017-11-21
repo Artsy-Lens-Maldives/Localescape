@@ -23,3 +23,7 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
     ], 'public/css/all.css')
     .js('resources/assets/js/maps.js', 'public/js')
     .js('resources/assets/js/custom.js', 'public/js')
+    .styles([
+        'resources/assets/combine/css/bootstrap.min.css',
+    ], 'public/css/admin.css')
+    .js('resources/assets/js/maps.js', 'public/js/admin.js')
