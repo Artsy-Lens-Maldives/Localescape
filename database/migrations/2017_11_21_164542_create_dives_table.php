@@ -18,7 +18,7 @@ class CreateDivesTable extends Migration
             $table->string('name');
             $table->string('price');
             $table->longText('description');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
