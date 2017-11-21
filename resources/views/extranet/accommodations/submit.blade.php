@@ -76,7 +76,7 @@
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group width-20">
-                                        <input type="text" class="form-control" id="percents" name="percents" placeholder="20%">
+                                        <input type="text" class="form-control" id="percents" name="percents" placeholder="20">
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group">
