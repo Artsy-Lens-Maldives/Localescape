@@ -1,9 +1,13 @@
 @extends('layouts.admin')
 
+@section('title')
+    <span>Add Blog Post</span>
+@endsection
+
 @section('content')
     
     <div class="container">
-    <h2>Horizontal form</h2>
+    <h2>BLOG</h2>
       <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
