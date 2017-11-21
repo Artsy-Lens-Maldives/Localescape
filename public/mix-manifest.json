@@ -1,6 +1,8 @@
 {
+    "/js/admin.js": "/js/admin.js",
     "/js/maps.js": "/js/maps.js",
     "/css/style.css": "/css/style.css",
     "/js/custom.js": "/js/custom.js",
-    "/css/all.css": "/css/all.css"
+    "/css/all.css": "/css/all.css",
+    "/css/admin.css": "/css/admin.css"
 }

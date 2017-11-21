@@ -24,6 +24,15 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
     .js('resources/assets/js/maps.js', 'public/js')
     .js('resources/assets/js/custom.js', 'public/js')
     .styles([
-        'resources/assets/combine/css/bootstrap.min.css',
+        'node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css',
+        'node_modules/gentelella/vendors/nprogress/nprogress.css',
+        'node_modules/gentelella/build/css/custom.min.css',
     ], 'public/css/admin.css')
-    .js('resources/assets/js/maps.js', 'public/js/admin.js')
+    .js([
+        'node_modules/gentelella/vendors/jquery/dist/jquery.min.js',
+        'node_modules/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js',
+        'node_modules/gentelella/vendors/fastclick/lib/fastclick.js',
+        'node_modules/gentelella/vendors/nprogress/nprogress.js',
+        'node_modules/gentelella/build/js/custom.min.js',
+    ], 'public/js/admin.js')
