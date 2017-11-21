@@ -7,6 +7,7 @@
 @section('content')
     
     <div class="container">
+    <h2>BLOG</h2>
       <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))

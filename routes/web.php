@@ -47,6 +47,12 @@ Route::get('/blog', function () {
 Route::get('/blog/create', 'BlogController@create');
 Route::post('/blog/create/post', 'BlogController@store');
 
+Route::get('/dive/create', 'DiveController@create');
+Route::post('/dive/create/package', 'DiveController@store');
+
+Route::get('/photo/create', 'PhotopanelController@create');
+Route::post('/photo/create/package', 'PhotopanelController@store');
+
 Route::prefix('extranet')->group(function () {
     Route::get('/', function () {
         return view('extranet.home');
