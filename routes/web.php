@@ -1,6 +1,7 @@
 <?php
 
 use App\Accomodations;
+use App\accommo_photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -73,17 +74,18 @@ Route::prefix('extranet')->group(function () {
         });
 
         Route::get('/add', function () {
-            return view('extranet.accommodations.submit');
+            $facilities = \App\facilities::all();
+            return view('extranet.accommodations.submit', compact('facilities'));
         });
 
         Route::post('/add', function (Request $request) {
-            $accommodations = Accomodations::create(Input::except('_token', 'files', 'facilities'));
+            $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
             $array = $request->facilities;
             $accommodations->facilities = implode("," ,$array);
             $accommodations->save();
             
             $i = 0;
-            foreach ($request->files as $photo) {
+            foreach ($request->image as $photo) {
                 $i++;
                 if ($i == '1'){
                     $m = '1';
@@ -93,8 +95,8 @@ Route::prefix('extranet')->group(function () {
                 $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
                 $location = 'public/' . $accommodations->slug . '/images'; 
                 $file = $photo->storeAs($location, $fileName);
-                liveaboard_photo::create([
-                    'liveaboard_id' => $accommodations->id,
+                accommo_photo::create([
+                    'accommo_id' => $accommodations->id,
                     'main' => $m,
                     'photo_url' => '/'. $accommodations->type . '/' . $accommodations->slug . '/' . 'photo/' . $fileName
                 ]);
