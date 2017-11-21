@@ -189,3 +189,8 @@ Route::get('/admin/photo/all', function () {
     $photopanels = \App\photopanel::all();
     return view('photo.view', compact('photopanels'));
 });
+
+Route::get('/admin/tour/all', function () {
+    $tours = \App\tour::all();
+    return view('tours.view', compact('tours'));
+});
