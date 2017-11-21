@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\blog;
-use Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class BlogController extends Controller
 {
@@ -35,8 +36,8 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        blog::create(Request::all());
-        return view("success");
+        blog::create(Input::except('_token'));
+        return redirect()->back()->with('alert-success', 'Successfully added new blog post');
     }
 
     /**
