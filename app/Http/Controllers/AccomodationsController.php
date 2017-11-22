@@ -40,7 +40,7 @@ class AccomodationsController extends Controller
 
     public function all()
     {
-        $accommodations = App\Accomodations::all();
+        $accommodations = Accomodations::all();
         return view('extranet.accommodations.all', compact('accommodations'));
     }
 
@@ -80,14 +80,14 @@ class AccomodationsController extends Controller
 
     public function edit()
     {
-        $acco = App\Accomodations::find($id);
+        $acco = Accomodations::find($id);
         $facilities = \App\facilities::all();
         return view('extranet.accommodations.edit', compact('acco', 'facilities'));
     }
 
     public function update()
     {
-        $acco = App\Accomodations::find($id);
+        $acco = Accomodations::find($id);
         $acco->title = $request->title;
         $acco->type = $request->type;
         $acco->description = $request->description;
