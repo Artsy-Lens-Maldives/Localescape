@@ -19,7 +19,6 @@
                         <ul>
                             <li><a href="#main-information" class="scroll">Main Information</a></li>
                             <li><a href="#location" class="scroll">Location</a></li>
-                            <li><a href="#gallery" class="scroll">Gallery</a></li>
                             <li><a href="#facilities" class="scroll">Facilities</a></li>
                             <li><a href="#additional-information" class="scroll">Additional Information</a></li>
                         </ul>
@@ -220,102 +219,41 @@
                         </div>
                         <!--end row-->
                     </section>
-                    <section id="gallery">
-                        <div class="title">
-                            <h2>Gallery</h2>
-                            <aside class="step">3</aside>
-                        </div>
-                        <div class="file-upload-previews"></div>
-                        <div class="file-upload">
-                            <input type="file" name="files[]" class="file-upload-input with-preview" multiple title="Click to add files" maxlength="10" accept="gif|jpg|png">
-                            <span>Click to add images</span>
-                        </div>
-                    </section>
                     <section id="facilities">
                         <div class="title">
-                            <h2>Facilities</h2>
-                            <aside class="step">4</aside>
+                            <h2>Facilities </h2>
+                            <aside class="step">3</aside>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <h3>Bathroom</h3>
+                            <div class="col-md-12">
                                 <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="facilities[]" value="1">Shower</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="2">Bathtub</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="3">Free toiletries</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="4">Toilet</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="5">Hairdryer</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="6">Bathroom</label></li>
+                                    <?php 
+                                        $myArray = explode(',', $acco->facilities);
+                                    ?>
+                                    @foreach($facilities as $facility)
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" name="facilities[]" value="{{ $facility->id }}"
+                                                @foreach($myArray as $arrayI)
+                                                    @if($arrayI == $facility->id)
+                                                        checked
+                                                    @else
+                                                        
+                                                    @endif
+                                                @endforeach
+                                                >{{ $facility->name }} 
+                                            </label>
+                                        </li>
+                                    @endforeach   
                                 </ul>
                                 <!--end checkboxes-->
                             </div>
-                            <!--end col-md-4-->
-                            <div class="col-md-4">
-                                <h3>Media & Technology</h3>
-                                <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="facilities[]" value="7">Satellite channels </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="8"> Flat-screen TV</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="9">TV</label></li>
-                                </ul>
-                                <!--end checkboxes-->
-                            </div>
-                            <!--end col-md-4-->
-                            <div class="col-md-4">
-                                <h3>Living Area</h3>
-                                <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="facilities[]" value="10">Desk</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="11">Sofa</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="12">Sitting area</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="13">Dining area</label></li>
-                                </ul>
-                                <!--end checkboxes-->
-                            </div>
-                            <!--end col-md-4-->
                         </div>
-                        <!--end row-->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h3>Services</h3>
-                                <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="facilities[]" value="14">Room Service </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="15"> Packed Lunches </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="16">Car Rental </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="17">Shuttle Service</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="18">Airport Shuttle</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="19">24-Hour Front Desk </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="20">Tour Desk </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="21">Ticket Service </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="22">Baggage Storage </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="23">Concierge Service</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="24">Laundry </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="25">Dry Cleaning</label></li>
-                                </ul>
-                                <!--end checkboxes-->
-                            </div>
-                            <!--end col-md-4-->
-                            <div class="col-md-4">
-                                <h3>General</h3>
-                                <ul class="checkboxes inline half list-unstyled">
-                                    <li><label><input type="checkbox" name="facilities[]" value="26">Safe</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="27">Non-smoking Rooms</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="28">Family Rooms </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="29">Elevator</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="30">Airport Shuttle</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="31">24-Hour Front Desk</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="32">Soundproof Rooms </label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="33">Heating</label></li>
-                                    <li><label><input type="checkbox" name="facilities[]" value="34">Iron </label></li>
-                                </ul>
-                                <!--end checkboxes-->
-                            </div>
-                            <!--end col-md-4-->
-                        </div>
-                        <!--end row-->
                     </section>
                     <section id="additional-information">
                         <div class="title">
                             <h2>Additional Information</h2>
-                            <aside class="step">5</aside>
+                            <aside class="step">4</aside>
                         </div>
                         <!--end title-->
                         <div class="row">
