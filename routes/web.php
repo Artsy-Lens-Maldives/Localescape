@@ -89,30 +89,36 @@ Route::prefix('extranet')->group(function () {
         Route::post('/add', 'AccomodationsController@store');
         Route::get('/edit/{id}', 'AccomodationsController@edit');
         Route::post('/edit/{id}', 'AccomodationsController@update');
-        
         Route::get('/bookings', function () {
             return view('extranet.accommodations.bookings');
         }); 
-
         Route::get('/reviews', function () {
             return view('extranet.accommodations.reviews');
         }); 
+
+        Route::prefix('rooms')->group(function () {
+            Route::get('{id}', function ($id) {
+                $rooms = \App\accommo_room::where('accommo_id', $id)->get();
+                return view('extranet.accommodations.rooms.all', compact('rooms'));
+            }); 
+        });
+
     });
 
 });
 
 Route::group(['prefix' => 'extranet'], function () {
-  Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm')->name('login');
-  Route::post('/login', 'ExtranetAuth\LoginController@login');
-  Route::post('/logout', 'ExtranetAuth\LoginController@logout')->name('logout');
+    Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'ExtranetAuth\LoginController@login');
+    Route::post('/logout', 'ExtranetAuth\LoginController@logout')->name('logout');
 
-  Route::get('/register', 'ExtranetAuth\RegisterController@showRegistrationForm')->name('register');
-  Route::post('/register', 'ExtranetAuth\RegisterController@register');
+    Route::get('/register', 'ExtranetAuth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'ExtranetAuth\RegisterController@register');
 
-  Route::post('/password/email', 'ExtranetAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'ExtranetAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'ExtranetAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-  Route::get('/password/reset/{token}', 'ExtranetAuth\ResetPasswordController@showResetForm');
+    Route::post('/password/email', 'ExtranetAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+    Route::post('/password/reset', 'ExtranetAuth\ResetPasswordController@reset')->name('password.email');
+    Route::get('/password/reset', 'ExtranetAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+    Route::get('/password/reset/{token}', 'ExtranetAuth\ResetPasswordController@showResetForm');
 });
 
 Route::get('/admin/blog', function () {
