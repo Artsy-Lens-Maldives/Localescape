@@ -137,8 +137,7 @@
                                             <th>Room Type</th>
                                             <th>Persons</th>
                                             <th>Price</th>
-                                            <th>Rooms</th>
-                                            <th></th>
+                                            <th>Book</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -148,23 +147,17 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr class="room">
-                                                    <td class="room-type">
+                                                    <td>
                                                         <a href=""><h3>{{ $room->room_type }}</h3></a>
                                                         <p>{{ $room->description }}</p>
                                                     </td>
-                                                    <td class="persons">{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
-                                                    <td class="price">${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
-                                                    <td class="rooms">
-                                                        <select class="framed" name="room_1_nights">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                        </select>
-                                                    </td>
+                                                    <td>{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
+                                                    <td>${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
+                                                            <center>
+                                                                <a href="#" class="btn btn-primary btn-rounded">Book Now</a>
+                                                            </center>
                                                         </div>
                                                         <!--end form-group-->
                                                     </td>
