@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\accommo_room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class AccommoRoomController extends Controller
 {
@@ -12,9 +13,10 @@ class AccommoRoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $rooms = \App\accommo_room::where('accommo_id', $id)->get();
+        return view('extranet.accommodations.rooms.all', compact('rooms'));
     }
 
     /**
@@ -22,9 +24,9 @@ class AccommoRoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view('extranet.accommodations.rooms.add', compact('id'));
     }
 
     /**
@@ -33,9 +35,11 @@ class AccommoRoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        //
+        $rooms = \App\accommo_room::create(Input::except('_token'));
+        $url = 'extranet/accommodations/rooms/' . $id ; 
+        return redirect($url)->with('alert-success', 'Successfully added new room');
     }
 
     /**
@@ -57,7 +61,7 @@ class AccommoRoomController extends Controller
      */
     public function edit(accommo_room $accommo_room)
     {
-        //
+        return view('extranet.accommodations.rooms.edit', compact('accommo_room'));
     }
 
     /**
@@ -69,7 +73,16 @@ class AccommoRoomController extends Controller
      */
     public function update(Request $request, accommo_room $accommo_room)
     {
-        //
+        $accommo_room->room_type = $request->room_type;
+        $accommo_room->description = $request->description;
+        $accommo_room->no_adult = $request->no_adult;
+        $accommo_room->price_adult = $request->price_adult;
+        $accommo_room->no_children = $request->no_children;
+        $accommo_room->price_child = $request->price_child;
+        $accommo_room->save();
+
+        $url = 'extranet/accommodations/rooms/' . $request->accommo_id ; 
+        return redirect($url)->with('alert-success', 'Successfully edited room');
     }
 
     /**

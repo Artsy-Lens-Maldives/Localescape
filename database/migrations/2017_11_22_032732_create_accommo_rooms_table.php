@@ -15,7 +15,7 @@ class CreateAccommoRoomsTable extends Migration
     {
         Schema::create('accommo_rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->string('user_id')->nullable();
             $table->string('accommo_id')->nullable();
             $table->string('room_type')->nullable();
             $table->longText('description')->nullable();

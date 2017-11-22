@@ -97,21 +97,13 @@ Route::prefix('extranet')->group(function () {
         Route::get('/reviews', function () {
             return view('extranet.accommodations.reviews');
         }); 
-
         Route::prefix('rooms')->group(function () {
-            Route::get('{id}', function ($id) {
-                $rooms = \App\accommo_room::where('accommo_id', $id)->get();
-                return view('extranet.accommodations.rooms.all', compact('rooms'));
-            });
-            
-            Route::get('{id}/add', function ($id) {
-                return view('extranet.accommodations.rooms.add');
-            }); 
+            Route::get('{id}', 'AccommoRoomController@index');
+            Route::get('{id}/add', 'AccommoRoomController@create');
+            Route::post('{id}/add', 'AccommoRoomController@store');
 
-            Route::get('{id}/add', function ($id) {
-                return view('extranet.accommodations.rooms.add');
-            }); 
-
+            Route::get('edit/{accommo_room}', 'AccommoRoomController@edit');
+            Route::post('edit/{accommo_room}', 'AccommoRoomController@update');
         });
 
     });
