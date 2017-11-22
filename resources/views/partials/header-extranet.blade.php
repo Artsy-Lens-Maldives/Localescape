@@ -65,13 +65,7 @@
                                         <li><a href="{{ url('/extranet/accommodations/add') }}">Add New</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="{{ url('/extranet/room') }}" class="has-child">Room</a>
-                                    <ul class="child-nav">
-                                        <li><a href="{{ url('/extranet/room') }}">View All</a></li>
-                                        <li><a href="{{ url('/extranet/room/add') }}">Add New</a></li>
-                                    </ul>
-                                </li>
+
                                 <li><a href="{{ url('/extranet/profile') }}">Profile</a></li>
                                 <!-- <li><a href="{{ url('/extranet/bookings') }}">Bookings</a></li> -->
                             </ul>
