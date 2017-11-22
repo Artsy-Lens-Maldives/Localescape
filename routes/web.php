@@ -91,6 +91,8 @@ Route::prefix('extranet')->group(function () {
         Route::post('/add', 'AccomodationsController@store');
         Route::get('/edit/{id}', 'AccomodationsController@edit');
         Route::post('/edit/{id}', 'AccomodationsController@update');
+        Route::get('/delete/{accomodations}', 'AccomodationsController@destroy');
+
         Route::get('/bookings', function () {
             return view('extranet.accommodations.bookings');
         }); 
@@ -101,9 +103,9 @@ Route::prefix('extranet')->group(function () {
             Route::get('{id}', 'AccommoRoomController@index');
             Route::get('{id}/add', 'AccommoRoomController@create');
             Route::post('{id}/add', 'AccommoRoomController@store');
-
             Route::get('edit/{accommo_room}', 'AccommoRoomController@edit');
             Route::post('edit/{accommo_room}', 'AccommoRoomController@update');
+            Route::get('delete/{accommo_room}', 'AccommoRoomController@destroy');
         });
 
     });

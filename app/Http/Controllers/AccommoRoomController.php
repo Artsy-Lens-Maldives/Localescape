@@ -93,6 +93,7 @@ class AccommoRoomController extends Controller
      */
     public function destroy(accommo_room $accommo_room)
     {
-        //
+        $accommo_room->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the room');
     }
 }

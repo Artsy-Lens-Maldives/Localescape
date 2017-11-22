@@ -123,4 +123,10 @@ class AccomodationsController extends Controller
         return redirect('extranet/accommodations')->with('alert-success', 'Successfully edited accommodation');
     }
 
+    public function destroy(Accomodations $accomodations)
+    {
+        $accomodations->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the accommodation');
+    }
+
 }
