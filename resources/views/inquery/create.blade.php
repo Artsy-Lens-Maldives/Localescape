@@ -30,27 +30,15 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Check in date</label>
+          <label class="control-label col-sm-2" for="pwd">Contact Number</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="checkin" placeholder="Check In Time" name="checkin">
-          </div>
-        </div>
-         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Check out date</label>
-          <div class="col-sm-10">          
-            <input type="text" class="form-control" id="checkout" placeholder="Check Out Time" name="checkout">
+            <input type="text" class="form-control" id="contact" placeholder="Contact Number" name="contact">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Estimated Time Arrival</label>
+          <label class="control-label col-sm-2" for="pwd">Inquery Details</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="eta" placeholder="Check Out Time" name="eta">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Flight Number</label>
-          <div class="col-sm-10">          
-            <input type="text" class="form-control" id="flightnumber" placeholder="Flight Number" name="flightnumber">
+            <input type="text" class="form-control" id="detailsr" placeholder="Inquery Details" name="details">
           </div>
         </div>
         <input type="hidden" name="_token" value="{{csrf_token()}}">
