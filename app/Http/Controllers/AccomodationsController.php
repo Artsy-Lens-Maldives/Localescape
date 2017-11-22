@@ -85,7 +85,7 @@ class AccomodationsController extends Controller
         return view('extranet.accommodations.edit', compact('acco', 'facilities'));
     }
 
-    public function update($id)
+    public function update($id, Request $request)
     {
         $acco = Accomodations::find($id);
         $acco->title = $request->title;
