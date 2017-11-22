@@ -69,6 +69,8 @@ Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename)
 Route::get('/booking/create', 'BookingController@create');
 Route::post('/booking/create/success', 'BookingController@store');
 
+Route::get('/inquery/create', 'InqueryController@create');
+Route::post('/inquery/create/success', 'InqueryController@store');
 
 Route::prefix('extranet')->group(function () {
     Route::get('/', function () {
