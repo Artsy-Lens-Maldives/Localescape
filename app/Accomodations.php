@@ -32,4 +32,14 @@ class Accomodations extends Model
     {
         return $query->where('type', $type);
     }
+
+    public function photos()
+    {
+        return $this->hasMany('App\accommo_photo', 'accommo_id');
+    }
+
+    public function scopeMain_photo($query)
+    {
+        return $query->where('main', '1');
+    }
 }

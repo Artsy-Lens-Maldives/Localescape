@@ -34,10 +34,13 @@
                                         <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="wrapper">
                                             
                                             <div class="gallery">
-                                                <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                                <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                                <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                                <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
+                                                @foreach($accommodation->photos as $photo)
+                                                    @if($photo->main == '1')
+                                                        <img src="{{ $photo->photo_url }}" alt="">
+                                                    @else
+                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ $photo->photo_url }}">
+                                                    @endif
+                                                @endforeach
                                             </div>
 
                                         </a>
@@ -58,11 +61,11 @@
                                     </div> -->
                                     <!--end meta-->
                                     <div class="info">
-                                        <a href="{{ url()->current() }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->name }}</h3></a>
+                                        <a href="{{ url()->current() }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
                                         <figure class="location">{{ $accommodation->location }}</figure>
                                         <figure class="label label-info">{{ $type }}</figure>
                                         <?php
-                                        $watch_count = rand(-100,100);
+                                            $watch_count = rand(-100,100);
                                         ?>  
                                         @if($watch_count > 0)
                                             <figure class="live-info"><b>{{ $watch_count }} watching this now!</b></figure>    
@@ -72,7 +75,7 @@
                                         <p>
                                             {{ $accommodation->description }}
                                         </p>
-                                        <div class="price-info">From<span class="price">${{ $accommodation->price }}</span><span class="appendix">/night</span></div>
+                                        <!-- <div class="price-info">From<span class="price">${{ $accommodation->price }}</span><span class="appendix">/night</span></div> -->
                                         <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
                                     </div>
                                     <!--end info-->

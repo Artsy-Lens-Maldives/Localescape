@@ -45,17 +45,26 @@ Route::get('/blog', function () {
     return view('blog.all');
 });
 
-Route::get('/blog/create', 'BlogController@create');
-Route::post('/blog/create/post', 'BlogController@store');
+//Photo Url
+Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename) {
+    $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
+    $path = storage_path($fileloc);
 
-Route::get('/dive/create', 'DiveController@create');
-Route::post('/dive/create/package', 'DiveController@store');
+    $failed = "It failed";
+    
+    if (!File::exists($path)) {
+      return $failed;
+    }
 
-Route::get('/photo/create', 'PhotopanelController@create');
-Route::post('/photo/create/package', 'PhotopanelController@store');
+    $file = File::get($path);
+    $type = File::mimeType($path);
 
-Route::get('/tour/create', 'TourController@create');
-Route::post('/tour/create/package', 'TourController@store');
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
 
 Route::prefix('extranet')->group(function () {
     Route::get('/', function () {
@@ -194,3 +203,15 @@ Route::get('/admin/tour/all', function () {
     $tours = \App\tour::all();
     return view('tours.view', compact('tours'));
 });
+
+Route::get('/blog/create', 'BlogController@create');
+Route::post('/blog/create/post', 'BlogController@store');
+
+Route::get('/dive/create', 'DiveController@create');
+Route::post('/dive/create/package', 'DiveController@store');
+
+Route::get('/photo/create', 'PhotopanelController@create');
+Route::post('/photo/create/package', 'PhotopanelController@store');
+
+Route::get('/tour/create', 'TourController@create');
+Route::post('/tour/create/package', 'TourController@store');

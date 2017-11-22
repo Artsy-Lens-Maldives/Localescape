@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">{{ $type }}</a></li>
-                <li class="active">{{ $accommodation->name }}</li>
+                <li class="active">{{ $accommodation->title }}</li>
             </ol>
             <!--end breadcrumb-->
             <div class="row">
@@ -27,7 +27,7 @@
                     <div class="main-content">
                         <div class="title">
                             <div class="left">
-                                <h1>{{ $accommodation->name }}<span class="rating"><i class="fa fa-star"></i>{{ $accommodation->rating }}</span></h1>
+                                <h1>{{ $accommodation->title }}<span class="rating"><i class="fa fa-star"></i>{{ $accommodation->rating }}</span></h1>
                                 <h3><a href="#">{{ $accommodation->location }}</a></h3>
                             </div>
                             <div class="right">
@@ -44,39 +44,11 @@
                                     
                                 @endif
                                 <div class="one-item-carousel">
-                                    <div class="image">
-                                        
-                                        <img src="/assets/img/items/01_b.jpg" alt="">
-                                    </div>
-                                    <div class="image">
-                                        <a href="#reviews" class="review scroll">
-                                            <div class="rating">
-                                                <div class="rating-title">
-                                                    <figure class="rating">9.9</figure>
-                                                    <h4>Beautiful Holiday</h4>
-                                                </div>
-                                                <p>Class aptent taciti sociosqu ad litora
-                                                    torquent per conubia nostra, per inceptos
-                                                </p>
-                                            </div>
-                                        </a>
-                                        <img src="/assets/img/items/02_b.jpg" alt="">
-                                    </div>
-                                    <div class="image">
-                                        <a href="#reviews" class="review scroll">
-                                            <div class="rating">
-                                                <div class="rating-title">
-                                                    <figure class="rating">9.8</figure>
-                                                    <h4>Very Good Hotel</h4>
-                                                </div>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod. Suspendisse
-                                                    at dui sit amet felis commodo dictum. Class aptent taciti sociosqu ad litora
-                                                    torquent per conubia nostra, per inceptos
-                                                </p>
-                                            </div>
-                                        </a>
-                                        <img src="/assets/img/items/03_b.jpg" alt="">
-                                    </div>
+                                    @foreach($accommodation->photos as $photo)
+                                        <div class="image">                                        
+                                            <img src="{{ $photo->photo_url }}" alt="">
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </section>
@@ -111,7 +83,7 @@
                                     <aside class="box">
                                         <h2>Contact</h2>
                                         <address>
-                                            <strong>{{ $accommodation->name }}</strong><br>
+                                            <strong>{{ $accommodation->title }}</strong><br>
                                             {{ $accommodation->address }}<br>
                                             <br>
                                             {{ $accommodation->phone }}<br>
@@ -284,18 +256,51 @@
                         <section id="additional-information">
                             <h2>Additional Information</h2>
                             <dl class="info">
-                                <dt>Check-in:</dt>
-                                <dd><strong>{{ $accommodation->check_in_time }} </strong></dd>
-                                <dt>Check-out:</dt>
-                                <dd><strong>{{ $accommodation->check_out_time }} </strong></dd>
-                                <dt>Cancellation:</dt>
-                                <dd>{{ $accommodation->cancellation }}</dd>
-                                <dt>Children:</dt>
-                                <dd>{{ $accommodation->charge_childeren }}</dd>
-                                <dt>Pets:</dt>
-                                <dd>{{ $accommodation->pets }}</dd>
-                                <dt>Other Policies:</dt>
-                                <dd>{{ $accommodation->other_policies }}</dd>
+                                @if($accommodation->getAttribute('check-in-from') !== null)
+                                    <dt>Check-in:</dt>
+                                    <dd><strong>{{ $accommodation->getAttribute('check-in-from') }} - {{ $accommodation->getAttribute('check-in-to') }} </strong></dd>    
+                                @else
+                                    
+                                @endif
+                                
+                                @if($accommodation->getAttribute('check-out-from') !== null)
+                                    <dt>Check-out:</dt>
+                                    <dd><strong>{{ $accommodation->getAttribute('check-out-from') }} - {{ $accommodation->getAttribute('check-out-to') }} </strong></dd>
+                                @else
+                                    
+                                @endif
+                                
+                                @if($accommodation->cancellation !== null)
+                                    <dt>Cancellation:</dt>
+                                    <br>
+                                    <dd>{{ $accommodation->cancellation }}</dd>
+                                @else
+                                    
+                                @endif
+                                
+                                @if($accommodation->charge_childeren !== null)
+                                    <dt>Children:</dt>
+                                    <br>
+                                    <dd>{{ $accommodation->charge_childeren }}</dd>
+                                @else
+                                    
+                                @endif
+                                
+                                @if($accommodation->pets !== null)
+                                    <dt>Pets:</dt>
+                                    <br>
+                                    <dd>{{ $accommodation->pets }}</dd>
+                                @else
+                                    
+                                @endif
+
+                                @if($accommodation->other_policies !== null)
+                                    <dt>Other Policies:</dt>
+                                    <br>
+                                    <dd>{{ $accommodation->other_policies }}</dd>
+                                @else
+                                    
+                                @endif
                             </dl>
                             <!--end info-->
                         </section>
