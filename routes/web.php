@@ -46,6 +46,31 @@ Route::get('/blog', function () {
 });
 
 //Photo Url
+Route::get('/{type}/{slug}/photo/{filename}/thumb', function ($type, $slug, $filename) {
+    $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
+    $path = storage_path($fileloc);
+
+    $failed = "It failed";
+    
+    if (!File::exists($path)) {
+      return $failed;
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $img = Image::cache(function($image) use ($file) {
+        $image->make($file)->resize(null, 200, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+    }, 100, false);
+    
+    $response = Response::make($img, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
 Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename) {
     $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
     $path = storage_path($fileloc);
@@ -86,6 +111,7 @@ Route::prefix('extranet')->group(function () {
     });
     
     Route::prefix('accommodations')->group(function () {
+        //Accommodation Route
         Route::get('/', 'AccomodationsController@all');
         Route::get('/add', 'AccomodationsController@create');
         Route::post('/add', 'AccomodationsController@store');
@@ -93,9 +119,16 @@ Route::prefix('extranet')->group(function () {
         Route::post('/edit/{id}', 'AccomodationsController@update');
         Route::get('/delete/{accomodations}', 'AccomodationsController@destroy');
 
+        Route::get('/images/{id}', 'AccommoPhotoController@index');
+        Route::get('/images/{id}/{accommo_photo}/delete', 'AccommoPhotoController@destroy');
+        Route::get('/images/{id}/{accommo_photo}/main', 'AccommoPhotoController@main');
+        Route::post('/images/{id}/new', 'AccommoPhotoController@store');
+
+        //Booking Route
         Route::get('/bookings', function () {
             return view('extranet.accommodations.bookings');
         }); 
+        //Review Route
         Route::get('/reviews', function () {
             return view('extranet.accommodations.reviews');
         }); 
@@ -157,3 +190,10 @@ Route::post('/photo/create/package', 'PhotopanelController@store');
 
 Route::get('/tour/create', 'TourController@create');
 Route::post('/tour/create/package', 'TourController@store');
+
+Route::get('/imagetest', function()
+{
+    $img = Image::make('foo.jpg')->resize(300, 200);
+
+    return $img->response('jpg');
+});

@@ -36,9 +36,9 @@
                                             <div class="gallery">
                                                 @foreach($accommodation->photos as $photo)
                                                     @if($photo->main == '1')
-                                                        <img src="{{ $photo->photo_url }}" alt="">
+                                                        <img src="{{ $photo->photo_url }}/thumb" alt="">
                                                     @else
-                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ $photo->photo_url }}">
+                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ $photo->photo_url }}/thumb">
                                                     @endif
                                                 @endforeach
                                             </div>
