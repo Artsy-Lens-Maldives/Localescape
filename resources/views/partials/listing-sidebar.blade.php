@@ -21,12 +21,12 @@
                                     <!--end form-group-->
                                 </div>
                                 <!--end form-group-inline-->
-                                <div class="center">
+                                <!-- <div class="center">
                                     <a href="#filter-advanced-search" class="link icon" data-toggle="collapse" aria-expanded="false" aria-controls="filter-advanced-search">Advanced Search<i class="fa fa-plus"></i></a>
-                                </div>
-                                <div class="collapse in" id="filter-advanced-search">
+                                </div> -->
+                                <!-- <div class="collapse in" id="filter-advanced-search">
                                     <div class="wrapper">
-                                        <h2>Filter<!--<span data-show-after-time="1000" data-container="body" data-toggle="popover" data-placement="right" title="Try Filters!" data-content="Get better results by using filters. Check what you like and what you don't."></span>--></h2>
+                                        <h2>Filter</h2>
                                         <section>
                                             <h3>Rate (per night)</h3>
                                             <ul class="checkboxes list-unstyled">
@@ -35,28 +35,18 @@
                                                 <li><label><input type="checkbox" name="breakfast-only">$150 - $150<span>36</span></label></li>
                                                 <li><label><input type="checkbox" name="spa-wellness">$150+<span>56</span></label></li>
                                             </ul>
-                                            <!--end checkboxes-->
+                                            
                                         </section>
-                                        <!--end section-->
+                                        
                                         <section>
                                             <h3>Property Type </h3>
                                             <ul class="checkboxes">
                                                 <li><label><input type="checkbox" name="apartment">Hotels<span>31</span></label></li>
                                                 <li><label><input type="checkbox" name="breakfast-only">Resorts<span>68</span></label></li>
                                                 <li><label><input type="checkbox" name="spa-wellness">Guest-House<span>52</span></label></li>
-                                            </ul>
-                                            <!-- <div class="collapse" id="all-property-types">
-                                                <ul class="checkboxes">
-                                                    <li><label><input type="checkbox" name="ski-center">Ski Center<span>67</span></label></li>
-                                                    <li><label><input type="checkbox" name="cottage">Cottage<span>31</span></label></li>
-                                                    <li><label><input type="checkbox" name="hostel">Hostel<span>68</span></label></li>
-                                                    <li><label><input type="checkbox" name="boat">Boat<span>52</span></label></li>
-                                                </ul>
-                                            </div> -->
-                                            <!--end checkboxes-->
-                                            <!-- <a href="#all-property-types" class="link" data-toggle="collapse" aria-expanded="false" aria-controls="all-property-types">Show all</a> -->
+                                            </ul>      
                                         </section>
-                                        <!--end section-->
+                                        
                                         <section>
                                             <h3>Property Facility</h3>
                                             <ul class="checkboxes no-bottom-margin">
@@ -65,12 +55,11 @@
                                                 <li><label><input type="checkbox" name="airport">Airport Shuttle<span>36</span></label></li>
                                                 <li><label><input type="checkbox" name="family-rooms">Family Rooms<span>56</span></label></li>
                                             </ul>
-                                            <!--end checkboxes-->
+                                            
                                         </section>
-                                        <!--end section-->
+                                        
                                     </div>
-                                    <!--end filter-advanced-search-->
-                                </div>
+                                </div> -->
                                 <!--end collapse-->
                                 <div class="form-group center">
                                     <button type="submit" class="btn btn-primary btn-rounded form-control">Search</button>

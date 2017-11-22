@@ -42,4 +42,9 @@ class Accomodations extends Model
     {
         return $query->where('main', '1');
     }
+
+    public function rooms()
+    {
+        return $this->hasMany('App\accommo_room', 'accommo_id');
+    }
 }

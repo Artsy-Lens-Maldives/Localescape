@@ -27,6 +27,10 @@
                                 </div>
                                 <!--end element-->
                                 <div class="element">
+                                    <a href="{{ url('extranet/login') }}">Extranet</a>
+                                </div>
+                                <!--end element-->
+                                <div class="element">
                                     <select>
                                         <option>EN</option>
                                         <option>DE</option>

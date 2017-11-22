@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Extranet</a></li>
+        <li><a href="#">Register</a></li>
+    </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

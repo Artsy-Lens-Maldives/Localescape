@@ -61,14 +61,18 @@
                                 <section id="facilities">
                                     <h2>Facilities</h2>
                                     <ul class="bullets half">
-                                        <li>Sauna</li>
-                                        <li>Fireplace or fire pit</li>
-                                        <li>Outdoor Kitchen</li>
-                                        <li>Tennis Courts</li>
-                                        <li>Trees and Landscaping</li>
-                                        <li>Sun Room</li>
-                                        <li>Family Room</li>
-                                        <li>Concrete Flooring</li>
+                                    <?php 
+                                        $myArray = explode(',', $accommodation->facilities);
+                                    ?>
+                                    @foreach($facilities as $facility)
+                                        @foreach($myArray as $arrayI)
+                                            @if($arrayI == $facility->id)
+                                                <li>{{ $facility->name }}</li>
+                                            @else
+                                                
+                                            @endif
+                                        @endforeach
+                                    @endforeach   
                                     </ul>
                                 </section>
                                 <section id="map">
@@ -139,117 +143,39 @@
                                         </thead>
                                     </table>
                                 </div>
-                                <form id="room_1">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr class="room">
-                                                <td class="room-type">
-                                                    <a href=""><h3>Double Room</h3><figure class="label label-danger">1 Room Left!</figure></a>
-                                                    <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                        Suspendisse at dui sit amet felis commodo dictum.
-                                                    </p>
-                                                    <ul class="info">
-                                                        <li>Breakfast Included</li>
-                                                        <li>VAT Included</li>
-                                                    </ul>
-                                                </td>
-                                                <td class="persons">2<i class="fa fa-user"></i></td>
-                                                <td class="price">$96</td>
-                                                <td class="rooms">
-                                                    <select class="framed" name="room_1_nights">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
-                                                    </div>
-                                                    <!--end form-group-->
-                                                </td>
-                                            </tr>
-                                            <!--end tr.room-->
-                                        </tbody>
-                                    </table>
-                                    <!--end table-->
-                                </form>
-                                <!--edn form#room_1-->
-                                <form id="room_2">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr class="room">
-                                            <td class="room-type">
-                                                <a href=""><h3>Family Suite</h3></a>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                    Suspendisse at dui sit amet felis commodo dictum.
-                                                </p>
-                                                <ul class="info">
-                                                    <li>Breakfast Included</li>
-                                                    <li>VAT Included</li>
-                                                </ul>
-                                            </td>
-                                            <td class="persons">4+1<i class="fa fa-user"></i></td>
-                                            <td class="price">$176</td>
-                                            <td class="rooms">
-                                                <select class="framed" name="room_2_nights">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
-                                                </div>
-                                                <!--end form-group-->
-                                            </td>
-                                        </tr>
-                                        <!--end tr.room-->
-                                        </tbody>
-                                    </table>
-                                    <!--end table-->
-                                </form>
-                                <!--edn form#room_2-->
-                                <form id="room_3">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr class="room">
-                                            <td class="room-type">
-                                                <a href=""><h3>Apartment</h3></a>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                    Suspendisse at dui sit amet felis commodo dictum.
-                                                </p>
-                                                <ul class="info">
-                                                    <li>Breakfast Included</li>
-                                                    <li>VAT Included</li>
-                                                </ul>
-                                            </td>
-                                            <td class="persons">2+2<i class="fa fa-user"></i></td>
-                                            <td class="price">$250</td>
-                                            <td class="rooms">
-                                                <select class="framed" name="room_3_nights">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
-                                                </div>
-                                                <!--end form-group-->
-                                            </td>
-                                        </tr>
-                                        <!--end tr.room-->
-                                        </tbody>
-                                    </table>
-                                    <!--end table-->
-                                </form>
-                                <!--edn form#room_3-->
+                                @foreach($accommodation->rooms as $room)
+                                    <form id="room_1">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr class="room">
+                                                    <td class="room-type">
+                                                        <a href=""><h3>{{ $room->room_type }}</h3></a>
+                                                        <p>{{ $room->description }}</p>
+                                                    </td>
+                                                    <td class="persons">{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
+                                                    <td class="price">${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
+                                                    <td class="rooms">
+                                                        <select class="framed" name="room_1_nights">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
+                                                        </div>
+                                                        <!--end form-group-->
+                                                    </td>
+                                                </tr>
+                                                <!--end tr.room-->
+                                            </tbody>
+                                        </table>
+                                        <!--end table-->
+                                    </form>
+                                @endforeach
+                                
                             </div>
                             <!--end form-reservations-->
                         </section>

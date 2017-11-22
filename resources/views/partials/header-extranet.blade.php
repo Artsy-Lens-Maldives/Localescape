@@ -17,15 +17,6 @@
                                         <option>€</option>
                                     </select>
                                 </div>
-                                <!--end element-->
-                                <div class="element">
-                                    <a href="#tab-sign-in" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Sign In</a>
-                                </div>
-                                <!--end element-->
-                                <div class="element">
-                                    <a href="#tab-register" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Register</a>
-                                </div>
-                                <!--end element-->
                                 <div class="element">
                                     <select>
                                         <option>EN</option>
@@ -56,8 +47,9 @@
                     <!--end left-->
                     <div class="right" >
                         <nav id="primary-nav">
+                            @if (Auth::guard('extranet')->check()) 
                             <ul>
-                                <li class="active"><a href="{{ url('/') }}">Go Back Home</a></li>
+                                <li class="active"><a href="{{ url('/') }}">Go Back Home </a></li>
                                 <li>
                                     <a href="{{ url('/extranet/accommodations') }}" class="has-child">Accommodations</a>
                                     <ul class="child-nav">
@@ -67,8 +59,27 @@
                                 </li>
 
                                 <li><a href="{{ url('/extranet/profile') }}">Profile</a></li>
+                                <li>
+                                    <a href="{{ url('/extranet/logout') }}"
+                                        onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ url('/extranet/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                                 <!-- <li><a href="{{ url('/extranet/bookings') }}">Bookings</a></li> -->
-                            </ul>
+                            </ul>   
+                            @else
+                            <ul>
+                                <li class="active"><a href="{{ url('/') }}">Go Back Home</a></li>                                
+                                <li><a href="{{ url('/extranet/login') }}">Login</a></li>
+                                <li><a href="{{ url('/extranet/register') }}">Register</a></li>
+                            </ul> 
+                            @endif
+                            
                         </nav>
                         <!--end nav-->
                     </div>

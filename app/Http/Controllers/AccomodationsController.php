@@ -7,40 +7,42 @@ use App\accommo_photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Auth;
 
 class AccomodationsController extends Controller
 {
     public function hotel()
     {
         $type = "Hotels";
-        $accommodations = Accomodations::where('type', 'hotel')->paginate(15);
+        $accommodations = Accomodations::where('type', 'hotel')->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
 
     public function hotel_detail($slug)
     {
         $type = "Hotel";
-        $accommodation = Accomodations::where('slug', $slug)->first();
-        return view('accommodations.details', compact('type', 'accommodation'));
+        $facilities = \App\facilities::all();
+        $accommodation = Accomodations::where('slug', $slug)->where('active', '1')->first();
+        return view('accommodations.details', compact('type', 'accommodation', 'facilities'));
     }
     
     public function resort()
     {
         $type = "Resorts";
-        $accommodations = Accomodations::where('type', 'resort')->paginate(15);
+        $accommodations = Accomodations::where('type', 'resort')->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
     
     public function guesthouse()
     {
         $type = "Guest House";
-        $accommodations = Accomodations::where('type', 'guest-house')->paginate(15);
+        $accommodations = Accomodations::where('type', 'guest-house')->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
 
     public function all()
     {
-        $accommodations = Accomodations::all();
+        $accommodations = Accomodations::where('user_id', Auth::guard('extranet')->user()->id)->get();
         return view('extranet.accommodations.all', compact('accommodations'));
     }
 
@@ -55,6 +57,7 @@ class AccomodationsController extends Controller
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         $array = $request->facilities;
         $accommodations->facilities = implode("," ,$array);
+        $accommodations->user_id = Auth::guard('extranet')->user()->id;
         $accommodations->save();
         
         $i = 0;
@@ -82,7 +85,11 @@ class AccomodationsController extends Controller
     {
         $acco = Accomodations::find($id);
         $facilities = \App\facilities::all();
-        return view('extranet.accommodations.edit', compact('acco', 'facilities'));
+        if($acco->user_id == Auth::guard('extranet')->user()->id){
+            return view('extranet.accommodations.edit', compact('acco', 'facilities'));
+        } else {
+            return redirect('extranet/accommodations');
+        }
     }
 
     public function update($id, Request $request)
@@ -125,8 +132,12 @@ class AccomodationsController extends Controller
 
     public function destroy(Accomodations $accomodations)
     {
-        $accomodations->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the accommodation');
+        if($accomodations->user_id == Auth::guard('extranet')->user()->id){
+            $accomodations->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the accommodation');
+        } else {
+            return redirect('extranet/accommodations');
+        }
     }
 
 }

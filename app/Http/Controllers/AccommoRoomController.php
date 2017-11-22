@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Accomodations;
 use App\accommo_room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 
 class AccommoRoomController extends Controller
 {
@@ -15,8 +17,13 @@ class AccommoRoomController extends Controller
      */
     public function index($id)
     {
-        $rooms = \App\accommo_room::where('accommo_id', $id)->get();
-        return view('extranet.accommodations.rooms.all', compact('rooms'));
+        $acco = Accomodations::find($id);
+        if($acco->user_id == Auth::guard('extranet')->user()->id){
+            $rooms = \App\accommo_room::where('accommo_id', $id)->get();
+            return view('extranet.accommodations.rooms.all', compact('rooms'));
+        } else {
+            return redirect('extranet/accommodations');
+        }
     }
 
     /**
@@ -61,7 +68,12 @@ class AccommoRoomController extends Controller
      */
     public function edit(accommo_room $accommo_room)
     {
-        return view('extranet.accommodations.rooms.edit', compact('accommo_room'));
+        $acco = Accomodations::find($accommo_room->accommo_id);
+        if($acco->user_id == Auth::guard('extranet')->user()->id){
+            return view('extranet.accommodations.rooms.edit', compact('accommo_room'));
+        } else {
+            return redirect('extranet/accommodations');
+        }    
     }
 
     /**
@@ -93,7 +105,12 @@ class AccommoRoomController extends Controller
      */
     public function destroy(accommo_room $accommo_room)
     {
-        $accommo_room->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the room');
+        $acco = Accomodations::find($accommo_room->accommo_id);
+        if($acco->user_id == Auth::guard('extranet')->user()->id){
+            $accommo_room->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the room');
+        } else {
+            return redirect('extranet/accommodations');
+        } 
     }
 }
