@@ -5,7 +5,7 @@
 
 <div class="container">
 <br>
-<center><h2>Booking Form</h2></center>
+<center><h2>Inquery Form</h2></center>
 <br>
       <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -16,7 +16,7 @@
             @endif
         @endforeach
       </div>
-      <form class="form-horizontal" action="{{ url('booking/create/success') }}" method="POST">
+      <form class="form-horizontal" action="{{ url('inquery/create/success') }}" method="POST">
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Full Name</label>
           <div class="col-sm-10">
