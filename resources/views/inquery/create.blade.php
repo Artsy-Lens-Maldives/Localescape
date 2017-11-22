@@ -38,7 +38,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Inquery Details</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="detailsr" placeholder="Inquery Details" name="details">
+            <input type="text" class="form-control" id="details" placeholder="Inquery Details  " name="details">
           </div>
         </div>
         <input type="hidden" name="_token" value="{{csrf_token()}}">
