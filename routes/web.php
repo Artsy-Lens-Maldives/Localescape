@@ -57,6 +57,10 @@ Route::post('/photo/create/package', 'PhotopanelController@store');
 Route::get('/tour/create', 'TourController@create');
 Route::post('/tour/create/package', 'TourController@store');
 
+Route::get('/booking/create', 'BookingController@create');
+Route::post('/booking/create/success', 'BookingController@store');
+
+
 Route::prefix('extranet')->group(function () {
     Route::get('/', function () {
         return view('extranet.home');
