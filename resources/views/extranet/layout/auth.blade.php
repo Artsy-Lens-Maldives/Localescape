@@ -10,8 +10,13 @@
 
     <title>{{ config('app.name', 'Laravel Multi Auth Guard') }}</title>
 
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/css/all.css" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link href="/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/fonts/elegant-fonts.css" rel="stylesheet" type="text/css">
+    @yield('css')
 
     <!-- Scripts -->
     <script>
@@ -79,7 +84,26 @@
 
     @yield('content')
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <!-- Script Tags -->
+    <script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places"></script>
+    <script type="text/javascript" src="/js/infobox.js"></script>
+    <script type="text/javascript" src="/js/markerclusterer_packed.js"></script>
+    <script type="text/javascript" src="/js/richmarker-compiled.js"></script>
+    <script type="text/javascript" src="/js/markerwithlabel_packed.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/js/icheck.min.js"></script>
+    <script type="text/javascript" src="/js/owl.carousel.js"></script>
+    <script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
+
+    @yield('js')
+
+    <script type="text/javascript" src="/js/maps.js"></script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+
+    @yield('js-after')
 </body>
 </html>
