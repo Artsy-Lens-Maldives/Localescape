@@ -36,6 +36,11 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
         'extranet' => [
             'driver' => 'session',
             'provider' => 'extranets',
@@ -70,6 +75,11 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
         'extranets' => [
             'driver' => 'eloquent',
             'model' => App\Extranet::class,
@@ -102,6 +112,12 @@ return [
     */
 
     'passwords' => [
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+
         'extranets' => [
             'provider' => 'extranets',
             'table' => 'extranet_password_resets',
