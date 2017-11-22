@@ -131,6 +131,11 @@ Route::get('/admin/tour/all', function () {
     return view('tours.view', compact('tours'));
 });
 
+Route::get('/admin/bookings/all', function () {
+    $bookings = \App\booking::all();
+    return view('accommodations.view', compact('bookings'));
+});
+
 Route::get('/blog/create', 'BlogController@create');
 Route::post('/blog/create/post', 'BlogController@store');
 
