@@ -78,14 +78,14 @@ class AccomodationsController extends Controller
         return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
     }
 
-    public function edit()
+    public function edit($id)
     {
         $acco = Accomodations::find($id);
         $facilities = \App\facilities::all();
         return view('extranet.accommodations.edit', compact('acco', 'facilities'));
     }
 
-    public function update()
+    public function update($id)
     {
         $acco = Accomodations::find($id);
         $acco->title = $request->title;

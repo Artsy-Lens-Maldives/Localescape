@@ -10,7 +10,7 @@
             <!--end breadcrumb-->
             <div class="main-content">
                 <div class="title">
-                    <h1><a href="#">Rooms of accommodation</a> <a style="margin:1px" class="btn btn-success" href="/extranet/accommodations/rooms/add">Add New Room</a></h1>
+                    <h1><a href="#">Rooms of accommodation</a> <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/add">Add New Room</a></h1>
                 </div>
                 <div class="reservations table-responsive">
                     <div class="flash-message">

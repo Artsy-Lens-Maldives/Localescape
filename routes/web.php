@@ -102,7 +102,16 @@ Route::prefix('extranet')->group(function () {
             Route::get('{id}', function ($id) {
                 $rooms = \App\accommo_room::where('accommo_id', $id)->get();
                 return view('extranet.accommodations.rooms.all', compact('rooms'));
+            });
+            
+            Route::get('{id}/add', function ($id) {
+                return view('extranet.accommodations.rooms.add');
             }); 
+
+            Route::get('{id}/add', function ($id) {
+                return view('extranet.accommodations.rooms.add');
+            }); 
+
         });
 
     });
