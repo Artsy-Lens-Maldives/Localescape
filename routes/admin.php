@@ -1,5 +1,11 @@
 <?php
+
 use App\Accomodations;
+use App\accommo_photo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/home', function () {
     $users[] = Auth::user();
@@ -22,6 +28,16 @@ Route::group(['prefix' => 'accommodations'], function () {
     Route::get('/', function () {
         $accommodations = Accomodations::all();
         return view('admin.accommodation.all', compact('accommodations'));
+    });
+
+    Route::get('/create', function () {
+        $accommodations = Accomodations::all();
+        return view('admin.accommodation.create', compact('accommodations'));
+    });
+
+    Route::post('/create', function () {
+        $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
+        return 'done';
     });
 
 });

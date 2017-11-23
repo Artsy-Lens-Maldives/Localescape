@@ -11,9 +11,9 @@
                     </li>
                     <li><a><i class="fa fa-edit"></i> Users <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="{{ url('admin/user/customers') }}">Customers</a></li>
-                        <li><a href="{{ url('admin/user/extranet') }}">Extranet</a></li>
                         <li><a href="{{ url('admin/user/admin') }}">Admin</a></li>
+                        <li><a href="{{ url('admin/user/extranet') }}">Extranet</a></li>
+                        <li><a href="{{ url('admin/user/customers') }}">Customers</a></li>
                         <li><a href="{{ url('admin/user/dive') }}">Dive Panel User</a></li>
                         <li><a href="{{ url('admin/user/photo') }}">Photo Panel</a></li>
                       </ul>

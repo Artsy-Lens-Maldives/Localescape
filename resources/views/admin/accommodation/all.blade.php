@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    <span>All Accommodation</span> <a class="btn btn-success" href="{{ url()->current() }}/create">Create Accommodation</a> 
+@endsection
+
 @section('content')
     
     <div>
