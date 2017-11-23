@@ -11,6 +11,8 @@
 
     <!-- css -->
     <link href="{{ url('css/admin.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sc-1.4.3/datatables.min.css"/
+    @yield('css')
   </head>
 
   <body class="nav-md">
@@ -39,53 +41,7 @@
 
             <br />
 
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Extranet <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ url('admin/accommodations') }}">Accommodations</a></li>
-                      <li><a href="{{ url('admin/rooms') }}">Rooms</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Users <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ url('admin/user/customers') }}">Customers</a></li>
-                      <li><a href="{{ url('admin/user/extranet') }}">Extranet</a></li>
-                      <li><a href="{{ url('admin/user/admin') }}">Admin</a></li>
-                      <li><a href="{{ url('admin/user/dive') }}">Dive Panel User</a></li>
-                      <li><a href="{{ url('admin/user/photo') }}">Photo Panel</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> Tours <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ url('admin/tours') }}">All Tours</a></li>
-                      <li><a href="{{ url('admin/tours/add') }}">Add Tours</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Blog <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ url('admin/blog') }}">All Blog Post</a></li>
-                      <li><a href="{{ url('admin/blog/create') }}">Add Blog Post</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Bookings <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ url('admin/bookings/accommodations') }}">Accommodations</a></li>
-                      <li><a href="{{ url('admin/bookings/tours') }}">Tours</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Inquiries <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ url('admin/inquiries') }}">All Inquiries</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- /sidebar menu -->
+            @include('partials.admin-sidebar')
           </div>
         </div>
 
@@ -164,5 +120,9 @@
     <!-- js -->
     <script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
     <script src="{{ url('js/admin.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sc-1.4.3/datatables.min.js"></script>
+    @yield('js')
   </body>
 </html>
