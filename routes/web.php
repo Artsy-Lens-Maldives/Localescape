@@ -111,31 +111,6 @@ Route::group(['prefix' => 'extranet'], function () {
     Route::get('/password/reset/{token}', 'ExtranetAuth\ResetPasswordController@showResetForm');
 });
 
-Route::get('/admin/blog', function () {
-    $blogs = \App\blog::all();
-    return view('blog.view', compact('blogs'));
-});
-
-Route::get('/admin/dive/all', function () {
-    $dives = \App\dive::all();
-    return view('dive.view', compact('dives'));
-});
-
-Route::get('/admin/photo/all', function () {
-    $photopanels = \App\photopanel::all();
-    return view('photo.view', compact('photopanels'));
-});
-
-Route::get('/admin/tour/all', function () {
-    $tours = \App\tour::all();
-    return view('tours.view', compact('tours'));
-});
-
-Route::get('/admin/bookings/all', function () {
-    $bookings = \App\booking::all();
-    return view('accommodations.view', compact('bookings'));
-});
-
 Route::get('/blog/create', 'BlogController@create');
 Route::post('/blog/create/post', 'BlogController@store');
 
@@ -144,9 +119,6 @@ Route::post('/dive/create/package', 'DiveController@store');
 
 Route::get('/photo/create', 'PhotopanelController@create');
 Route::post('/photo/create/package', 'PhotopanelController@store');
-
-Route::get('/tour/create', 'TourController@create');
-Route::post('/tour/create/package', 'TourController@store');
 
 Route::get('/imagetest', function()
 {

@@ -91,7 +91,30 @@ Route::group(['prefix' => 'tours'], function () {
     });
     Route::get('/add', function () {
         return view('tours.create');
-    }); 
+    });
+    Route::post('/add', 'TourController@store');
+
+    Route::get('/delete/{id}', function ($id) {
+        $tour = \App\tour::find($id);
+        $tour->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the tour');
+    });
+    
+    Route::get('/edit/{id}', function ($id) {
+        $tour = \App\tour::find($id);
+        return view('tours.edit', compact('tour'));
+    });
+    Route::post('/edit/{id}', function ($id, Request $request) {
+        $tour = \App\tour::find($id);
+        $tour->name = $request->name;
+        $tour->price = $request->price;
+        $tour->description = $request->description;
+        $tour->itenarary = $request->itenarary;
+        $tour->save();
+        return redirect('admin/tours')->with('alert-success', 'Successfully edited the tour');
+    });
+
+
 });
 
 Route::group(['prefix' => 'blog'], function () {
@@ -102,6 +125,24 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('/create', function () {
         return view('blog.create');
     }); 
+    Route::post('/create', 'BlogController@store');
+
+    Route::get('/delete/{id}', function ($id) {
+        $blog = \App\blog::find($id);
+        $blog->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the blog post');
+    });
+    
+    Route::get('/edit/{id}', function ($id) {
+        $blog = \App\blog::find($id);
+        return view('blog.edit', compact('blog'));
+    });
+    Route::post('/edit/{id}', function ($id, Request $request) {
+        $blog = \App\blog::find($id);
+        
+        $blog->save();
+        return redirect('admin/blog')->with('alert-success', 'Successfully edited the blog');
+    });
 });
 
 Route::group(['prefix' => 'bookings'], function () {

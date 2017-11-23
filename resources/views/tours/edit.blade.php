@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span>Add Blog Post</span>
+    <span>Edit Tour Package</span>
 @endsection
 
 @section('content')
@@ -16,26 +16,32 @@
             @endif
         @endforeach
       </div>
+
       <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
         <div class="form-group">
-          <label class="control-label col-sm-2" for="email">Blog Title</label>
+          <label class="control-label col-sm-2" for="email">Package Title</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" placeholder="Your Blog Title" name="title">
+            <input type="text" class="form-control" id="name" name="name" value="{{ $tour->name }}">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Blog Post</label>
+          <label class="control-label col-sm-2" for="pwd">Price</label>
           <div class="col-sm-10">          
-            <textarea name="description" form="form-control"  id="description" placeholder="" style="width: 100%;" rows="30" ></textarea>
+            <input type="text" class="form-control" id="description" placeholder="Price" name="price"  value="{{ $tour->price }}">
           </div>
         </div>
          <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Author</label>
+          <label class="control-label col-sm-2" for="pwd">Description</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="author" placeholder="Author Name" name="author">
+            <input type="text" class="form-control" id="description" placeholder="Your Description" name="description" value="{{ $tour->description }}">
           </div>
         </div>
-        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd">Itenarary</label>
+          <div class="col-sm-10">          
+            <input type="text" class="form-control" id="itenarary" placeholder="Itenarary" name="itenarary" value="{{ $tour->itenarary }}">
+          </div>
+        </div>
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
