@@ -7,7 +7,7 @@
 @section('content')
     
     <div class="container">
-      <table class="table table-bordered">
+      <table id="tours" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th>Package Name</th>
@@ -33,5 +33,15 @@
         </tbody>
     </table>
     </div>
+
+@endsection
+
+@section('js')
+    
+<script>
+    $(document).ready(function() {
+        $('#tours').DataTable();
+    } );
+</script>
 
 @endsection

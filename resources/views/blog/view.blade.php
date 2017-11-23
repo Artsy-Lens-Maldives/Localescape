@@ -7,7 +7,7 @@
 @section('content')
     
     <div class="container">
-      <table class="table table-bordered">
+      <table id="blog_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th>Title</th>
@@ -29,5 +29,15 @@
         </tbody>
     </table>
     </div>
+
+@endsection
+
+@section('js')
+    
+<script>
+    $(document).ready(function() {
+        $('#blog_table').DataTable();
+    } );
+</script>
 
 @endsection

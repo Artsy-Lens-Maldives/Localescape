@@ -67,3 +67,45 @@ Route::group(['prefix' => 'user'], function () {
         });
     });
 });
+
+Route::group(['prefix' => 'tours'], function () {
+    Route::get('/', function () {
+        $tours = \App\tour::all();
+        return view('tours.view', compact('tours'));
+    });
+    Route::get('/add', function () {
+        return view('tours.create');
+    }); 
+});
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', function () {
+        $blogs = \App\blog::all();
+        return view('blog.view', compact('blogs'));
+    });
+    Route::get('/create', function () {
+        return view('blog.create');
+    }); 
+});
+
+Route::group(['prefix' => 'bookings'], function () {
+    Route::group(['prefix' => 'accommodations'], function () {
+        Route::get('/', function () {
+            $bookings = \App\booking::all();
+            return view('bookings.view', compact('bookings'));
+        }); 
+    });
+    Route::group(['prefix' => 'tours'], function () {
+        Route::get('/', function () {
+            $bookings = \App\booking::all();
+            return view('bookings.view', compact('bookings'));
+        }); 
+    });
+});
+
+Route::group(['prefix' => 'inquiries'], function () {
+    Route::get('/', function () {
+        $inquiries = \App\inquery::all();
+        return view('inquery.view', compact('inquiries'));
+    }); 
+});
