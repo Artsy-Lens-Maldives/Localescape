@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span>All Blog Post</span>
+    <span>All Blog Post</span> <a class="btn btn-success" href="{{ url()->current() }}/create">Add blog post</a>
 @endsection
 
 @section('content')
