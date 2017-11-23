@@ -139,7 +139,9 @@ Route::group(['prefix' => 'blog'], function () {
     });
     Route::post('/edit/{id}', function ($id, Request $request) {
         $blog = \App\blog::find($id);
-        
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+        $blog->author = $request->author;
         $blog->save();
         return redirect('admin/blog')->with('alert-success', 'Successfully edited the blog');
     });
