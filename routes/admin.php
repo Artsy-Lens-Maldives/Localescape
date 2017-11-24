@@ -32,7 +32,8 @@ Route::group(['prefix' => 'accommodations'], function () {
 
     Route::get('/create', function () {
         $accommodations = Accomodations::all();
-        return view('admin.accommodation.create', compact('accommodations'));
+        $facilities = \App\facilities::all();
+        return view('admin.accommodation.create', compact('accommodations', 'facilities'));
     });
 
     Route::post('/create', function () {
