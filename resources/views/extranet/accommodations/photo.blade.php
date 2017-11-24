@@ -33,7 +33,7 @@
                         </div>
                         <div class="file-upload-previews"></div>
                         <div class="file-upload">
-                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png">
+                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png" required>
                             <span>Click to add images</span>
                         </div>
                     <section>
@@ -47,8 +47,8 @@
                 <div>
                     @foreach($acco->photos as $image)
                     <div class="clearfix col-lg-2 col-md-2 col-sm-4 col-xs-6" style="width: 200px; height:100%; margin-top: 10px; margin-bottom: 10px;">
-                        <a href="{{ $image->photo_url }}" data-title="{{ $acco->title }}'s image" data-toggle="lightbox">
-                            <img class='img-responsive img-thumbnail' src="{{ $image->photo_url }}" style="width: 200px; height:130px;">
+                        <a href="{{ Helper::s3_url_gen($image->photo_url) }}" data-title="{{ $acco->title }}'s image" data-toggle="lightbox">
+                            <img class='img-responsive img-thumbnail' src="{{ Helper::s3_url_gen($image->photo_url) }}" style="width: 200px; height:130px;">
                         </a>
                         <center>
                             @if($image->main == '0')

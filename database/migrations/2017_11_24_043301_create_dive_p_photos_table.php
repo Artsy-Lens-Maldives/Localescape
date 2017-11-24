@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateToursTable extends Migration
+class CreateDivePPhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateToursTable extends Migration
      */
     public function up()
     {
-        Schema::create('tours', function (Blueprint $table) {
+        Schema::create('dive_p_photos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('price');
-            $table->longText('description');
-            $table->longText('itenarary');
-            $table->string('photo')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('dive_id');
+            $table->string('main');
+            $table->string('photo_url');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateToursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tours');
+        Schema::dropIfExists('dive_p_photos');
     }
 }

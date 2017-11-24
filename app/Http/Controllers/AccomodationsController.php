@@ -32,12 +32,28 @@ class AccomodationsController extends Controller
         $accommodations = Accomodations::where('type', 'resort')->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
+
+    public function resort_detail($slug)
+    {
+        $type = "Resorts";
+        $facilities = \App\facilities::all();
+        $accommodation = Accomodations::where('slug', $slug)->where('active', '1')->first();
+        return view('accommodations.details', compact('type', 'accommodation', 'facilities'));
+    }
     
     public function guesthouse()
     {
         $type = "Guest House";
         $accommodations = Accomodations::where('type', 'guest-house')->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
+    }
+
+    public function guesthouse_detail($slug)
+    {
+        $type = "Guest House";
+        $facilities = \App\facilities::all();
+        $accommodation = Accomodations::where('slug', $slug)->where('active', '1')->first();
+        return view('accommodations.details', compact('type', 'accommodation', 'facilities'));
     }
 
     public function all()
@@ -68,13 +84,31 @@ class AccomodationsController extends Controller
             } else {
                 $m = '0';
             }
+            //File names and location
             $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
-            $location = 'public/' . $accommodations->slug . '/images'; 
-            $file = $photo->storeAs($location, $fileName);
+            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
+            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
+            
+            $s3 = \Storage::disk('s3');
+
+            //Original Image
+            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_o, $original->stream()->__toString(), 'public');
+            //Thumbnail image
+            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+
             accommo_photo::create([
                 'accommo_id' => $accommodations->id,
                 'main' => $m,
-                'photo_url' => '/'. $accommodations->type . '/' . $accommodations->slug . '/' . 'photo/' . $fileName
+                'photo_url' => $location_o,
+                'thumbnail' => $location_t,
             ]);
         }
 

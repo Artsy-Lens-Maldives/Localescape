@@ -19,6 +19,7 @@ class CreatePhotopanelsTable extends Migration
             $table->string('price');
             $table->longText('description');
             $table->string('photo')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

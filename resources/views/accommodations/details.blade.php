@@ -46,7 +46,7 @@
                                 <div class="one-item-carousel">
                                     @foreach($accommodation->photos as $photo)
                                         <div class="image">                                        
-                                            <img src="{{ $photo->photo_url }}" alt="">
+                                            <img src="{{ Helper::s3_url_gen($photo->photo_url) }}" alt="">
                                         </div>
                                     @endforeach
                                 </div>

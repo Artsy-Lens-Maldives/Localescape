@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Accomodations;
 use App\accommo_photo;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Image;
 
 class AccommoPhotoController extends Controller
 {
@@ -40,15 +42,34 @@ class AccommoPhotoController extends Controller
         $accommodations = Accomodations::find($id);
 
         foreach ($request->image as $photo) {            
+            //File names and location
             $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
-            $location = 'public/' . $accommodations->slug . '/images'; 
-            $file = $photo->storeAs($location, $fileName);
+            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
+            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
+            
+            $s3 = \Storage::disk('s3');
+
+            //Original Image
+            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_o, $original->stream()->__toString(), 'public');
+            //Thumbnail image
+            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+
             accommo_photo::create([
                 'accommo_id' => $accommodations->id,
                 'main' => '0',
-                'photo_url' => '/'. $accommodations->type . '/' . $accommodations->slug . '/' . 'photo/' . $fileName
+                'photo_url' => $location_o,
+                'thumbnail' => $location_t,
             ]);
         }
+
         return redirect()->back()->with('alert-success', 'Successfully added new image(s)');
     }
 

@@ -36,9 +36,9 @@
                                             <div class="gallery">
                                                 @foreach($accommodation->photos as $photo)
                                                     @if($photo->main == '1')
-                                                        <img src="{{ $photo->photo_url }}/thumb" alt="">
+                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
                                                     @else
-                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ $photo->photo_url }}/thumb">
+                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
                                                     @endif
                                                 @endforeach
                                             </div>
