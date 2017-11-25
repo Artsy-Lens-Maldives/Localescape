@@ -21,7 +21,7 @@
               <td>{{ $blog->title }}</td>
               <td>{{ $blog->author }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-danger" href="" onclick="return confirm('Are you sure you would like to delete this blog post. This process cannot be reversed.')">Delete</a>
+                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $blog->id }}" onclick="return confirm('Are you sure you would like to delete this blog post. This process cannot be reversed.')">Delete</a>
                 <a style="margin:1px" class="btn btn-warning" href="">Edit</a>                     
               </td>
             </tr>
