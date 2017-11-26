@@ -12,11 +12,15 @@ Route::get('/home', function () {
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('admin')->user();
 
-    //dd($users);
+    // dd($users);
 
     return view('admin.home');
 })->name('home');
 
+Route::get('/', function () {
+    return redirect('admin/home');
+    
+});
 
 Route::group(['prefix' => 'accommodations'], function () {
     Route::group(['prefix' => 'rooms'], function () {

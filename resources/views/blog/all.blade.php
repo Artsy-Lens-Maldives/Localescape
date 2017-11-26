@@ -14,30 +14,26 @@
                             <h1>Blog Posts</h1>
                         </div>
                         <!--end title-->
+                        @foreach($blogs as $blog)
                         <article class="blog-post">
-                            <a href="blog-detail"><img src="/assets/img/items/01_b.jpg"></a>
-                            <header><a href="blog-detail"><h2>Vivamus porta orci eu turpis vulputate ornare fusce hendrerit arcu risu</h2></a></header>
+                            <a href="blog-detail"><img src="{{ Helper::s3_url_gen($blog->photos[0]->thumbnail) }}"></a>
+                            <header><a href="blog-detail"><h2>{{ $blog->title }}</h2></a></header>
                             <figure class="meta">
-                                <a href="#" class="link icon"><i class="fa fa-user"></i>Admin</a>
-                                <a href="#" class="link icon"><i class="fa fa-calendar"></i>{{ date("d/m/Y") }}</a>
+                                <a href="#" class="link icon"><i class="fa fa-user"></i>{{ $blog->author }}</a>
+                                <a href="#" class="link icon"><i class="fa fa-calendar"></i>{{ $blog->created_at->format("d/m/Y") }}</a>
                                 <div class="tags">
                                     <a href="#" class="tag article">Photo Post</a>
                                     <a href="#" class="tag article">Local Escape</a>
                                 </div>
                             </figure>
-                            <p>Fusce quis nulla volutpat, rhoncus ligula ut, pulvinar nisi. In dapibus urna sit amet accumsan
-                                tristique. Donec odio ligula, luctus venenatis varius id, tincidunt ac ipsum. Cras commodo,
-                                velit nec aliquam dictum, tortor velit dictum ipsum, sed ornare nunc leo nec ipsum. Vestibulum
-                                sagittis sapien vitae tristique mollis. Aliquam hendrerit nulla semper, viverra mi et,
-                                hendrerit mauris. Maecenas hendrerit congue ultrices. In laoreet erat blandit eros aliquet,
-                                in malesuada sem rutrum. In placerat porta egestas.
+                            <p>
+                            {{ $blog->description }}
                             </p>
                             <a href="blog-detail" class="btn btn-rounded btn-default btn-framed btn-small">Read More</a>
-                        </article><!-- /.blog-post -->
-                        
-
+                        </article><!-- /.blog-post -->    
+                        @endforeach
                         <!-- Pagination -->
-                        <div class="center">
+                        <!--<div class="center">
                             <ul class="pagination">
                                 <li class="prev">
                                     <a href="#"><i class="arrow_left"></i></a>
@@ -51,8 +47,7 @@
                                     <a href="#"><i class="arrow_right"></i></a>
                                 </li>
                             </ul>
-                            <!-- end pagination-->
-                        </div>
+                        </div>-->
                         <!-- end center-->
                     </div>
                     <!--end main-content-->

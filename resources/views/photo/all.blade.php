@@ -15,7 +15,7 @@
                         </div>
                         <!--end title-->
                         <div class="row">
-                            @foreach($tours as $tour)
+                            @foreach($photos as $photo)
                             <div class="col-md-4 col-sm-6">
                                 <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="2">
                                     <div class="item-wrapper">
@@ -24,7 +24,7 @@
                                             <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
                                             <a href="detail" class="wrapper">
                                                 <div class="gallery">
-                                                @foreach($tour->photos as $photo)
+                                                @foreach($photo->photos as $photo)
                                                     @if($photo->main == '1')
                                                         <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
                                                     @else
@@ -40,8 +40,8 @@
                                         <div class="description">
                                             <div class="info">
                                                 <figure class="label label-info">Tour</figure>
-                                                <a href="detail"><h3>{{ $tour->name }}</h3></a>
-                                                <figure class="location">Price ${{ $tour->price }}</figure>
+                                                <a href="detail"><h3>{{ $photo->name }}</h3></a>
+                                                <figure class="location">Price ${{ $photo->price }}</figure>
                                             </div>
                                         </div>
                                         <!--end description-->

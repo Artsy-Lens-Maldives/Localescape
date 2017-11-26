@@ -42,7 +42,8 @@ Route::get('/guest-house/{slug}', 'AccomodationsController@guesthouse_detail');
 // Accommodation Routes (End)
 
 Route::get('/blog', function () {
-    return view('blog.all');
+    $blogs = \App\blog::all();
+    return view('blog.all', compact('blogs'));
 });
 
 //Photo Url
@@ -90,7 +91,6 @@ Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename)
     return $response;
 });
 
-
 Route::get('/booking/create', 'BookingController@create');
 Route::post('/booking/create/success', 'BookingController@store');
 
@@ -120,8 +120,7 @@ Route::post('/dive/create/package', 'DiveController@store');
 Route::get('/photo/create', 'PhotopanelController@create');
 Route::post('/photo/create/package', 'PhotopanelController@store');
 
-Route::get('/imagetest', function()
-{
+Route::get('/imagetest', function(){
     $img = Image::make('foo.jpg')->resize(300, 200);
 
     return $img->response('jpg');
@@ -138,4 +137,22 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+});
+
+Route::get('/tours', function() {
+    $type = 'Tours';
+    $tours = \App\tour::all();
+    return view('tours.all', compact('type', 'tours'));
+});
+
+Route::get('/diving-package', function() {
+    $type = 'Diving Pacakages';
+    $dives = \App\dive::all();
+    return view('dive.all', compact('type', 'dives'));
+});
+
+Route::get('/photo-package', function() {
+    $type = 'Photo Pacakages';
+    $photos = \App\photopanel::all();
+    return view('photo.all', compact('type', 'photos'));
 });
