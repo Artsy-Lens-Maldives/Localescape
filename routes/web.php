@@ -156,3 +156,31 @@ Route::get('/photo-package', function() {
     $photos = \App\photopanel::all();
     return view('photo.all', compact('type', 'photos'));
 });
+
+Route::group(['prefix' => 'divepackage'], function () {
+  Route::get('/login', 'DivepackageAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'DivepackageAuth\LoginController@login');
+  Route::post('/logout', 'DivepackageAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'DivepackageAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'DivepackageAuth\RegisterController@register');
+
+  Route::post('/password/email', 'DivepackageAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'DivepackageAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'DivepackageAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'DivepackageAuth\ResetPasswordController@showResetForm');
+});
+
+Route::group(['prefix' => 'photopackage'], function () {
+  Route::get('/login', 'PhotopackageAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'PhotopackageAuth\LoginController@login');
+  Route::post('/logout', 'PhotopackageAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'PhotopackageAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'PhotopackageAuth\RegisterController@register');
+
+  Route::post('/password/email', 'PhotopackageAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'PhotopackageAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'PhotopackageAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'PhotopackageAuth\ResetPasswordController@showResetForm');
+});
