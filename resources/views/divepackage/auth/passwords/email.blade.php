@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 className">
             <div class="panel panel-default">
                 <div class="panel-heading">Reset Password</div>
                 <div class="panel-body">
@@ -44,4 +44,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('js')
+    <script>
+      $(function() {
+          $('.className').css({
+              'position' : 'absolute',
+              'left' : '50%',
+              'top' : '50%',
+              'margin-left' : -$('.className').outerWidth()/2,
+              'margin-top' : -$('.className').outerHeight()/2
+          });
+      });
+    </script>
 @endsection
