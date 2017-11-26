@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tours_photo;
+use App\tour;
 use Illuminate\Http\Request;
 
 class ToursPhotoController extends Controller
@@ -55,9 +56,21 @@ class ToursPhotoController extends Controller
      * @param  \App\Tours_photo  $tours_photo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tours_photo $tours_photo)
+    public function main($slug, Tours_photo $tours_photo)
     {
-        //
+        $tour = tour::where('slug', $slug)->first();
+        $old_photos = Tours_photo::where('tour_id', $tour->id)->get();
+        foreach ($old_photos as $old_photo) {
+            $old_photo->main = '0';
+            $old_photo->save();
+        }
+        $tours_photo->main = '1';
+        $tours_photo->save();
+
+        
+        return redirect()->back()->withInput();
+        
+
     }
 
     /**

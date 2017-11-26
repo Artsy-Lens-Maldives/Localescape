@@ -49,6 +49,26 @@
           </div>
         </div>
       </form>
+
+      <hr>
+
+      <h3>Tour Images</h3>
+      @foreach($tour->photos as $image)
+        <div class="clearfix col-lg-2 col-md-2 col-sm-4 col-xs-6" style="width: 200px; height:100%; margin-top: 10px; margin-bottom: 10px;">
+            <a href="{{ Helper::s3_url_gen($image->thumbnail) }}" data-title="{{ $tour->name }}'s image" data-toggle="lightbox">
+                <img class='img-responsive img-thumbnail' src="{{ Helper::s3_url_gen($image->thumbnail) }}" style="width: 200px; height:130px;">
+            </a>
+            <center>
+                @if($image->main == '0')
+                    <a href="{{ url()->current() }}/{{ $image->id }}/delete" onclick="return confirm('Are you sure you want to delete this image?');" class="btn btn-danger" style="margin-top: 3px;">Delete</a>
+                    <a href="{{ url()->current() }}/{{ $image->id }}/main" class="btn btn-warning" style="margin-top: 3px;">Main Photo</a>        
+                @else
+                    <a href="" class="btn btn-warning disabled" style="margin-top: 3px;" disabled>Current Main</a>
+                @endif
+            </center>
+            
+        </div>
+      @endforeach
     </div>
 
 @endsection

@@ -89,7 +89,7 @@ class AccomodationsController extends Controller
             $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
             $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
             
-            $s3 = \Storage::disk('s3');
+            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
 
             //Original Image
             $original = Image::make($photo)->resize(1080, null, function ($constraint) {
