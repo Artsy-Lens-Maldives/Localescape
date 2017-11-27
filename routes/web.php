@@ -42,7 +42,8 @@ Route::get('/guest-house/{slug}', 'AccomodationsController@guesthouse_detail');
 // Accommodation Routes (End)
 
 Route::get('/blog', function () {
-    return view('blog.all');
+    $blogs = \App\blog::all();
+    return view('blog.all', compact('blogs'));
 });
 
 //Photo Url
@@ -90,7 +91,6 @@ Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename)
     return $response;
 });
 
-
 Route::get('/booking/create', 'BookingController@create');
 Route::post('/booking/create/success', 'BookingController@store');
 
@@ -120,8 +120,7 @@ Route::post('/dive/create/package', 'DiveController@store');
 Route::get('/photo/create', 'PhotopanelController@create');
 Route::post('/photo/create/package', 'PhotopanelController@store');
 
-Route::get('/imagetest', function()
-{
+Route::get('/imagetest', function(){
     $img = Image::make('foo.jpg')->resize(300, 200);
 
     return $img->response('jpg');
@@ -129,7 +128,7 @@ Route::get('/imagetest', function()
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+  Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
 
   Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
   Route::post('/register', 'AdminAuth\RegisterController@register');
@@ -138,4 +137,50 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+});
+
+Route::get('/tours', function() {
+    $type = 'Tours';
+    $tours = \App\tour::all();
+    return view('tours.all', compact('type', 'tours'));
+});
+
+Route::get('/diving-package', function() {
+    $type = 'Diving Pacakages';
+    $dives = \App\dive::all();
+    return view('dive.all', compact('type', 'dives'));
+});
+
+Route::get('/photo-package', function() {
+    $type = 'Photo Pacakages';
+    $photos = \App\photopanel::all();
+    return view('photo.all', compact('type', 'photos'));
+});
+
+Route::group(['prefix' => 'divepackage'], function () {
+  Route::get('/login', 'DivepackageAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'DivepackageAuth\LoginController@login');
+  Route::post('/logout', 'DivepackageAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'DivepackageAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'DivepackageAuth\RegisterController@register');
+
+  Route::post('/password/email', 'DivepackageAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'DivepackageAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'DivepackageAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'DivepackageAuth\ResetPasswordController@showResetForm');
+});
+
+Route::group(['prefix' => 'photopackage'], function () {
+  Route::get('/login', 'PhotopackageAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'PhotopackageAuth\LoginController@login');
+  Route::post('/logout', 'PhotopackageAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'PhotopackageAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'PhotopackageAuth\RegisterController@register');
+
+  Route::post('/password/email', 'PhotopackageAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'PhotopackageAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'PhotopackageAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'PhotopackageAuth\ResetPasswordController@showResetForm');
 });

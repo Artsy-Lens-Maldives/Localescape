@@ -34,8 +34,8 @@
               <td>{{ $tour->description }}</td>
               <td>{{ $tour->itenarary }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $tour->id }}" onclick="return confirm('Are you sure you would like to delete this tour package. This process cannot be reversed.')">Delete</a>
-                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $tour->id }}">Edit</a>                     
+                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $tour->slug }}" onclick="return confirm('Are you sure you would like to delete this tour package. This process cannot be reversed.')">Delete</a>
+                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $tour->slug }}">Edit</a>                     
               </td>
             </tr>
           @endforeach

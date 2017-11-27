@@ -36,6 +36,16 @@ return [
     */
 
     'guards' => [
+        'photopackage' => [
+            'driver' => 'session',
+            'provider' => 'photopackages',
+        ],
+
+        'divepackage' => [
+            'driver' => 'session',
+            'provider' => 'divepackages',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -75,6 +85,16 @@ return [
     */
 
     'providers' => [
+        'photopackages' => [
+            'driver' => 'eloquent',
+            'model' => App\Photopackage::class,
+        ],
+
+        'divepackages' => [
+            'driver' => 'eloquent',
+            'model' => App\Divepackage::class,
+        ],
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
@@ -112,6 +132,18 @@ return [
     */
 
     'passwords' => [
+        'photopackages' => [
+            'provider' => 'photopackages',
+            'table' => 'photopackage_password_resets',
+            'expire' => 60,
+        ],
+
+        'divepackages' => [
+            'provider' => 'divepackages',
+            'table' => 'divepackage_password_resets',
+            'expire' => 60,
+        ],
+
         'admins' => [
             'provider' => 'admins',
             'table' => 'admin_password_resets',

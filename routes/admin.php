@@ -12,11 +12,15 @@ Route::get('/home', function () {
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('admin')->user();
 
-    //dd($users);
+    // dd($users);
 
     return view('admin.home');
 })->name('home');
 
+Route::get('/', function () {
+    return redirect('admin/home');
+    
+});
 
 Route::group(['prefix' => 'accommodations'], function () {
     Route::group(['prefix' => 'rooms'], function () {
@@ -90,31 +94,24 @@ Route::group(['prefix' => 'tours'], function () {
         $tours = \App\tour::all();
         return view('tours.view', compact('tours'));
     });
-    Route::get('/add', function () {
-        return view('tours.create');
-    });
+    Route::get('/add', 'TourController@create');
     Route::post('/add', 'TourController@store');
-
-    Route::get('/delete/{id}', function ($id) {
-        $tour = \App\tour::find($id);
-        $tour->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the tour');
-    });
+    Route::get('/delete/{slug}', 'TourController@destroy');
     
-    Route::get('/edit/{id}', function ($id) {
-        $tour = \App\tour::find($id);
-        return view('tours.edit', compact('tour'));
-    });
-    Route::post('/edit/{id}', function ($id, Request $request) {
-        $tour = \App\tour::find($id);
-        $tour->name = $request->name;
-        $tour->price = $request->price;
-        $tour->description = $request->description;
-        $tour->itenarary = $request->itenarary;
-        $tour->save();
-        return redirect('admin/tours')->with('alert-success', 'Successfully edited the tour');
+    Route::group(['prefix' => 'edit'], function () {
+        Route::get('/{slug}', 'TourController@edit');
+        Route::post('/{slug}', 'TourController@update');
+        
+        Route::get('/{slug}/{tours_photo}/main', 'ToursPhotoController@main');
+        Route::get('/{slug}/{tours_photo}/delete', 'ToursPhotoController@destroy');
     });
 
+
+});
+
+Route::get('/testone', function () {
+    $type = env('UPLOAD_TYPE', 'public');
+    return $type;
 
 });
 
@@ -131,7 +128,7 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('/delete/{id}', function ($id) {
         $blog = \App\blog::find($id);
         $blog->delete();
-        return redirect()->back()->with('alert-success', 'Successfully deleted the blog post');
+        return redirect('admin/blog')->with('alert-success', 'Successfully deleted the blog post');
     });
     
     Route::get('/edit/{id}', function ($id) {

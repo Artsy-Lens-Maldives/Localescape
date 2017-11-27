@@ -39,6 +39,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapPhotopackageRoutes();
+
+        $this->mapDivepackageRoutes();
+
         $this->mapAdminRoutes();
 
         $this->mapExtranetRoutes();
@@ -102,6 +106,28 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => $this->namespace,
         ], function ($router) {
             require base_path('routes/admin.php');
+        });
+    }
+
+    protected function mapDivepackageRoutes() {
+        Route::group([
+            'middleware' => ['web', 'divepackage', 'auth:divepackage'], //you need to add the last middleware to array to fix it (version < v.1.0.6)
+            'prefix' => 'divepackage',
+            'as' => 'divepackage.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/divepackage.php');
+        });
+    }
+
+    protected function mapPhotopackageRoutes() {
+        Route::group([
+            'middleware' => ['web', 'photopackage', 'auth:photopackage'], //you need to add the last middleware to array to fix it (version < v.1.0.6)
+            'prefix' => 'photopackage',
+            'as' => 'photopackage.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/photopackage.php');
         });
     }
 }

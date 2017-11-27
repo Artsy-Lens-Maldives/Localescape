@@ -50,6 +50,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'photopackage' => \App\Http\Middleware\RedirectIfNotPhotopackage::class,
+        'photopackage.guest' => \App\Http\Middleware\RedirectIfPhotopackage::class,
+        'divepackage' => \App\Http\Middleware\RedirectIfNotDivepackage::class,
+        'divepackage.guest' => \App\Http\Middleware\RedirectIfDivepackage::class,
         'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
         'admin.guest' => \App\Http\Middleware\RedirectIfAdmin::class,
         'extranet' => \App\Http\Middleware\RedirectIfNotExtranet::class,

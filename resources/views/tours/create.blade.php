@@ -16,7 +16,13 @@
             @endif
         @endforeach
       </div>
-      <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
+      <form class="form-horizontal" action="{{ url()->current() }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Upload Image(s)</label>
+          <div class="col-sm-10">
+            <input type="file" name="image[]" multiple>
+          </div>
+        </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Package Title</label>
           <div class="col-sm-10">

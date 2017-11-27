@@ -47,7 +47,7 @@ class BlogController extends Controller
         $location_o = 'blog/'.$blog->slug.'/original'.'/'.$fileName;
         $location_t = 'blog/'.$blog->slug.'/thumbnail'.'/'.$fileName;
         
-        $s3 = \Storage::disk('s3');
+        $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
 
         //Original Image
         $original = Image::make($photo->getRealPath())->resize(1080, null, function ($constraint) {
@@ -69,7 +69,7 @@ class BlogController extends Controller
             'thumbnail' => $location_t,
         ]);
 
-        return redirect()->back()->with('alert-success', 'Successfully added new blog post');
+        return redirect('admin/blog')->with('alert-success', 'Successfully added new blog post');
     }
 
     /**
