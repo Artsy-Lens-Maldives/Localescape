@@ -55,6 +55,20 @@ Route::group(['prefix' => 'accommodations'], function () {
         $acco = Accomodations::find($id);
         return view('admin.accommodation.approve', compact('acco'));
     });
+    Route::post('/approve/{id}', function ($id, Request $request) {
+        $acco = Accomodations::find($id);
+        if ($request->active == '1') {
+            $acco->active = $request->active;
+            $acco->status = $request->status;
+            $acco->save();
+        } else {
+            $acco->active = '0';
+            $acco->status = $request->status;
+            $acco->save();
+        }    
+        return redirect('admin/accommodations');
+        
+    });
 });
 
 Route::group(['prefix' => 'user'], function () {

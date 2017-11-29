@@ -12,7 +12,7 @@
             <!--end breadcrumb-->
             <div class="main-content">
                 <div class="title">
-                    <h1>Approve {{ $acco->title }} <a href="{{ url('extranet/accommodations') }}" class="btn btn-lg btn-success">Go Back</a> </h1>
+                    <h1>Approve Accommodation: {{ $acco->title }} <a href="{{ url('extranet/accommodations') }}" class="btn btn-success">Go Back</a> </h1>
                 </div>
                 <!--end title-->
                 <div class="flash-message">
@@ -27,19 +27,31 @@
                 
                 <form class="form-horizontal" action="{{ url()->current() }}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Status</label>
-                        <div class="form-group">
-                                <label class="no-margin"><input type="checkbox" value="1" name="approve"
-                                @if($acco->approve == '1')
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label style="font-size: 120%;  display: inline;"><input type="checkbox" value="1" name="active"
+                                @if($acco->active == '1')
                                     checked
                                 @else
                                     
                                 @endif
+                                style="-ms-transform: scale(2); -moz-transform: scale(2); -webkit-transform: scale(2); -o-transform: scale(2); padding: 10px;"
                                 >Approve</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Message</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="title" value="{{ $acco->status }}" name="status">
+                            <label class="radio-inline"><input type="radio" name="optradio" onClick="document.getElementById('statusField').value=this.value" value="Pending Approval">Pending Approval</label>
+                            <label class="radio-inline"><input type="radio" name="optradio" onClick="document.getElementById('statusField').value=this.value" value="Accommodation Approved">Accommodation Approved</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="statusField">Status</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="statusField" value="{{ $acco->status }}" name="status">
                         </div>
                     </div>
                     <div class="form-group">        
