@@ -29,34 +29,32 @@ Route::group(['prefix' => 'accommodations'], function () {
             return view('admin.accommodation.rooms.all');
         });    
     });
-
     Route::get('/', function () {
         $accommodations = Accomodations::all();
         return view('admin.accommodation.all', compact('accommodations'));
     });
-
     Route::get('/create', function () {
         $accommodations = Accomodations::all();
         $facilities = \App\facilities::all();
         return view('admin.accommodation.create', compact('accommodations', 'facilities'));
     });
-
     Route::post('/create', function () {
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         return 'done';
     });
-
     Route::get('/edit/{id}', function ($id) {
         $acco = Accomodations::find($id);
         $facilities = facilities::all();
         return view('admin.accommodation.edit', compact('acco', 'facilities'));
     });
-
     Route::get('/images/{id}', function ($id) {
         $acco = Accomodations::find($id);
         return view('admin.accommodation.photo', compact('acco'));
     });
-
+    Route::get('/approve/{id}', function ($id) {
+        $acco = Accomodations::find($id);
+        return view('admin.accommodation.approve', compact('acco'));
+    });
 });
 
 Route::group(['prefix' => 'user'], function () {
