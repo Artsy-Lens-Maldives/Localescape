@@ -31,6 +31,7 @@
                         <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $acco->id }}">Edit</a>
                         <a style="margin:1px" class="btn btn-info" href="{{ url()->current() }}/rooms/{{ $acco->id }}">Rooms</a>
                         <a style="margin:1px" class="btn btn-success" href="{{ url()->current() }}/images/{{ $acco->id }}">Images</a>
+                        <a style="margin:1px" class="btn btn-primary" href="{{ url()->current() }}/approve/{{ $acco->id }}">Approve</a>
                     </td>
                 </tr>    
                 @endforeach

@@ -10,17 +10,21 @@
     <title>Local Escape</title>
 
     <link href="{{ url('css/admin.css') }}" rel="stylesheet">
-    
+    <style>
+    .className {
+
+    }
+    </style>
   </head>
 
-  <body class="login" style="overflow: hidden;">
+  <body class="login" style="overflow: hidden; background-image: url('/img/background/image 1.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; ">
     @yield('content')
 
     <script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
     <script src="{{ url('js/admin.js') }}"></script>
     @yield('js')
     <script>
-      $(function() {
+      $(function centerTo () {
           $('.className').css({
               'position' : 'absolute',
               'left' : '50%',

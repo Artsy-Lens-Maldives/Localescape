@@ -2,6 +2,7 @@
 
 use App\Accomodations;
 use App\accommo_photo;
+use App\facilities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -43,6 +44,17 @@ Route::group(['prefix' => 'accommodations'], function () {
     Route::post('/create', function () {
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         return 'done';
+    });
+
+    Route::get('/edit/{id}', function ($id) {
+        $acco = Accomodations::find($id);
+        $facilities = facilities::all();
+        return view('admin.accommodation.edit', compact('acco', 'facilities'));
+    });
+
+    Route::get('/images/{id}', function ($id) {
+        $acco = Accomodations::find($id);
+        return view('admin.accommodation.photo', compact('acco'));
     });
 
 });
