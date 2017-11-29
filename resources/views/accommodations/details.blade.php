@@ -156,7 +156,8 @@
                                                     <td>
                                                         <div class="form-group">
                                                             <center>
-                                                                <a href="#" class="btn btn-primary btn-rounded">Book Now</a>
+                                                                <a href="{{ url('booking') }}/{{ $accommodation->id }}/{{ $room->id }}" class="btn btn-primary btn-rounded">Book Now</a>
+                                                                <a href="{{ url('inquiry') }}/{{ $accommodation->id }}/{{ $room->id }}" class="btn btn-info btn-rounded">Send Inquiry</a>
                                                             </center>
                                                         </div>
                                                         <!--end form-group-->

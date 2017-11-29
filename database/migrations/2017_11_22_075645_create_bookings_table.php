@@ -22,6 +22,7 @@ class CreateBookingsTable extends Migration
             $table->longText('eta')->nullable();
             $table->longText('flightnumber')->nullable();
             $table->string('acco_id')->nullable();
+            $table->string('room_id')->nullable();
             $table->string('user_id')->nullable();
             $table->timestamps();
         });

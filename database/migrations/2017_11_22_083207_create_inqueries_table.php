@@ -20,6 +20,7 @@ class CreateInqueriesTable extends Migration
             $table->string('contact')->nullable();
             $table->longText('details')->nullable();
             $table->string('acco_id')->nullable();
+            $table->string('room_id')->nullable();
             $table->string('user_id')->nullable();
             $table->timestamps();
         });

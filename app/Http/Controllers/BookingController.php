@@ -25,7 +25,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view("accommodations.booking");
+        return view("bookings.create");
     }
 
     /**
@@ -34,9 +34,13 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($acco_id, $room_id, Request $request)
     {
-        booking::create(Input::except('_token'));
+        $booking = booking::create(Input::except('_token'));
+        $booking->acco_id = $acco_id;
+        $booking->room_id = $room_id;
+        $booking->user_id = Auth::user()->id;
+        $booking->save();
         return redirect()->back()->with('alert-success', 'Booking Successful !');
     }
 

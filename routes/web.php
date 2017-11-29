@@ -84,10 +84,10 @@ Route::get('/resorts/{slug}', 'AccomodationsController@resort_detail');
 Route::get('/guest-house', 'AccomodationsController@guesthouse');
 Route::get('/guest-house/{slug}', 'AccomodationsController@guesthouse_detail');
 //Bookings and Inquiry
-Route::get('/booking/create', 'BookingController@create');
-Route::post('/booking/create/success', 'BookingController@store');
-Route::get('/inquery/create', 'InqueryController@create');
-Route::post('/inquery/create/success', 'InqueryController@store');
+Route::get('/booking/{acco_id}/{room_id}', 'BookingController@create');
+Route::post('/booking/{acco_id}/{room_id}', 'BookingController@store');
+Route::get('/inquery/{acco_id}/{room_id}', 'InqueryController@create');
+Route::post('/inquery/{acco_id}/{room_id}', 'InqueryController@store');
 // Accommodation Routes (end)
 
 //Tour, Diving and Photo Package (start)
