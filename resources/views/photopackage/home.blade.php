@@ -1,4 +1,4 @@
-@extends('photopackage.layout.auth')
+@extends('layouts.photo')
 
 @section('content')
 <div class="container">

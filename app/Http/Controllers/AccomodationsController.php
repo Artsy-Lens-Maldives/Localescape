@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 class AccomodationsController extends Controller
 {
@@ -72,9 +73,14 @@ class AccomodationsController extends Controller
     {
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         $array = $request->facilities;
-        $accommodations->facilities = implode("," ,$array);
-        $accommodations->user_id = Auth::guard('extranet')->user()->id;
-        $accommodations->save();
+        if($array) {
+            $accommodations->facilities = implode("," ,$array);
+            $accommodations->user_id = Auth::guard('extranet')->user()->id;
+            $accommodations->save();
+        } else {
+            $accommodations->user_id = Auth::guard('extranet')->user()->id;
+            $accommodations->save();
+        }
         
         $i = 0;
         foreach ($request->image as $photo) {

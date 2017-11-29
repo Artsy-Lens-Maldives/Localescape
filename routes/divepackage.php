@@ -10,3 +10,10 @@ Route::get('/home', function () {
     return view('divepackage.home');
 })->name('home');
 
+Route::get('/all', function () {
+    $dives = \App\dive::all();
+    return view('dive.view', compact('dives'));
+});
+
+Route::get('/create', 'DiveController@create');
+Route::post('/create', 'DiveController@store');

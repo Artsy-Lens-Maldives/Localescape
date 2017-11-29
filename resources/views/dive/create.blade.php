@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dive')
 
 @section('title')
     <span>Add Dive Package</span>
@@ -16,7 +16,7 @@
             @endif
         @endforeach
       </div>
-      <form class="form-horizontal" action="{{ url('dive/create/package') }}" method="POST">
+      <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Package Title</label>
           <div class="col-sm-10">

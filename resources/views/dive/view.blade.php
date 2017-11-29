@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dive')
 
 @section('title')
     <span>All Dive Packages</span>

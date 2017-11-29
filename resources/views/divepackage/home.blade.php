@@ -1,4 +1,4 @@
-@extends('divepackage.layout.auth')
+@extends('layouts.dive')
 
 @section('content')
 <div class="container">
