@@ -74,7 +74,6 @@ Route::get('/imagetest', function(){
     $img = Image::make('https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg')->resize(300, 200);
     return $img->response('jpg');
 });
-
 Route::get('/image/{folder}/{type}/{filename}', function ($folder, $type, $filename) {
     $fileloc = 'app/public/'.$folder.'/'.$type.'/'.$filename;
     $path = storage_path($fileloc);
@@ -99,7 +98,17 @@ Route::get('/image/{folder}/{type}/{filename}', function ($folder, $type, $filen
 
     return $response;
 });
-
+Route::get('/dontdumpthis', function () {
+    $stuffs = 'Shower, Bathtub, Free toiletries, Toilet, Hairdryer, Bathroom, Satellite channels, Flat-screen TV, TV, Desk, Sofa, Sitting area, Dining area, Room Service, Packed Lunches, Car Rental, Shuttle Service, Airport Shuttle, 24-Hour Front Desk, Tour Desk, Ticket Service, Baggage Storage, Concierge Service, Laundry, Dry Cleaning, Safe, Non-smoking Rooms, Family Rooms, Elevator, Airport Shuttle, 24-Hour Front Desk, Soundproof Rooms, Heating, Iron';
+    $array_items = explode(', ', $stuffs);
+    foreach ($array_items as $name) {
+        $flight = new \App\facilities;
+        $flight->name = $name;
+        $flight->save();
+        echo 'Done';
+    }
+    echo 'Fully DOne';
+});
 //Test Routes (end)
 
 //Gallery (start)

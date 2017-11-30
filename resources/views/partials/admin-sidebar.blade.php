@@ -42,7 +42,7 @@
                       </ul>
                     </li>
                     <li><a href="{{ url('admin/gallery') }}"><i class="fa fa-camera-retro"></i> Gallery</a></li>
-                    <li><a href="{{ url('admin/facilities') }}"><i class="fa fa-camera-retro"></i> Facilities</a></li>
+                    <li><a href="{{ url('admin/facilities') }}"><i class="fa fa-check"></i> Facilities</a></li>
                   </ul>
                 @else
                   <ul class="nav side-menu">

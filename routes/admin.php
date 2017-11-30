@@ -239,6 +239,7 @@ Route::group(['prefix' => 'gallery'], function () {
 
 Route::group(['prefix' => 'facilities'], function () {
     Route::get('/', function () {
-        return view('facillities.index');
+        $facilities = \App\facilities::all();
+        return view('facilities.index', compact('facilities'));
     });
 });

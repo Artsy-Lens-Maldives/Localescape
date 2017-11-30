@@ -12,7 +12,8 @@
     <!-- css -->
     <link href="{{ url('css/admin.css') }}" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sc-1.4.3/datatables.min.css"/
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sc-1.4.3/datatables.min.css"/>
+    <link rel="stylesheet" href="{{ url('css/daterangepicker.css') }}">
     @yield('css')
   </head>
 
@@ -79,34 +80,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>@yield('title')</h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                  @yield('content')
-              </div>
-            </div>
-          </div>
-        </div>
+        @yield('content')
         <!-- /page content -->
 
         <!-- footer content -->
@@ -122,6 +96,11 @@
 
     <!-- js -->
     <script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
+    <script src="{{ url('js/admin-home.js') }}"></script>
+    <script src="{{ url('js/daterangepicker.js') }}"></script>
+    <script src="{{ url('js/date.js') }}"></script>
+    <script src="{{ url('js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ url('js/bootstrap-progressbar.min.js') }}"></script>
     <script src="{{ url('js/admin.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>

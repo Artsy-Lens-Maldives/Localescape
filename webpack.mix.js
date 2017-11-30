@@ -25,7 +25,7 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
     .js('resources/assets/js/custom.js', 'public/js')
     .styles([
         'node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css',
-        'node_modules/gentelella/vendors/font-awesome/css/font-awesome.min.css',
+        
         'node_modules/gentelella/vendors/nprogress/nprogress.css',
         
         'node_modules/gentelella/vendors/iCheck/skins/flat/green.css',
@@ -46,7 +46,6 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
     .js([
         'node_modules/gentelella/vendors/Chart.js/dist/Chart.min.js',
         'node_modules/gentelella/vendors/gauge.js/dist/gauge.min.js',
-        'node_modules/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js',
         'node_modules/gentelella/vendors/iCheck/icheck.min.js',
         'node_modules/gentelella/vendors/skycons/skycons.js',
         'node_modules/gentelella/vendors/Flot/jquery.flot.js',

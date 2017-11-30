@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span>All Facilities</span>  <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> 
+    <span><i class="fa fa-tick" aria-hidden="true"></i> All Facilities</span>  <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> 
 @endsection
 
 @section('content')
@@ -16,20 +16,22 @@
             @endif
         @endforeach
       </div>
-      <table id="tours" class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <table id="facilities" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th>Facility Name</th>
+            <th>Icon</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($facility as $facilities)
+          @foreach($facilities as $facility)
             <tr>
-              <td>{{ $facilities->name }}</td>
+              <td>{{ $facility->name }}</td>
+              <td><i class="fa {{ $facility->fa_icon }} fa-5x" aria-hidden="true"></i></td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $tour->slug }}" onclick="return confirm('Are you sure you would like to delete this Facility. This process cannot be reversed.')">Delete</a>
-                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $tour->slug }}">Edit</a>                     
+                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $facility->id }}" onclick="return confirm('Are you sure you would like to delete this Facility. This process cannot be reversed.')">Delete</a>
+                <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $facility->id }}">Edit</a>
               </td>
             </tr>
           @endforeach
@@ -43,7 +45,7 @@
     
 <script>
     $(document).ready(function() {
-        $('#tours').DataTable();
+        $('#facilities').DataTable();
     } );
 </script>
 

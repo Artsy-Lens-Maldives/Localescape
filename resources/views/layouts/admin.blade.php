@@ -11,6 +11,7 @@
 
     <!-- css -->
     <link href="{{ url('css/admin.css') }}" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/r-2.2.0/sc-1.4.3/datatables.min.css"/
     @yield('css')
   </head>
