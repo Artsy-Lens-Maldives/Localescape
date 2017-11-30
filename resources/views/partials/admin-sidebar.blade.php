@@ -41,6 +41,7 @@
                         <li><a href="{{ url('admin/inquiries') }}">All Inquiries</a></li>
                       </ul>
                     </li>
+                    <li><a href="{{ url('admin/gallery') }}"><i class="fa fa-camera-retro"></i> Gallery</a></li>
                   </ul>
                 @else
                   <ul class="nav side-menu">

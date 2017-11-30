@@ -190,3 +190,55 @@ Route::group(['prefix' => 'inquiries'], function () {
         return view('inquery.view', compact('inquiries'));
     }); 
 });
+
+Route::group(['prefix' => 'gallery'], function () {
+    Route::get('/', function () {
+        $gallery_images = \App\Gallery::all();        
+        return view('gallery.create', compact('gallery_images'));
+    });
+    Route::post('/post', function (Request $request) {                
+        foreach ($request->image as $photo) {
+            //File names and location
+            $fileName = 'gallery' . '-' . time() . '-' . $photo->getClientOriginalName();
+            $location_o = 'gallery'.'/original'.'/'.$fileName;
+            $location_t = 'gallery'.'/thumbnail'.'/'.$fileName;
+            
+            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+
+            //Original Image
+            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_o, $original->stream()->__toString(), 'public');
+            //Thumbnail image
+            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+
+            \App\Gallery::create([
+                'photo_url' => $location_o,
+                'thumbnail' => $location_t,
+            ]);
+        }
+        return redirect()->back()->with('alert-success', 'Successfully added new image(s)');
+    }); 
+    Route::get('/{id}/delete', function ($id) {
+        $photo = \App\Gallery::find($id);
+        if ($photo !== null) {
+            $photo->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the image');
+        } else {
+            return redirect('admin/gallery')->with('alert-danger', 'Image not found');
+        }
+        
+    });
+});
+
+Route::group(['prefix' => 'facilities'], function () {
+    Route::get('/', function () {
+        return view('facillities.index');
+    });
+});

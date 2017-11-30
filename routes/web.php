@@ -74,7 +74,40 @@ Route::get('/imagetest', function(){
     $img = Image::make('https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg')->resize(300, 200);
     return $img->response('jpg');
 });
+
+Route::get('/image/{folder}/{type}/{filename}', function ($folder, $type, $filename) {
+    $fileloc = 'app/public/'.$folder.'/'.$type.'/'.$filename;
+    $path = storage_path($fileloc);
+
+    $failed = "It failed";
+    
+    if (!File::exists($path)) {
+      return $failed;
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    /*$img = Image::cache(function($image) use ($file) {
+        $image->make($file)->resize(null, 1080, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+    }, 100, false); */
+    
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
 //Test Routes (end)
+
+//Gallery (start)
+Route::get('/gallery', function () {
+    $gallery_images = \App\Gallery::all();
+    return view('gallery.index', compact('gallery_images'));
+});
+//Gallery (end)
 
 // Accommodation Routes (start)
 Route::get('/hotels', 'AccomodationsController@hotel');

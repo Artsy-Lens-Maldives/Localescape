@@ -7,4 +7,9 @@ class Helper
     {
         return 'https://s3.ap-south-1.amazonaws.com/localescape/'.$location;
     }
+    
+    public static function local_url_gen($location)
+    {
+        return '/'.'image/'.$location;
+    }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class facilities extends Model
+class Gallery extends Model
 {
     protected $guarded = [];
 }
