@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span>All Tour Packages</span>  <a class="btn btn-success" href="{{ url()->current() }}/add">Create a tour</a> 
+    <span>All Facilities</span>  <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> 
 @endsection
 
 @section('content')
@@ -19,22 +19,16 @@
       <table id="tours" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th>Package Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Itenarary</th>
+            <th>Facility Name</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($tours as $tour)
+          @foreach($facility as $facilities)
             <tr>
-              <td>{{ $tour->name }}</td>
-              <td>{{ $tour->price }}</td>
-              <td>{{ $tour->description }}</td>
-              <td>{{ $tour->itenarary }}</td>
+              <td>{{ $facilities->name }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $tour->slug }}" onclick="return confirm('Are you sure you would like to delete this tour package. This process cannot be reversed.')">Delete</a>
+                <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $tour->slug }}" onclick="return confirm('Are you sure you would like to delete this Facility. This process cannot be reversed.')">Delete</a>
                 <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $tour->slug }}">Edit</a>                     
               </td>
             </tr>
