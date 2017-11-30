@@ -46,6 +46,7 @@
                         <div class="col-sm-10">
                             <label class="radio-inline"><input type="radio" name="optradio" onClick="document.getElementById('statusField').value=this.value" value="Pending Approval">Pending Approval</label>
                             <label class="radio-inline"><input type="radio" name="optradio" onClick="document.getElementById('statusField').value=this.value" value="Accommodation Approved">Accommodation Approved</label>
+                            <label class="radio-inline"><input type="radio" name="optradio" onClick="document.getElementById('statusField').value=this.value" value="then it will work">then it will work</label>
                         </div>
                     </div>
                     <div class="form-group">
