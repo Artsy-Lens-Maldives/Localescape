@@ -109,6 +109,9 @@ Route::get('/dontdumpthis', function () {
     }
     echo 'Fully DOne';
 });
+Route::get('/newExtranet/login', function () {
+    return view('extranet.auth.newLogin');
+});
 //Test Routes (end)
 
 //Gallery (start)

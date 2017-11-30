@@ -25,14 +25,11 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
     .js('resources/assets/js/custom.js', 'public/js')
     .styles([
         'node_modules/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css',
-        
         'node_modules/gentelella/vendors/nprogress/nprogress.css',
-        
         'node_modules/gentelella/vendors/iCheck/skins/flat/green.css',
         'node_modules/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css',
         'node_modules/gentelella/vendors/jqvmap/dist/jqvmap.min.css',
         'node_modules/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css',
-
         'node_modules/gentelella/vendors/dropzone/dist/min/dropzone.min.css',
         'node_modules/gentelella/build/css/custom.min.css',
     ], 'public/css/admin.css')
@@ -40,6 +37,7 @@ mix.sass('resources/assets/sass/style.scss', 'public/css')
         'node_modules/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/gentelella/vendors/fastclick/lib/fastclick.js',
         'node_modules/gentelella/vendors/nprogress/nprogress.js',
+        'node_modules/gentelella/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js',
         'node_modules/gentelella/vendors/dropzone/dist/min/dropzone.min.js',
         'node_modules/gentelella/build/js/custom.min.js',
     ], 'public/js/admin.js')

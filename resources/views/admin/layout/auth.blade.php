@@ -10,11 +10,7 @@
     <title>Local Escape</title>
 
     <link href="{{ url('css/admin.css') }}" rel="stylesheet">
-    <style>
-    .className {
-
-    }
-    </style>
+    @yield('css')
   </head>
 
   <body class="login" style="overflow: hidden; background-image: url('/img/background/image 1.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; ">
