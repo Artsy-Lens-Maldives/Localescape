@@ -242,4 +242,27 @@ Route::group(['prefix' => 'facilities'], function () {
         $facilities = \App\facilities::all();
         return view('facilities.index', compact('facilities'));
     });
+    Route::get('/add', function () {
+        return view('facilities.create');
+    });
+    Route::post('/add', function () {
+        $facility = \App\facilities::create(Input::except('_token'));
+        return redirect('admin/facilities')->with('alert-success', 'Successfully added new facility');
+    });
+    Route::get('/edit/{id}', function ($id) {
+        $facility = \App\facilities::find($id);
+        return view('facilities.edit', compact('facility'));
+    });
+    Route::post('/edit/{id}', function ($id, Request $request) {
+        $facility = \App\facilities::find($id);
+        $facility->name = $request->name;
+        $facility->fa_icon = $request->fa_icon;
+        $facility->save();
+        return redirect('admin/facilities')->with('alert-success', 'Successfully edited the facility');
+    });
+    Route::get('/delete/{id}', function ($id) {
+        $facility = \App\facilities::find($id);
+        $facility->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the facility');
+    });
 });
