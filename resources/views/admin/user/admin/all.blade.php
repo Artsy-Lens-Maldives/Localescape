@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    <span><i class="fa fa-user"></i> All Admin Users</span> <a class="btn btn-success" href="{{ url()->current() }}/create">Create new Admin</a> 
+@endsection
+
 @section('content')
     
     <div>
@@ -19,8 +23,8 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at->diffForHumans() }}</td>
                     <td style="text-align: center;">
-                        <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $user->id }}" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')">Delete</a>
-                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $user->id }}">Edit</a>
+                        <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $user->id }}" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')"><i class="fa fa-trash-o"></i> Delete</a>
+                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $user->id }}"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                 </tr>    
                 @endforeach
