@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span><i class="fa fa-tick" aria-hidden="true"></i> All Facilities</span>  <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> 
+    <span><i class="fa fa-check" aria-hidden="true"></i> All Facilities</span>  <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> 
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
           @foreach($facilities as $facility)
             <tr>
               <td>{{ $facility->name }}</td>
-              <td><i class="fa {{ $facility->fa_icon }} fa-5x" aria-hidden="true"></i></td>
+              <td><i class="fa {{ $facility->fa_icon }} fa-2x" aria-hidden="true"></i> icon</td>
               <td style="text-align: center;">
                 <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $facility->id }}" onclick="return confirm('Are you sure you would like to delete this Facility. This process cannot be reversed.')">Delete</a>
                 <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/edit/{{ $facility->id }}">Edit</a>

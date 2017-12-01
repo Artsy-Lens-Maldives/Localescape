@@ -10,6 +10,7 @@
     <title>Local Escape</title>
 
     <link href="{{ url('css/admin.css') }}" rel="stylesheet">
+    <script src="https://use.fontawesome.com/509690c6de.js"></script>
     @yield('css')
   </head>
 

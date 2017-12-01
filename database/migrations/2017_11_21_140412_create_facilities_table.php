@@ -16,7 +16,7 @@ class CreateFacilitiesTable extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('fa_icon')->nullable();
+            $table->string('fa_icon')->default('fa-check');
             $table->timestamps();
         });
     }
