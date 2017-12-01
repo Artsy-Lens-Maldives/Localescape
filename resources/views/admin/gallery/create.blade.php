@@ -1,13 +1,14 @@
 @extends('layouts.admin')
 
+@section('title')
+    <span><i class="fa fa-camera-retro" aria-hidden="true"></i> Gallery</span>
+@endsection
+
 @section('content')
     
     <div class="container">
             <!--end breadcrumb-->
             <div class="main-content">
-                <div class="title">
-                    <h1>Gallery </h1>
-                </div>
                 <!--end title-->
                 <div class="flash-message">
                     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -32,7 +33,7 @@
                         </div>
                     <section>
                         <div class="form-group center">
-                            <button type="submit" class="btn btn-primary btn-rounded btn-lg">Add Image(s)</button>
+                            <button type="submit" class="btn btn-info btn-rounded">Add Image(s)</button>
                         </div>
                     </section>
                     </form>

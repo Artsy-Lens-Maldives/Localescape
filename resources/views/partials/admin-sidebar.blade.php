@@ -42,10 +42,13 @@
                         <li><a href="{{ url('admin/user/photo') }}">Photo Panel</a></li>
                       </ul>
                     </li>
+                    <li><a href="{{ url('admin/bills') }}"><i class="fa fa-credit-card"></i> Bills and Fees <span class="label label-danger pull-right">2 Due</span></a></li>
                     <li><a><i class="fa fa-cogs"></i> Admin Features <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="{{ url('admin/gallery') }}"><i class="fa fa-camera-retro"></i> Gallery</a></li>
                         <li><a href="{{ url('admin/facilities') }}"><i class="fa fa-check"></i> Facilities</a></li>
+                        <li><a href="{{ url('admin/message') }}"><i class="fa fa-envelope"></i> Message</a></li>
+                        <li><a href="{{ url('admin/top-picks') }}"><i class="fa fa-certificate"></i> Top Picks</a></li>
                       </ul>
                     </li>
                     

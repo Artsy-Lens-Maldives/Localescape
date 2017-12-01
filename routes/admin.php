@@ -194,7 +194,7 @@ Route::group(['prefix' => 'inquiries'], function () {
 Route::group(['prefix' => 'gallery'], function () {
     Route::get('/', function () {
         $gallery_images = \App\Gallery::all();        
-        return view('gallery.create', compact('gallery_images'));
+        return view('admin.gallery.create', compact('gallery_images'));
     });
     Route::post('/post', function (Request $request) {                
         foreach ($request->image as $photo) {
@@ -240,10 +240,10 @@ Route::group(['prefix' => 'gallery'], function () {
 Route::group(['prefix' => 'facilities'], function () {
     Route::get('/', function () {
         $facilities = \App\facilities::all();
-        return view('facilities.index', compact('facilities'));
+        return view('admin.facilities.index', compact('facilities'));
     });
     Route::get('/add', function () {
-        return view('facilities.create');
+        return view('admin.facilities.create');
     });
     Route::post('/add', function () {
         $facility = \App\facilities::create(Input::except('_token'));
@@ -251,7 +251,7 @@ Route::group(['prefix' => 'facilities'], function () {
     });
     Route::get('/edit/{id}', function ($id) {
         $facility = \App\facilities::find($id);
-        return view('facilities.edit', compact('facility'));
+        return view('admin.facilities.edit', compact('facility'));
     });
     Route::post('/edit/{id}', function ($id, Request $request) {
         $facility = \App\facilities::find($id);
