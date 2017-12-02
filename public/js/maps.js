@@ -193,7 +193,9 @@ function autoComplete(map, marker) {
             map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
             //initSubmitMap(position.coords.latitude, position.coords.longitude);
             $('#latitude').val(position.coords.latitude);
+            console.log(position.coords.latitude);
             $('#longitude').val(position.coords.longitude);
+            console.log(position.coords.longitude);
         };
 
         var input = /** @type {HTMLInputElement} */document.getElementById('address-autocomplete');

@@ -4,7 +4,7 @@
                 <h3>General</h3>
                 @if (Auth::guard('admin')->check()) 
                   <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Extranet <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-home"></i> Extranet <span class="fa fa-chevron-down"></span> <span class="label label-warning pull-right">2 Unapproved</span></a>
                       <ul class="nav child_menu">
                         <li><a href="{{ url('admin/accommodations') }}">Accommodations</a></li>
                       </ul>
@@ -49,6 +49,7 @@
                         <li><a href="{{ url('admin/facilities') }}"><i class="fa fa-check"></i> Facilities</a></li>
                         <li><a href="{{ url('admin/message') }}"><i class="fa fa-envelope"></i> Message</a></li>
                         <li><a href="{{ url('admin/top-picks') }}"><i class="fa fa-certificate"></i> Top Picks</a></li>
+                        <li><a href="{{ url('admin/settings') }}"><i class="fa fa-cog"></i> Settings</a></li>
                       </ul>
                     </li>
                     

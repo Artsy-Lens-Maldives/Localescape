@@ -47,9 +47,9 @@
                                     <label for="object-type">Accommodation Type</label>
                                     <select class="framed width-100" name="type" id="object-type">
                                         <option disabled>Select</option>
-                                        <option value="hotel">Hotel</option>
-                                        <option value="resort">Resort</option>
-                                        <option value="guest-house">Guest House</option>
+                                        @foreach($categories as $category)
+                                        <option value="{{ Helper::slug_gen($category) }}">{{ $category }}</option>    
+                                        @endforeach
                                     </select>
                                 </div>
                                 <!--end form-group-->

@@ -12,4 +12,19 @@ class Helper
     {
         return '/'.'image/'.$location;
     }
+
+    public static function slug_gen($str)
+    {
+        $str = strtolower(trim($str));
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+        $str = preg_replace('/-+/', "-", $str);
+        return $str;
+    }
+
+    public static function un_slug_gen($str)
+    {
+        $str = ucfirst(trim($str));
+        $str = str_replace("-", " ", $str);
+        return $str;
+    }
 }

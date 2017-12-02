@@ -5,8 +5,8 @@
     
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">{{ $type }}</a></li>
+                <li><a href="#">Home - {{ $country }} </a></li>
+                <li><a href="#">{{ Helper::un_slug_gen($type) }}</a></li>
                 <li class="active">{{ $accommodation->title }}</li>
             </ol>
             <!--end breadcrumb-->
@@ -412,30 +412,28 @@
         <?php
             $watch_count = rand(-100,100);
             $booking_count = rand(-100,100);
-            $watch_count = rand(-100,100);
+            $watch_counts = rand(-100,100);
         ?>  
         @if($watch_count > 0)
-        <div class="message-popup bottom-left" data-show-after-time="2000" data-close-after-time="10000">
-            <div class="close"><i class="fa fa-times"></i></div>
-            <p>{{ $watch_count }} people are watching this accommodation.</p>
-        </div>
-        @else
-            
+            <div class="message-popup bottom-left" data-show-after-time="2000" data-close-after-time="10000">
+                <div class="close"><i class="fa fa-times"></i></div>
+                <p>{{ $watch_count }} people are watching this accommodation.</p>
+            </div>
         @endif
 
         @if($booking_count > 0)
-        <div class="message-popup bottom-left featured" data-show-after-time="4000" data-close-after-time="10000">
-            <div class="close"><i class="fa fa-times"></i></div>
-            <div class="title">Just Booked!</div>
-            <p>Hurry up! This accommodation was just booked. Don’t miss the chance!</p>
-        </div>
-
-        <div class="message-popup bottom-left" data-show-after-time="5000" data-close-after-time="10000">
-            <div class="close"><i class="fa fa-times"></i></div>
-            <p>Last booking was from <strong>France</strong></p>
-        </div>
-        @else
-            
+            <div class="message-popup bottom-left featured" data-show-after-time="4000" data-close-after-time="10000">
+                <div class="close"><i class="fa fa-times"></i></div>
+                <div class="title">Just Booked!</div>
+                <p>Hurry up! This accommodation was just booked. Don’t miss the chance!</p>
+            </div>
+        @endif
+        
+        @if($watch_counts > 0)
+            <div class="message-popup bottom-left" data-show-after-time="5000" data-close-after-time="10000">
+                <div class="close"><i class="fa fa-times"></i></div>
+                <p>Last booking was from <strong>{{ $country }}</strong></p>
+            </div>
         @endif
 
     </div>

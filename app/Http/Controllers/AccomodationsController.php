@@ -8,53 +8,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
+use Faker\Factory as Faker;
 use Image;
 
 class AccomodationsController extends Controller
 {
-    public function hotel()
+    public function listing($type)
     {
-        $type = "Hotels";
-        $accommodations = Accomodations::where('type', 'hotel')->where('active', '1')->paginate(15);
+        $accommodations = Accomodations::where('type', $type)->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
 
-    public function hotel_detail($slug)
+    public function detail($type, $slug)
     {
-        $type = "Hotel";
+        $faker = Faker::create();
         $facilities = \App\facilities::all();
         $accommodation = Accomodations::where('slug', $slug)->where('active', '1')->first();
-        return view('accommodations.details', compact('type', 'accommodation', 'facilities'));
-    }
-    
-    public function resort()
-    {
-        $type = "Resorts";
-        $accommodations = Accomodations::where('type', 'resort')->where('active', '1')->paginate(15);
-        return view('accommodations.listings', compact('type', 'accommodations'));
-    }
-
-    public function resort_detail($slug)
-    {
-        $type = "Resorts";
-        $facilities = \App\facilities::all();
-        $accommodation = Accomodations::where('slug', $slug)->where('active', '1')->first();
-        return view('accommodations.details', compact('type', 'accommodation', 'facilities'));
-    }
-    
-    public function guesthouse()
-    {
-        $type = "Guest House";
-        $accommodations = Accomodations::where('type', 'guest-house')->where('active', '1')->paginate(15);
-        return view('accommodations.listings', compact('type', 'accommodations'));
-    }
-
-    public function guesthouse_detail($slug)
-    {
-        $type = "Guest House";
-        $facilities = \App\facilities::all();
-        $accommodation = Accomodations::where('slug', $slug)->where('active', '1')->first();
-        return view('accommodations.details', compact('type', 'accommodation', 'facilities'));
+        $country = $faker->country;
+        return view('accommodations.details', compact('type', 'accommodation', 'facilities', 'country'));
     }
 
     public function all()
@@ -66,7 +37,9 @@ class AccomodationsController extends Controller
     public function create()
     {
         $facilities = \App\facilities::all();
-        return view('extranet.accommodations.submit', compact('facilities'));
+        $settings = \App\settings::find('1');
+        $categories = explode(',', $settings->categories);
+        return view('extranet.accommodations.submit', compact('facilities', 'categories'));
     }
 
     public function store(Request $request)
@@ -124,9 +97,13 @@ class AccomodationsController extends Controller
     public function edit($id)
     {
         $acco = Accomodations::find($id);
+        
         $facilities = \App\facilities::all();
+        $settings = \App\settings::find('1');
+        $categories = explode(',', $settings->categories);
+
         if($acco->user_id == Auth::guard('extranet')->user()->id){
-            return view('extranet.accommodations.edit', compact('acco', 'facilities'));
+            return view('extranet.accommodations.edit', compact('acco', 'facilities', 'categories'));
         } else {
             return redirect('extranet/accommodations');
         }

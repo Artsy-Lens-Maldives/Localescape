@@ -266,3 +266,35 @@ Route::group(['prefix' => 'facilities'], function () {
         return redirect()->back()->with('alert-success', 'Successfully deleted the facility');
     });
 });
+
+Route::group(['prefix' => 'settings'], function () {
+    Route::get('/', function () {
+        $settings = \App\settings::find('1');
+        //dd($settings);
+        $categories = explode(',', $settings->categories);
+        return view('admin.settings.index', compact('settings', 'categories'));
+    });
+    Route::post('/', function (Request $request) {
+        $settings = \App\settings::find('1');
+        $settings->categories = $request->categories;
+        //dd($settings);
+        return redirect('admin/settings')->with('alert-success', 'Successfully saved changes');
+    });
+    Route::get('/test/{str}', function ($str) {
+        $str = strtolower(trim($str));
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+        $str = preg_replace('/-+/', "-", $str);
+        return $str;
+    });
+    Route::get('/test', function () {
+        $stuffs = "Hotel,Resort,Guest House,Safari";
+        $array_items = explode(',', $stuffs);
+        foreach ($array_items as $item) {
+            $item = strtolower(trim($item));
+            $item = preg_replace('/[^a-z0-9-]/', '-', $item);
+            $item = preg_replace('/-+/', "-", $item);
+            echo $item;
+            echo '<br>';
+        }
+    });
+});

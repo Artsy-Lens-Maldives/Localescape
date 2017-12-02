@@ -59,9 +59,9 @@
                         <nav id="primary-nav">
                             <ul>
                                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="{{ url('/hotels') }}">Hotels</a></li>
-                                <li><a href="{{ url('/resorts') }}">Resort</a></li>
-                                <li><a href="{{ url('/guest-house') }}">Guest House</a></li>
+                                @foreach($categories as $category)
+                                    <li><a href="/accommodation/{{ Helper::slug_gen($category) }}">{{ $category }}</a></li>    
+                                @endforeach
                                 <li>
                                     <a href="{{ url('/tours') }}" class="has-child">Tours</a>
                                     <ul class="child-nav">

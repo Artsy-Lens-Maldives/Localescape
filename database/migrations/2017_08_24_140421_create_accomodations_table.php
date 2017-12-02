@@ -25,7 +25,7 @@ class CreateAccomodationsTable extends Migration
             $table->string('special-offer-text')->nullable();
             $table->integer('receive_reviews')->default("0");
             $table->integer('minimum_stay')->nullable();
-            $table->integer('price')->nullable();
+            $table->integer('rating')->nullable();
 
             $table->string('address')->nullable();
             $table->string('email')->nullable();

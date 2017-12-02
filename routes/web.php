@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 //Test Routes (start)
-Route::get('/all', 'Api/ApiAccomodationsController@index');
+//Route::get('/all', 'Api/ApiAccomodationsController@index');
 Route::get('/all2', function () {
     $flights = App\Accomodations::all();
     return $flights;
@@ -122,12 +122,8 @@ Route::get('/gallery', function () {
 //Gallery (end)
 
 // Accommodation Routes (start)
-Route::get('/hotels', 'AccomodationsController@hotel');
-Route::get('/hotels/{slug}', 'AccomodationsController@hotel_detail');
-Route::get('/resorts', 'AccomodationsController@resort');
-Route::get('/resorts/{slug}', 'AccomodationsController@resort_detail');
-Route::get('/guest-house', 'AccomodationsController@guesthouse');
-Route::get('/guest-house/{slug}', 'AccomodationsController@guesthouse_detail');
+Route::get('accommodation/{type}', 'AccomodationsController@listing');
+Route::get('accommodation/{type}/{slug}', 'AccomodationsController@detail');
 //Bookings and Inquiry
 Route::get('/booking/{acco_id}/{room_id}', 'BookingController@create');
 Route::post('/booking/{acco_id}/{room_id}', 'BookingController@store');
