@@ -30,6 +30,7 @@
                             <th>Location</th>
                             <th>Status</th>
                             <th>Created at</th>
+                            <th>Last Update</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -42,6 +43,7 @@
                             <td>{{ $acco->address }}</td>
                             <td style="font-weight: bold; text-transform: capitalize;">{{ $acco->status }}</td>
                             <td>{{ $acco->created_at->diffForHumans() }}</td>
+                            <td>{{ $acco->updated_at->diffForHumans() }}</td>
                             <td style="text-align: center;">
                                 <a style="margin:1px" class="btn btn-danger" href="/extranet/accommodations/delete/{{ $acco->id }}" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')">Delete</a>
                                 <a style="margin:1px" class="btn btn-warning" href="/extranet/accommodations/edit/{{ $acco->id }}">Edit</a>

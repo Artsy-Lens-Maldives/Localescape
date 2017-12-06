@@ -22,14 +22,17 @@
                             @endif
                         @endforeach
                     </div>
+                    @if($rooms->isempty())
+                        <h4>No Rooms found for this Accommodation </h4>
+                    @else
                     <table class="table table-fixed-header">
                         <thead class="header">
-                        <tr>
-                            <th>Accommodation Name</th>
-                            <th>Room Type</th>
-                            <th>Created at</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr>
+                                <th>Accommodation Name</th>
+                                <th>Room Type</th>
+                                <th>Created at</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach($rooms as $room)
@@ -46,6 +49,7 @@
                         <!--end reservation-->
                         </tbody>
                     </table>
+                    @endif
                 </div>
                 <!--end my-items-->
             </div>

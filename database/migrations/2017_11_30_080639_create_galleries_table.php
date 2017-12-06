@@ -17,6 +17,8 @@ class CreateGalleriesTable extends Migration
             $table->increments('id');
             $table->string('photo_url');
             $table->string('thumbnail')->nullable();
+            $table->string('explit')->nullable();
+            $table->string('quality')->nullable();
             $table->timestamps();
         });
     }

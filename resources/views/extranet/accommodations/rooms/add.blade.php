@@ -24,9 +24,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label col-sm-2" for="short_description">Short Description</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="short_description" placeholder="Short Description" name="short_description">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="control-label col-sm-2" for="description">Description</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="description" placeholder="Description" name="description">
+                            <textarea class="form-control" rows="5" id="description" placeholder="Description" name="description"></textarea>
                         </div>
                     </div>
 
@@ -57,10 +64,18 @@
                             <input type="text" class="form-control" id="price_child" placeholder="Price per child" name="price_child">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="price_child">Images</label>
+                        <div class="col-sm-10">
+                            <p class="form-control">To add Images goto the images section in accommodation after adding the room</p>
+                        </div>
+                    </div>
                     
                     <div class="form-group">        
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-info">Submit</button>
+                            <a href="{{ url('extranet/accommodations') }}" class="btn btn-danger">Back</a>
                         </div>
                     </div>
                 </form>

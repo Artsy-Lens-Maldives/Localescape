@@ -117,6 +117,7 @@ class AccomodationsController extends Controller
         $acco->description = $request->description;
         $acco->special_offer = $request->special_offer;
         $acco->percents = $request->percents;
+        $acco->rating = $request->rating;
         $acco->{'special-offer-text'} = $request->{'special-offer-text'};
         $acco->receive_reviews = $request->receive_reviews;
         $acco->minimum_stay = $request->minimum_stay;

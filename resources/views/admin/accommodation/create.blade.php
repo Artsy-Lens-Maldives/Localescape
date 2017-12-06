@@ -24,12 +24,11 @@
                     <!--end col-md-7-->
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="object-type">Accommodation Type</label>
-                            <select class="framed width-100" name="type" id="object-type">
-                                <option disabled>Select</option>
-                                <option value="hotel">Hotel</option>
-                                <option value="resort">Resort</option>
-                                <option value="guest-house">Guest House</option>
+                            <label for="type">Type:</label>
+                            <select class="form-control" id="type" name="type">
+                                @foreach($categories as $category)
+                                    <option value="{{ Helper::slug_gen($category) }}">{{ $category }}</option>    
+                                @endforeach
                             </select>
                         </div>
                         <!--end form-group-->
@@ -48,21 +47,26 @@
                 </div>
                 <!--end row-->
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-12">
                         <h3>Special Offer? <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="right" title="Have a special offer? Tick here and Enter the details"></i></h3>
                         <div class="form-group-inline vertical-align-middle">
-                            <div class="form-group">
-                                <label class="no-margin"><input type="checkbox" value="1" name="special_offer">Special Offer</label>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="1" name="special_offer">Special Offer</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="percents" name="percents" placeholder="Offer Percentage example: 20%">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="special-offer-text" name="special-offer-text" placeholder="Offer Text example: Off the price today">
+                                    </div>
+                                </div>
                             </div>
-                            <!--end form-group-->
-                            <div class="form-group width-20">
-                                <input type="text" class="form-control" id="percents" name="percents" placeholder="20">
-                            </div>
-                            <!--end form-group-->
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="special-offer-text" name="special-offer-text" placeholder="Off the price today">
-                            </div>
-                            <!--end form-group-->
                         </div>
                         <!--end form-group-inline-->
                     </div>
@@ -72,13 +76,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-7">
-                                <h3>Receive Reviews<i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Tick Here if you want to turn off review emails about your accommodation. (Feature Comming Soon.)"></i></h3>
-                                <label><input type="checkbox" name="receive_reviews" value="1">Receive Reviews in Email</label>
+                            <div class="col-md-2">
+                                <h3>Receive Reviews <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Tick Here if you want to turn off review emails about your accommodation. (Feature Comming Soon.)"></i></h3>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="receive_reviews" value="1">Receive Reviews in Email</label>
+                                </div>
                             </div>
+                                
                             <!--end col-md-7-->
-                            <div class="col-md-5">
-                                <h3>Minimum Stay<i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Enter the minimum nights required to book your accommodation"></i></h3>
+                            <div class="col-md-2">
+                                <h3>Minimum Stay <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Enter the minimum nights required to book your accommodation"></i></h3>
                                 <input type="number" min="1" class="form-control" id="minimum-stay" name="minimum_stay" placeholder="2">
                             </div>
                             <!--end col-md-5-->
@@ -89,6 +96,7 @@
                 </div>
                 <!--end row-->
             </section>
+            <hr>
             <section id="location">
                 <div class="row">
                     <div class="col-md-12">
@@ -150,6 +158,7 @@
                 </div>
                 <!--end row-->
             </section>
+            <hr>
             <section id="gallery">
                 <div class="title">
                     <h2>Gallery</h2>
@@ -160,21 +169,23 @@
                     <span>Click to add images</span>
                 </div>
             </section>
+            <hr>
             <section id="facilities">
                 <div class="title">
                     <h2>Facilities</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <ul class="checkboxes inline half list-unstyled">
+                        <ul class="checkboxes inline half list-unstyled" style="columns: 3; -webkit-columns: 3; -moz-columns: 3;">
                             @foreach($facilities as $facility)
-                                <li><label><input type="checkbox" name="facilities[]" value="{{ $facility->id }}">{{ $facility->name }} </label></li>
+                                <li><label><input type="checkbox" name="facilities[]" value="{{ $facility->id }}">  <i class="fa {{ $facility->fa_icon }}"></i> {{ $facility->name }} </label></li>
                             @endforeach   
                         </ul>
                         <!--end checkboxes-->
                     </div>
                 </div>
             </section>
+            <hr>
             <section id="additional-information">
                 <div class="title">
                     <h2>Additional Information</h2>
@@ -212,37 +223,52 @@
                             <div class="col-md-6">
                                 <h3>Check In</h3>
                                 <div class="form-group-inline">
-                                    <div class="form-group">
-                                        <label for="check-in-from">From</label>
-                                        <input type="text" class="form-control" id="check-in-from" name="check-in-from" placeholder="12:00">
-                                    </div>
-                                    <!--end form-group-->
-                                    <div class="form-group">
-                                        <label for="check-in-to">To</label>
-                                        <input type="text" class="form-control" id="check-in-to" name="check-in-to" placeholder="20:00">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="check-in-from">From</label>
+                                                <input type="text" class="form-control" id="check-in-from" name="check-in-from" placeholder="12:00">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="check-in-to">To</label>
+                                                <input type="text" class="form-control" id="check-in-to" name="check-in-to" placeholder="20:00">
+                                            </div>
+                                        </div>
                                     </div>
                                     <!--end form-group-->
                                 </div>
                                 <!--end form-group-inline-->
-                                <label><input type="checkbox" value="1" name="early_check_in">Early Check-in</label>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="1" name="early_check_in">Early Check-in</label>
+                                </div>
                             </div>
                             <!--end col-md-6-->
                             <div class="col-md-6">
                                 <h3>Check Out</h3>
                                 <div class="form-group-inline">
-                                    <div class="form-group">
-                                        <label for="check-out-from">From</label>
-                                        <input type="text" class="form-control" id="check-out-from" name="check-out-from" placeholder="08:00">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="check-out-from">From</label>
+                                                <input type="text" class="form-control" id="check-out-from" name="check-out-from" placeholder="08:00">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!--end form-group-->
+                                            <div class="form-group">
+                                                <label for="check-out-to">To</label>
+                                                <input type="text" class="form-control" id="check-out-to" name="check-out-to" placeholder="12:00">
+                                            </div>
+                                            <!--end form-group-->
+                                        </div>
                                     </div>
-                                    <!--end form-group-->
-                                    <div class="form-group">
-                                        <label for="check-out-to">To</label>
-                                        <input type="text" class="form-control" id="check-out-to" name="check-out-to" placeholder="12:00">
-                                    </div>
-                                    <!--end form-group-->
                                 </div>
                                 <!--end form-group-inline-->
-                                <label><input type="checkbox" value="1" name="late_check_out">Late Check-out</label>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="1" name="late_check_out">Late Check-out</label>
+                                </div>
                             </div>
                             <!--end col-md-6-->
                         </div>

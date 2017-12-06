@@ -68,7 +68,7 @@
                         </div>
                         <!--end row-->
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <h3>Special Offer? <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="right" title="Have a special offer? Tick here and Enter the details"></i></h3>
                                 <div class="form-group-inline vertical-align-middle">
                                     <div class="form-group">
@@ -87,6 +87,17 @@
                                 <!--end form-group-inline-->
                             </div>
                             <!--col-md-5-->
+                            <div class="col-md-5">
+                                <br>
+                                <label for="object-type">Accommodation Rating</label>
+                                <select class="framed width-100" name="rating" id="object-type">
+                                    <option value="1">1 Star</option>
+                                    <option value="2">2 Star</option>   
+                                    <option value="3">3 Star</option>
+                                    <option value="4">4 Star</option>
+                                    <option value="5">5 Star</option>
+                                </select>
+                            </div>
                         </div>
                         <!--end row-->
                         <div class="row">

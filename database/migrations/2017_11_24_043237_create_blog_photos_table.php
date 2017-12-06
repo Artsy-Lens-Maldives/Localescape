@@ -19,6 +19,8 @@ class CreateBlogPhotosTable extends Migration
             $table->string('main');
             $table->string('photo_url');
             $table->string('thumbnail')->nullable();
+            $table->string('explit')->nullable();
+            $table->string('quality')->nullable();
             $table->timestamps();
         });
     }
