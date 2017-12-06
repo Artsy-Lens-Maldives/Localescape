@@ -147,6 +147,44 @@ Route::group(['prefix' => 'accommodations'], function () {
         $acco = Accomodations::find($id);
         return view('admin.accommodation.photo', compact('acco'));
     });
+    Route::post('/images/{id}/new', function ($id, Request $request) {
+        $accommodations = Accomodations::find($id);
+        
+        foreach ($request->image as $photo) {            
+            //File names and location
+            $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
+            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
+            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
+            
+            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+
+            //Original Image
+            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_o, $original->stream()->__toString(), 'public');
+            //Thumbnail image
+            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+
+            accommo_photo::create([
+                'accommo_id' => $accommodations->id,
+                'main' => '0',
+                'photo_url' => $location_o,
+                'thumbnail' => $location_t,
+            ]);
+        }
+
+        return redirect()->back()->with('alert-success', 'Successfully added new image(s)');
+    });
+
+    Route::get('/images/{id}/{accommo_photo}/delete', 'AccommoPhotoController@destroy');
+    Route::get('/images/{id}/{accommo_photo}/main', 'AccommoPhotoController@main');
+
     Route::get('/approve/{id}', function ($id) {
         $acco = Accomodations::find($id);
         return view('admin.accommodation.approve', compact('acco'));

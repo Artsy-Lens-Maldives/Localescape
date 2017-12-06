@@ -12,7 +12,7 @@
             <!--end breadcrumb-->
             <div class="main-content">
                 <div class="title">
-                    <h1>Edit {{ $acco->title }}'s Photos <a href="{{ url('extranet/accommodations') }}" class="btn btn-lg btn-success">Go Back</a> </h1>
+                    <h1>Edit {{ $acco->title }}'s Photos <a href="{{ url('admin/accommodations') }}" class="btn btn-lg btn-success">Go Back</a> </h1>
                 </div>
                 <!--end title-->
                 <div class="flash-message">
@@ -25,42 +25,92 @@
                     @endforeach
                 </div>
                 
-                <section id="gallery">
-                    <form action="{{ url()->current() }}/new" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="title">
-                            <h2>Add New Image</h2>
-                        </div>
-                        <div class="file-upload-previews"></div>
-                        <div class="file-upload">
-                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png" required>
-                            <span>Click to add images</span>
-                        </div>
-                    <section>
-                        <div class="form-group center">
-                            <button type="submit" class="btn btn-primary btn-rounded btn-lg">Add Image(s)</button>
-                        </div>
-                    </section>
-                    </form>
-                </section>
-
-                <div>
-                    @foreach($acco->photos as $image)
-                    <div class="clearfix col-lg-2 col-md-2 col-sm-4 col-xs-6" style="width: 200px; height:100%; margin-top: 10px; margin-bottom: 10px;">
-                        <a href="{{ Helper::s3_url_gen($image->photo_url) }}" data-title="{{ $acco->title }}'s image" data-toggle="lightbox">
-                            <img class='img-responsive img-thumbnail' src="{{ Helper::s3_url_gen($image->photo_url) }}" style="width: 200px; height:130px;">
-                        </a>
-                        <center>
-                            @if($image->main == '0')
-                                <a href="{{ url()->current() }}/{{ $image->id }}/delete" onclick="return confirm('Are you sure you want to delete this image?');" class="btn btn-danger" style="margin-top: 3px;">Delete</a>
-                                <a href="{{ url()->current() }}/{{ $image->id }}/main" class="btn btn-warning" style="margin-top: 3px;">Main Photo</a>        
-                            @else
-                                <a href="" class="btn btn-warning disabled" style="margin-top: 3px;" disabled>Current Main</a>
-                            @endif
-                        </center>
-                        
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <section id="gallery">
+                            <form action="{{ url()->current() }}/new" method="post" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="title">
+                                    <h2>Add Accommodation Photos</h2>
+                                </div>
+                                <div class="file-upload">
+                                    <input id="input-b1" name="image[]" type="file" class="file" multiple accept="gif|jpg|png" required>
+                                    <span>Click to add images</span>
+                                </div>
+                            <section>
+                                <div class="form-group center">
+                                    <button type="submit" class="btn btn-primary btn-rounded btn-lg">Add Image(s)</button>
+                                </div>
+                            </section>
+                            </form>
+                        </section>
+                        <div>   
+                            @foreach($acco->photos as $image)
+                            <div class="clearfix col-lg-2 col-md-2 col-sm-4 col-xs-6" style="width: 200px; height:100%; margin-top: 10px; margin-bottom: 10px;">
+                                <a href="{{ Helper::s3_url_gen($image->photo_url) }}" data-title="{{ $acco->title }}'s image" data-toggle="lightbox">
+                                    <img class='img-responsive img-thumbnail' src="{{ Helper::s3_url_gen($image->photo_url) }}" style="width: 200px; height:130px;">
+                                </a>
+                                <center>
+                                    @if($image->main == '0')
+                                        <a href="{{ url()->current() }}/{{ $image->id }}/delete" onclick="return confirm('Are you sure you want to delete this image?');" class="btn btn-danger" style="margin-top: 3px;">Delete</a>
+                                        <a href="{{ url()->current() }}/{{ $image->id }}/main" class="btn btn-warning" style="margin-top: 3px;">Main Photo</a>        
+                                    @else
+                                        <a href="" class="btn btn-warning disabled" style="margin-top: 3px;" disabled>Current Main</a>
+                                    @endif
+                                </center>
+                                
+                            </div>
+                            @endforeach
+                        </div>    
                     </div>
+                </div>
+                <hr>
+                @if($acco->rooms->isempty() )
+                    <h4>No Rooms found for this Accommodation <a href="{{ url('admin/accommodations/rooms') }}/{{ $acco->id }}" class="btn btn-lg btn-warning">Add a room</a> </h4>
+                @else
+                    @foreach($acco->rooms as $room)
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <section id="gallery">
+                                    <form action="{{ url()->current() }}/room/{{ $room->id }}" method="post" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        <div class="title">
+                                            <h2>Add Room Photos</h2>
+                                        </div>
+                                        <div class="file-upload-previews"></div>
+                                        <div class="file-upload">
+                                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png" required>
+                                            <span>Click to add images</span>
+                                        </div>
+                                    <section>
+                                        <div class="form-group center">
+                                            <button type="submit" class="btn btn-primary btn-rounded btn-lg">Add Image(s)</button>
+                                        </div>
+                                    </section>
+                                    </form>
+                                </section>
+                                <div>   
+                                    @foreach($acco->photos as $image)
+                                    <div class="clearfix col-lg-2 col-md-2 col-sm-4 col-xs-6" style="width: 200px; height:100%; margin-top: 10px; margin-bottom: 10px;">
+                                        <a href="{{ Helper::s3_url_gen($image->photo_url) }}" data-title="{{ $acco->title }}'s image" data-toggle="lightbox">
+                                            <img class='img-responsive img-thumbnail' src="{{ Helper::s3_url_gen($image->photo_url) }}" style="width: 200px; height:130px;">
+                                        </a>
+                                        <center>
+                                            @if($image->main == '0')
+                                                <a href="{{ url()->current() }}/{{ $image->id }}/delete" onclick="return confirm('Are you sure you want to delete this image?');" class="btn btn-danger" style="margin-top: 3px;">Delete</a>
+                                                <a href="{{ url()->current() }}/{{ $image->id }}/main" class="btn btn-warning" style="margin-top: 3px;">Main Photo</a>        
+                                            @else
+                                                <a href="" class="btn btn-warning disabled" style="margin-top: 3px;" disabled>Current Main</a>
+                                            @endif
+                                        </center>
+                                        
+                                    </div>
+                                    @endforeach
+                                </div>    
+                            </div>
+                        </div>   
                     @endforeach
+                @endif 
                 </div>
             </div>
             <!--end main-content-->
