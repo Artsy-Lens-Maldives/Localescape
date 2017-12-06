@@ -18,6 +18,8 @@ class CreateAccommoPhotosTable extends Migration
             $table->string('accommo_id');
             $table->string('main');
             $table->string('photo_url');
+            $table->string('explit')->nullable();
+            $table->string('quality')->nullable();
             $table->timestamps();
         });
     }
