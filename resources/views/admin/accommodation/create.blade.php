@@ -14,7 +14,7 @@
                     <h2>Main Information</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="form-submit-title">Title<em>*</em></label>
                             <input type="text" class="form-control" id="form-submit-title" name="title" placeholder="Accommodation Title" required="">
@@ -22,12 +22,30 @@
                         <!--end form-group-->
                     </div>
                     <!--end col-md-7-->
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="type">Type:</label>
                             <select class="form-control" id="type" name="type">
                                 @foreach($categories as $category)
                                     <option value="{{ Helper::slug_gen($category) }}">{{ $category }}</option>    
+                                @endforeach
+                            </select>
+                        </div>
+                        <!--end form-group-->
+                    </div>
+                    <!--end col-md-5-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="object-type">Extranet User</label>
+                            <select class="form-control" name="user_id" id="object-type">
+                                @foreach($extranet_users as $user)
+                                    <option value="{{ $user->id }}"
+                                    @if($acco->user_id == $user->id)
+                                        selected
+                                    @else
+                                        
+                                    @endif
+                                    >Name:{{ $user->name }} - Email:{{ $user->email }}</option>    
                                 @endforeach
                             </select>
                         </div>

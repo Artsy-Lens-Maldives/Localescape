@@ -14,7 +14,7 @@
                     <h2>Main Information</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="form-submit-title">Title</label>
                             <input type="text" value="{{ $acco->title }}" class="form-control" id="form-submit-title" name="title" placeholder="Accommodation Title" required="">
@@ -22,7 +22,7 @@
                         <!--end form-group-->
                     </div>
                     <!--end col-md-7-->
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="object-type">Accommodation Type</label>
                             <select class="form-control" name="type" id="object-type">
@@ -34,6 +34,24 @@
                                         
                                     @endif
                                     >{{ $category }}</option>    
+                                @endforeach
+                            </select>
+                        </div>
+                        <!--end form-group-->
+                    </div>
+                    <!--end col-md-5-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="object-type">Switch User</label>
+                            <select class="form-control" name="user_id" id="object-type">
+                                @foreach($extranet_users as $user)
+                                    <option value="{{ $user->id }}"
+                                    @if($acco->user_id == $user->id)
+                                        selected
+                                    @else
+                                        
+                                    @endif
+                                    >Name:{{ $user->name }} - Email:{{ $user->email }}</option>    
                                 @endforeach
                             </select>
                         </div>

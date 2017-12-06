@@ -37,10 +37,12 @@ Route::group(['prefix' => 'accommodations'], function () {
         $accommodations = Accomodations::all();
         $facilities = \App\facilities::all();
 
+        $extranet_users = \App\Extranet::all();
+
         $settings = \App\settings::find('1');
         $categories = explode(',', $settings->categories);
         
-        return view('admin.accommodation.create', compact('accommodations', 'facilities', 'categories'));
+        return view('admin.accommodation.create', compact('accommodations', 'facilities', 'categories', 'extranet_users'));
     });
     Route::post('/create', function () {
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
@@ -97,10 +99,12 @@ Route::group(['prefix' => 'accommodations'], function () {
         $acco = Accomodations::find($id);
         $facilities = facilities::all();
 
+        $extranet_users = \App\Extranet::all();
+
         $settings = \App\settings::find('1');
         $categories = explode(',', $settings->categories);
 
-        return view('admin.accommodation.edit', compact('acco', 'facilities', 'categories'));
+        return view('admin.accommodation.edit', compact('acco', 'facilities', 'categories', 'extranet_users'));
     });
     Route::post('/edit/{id}', function ($id, Request $request) {
         $acco = Accomodations::find($id);
