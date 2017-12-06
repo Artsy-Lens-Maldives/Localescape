@@ -27,8 +27,6 @@
                                         <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
                                         @if($accommodation->top_acco == "1")
                                             <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>    
-                                        @else
-                                            
                                         @endif
                                         <div class="image">
                                             <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="wrapper">

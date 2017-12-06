@@ -17,7 +17,8 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 */
 
 Route::get('/', function () {
-    return view('main');
+    $top_picks = \App\Accomodations::where('top_acco', '1')->get();
+    return view('main', compact('top_picks'));
 });
 
 //Test Routes (start)

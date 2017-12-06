@@ -24,15 +24,13 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'accommodations'], function () {
-    Route::group(['prefix' => 'rooms'], function () {
-        Route::get('/', function () {
-            return view('admin.accommodation.rooms.all');
-        });    
-    });
+    // List All
     Route::get('/', function () {
         $accommodations = Accomodations::all();
         return view('admin.accommodation.all', compact('accommodations'));
     });
+
+    // Create New
     Route::get('/create', function () {
         $accommodations = Accomodations::all();
         $facilities = \App\facilities::all();
@@ -44,7 +42,7 @@ Route::group(['prefix' => 'accommodations'], function () {
         
         return view('admin.accommodation.create', compact('accommodations', 'facilities', 'categories', 'extranet_users'));
     });
-    Route::post('/create', function () {
+    Route::post('/create', function (Request $request) {
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         
         $array = $request->facilities;
@@ -95,6 +93,100 @@ Route::group(['prefix' => 'accommodations'], function () {
 
         return redirect('admin/accommodations')->with('alert-success', 'Successfully added new accommodation');
     });
+
+    //Delete
+    Route::get('/delete/{id}', function ($id) {
+        $accommodation = Accomodations::find($id);
+        $accommodation->delete();
+        return redirect()->back()->with('alert-success', 'Successfully deleted the accommodation');
+    });
+
+    // Image
+    Route::get('/images/{id}', function ($id) {
+        $acco = Accomodations::find($id);
+        return view('admin.accommodation.photo', compact('acco'));
+    });
+    Route::post('/images/{id}/new', function ($id, Request $request) {
+        $accommodations = Accomodations::find($id);
+        
+        foreach ($request->image as $photo) {            
+            //File names and location
+            $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
+            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
+            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
+            
+            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+
+            //Original Image
+            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_o, $original->stream()->__toString(), 'public');
+            //Thumbnail image
+            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+
+            accommo_photo::create([
+                'accommo_id' => $accommodations->id,
+                'main' => '0',
+                'photo_url' => $location_o,
+                'thumbnail' => $location_t,
+            ]);
+        }
+
+        return redirect()->back()->with('alert-success', 'Successfully added new image(s)');
+    });
+    Route::get('/images/{id}/{accommo_photo}/delete', 'AccommoPhotoController@destroy');
+    Route::get('/images/{id}/{accommo_photo}/main', 'AccommoPhotoController@main');
+    Route::post('/images/{id}/room/{room_id}', function ($id, $room_id, Request $request) {
+        $accommodations = Accomodations::find($id);
+        $room = \App\accommo_room::find($room_id);
+
+        $i = 0;
+        foreach ($request->image as $photo) {            
+            $i++;
+            if ($i == '1'){
+                $m = '1';
+            } else {
+                $m = '0';
+            }
+            //File names and location
+            $fileName = $room->room_type.'-'.time().'-'.$photo->getClientOriginalName();
+            $location_o = $accommodations->type.'/'.$accommodations->slug.'/rooms'.$room->room_type.'/original'.'/'.$fileName;
+            $location_t = $accommodations->type.'/'.$accommodations->slug.'/rooms'.$room->room_type.'/thumbnail'.'/'.$fileName;
+            
+            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+
+            //Original Image
+            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_o, $original->stream()->__toString(), 'public');
+            //Thumbnail image
+            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+
+            \App\Room_Image::create([
+                'accommo_id' => $id,
+                'room_id' => $id,
+                'main' => $m,
+                'photo_url' => $location_o,
+                'thumbnail' => $location_t,
+            ]);
+        }
+
+        return redirect()->back()->with('alert-success', 'Successfully added new image(s)');
+    });
+
+    //Edit
     Route::get('/edit/{id}', function ($id) {
         $acco = Accomodations::find($id);
         $facilities = facilities::all();
@@ -144,48 +236,8 @@ Route::group(['prefix' => 'accommodations'], function () {
 
         return redirect('admin/accommodations')->with('alert-success', 'Successfully edited the accommodation');
     });
-    Route::get('/images/{id}', function ($id) {
-        $acco = Accomodations::find($id);
-        return view('admin.accommodation.photo', compact('acco'));
-    });
-    Route::post('/images/{id}/new', function ($id, Request $request) {
-        $accommodations = Accomodations::find($id);
-        
-        foreach ($request->image as $photo) {            
-            //File names and location
-            $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
-            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
-            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
-            
-            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
-
-            //Original Image
-            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_o, $original->stream()->__toString(), 'public');
-            //Thumbnail image
-            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
-
-            accommo_photo::create([
-                'accommo_id' => $accommodations->id,
-                'main' => '0',
-                'photo_url' => $location_o,
-                'thumbnail' => $location_t,
-            ]);
-        }
-
-        return redirect()->back()->with('alert-success', 'Successfully added new image(s)');
-    });
-
-    Route::get('/images/{id}/{accommo_photo}/delete', 'AccommoPhotoController@destroy');
-    Route::get('/images/{id}/{accommo_photo}/main', 'AccommoPhotoController@main');
-
+    
+    //Approve
     Route::get('/approve/{id}', function ($id) {
         $acco = Accomodations::find($id);
         return view('admin.accommodation.approve', compact('acco'));
@@ -204,6 +256,52 @@ Route::group(['prefix' => 'accommodations'], function () {
         return redirect('admin/accommodations');
         
     });
+
+    //Room
+    Route::group(['prefix' => 'rooms'], function () {
+        Route::get('/{id}', function ($id) {
+            $accommodation = Accomodations::find($id);
+            return view('admin.accommodation.rooms.all', compact('accommodation'));
+        }); 
+        Route::get('{id}/add', function ($id) {
+            $accommodation = Accomodations::find($id);
+            return view('admin.accommodation.rooms.create', compact('accommodation'));
+        });    
+        Route::post('{id}/add', function ($id) {
+            $accommodation = Accomodations::find($id);
+            $rooms = \App\accommo_room::create(Input::except('_token'));
+            $url = 'admin/accommodations/rooms/' . $id ; 
+            return redirect($url)->with('alert-success', 'Successfully added new room');
+        });
+        Route::get('{id}/delete/{room_id}', function ($id, $room_id) {
+            $accommodation = Accomodations::find($id);
+            $room = \App\accommo_room::find($room_id);
+            $room->delete();
+            return redirect()->back()->with('alert-success', 'Successfully deleted the room');
+        });
+        Route::get('{id}/edit/{room_id}', function ($id, $room_id) {
+            $accommodation = Accomodations::find($id);
+            $room = \App\accommo_room::find($room_id);
+            return view('admin.accommodation.rooms.edit', compact('accommodation', 'room'));
+        });
+        Route::post('{id}/edit/{room_id}', function ($id, $room_id, Request $request) {
+            $accommodation = Accomodations::find($id);
+            $room = \App\accommo_room::find($room_id);
+
+            $room->room_type = $request->room_type;
+            $room->short_description = $request->short_description;
+            $room->description = $request->description;
+            $room->no_adult = $request->no_adult;
+            $room->price_adult = $request->price_adult;
+            $room->no_children = $request->no_children;
+            $room->price_child = $request->price_child;
+            $room->save();
+
+            $url = 'admin/accommodations/rooms/' . $id ; 
+            return redirect($url)->with('alert-success', 'Successfully edited the room');
+        });
+    });
+    
 });
 
 Route::group(['prefix' => 'user'], function () {
@@ -412,24 +510,96 @@ Route::group(['prefix' => 'settings'], function () {
     Route::post('/', function (Request $request) {
         $settings = \App\settings::find('1');
         $settings->categories = $request->categories;
+        $settings->save();
         //dd($settings);
         return redirect('admin/settings')->with('alert-success', 'Successfully saved changes');
     });
-    Route::get('/test/{str}', function ($str) {
-        $str = strtolower(trim($str));
-        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
-        $str = preg_replace('/-+/', "-", $str);
-        return $str;
+});
+
+Route::group(['prefix' => 'top-picks'], function () {
+    Route::get('/', function () {
+        $accommodations = Accomodations::all();
+        return view('admin.topPicks.all', compact('accommodations'));
     });
-    Route::get('/test', function () {
-        $stuffs = "Hotel,Resort,Guest House,Safari";
-        $array_items = explode(',', $stuffs);
-        foreach ($array_items as $item) {
-            $item = strtolower(trim($item));
-            $item = preg_replace('/[^a-z0-9-]/', '-', $item);
-            $item = preg_replace('/-+/', "-", $item);
-            echo $item;
-            echo '<br>';
+
+    Route::get('/{id}/top', function ($id) {
+        $accommodation = Accomodations::find($id);
+        
+        if ($accommodation !== null) {
+
+            if ($accommodation->top_acco == '0' OR $accommodation->top_acco == 0 OR $accommodation->top_acco == null) {
+                $accommodation->top_acco = '1';
+                $accommodation->save();
+            }
+
+            if ($accommodation->top_acco == '1') {
+                $accommodation->top_acco = '0';
+                $accommodation->save();
+            }
+
+            return redirect('admin/top-picks')->with('alert-success', 'Successfully added the accommodation to Top Accommodation');
+        } else {
+            return redirect('admin/top-picks')->with('alert-warning', 'Accommodation not found');
         }
+        
+    });
+
+    Route::get('/{id}/top/0', function ($id) {
+        $accommodation = Accomodations::find($id);
+        
+        if ($accommodation !== null) {
+            $accommodation->top_acco = '0';
+            $accommodation->save();
+
+            return redirect('admin/top-picks')->with('alert-success', 'Successfully removed from Top Accommodation');
+        } else {
+            return redirect('admin/top-picks')->with('alert-warning', 'Accommodation not found');
+        }
+        
+    });
+    Route::get('/{id}/top/1', function ($id) {
+        $accommodation = Accomodations::find($id);
+        
+        if ($accommodation !== null) {
+            $accommodation->top_acco = '1';
+            $accommodation->save();
+
+            return redirect('admin/top-picks')->with('alert-success', 'Successfully added to Top Accommodation');
+        } else {
+            return redirect('admin/top-picks')->with('alert-warning', 'Accommodation not found');
+        }
+        
+    });
+});
+
+Route::group(['prefix' => 'bills'], function () {
+    Route::get('/', function () {
+        $bills = \App\Bills::all();
+        return view('admin.bills.all', compact('bills'));
+    });
+
+    Route::get('/create', function (Request $request) {
+        if (request()->create == 'athikonly') {
+            return view('admin.bills.create');
+        } else {
+            abort(404);
+        }
+    });
+
+    Route::post('/create', function (Request $request) {
+        $bill = \App\Bills::create(Input::except('_token', 'pdf_link'));
+
+        $pdf = $request->file('pdf_link');
+
+        $fileName = time() . '-' . $pdf->getClientOriginalName();
+        $location = 'bills/'.$fileName;
+
+        $s3 = \Storage::disk('s3');
+        $s3->put($location, file_get_contents($pdf), 'public');
+        
+        $bill->pdf_link = $location;
+        $bill->save();
+        
+        return redirect()->back()->with('alert-success', 'Successfully added new bill');
     });
 });

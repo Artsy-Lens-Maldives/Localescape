@@ -22,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
             $categories = explode(',', $settings->categories);
             $view->with('categories', $categories);
         });
+        View::composer('partials.admin-sidebar', function ($view) {
+            $approve_count = \App\Accomodations::where('active', '0')->count();
+            $unpaid_count = \App\Bills::where('paid', '0')->count();
+            $view->with('approve_count', $approve_count)->with('unpaid_count', $unpaid_count);
+        });
     }
 
     /**

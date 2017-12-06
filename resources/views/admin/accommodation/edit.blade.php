@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span>Add New Accommodation</span>
+    <span>Add New Accommodation</span> <a href="{{ url('admin/accommodations') }}" class="btn btn-lg btn-success">Go Back</a> </h1></span>
 @endsection
 
 @section('content') 
@@ -44,12 +44,15 @@
                         <div class="form-group">
                             <label for="object-type">Switch User</label>
                             <select class="form-control" name="user_id" id="object-type">
+                                <option value="0"
+                                @if($acco->user_id == '0')
+                                    selected
+                                @endif
+                                >Admin User</option>    
                                 @foreach($extranet_users as $user)
                                     <option value="{{ $user->id }}"
                                     @if($acco->user_id == $user->id)
                                         selected
-                                    @else
-                                        
                                     @endif
                                     >Name:{{ $user->name }} - Email:{{ $user->email }}</option>    
                                 @endforeach

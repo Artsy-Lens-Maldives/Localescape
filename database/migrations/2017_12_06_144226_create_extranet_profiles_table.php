@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExtranetsTable extends Migration
+class CreateExtranetProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +13,9 @@ class CreateExtranetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('extranets', function (Blueprint $table) {
+        Schema::create('extranet_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('profile_image')->default('extranet/default/person.jpg');
+            $table->string('profile_image')->nullable();
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
             $table->string('street')->nullable();
@@ -38,6 +35,6 @@ class CreateExtranetsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('extranets');
+        Schema::dropIfExists('extranet_profiles');
     }
 }

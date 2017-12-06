@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bills extends Model
+class Top_Picks extends Model
 {
-    protected $guarded = [];
+    //
 }

@@ -4,7 +4,7 @@
                 <h3>General</h3>
                 @if (Auth::guard('admin')->check()) 
                   <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Extranet <span class="fa fa-chevron-down"></span> <span class="label label-warning pull-right">2 Unapproved</span></a>
+                    <li><a><i class="fa fa-home"></i> Extranet <span class="fa fa-chevron-down"></span> @if($approve_count > 0) <span class="label label-warning pull-right">{{ $approve_count }} Unapproved</span> @endif</a>
                       <ul class="nav child_menu">
                         <li><a href="{{ url('admin/accommodations') }}">Accommodations</a></li>
                       </ul>
@@ -42,12 +42,12 @@
                         <li><a href="{{ url('admin/user/photo') }}">Photo Panel</a></li>
                       </ul>
                     </li>
-                    <li><a href="{{ url('admin/bills') }}"><i class="fa fa-credit-card"></i> Bills and Fees <span class="label label-danger pull-right">2 Due</span></a></li>
+                    <li><a href="{{ url('admin/bills') }}"><i class="fa fa-credit-card"></i> Bills and Fees @if($unpaid_count > 0) <span class="label label-danger pull-right">{{ $unpaid_count }} Due</span> @endif</a></li>
                     <li><a><i class="fa fa-cogs"></i> Admin Features <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="{{ url('admin/gallery') }}"><i class="fa fa-camera-retro"></i> Gallery</a></li>
                         <li><a href="{{ url('admin/facilities') }}"><i class="fa fa-check"></i> Facilities</a></li>
-                        <li><a href="{{ url('admin/message') }}"><i class="fa fa-envelope"></i> Message</a></li>
+                        <!--<li><a href="{{ url('admin/message') }}"><i class="fa fa-envelope"></i> Message</a></li>-->
                         <li><a href="{{ url('admin/top-picks') }}"><i class="fa fa-certificate"></i> Top Picks</a></li>
                         <li><a href="{{ url('admin/settings') }}"><i class="fa fa-cog"></i> Settings</a></li>
                       </ul>

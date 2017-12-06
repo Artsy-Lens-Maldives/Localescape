@@ -165,256 +165,113 @@
                     <h2>Top Accommodations</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                            <div class="item-wrapper">
-                                <div class="image">
-                                    <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
-                                    <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                    <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
-                                    <a href="detail.html" class="wrapper">
-                                        <div class="gallery">
-                                            <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
+                    @if(!$top_picks->isempty())
+                        @foreach($top_picks as $accommodation)
+                            <div class="col-md-3 col-sm-6">
+                                <div class="item big equal-height" data-map-latitude="{{ $accommodation->latitude }}" data-map-longitude="{{ $accommodation->longtitude }}" data-id="1">
+                                    <div class="item-wrapper">
+                                        <div class="image">
+                                            <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
+                                            <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
+                                            @if($accommodation->top_acco == "1")
+                                                <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
+                                            @endif
+                                            <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="wrapper">
+                                                @foreach($accommodation->photos as $photo)
+                                                    @if($photo->main == '1')
+                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
+                                                    @else
+                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
+                                                    @endif
+                                                @endforeach
+                                            </a>
+                                            <div class="owl-navigation"></div>
+                                            <!--end owl-navigation-->
                                         </div>
-                                    </a>
-                                    <div class="owl-navigation"></div>
-                                    <!--end owl-navigation-->
-                                </div>
-                                <!--end image-->
-                                <div class="description">
-                                    <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
-                                        <span><i class="fa fa-bed"></i>365</span>
-                                    </div>
-                                    <div class="info">
-                                        <figure class="label label-info">Hotel</figure>
-                                        <a href="detail.html"><h3>Spring Hotel</h3></a>
-                                        <figure class="location">Montenegro</figure>
-                                    </div>
-                                </div>
-                                <!--end description-->
-                                <div class="map-item">
-                                    <button class="btn btn-close"><i class="fa fa-close"></i></button>
-                                    <div class="map-wrapper"></div>
-                                </div>
-                                <!--end map-item-->
-                            </div>
-                        </div>
-                        <!--end item-->
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                            <div class="item-wrapper">
-                                <div class="image">
-                                    <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
-                                    <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                    <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
-                                    <a href="detail.html" class="wrapper">
-                                        <div class="gallery">
-                                            <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
+                                        <!--end image-->
+                                        <div class="description">
+                                            <div class="info">
+                                                <figure class="label label-info">{{ Helper::un_slug_gen($accommodation->type) }}</figure>
+                                                <a href="{{ url()->current() }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
+                                            </div>
                                         </div>
-                                    </a>
-                                    <div class="owl-navigation"></div>
-                                    <!--end owl-navigation-->
-                                </div>
-                                <!--end image-->
-                                <div class="description">
-                                    <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
-                                        <span><i class="fa fa-bed"></i>365</span>
-                                    </div>
-                                    <div class="info">
-                                        <figure class="label label-info">Hotel</figure>
-                                        <a href="detail.html"><h3>Spring Hotel</h3></a>
-                                        <figure class="location">Montenegro</figure>
-                                    </div>
-                                </div>
-                                <!--end description-->
-                                <div class="map-item">
-                                    <button class="btn btn-close"><i class="fa fa-close"></i></button>
-                                    <div class="map-wrapper"></div>
-                                </div>
-                                <!--end map-item-->
-                            </div>
-                        </div>
-                        <!--end item-->
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                            <div class="item-wrapper">
-                                <div class="image">
-                                    <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
-                                    <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                    <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
-                                    <a href="detail.html" class="wrapper">
-                                        <div class="gallery">
-                                            <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
+                                        <!--end description-->
+                                        <div class="map-item">
+                                            <button class="btn btn-close"><i class="fa fa-close"></i></button>
+                                            <div class="map-wrapper"></div>
                                         </div>
-                                    </a>
-                                    <div class="owl-navigation"></div>
-                                    <!--end owl-navigation-->
-                                </div>
-                                <!--end image-->
-                                <div class="description">
-                                    <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
-                                        <span><i class="fa fa-bed"></i>365</span>
-                                    </div>
-                                    <div class="info">
-                                        <figure class="label label-info">Hotel</figure>
-                                        <a href="detail.html"><h3>Spring Hotel</h3></a>
-                                        <figure class="location">Montenegro</figure>
+                                        <!--end map-item-->
                                     </div>
                                 </div>
-                                <!--end description-->
-                                <div class="map-item">
-                                    <button class="btn btn-close"><i class="fa fa-close"></i></button>
-                                    <div class="map-wrapper"></div>
-                                </div>
-                                <!--end map-item-->
-                            </div>
-                        </div>
-                        <!--end item-->
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                            <div class="item-wrapper">
-                                <div class="image">
-                                    <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
-                                    <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                    <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
-                                    <a href="detail.html" class="wrapper">
-                                        <div class="gallery">
-                                            <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
-                                        </div>
-                                    </a>
-                                    <div class="owl-navigation"></div>
-                                    <!--end owl-navigation-->
-                                </div>
-                                <!--end image-->
-                                <div class="description">
-                                    <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
-                                        <span><i class="fa fa-bed"></i>365</span>
-                                    </div>
-                                    <div class="info">
-                                        <figure class="label label-info">Hotel</figure>
-                                        <a href="detail.html"><h3>Spring Hotel</h3></a>
-                                        <figure class="location">Montenegro</figure>
-                                    </div>
-                                </div>
-                                <!--end description-->
-                                <div class="map-item">
-                                    <button class="btn btn-close"><i class="fa fa-close"></i></button>
-                                    <div class="map-wrapper"></div>
-                                </div>
-                                <!--end map-item-->
-                            </div>
-                        </div>
-                        <!--end item-->
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <a href="#" class="advertising-banner equal-height">
-                            <span class="banner-badge">Advertising</span>
-                            <img src="https://via.placeholder.com/555x333?text=Add Advertisments Here" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                            <div class="item-wrapper">
-                                <div class="image">
-                                    <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
-                                    <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                    <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
-                                    <a href="detail.html" class="wrapper">
-                                        <div class="gallery">
-                                            <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
-                                        </div>
-                                    </a>
-                                    <div class="owl-navigation"></div>
-                                    <!--end owl-navigation-->
-                                </div>
-                                <!--end image-->
-                                <div class="description">
-                                    <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
-                                        <span><i class="fa fa-bed"></i>365</span>
-                                    </div>
-                                    <div class="info">
-                                        <figure class="label label-info">Hotel</figure>
-                                        <a href="detail.html"><h3>Spring Hotel</h3></a>
-                                        <figure class="location">Montenegro</figure>
-                                    </div>
-                                </div>
-                                <!--end description-->
-                                <div class="map-item">
-                                    <button class="btn btn-close"><i class="fa fa-close"></i></button>
-                                    <div class="map-wrapper"></div>
-                                </div>
-                                <!--end map-item-->
-                            </div>
-                        </div>
-                        <!--end item-->
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item big equal-height" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                            <div class="item-wrapper">
-                                <div class="image">
-                                    <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
-                                    <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                    <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
-                                    <a href="detail.html" class="wrapper">
-                                        <div class="gallery">
-                                            <img src="https://via.placeholder.com/273x208?text=Main%20Image" alt="">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%201">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%202">
-                                            <img src="#" class="owl-lazy" alt="" data-src="https://via.placeholder.com/273x208?text=image%203">
-                                        </div>
-                                    </a>
-                                    <div class="owl-navigation"></div>
-                                    <!--end owl-navigation-->
-                                </div>
-                                <!--end image-->
-                                <div class="description">
-                                    <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
-                                        <span><i class="fa fa-bed"></i>365</span>
-                                    </div>
-                                    <div class="info">
-                                        <figure class="label label-info">Hotel</figure>
-                                        <a href="detail.html"><h3>Spring Hotel</h3></a>
-                                        <figure class="location">Montenegro</figure>
-                                    </div>
-                                </div>
-                                <!--end description-->
-                                <div class="map-item">
-                                    <button class="btn btn-close"><i class="fa fa-close"></i></button>
-                                    <div class="map-wrapper"></div>
-                                </div>
-                                <!--end map-item-->
-                            </div>
-                        </div>
-                        <!--end item-->
-                    </div>
+                                <!--end item-->
+                            </div>    
+                        @endforeach    
+                    @endif
                 </div>
                 <!--end row-->
             </div>
             <!--end container-->
+        </div>
+        <!--end block-->
+        
+        <!-- HR TAG -->
+        <div class="container"><hr/></div>
+        <!-- HR TAG -->
+
+        <!--Features-section -->
+        <div class="block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature">
+                            <aside class="circle">
+                                <i class="icon_house_alt"></i>
+                            </aside>
+                            <figure>
+                                <h3>200+ Accommodations</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
+                                    Donec id nulla nisl.
+                                </p>
+                            </figure>
+                        </div>
+                        <!--end feature-->
+                    </div>
+                    <!--end col-md-4-->
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature">
+                            <aside class="circle">
+                                <i class="icon_box-checked"></i>
+                            </aside>
+                            <figure>
+                                <h3>Easy Booking System</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
+                                    Donec id nulla nisl.
+                                </p>
+                            </figure>
+                        </div>
+                        <!--end feature-->
+                    </div>
+                    <!--end col-md-4-->
+                    <div class="col-md-4 col-sm-4">
+                        <div class="feature">
+                            <aside class="circle">
+                                <i class="icon_headphones"></i>
+                            </aside>
+                            <figure>
+                                <h3>Great Support</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
+                                    Donec id nulla nisl.
+                                </p>
+                            </figure>
+                        </div>
+                        <!--end feature-->
+                    </div>
+                    <!--end col-md-4-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end container-->
+            <div class="space"></div>
         </div>
         <!--end block-->
 
@@ -672,68 +529,34 @@
         </div>
         <!--end block-->
 
-        <!--Features-section -->
-        <div class="block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <div class="feature">
-                            <aside class="circle">
-                                <i class="icon_house_alt"></i>
-                            </aside>
-                            <figure>
-                                <h3>200+ Accommodations</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
-                                </p>
-                            </figure>
+        <!-- subscribe-section -->        
+        <div class="container">
+            <div class="block">
+                <form class="marketing-form">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="form-group-inline vertical-align-middle no-margin">
+                                <div class="form-group">
+                                    <h3 class="font-color-white no-margin"> Subscribe to recivie exclusive deals</h3>
+                                    <p class="font-color-white no-margin">Secret Deals – for our subscribers only</p>
+                                </div>
+                                <div class="form-group width-50">
+                                    <input type="email" class="form-control input-dark" name="location" placeholder="Your email">
+                                </div>
+                            </div>
                         </div>
-                        <!--end feature-->
                     </div>
-                    <!--end col-md-4-->
-                    <div class="col-md-4 col-sm-4">
-                        <div class="feature">
-                            <aside class="circle">
-                                <i class="icon_box-checked"></i>
-                            </aside>
-                            <figure>
-                                <h3>Easy Booking System</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
-                                </p>
-                            </figure>
-                        </div>
-                        <!--end feature-->
-                    </div>
-                    <!--end col-md-4-->
-                    <div class="col-md-4 col-sm-4">
-                        <div class="feature">
-                            <aside class="circle">
-                                <i class="icon_headphones"></i>
-                            </aside>
-                            <figure>
-                                <h3>Great Support</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
-                                </p>
-                            </figure>
-                        </div>
-                        <!--end feature-->
-                    </div>
-                    <!--end col-md-4-->
-                </div>
-                <!--end row-->
+                </form>
+                <div class="bg color default"></div>
             </div>
-            <!--end container-->
-            <div class="space"></div>
         </div>
-        <!--end block-->
+        <!--end block-->        
 
         <!-- Tip-for-a-trip-section -->
         <div class="block">
             <div class="container">
                 <div class="title">
-                    <h2 class="center">Tip For a Trip</h2>
+                    <h2 class="center">Blog Posts</h2>
                 </div>
                 <!--end title-->
                 <div class="gallery-carousel">
@@ -801,185 +624,7 @@
                 <!--end gallery-carousel-->
             </div>
             <!--end container-->
-            <div class="bg opacity-30">
-                <img src="assets/img/bg-map.jpg" alt="">
-            </div>
         </div>
         <!--end block-->
 
-        <!-- subscribe-section -->        
-        <div class="container">
-            <div class="block">
-                <form class="marketing-form">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="form-group-inline vertical-align-middle no-margin">
-                                <div class="form-group">
-                                    <h3 class="font-color-white no-margin"> Save up to 50% off your next trip</h3>
-                                    <p class="font-color-white no-margin">Secret Deals – for our subscribers only</p>
-                                </div>
-                                <div class="form-group width-50">
-                                    <input type="email" class="form-control input-dark" name="location" placeholder="Your email">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="bg color default"></div>
-            </div>
-        </div>
-        <!--end block-->
-
-        <!-- Our-Picks-section -->
-        <div class="block">
-            <div class="container">
-                <div class="title">
-                    <h2>Our Picks</h2>
-                </div>
-                <!--end title-->
-                <div class="grid masonry">
-                    <div class="grid-item">
-                        <a href="#">
-                            <h3>Switzerland</h3>
-                            <img src="assets/img/items/pick-01.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="grid-item">
-                        <a href="#">
-                            <h3>Prague</h3>
-                            <img src="assets/img/items/pick-02.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="grid-item grid-item--width2">
-                        <a href="#">
-                            <h3>Norway</h3>
-                            <img src="assets/img/items/pick-03.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="grid-item grid-item--width2">
-                        <a href="#">
-                            <h3>Machu Picchu</h3>
-                            <img src="assets/img/items/pick-04.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="grid-item">
-                        <a href="#">
-                            <h3>Tuscany</h3>
-                            <img src="assets/img/items/pick-05.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end block-->
-
-        <!-- HR TAG -->
-        <div class="container"><hr/></div>
-        <!-- HR TAG -->
-
-        <!-- Favorite-Destinations-section -->
-        <div class="block">
-            <div class="container">
-                <div class="title">
-                    <h2>Favorite Destinations</h2>
-                </div>
-                <!--end title-->
-               <ul class="list-links">
-                   <li><a href="#">Tenerife<span>23</span></a></li>
-                   <li><a href="#">Al Madinah<span>12</span></a></li>
-                   <li><a href="#">Koh Samui<span>76</span></a></li>
-                   <li><a href="#">Cotswolds<span>52</span></a></li>
-                   <li><a href="#">Lake District<span>63</span></a></li>
-                   <li><a href="#">Cornwall<span>15</span></a></li>
-                   <li><a href="#">Algarve<span>19</span></a></li>
-                   <li><a href="#">Ibiza<span>90</span></a></li>
-                   <li><a href="#">New Forest<span>57</span></a></li>
-                   <li><a href="#">Phuket Province<span>82</span></a></li>
-                   <li><a href="#">Loch Lomond<span>24</span></a></li>
-                   <li><a href="#">Gran Canaria<span>23</span></a></li>
-                   <li><a href="#">Majorca<span>33</span></a></li>
-                   <li><a href="#">Isle of Wight<span>74</span></a></li>
-                   <li><a href="#">Jersey<span>51</span></a></li>
-                   <li><a href="#">Isle of Man<span>23</span></a></li>
-                   <li><a href="#">Santoríni<span>36</span></a></li>
-                   <li><a href="#">Mykonos<span>55</span></a></li>
-                   <li><a href="#">Lanzarote<span>78</span></a></li>
-                   <li><a href="#">Bali<span>17</span></a></li>
-               </ul>
-                <!--end list-links-->
-            </div>
-            <!--end container-->
-        </div>
-        <!--end block-->
-
-        <!-- HR TAG -->
-        <div class="container"><hr/></div>
-        <!-- HR TAG -->
-
-        <!-- Latest-Reviews-section -->
-        <div class="container">
-            <div class="block">
-                <div class="title">
-                    <h2>Reviews</h2>
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3">
-                            <div class="review-single">
-                                <a href="detail.html#reviews"><h3>White Doe Inn</h3></a>
-                                <figure class="location">Austria</figure>
-                                <div class="rating"><i class="fa fa-star"></i>8.9</div>
-                                <p>Donec bibendum at neque pellentesque viverra. Fusce rhoncus elementum commodo.
-                                    In ac nibh nec turpis finibus eleme
-                                </p>
-                                <a href="detail.html#reviews" class="link icon">Full Review<i class="arrow_right"></i></a>
-                            </div>
-                            <!--end review-->
-                        </div>
-                        <!--end col-md-3-->
-                        <div class="col-md-3 col-sm-3">
-                            <div class="review-single">
-                                <a href="detail.html#reviews"><h3>Mountain Valley Motel</h3></a>
-                                <figure class="location">Scotland</figure>
-                                <div class="rating"><i class="fa fa-star"></i>9.3</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae odio ac dui
-                                    fermentum tempus. Phasellus sit amet
-                                </p>
-                                <a href="detail.html#reviews" class="link icon">Full Review<i class="arrow_right"></i></a>
-                            </div>
-                            <!--end review-->
-                        </div>
-                        <!--end col-md-3-->
-                        <div class="col-md-3 col-sm-3">
-                            <div class="review-single">
-                                <a href="detail.html#reviews"><h3>Camp Shoresh</h3></a>
-                                <figure class="location">France</figure>
-                                <div class="rating"><i class="fa fa-star"></i>9.6</div>
-                                <p>Sed posuere nunc sit amet arcu rutrum porttitor. Quisque ut ante lacus. Fusce a
-                                    lacus fermentum ante iaculis convallis
-                                </p>
-                                <a href="detail.html#reviews" class="link icon">Full Review<i class="arrow_right"></i></a>
-                            </div>
-                            <!--end review-->
-                        </div>
-                        <!--end col-md-3-->
-                        <div class="col-md-3 col-sm-3">
-                            <div class="review-single">
-                                <a href="detail.html#reviews"><h3>Primal Court Resort</h3></a>
-                                <figure class="location">Switzerland</figure>
-                                <div class="rating"><i class="fa fa-star"></i>9.4</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae odio ac dui fermentum tempus.
-                                </p>
-                                <a href="detail.html#reviews" class="link icon">Full Review<i class="arrow_right"></i></a>
-                            </div>
-                            <!--end review-->
-                        </div>
-                        <!--end col-md-3-->
-                    </div>
-                    <!--end row-->
-                </div>
-                <!--end title-->
-                <div class="bg color white"></div>
-            </div>
-            <!--end container-->
-        </div>
-        <!--end block-->
 @endsection

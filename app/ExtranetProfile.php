@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bills extends Model
+class ExtranetProfile extends Model
 {
-    protected $guarded = [];
+    //
 }

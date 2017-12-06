@@ -24,7 +24,7 @@
                                     <section>
                                         <h3>Profile Picture</h3>
                                         <div id="profile-picture" class="profile-picture single-file-preview">
-                                            <img src="/assets/img/person-01.jpg" alt="" class="image">
+                                            <img src="{{ Helper::s3_url_gen($users->profile_image) }}" alt="" class="image">
                                             <div class="input">
                                                 <input name="file" type="file" class="">
                                                 <span>Click to upload a picture</span>
@@ -42,7 +42,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="Jane Doe">
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -50,7 +50,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input type="email" class="form-control" id="email" name="email" value="janedoe@example.com">
+                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $users->email }}">
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -58,7 +58,10 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="mobile">Mobile</label>
-                                                    <input type="text" class="form-control" id="mobile" name="mobile" pattern="\d*" value="903-675-5323">
+                                                    <input type="text" class="form-control" id="mobile" name="mobile" 
+                                                    @if($users->mobile !== null)
+                                                        value="{{ $users->mobile }}"
+                                                    @endif>
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -66,7 +69,10 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="phone">Phone</label>
-                                                    <input type="text" class="form-control" id="phone" name="phone" pattern="\d*" value="(0)123 456 7890">
+                                                    <input type="text" class="form-control" id="phone" name="phone" 
+                                                    @if($users->phone !== null)
+                                                        value="{{ $users->phone }}"
+                                                    @endif>
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -75,21 +81,14 @@
                                     </section>
                                     <section>
                                         <h3>Address</h3>
-                                        <div class="form-group">
-                                            <label for="state">State</label>
-                                            <input type="text" class="form-control" id="state" name="state" value="Male">
-                                        </div>
-                                        <!--end form-group-->
-                                        <div class="form-group">
-                                            <label for="city">City</label>
-                                            <input type="text" class="form-control" id="city" name="city" value="Male">
-                                        </div>
-                                        <!--end form-group-->
                                         <div class="row">
                                             <div class="col-md-8 col-sm-8">
                                                 <div class="form-group">
                                                     <label for="street">Street</label>
-                                                    <input type="text" class="form-control" id="street" name="street" value="Male Magu">
+                                                    <input type="text" class="form-control" id="street" name="street" value="Male Magu"
+                                                    @if($users->street !== null)
+                                                        value="{{ $users->street }}"
+                                                    @endif>
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -97,26 +96,41 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <div class="form-group">
                                                     <label for="zip">ZIP</label>
-                                                    <input type="text" class="form-control" id="zip" name="zip" pattern="\d*" value="23020">
+                                                    <input type="text" class="form-control" id="zip" name="zip"
+                                                    @if($users->zip !== null)
+                                                        value="{{ $users->mobile }}"
+                                                    @endif>
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
                                         </div>
-                                        <!--end col-md-3-->
                                         <div class="form-group">
-                                            <label for="additional-address">Additional Address Line</label>
-                                            <input type="text" class="form-control" id="additional-address" name="additional-address">
+                                            <label for="additional_address">Additional Address Line</label>
+                                            <input type="text" class="form-control" id="additional_address" name="additional_address"
+                                            @if($users->additional_address !== null)
+                                                value="{{ $users->additional_address }}"
+                                            @endif>
                                         </div>
-                                        <!--end form-group-->
-                                    </section>
-                                    <section>
-                                        <h3>About Me</h3>
                                         <div class="form-group">
-                                            <label for="about-me">Some Words About Me</label>
-                                            <div class="form-group">
-                                                <textarea class="form-control" id="about-me" rows="3" name="about-me" required></textarea>
-                                            </div>
-                                            <!--end form-group-->
+                                            <label for="state">State</label>
+                                            <input type="text" class="form-control" id="state" name="state" value="Male"
+                                            @if($users->state !== null)
+                                                value="{{ $users->state }}"
+                                            @endif>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="city">City</label>
+                                            <input type="text" class="form-control" id="city" name="city" value="Male"
+                                            @if($users->city !== null)
+                                                value="{{ $users->city }}"
+                                            @endif>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <input type="text" class="form-control" id="country" name="country"
+                                            @if($users->country !== null)
+                                                value="{{ $users->country }}"
+                                            @endif>
                                         </div>
                                         <!--end form-group-->
                                     </section>
