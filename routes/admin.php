@@ -108,6 +108,7 @@ Route::group(['prefix' => 'accommodations'], function () {
     });
     Route::post('/edit/{id}', function ($id, Request $request) {
         $acco = Accomodations::find($id);
+        $acco->user_id = $request->user_id;
         $acco->title = $request->title;
         $acco->type = $request->type;
         $acco->description = $request->description;

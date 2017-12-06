@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.extranet')
 
 @section('content')
 
@@ -6,7 +6,8 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">{{ Helper::un_slug_gen($type) }}</a></li>
+                <li><a href="#">Extranet</a></li>
+                <li><a href="#">Preview</a></li>
                 <li class="active">{{ $accommodation->title }}</li>
             </ol>
             <!--end breadcrumb-->
@@ -394,40 +395,10 @@
             <!--end row-->
         </div>
         <!--end container-->
-
-    <div>
-        <?php
-            $watch_count = rand(-100,100);
-            $booking_count = rand(-100,100);
-            $watch_counts = rand(-100,100);
-        ?>  
-        @if($watch_count > 0)
-            <div class="message-popup bottom-left" data-show-after-time="2000" data-close-after-time="10000">
-                <div class="close"><i class="fa fa-times"></i></div>
-                <p>{{ $watch_count }} people are watching this accommodation.</p>
-            </div>
-        @endif
-
-        @if($booking_count > 0)
-            <div class="message-popup bottom-left featured" data-show-after-time="4000" data-close-after-time="10000">
-                <div class="close"><i class="fa fa-times"></i></div>
-                <div class="title">Just Booked!</div>
-                <p>Hurry up! This accommodation was just booked. Don’t miss the chance!</p>
-            </div>
-        @endif
-        
-        @if($watch_counts > 0)
-            <div class="message-popup bottom-left" data-show-after-time="5000" data-close-after-time="10000">
-                <div class="close"><i class="fa fa-times"></i></div>
-                <p>Last booking was from <strong>{{ $country }}</strong></p>
-            </div>
-        @endif
-
-    </div>
     
 @endsection
 
-@section('js-after')
+@section('js')
 <script async defer type="text/javascript">
 !function(e){function t(n){if(o[n])return o[n].exports;var i=o[n]={i:n,l:!1,exports:{}};return e[n].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var o={};return t.m=e,t.c=o,t.d=function(e,o,n){t.o(e,o)||Object.defineProperty(e,o,{configurable:!1,enumerable:!0,get:n})},t.n=function(e){var o=e&&e.__esModule?function(){return e["default"]}:function(){return e};return t.d(o,"a",o),o},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,o){o(1),e.exports=o(2)},function(e,t){function o(e,t,o,a){a||(a=!1);var l=new google.maps.LatLng(e,t),r={zoom:16,center:l,disableDefaultUI:!0,scrollwheel:!0,styles:s},c=document.getElementById(o),d=new google.maps.Map(c,r),u=new MarkerWithLabel({position:new google.maps.LatLng(e,t),map:d,icon:"/assets/img/marker.png",labelAnchor:new google.maps.Point(50,0),draggable:a});google.maps.event.addListener(u,"mouseup",function(e){this.position.lat(),this.position.lng();$("#latitude").val(this.position.lat()),$("#longitude").val(this.position.lng())}),i(d,u),n(e,t)}function n(e,t){if($(".weather").length){var o,n,i,s,a=new google.maps.LatLng(e,t);o=new google.maps.Geocoder,o.geocode({latLng:a},function(e,t){if(t==google.maps.GeocoderStatus.OK)if(e[0]){var o=e[0].formatted_address,a=o.split(",");count=a.length,i=a[count-1],n=a[count-2].replace(/\d+/g,""),s=a[count-3],$.simpleWeather({location:n+", "+i,woeid:"",unit:"c",success:function(e){var t='<div class="left"><i class="icon-'+e.code+'"></i><span>'+e.temp+"&deg;"+e.units.temp+'</span></div><div class="right"><ul><li>'+e.city+", "+e.region+'</li><li class="currently">'+e.currently+"</li></ul></div>";$(".weather-detail").html(t)},error:function(e){function t(t){return e.apply(this,arguments)}return t.toString=function(){return e.toString()},t}(function(e){$(".weather-detail").html("<p>"+e+"</p>")})})}else console.log("address not found");else console.log("Geocoder failed due to: "+t)})}}function i(e,t){if($("#address-autocomplete").length){var o=function(t){e.setCenter(new google.maps.LatLng(t.coords.latitude,t.coords.longitude)),$("#latitude").val(t.coords.latitude),console.log(t.coords.latitude),$("#longitude").val(t.coords.longitude),console.log(t.coords.longitude)},n=document.getElementById("address-autocomplete"),i=new google.maps.places.Autocomplete(n);i.bindTo("bounds",e),google.maps.event.addListener(i,"place_changed",function(){var o=i.getPlace();if(o.geometry){o.geometry.viewport?e.fitBounds(o.geometry.viewport):(e.setCenter(o.geometry.location),e.setZoom(17)),t&&(t.setPosition(o.geometry.location),t.setVisible(!0),$("#latitude").val(t.getPosition().lat()),$("#longitude").val(t.getPosition().lng()));var n="";o.address_components&&(n=[o.address_components[0]&&o.address_components[0].short_name||"",o.address_components[1]&&o.address_components[1].short_name||"",o.address_components[2]&&o.address_components[2].short_name||""].join(" "))}}),$(".geo-location").on("click",function(){navigator.geolocation?($("#"+element).addClass("fade-map"),navigator.geolocation.getCurrentPosition(o)):console.log("Geo Location is not supported")})}}var s=[{featureType:"road",elementType:"geometry",stylers:[{lightness:100},{visibility:"simplified"}]},{featureType:"water",elementType:"geometry",stylers:[{visibility:"on"},{color:"#C6E2FF"}]},{featureType:"poi",elementType:"geometry.fill",stylers:[{color:"#C5E3BF"}]},{featureType:"road",elementType:"geometry.fill",stylers:[{color:"#D1D1B8"}]}];$(document).ready(function(e){"use strict";e(".item .mark-circle.map").on("click",function(){var t=e(this).closest(".item").attr("data-map-latitude"),n=e(this).closest(".item").attr("data-map-longitude"),i=e(this).closest(".item").attr("data-id");e(this).closest(".item").find(".map-wrapper").attr("id","map"+i);var s="map"+i;o(t,n,s),e(this).closest(".item").addClass("show-map"),e(this).closest(".item").find(".btn-close").on("click",function(){e(this).closest(".item").removeClass("show-map")})})});var a={{ $accommodation->latitude }},l={{ $accommodation->longitude }},r="map-item-detail";o(a,l,r)},function(e,t){}]);
 </script>

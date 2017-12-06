@@ -42,9 +42,7 @@
 <script type="text/javascript" src="/js/owl.carousel.js"></script>
 <script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
 
-@yield('js')
 
-<script type="text/javascript" src="/js/maps.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>
 
 <!--[if lte IE 9]>
@@ -60,5 +58,6 @@
     document.head.appendChild(script);
     });
 </script> -->
+@yield('js')
 </body>
 </html>

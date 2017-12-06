@@ -158,4 +158,10 @@ class AccomodationsController extends Controller
         }
     }
 
+    public function preview($id)
+    {
+        $facilities = \App\facilities::all();
+        $accommodation = Accomodations::where('id', $id)->first();
+        return view('extranet.accommodations.details', compact('accommodation', 'facilities'));
+    }
 }

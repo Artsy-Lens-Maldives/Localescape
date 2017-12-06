@@ -34,6 +34,8 @@ Route::prefix('accommodations')->group(function () {
     Route::get('/images/{id}/{accommo_photo}/main', 'AccommoPhotoController@main');
     Route::post('/images/{id}/new', 'AccommoPhotoController@store');
 
+    Route::get('/preview/{id}', 'AccomodationsController@preview');
+
     //Booking Route
     Route::get('/bookings', function () {
         return view('extranet.accommodations.bookings');
