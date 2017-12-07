@@ -38,7 +38,7 @@
                         <!--end title-->
                         
                         @if($accommodation->photos->isempty())
-                            <h4>No photos added for this Accommodation <a href="{{ url('extranet/accommodations/images') }}/{{ $accommodation->id }}" class="btn btn-lg btn-warning">Add photos</a> </h4> 
+                            <h4>No photos added for this Accommodation </h4> 
                         @else
                             <section id="gallery">
                                 <div class="gallery-detail">
@@ -105,7 +105,7 @@
                         </div>
                         <!--end row-->
                         <section id="availability">
-                            <h2>Availability</h2>
+                            <h2>Availability</h2> <a class="btn btn-lg btn-info" href="http://127.0.0.1:8000/booking/?accommodation=1&room=1&check_in=12%2F21%2F2017&check_out=12%2F25%2F2017&adults=2&child=1"> Room rate calculation Test Link for yaniu, Add a room and room photo first </a>
                             <form class="labels-uppercase" id="form-availability">
                                 <div class="row">
                                     <div class="col-md-3">
@@ -135,7 +135,7 @@
 
                             <div class="form-reservations">
                                 @if($accommodation->rooms->isempty())
-                                    <h4>No Rooms added for this Accommodation <a href="{{ url('extranet/rooms/images') }}/{{ $accommodation->id }}" class="btn btn-lg btn-warning">Add room(s)</a> </h4> 
+                                    <h4>No Rooms added for this Accommodation </h4> 
                                 @else
                                     <div class="table-responsive">
                                         <table class="table">
@@ -221,7 +221,7 @@
                         </section>
                         <section id="reviews">
                             <div class="title">
-                                <h2 class="pull-left">Reviews (These are sample reviews for the accommodation)</h2>
+                                <h2 class="pull-left">Reviews</h2>
                                 <a href="#write-a-review" class="btn btn-primary btn-rounded pull-right scroll">Write a Review</a>
                             </div>
                             <h3>Overall Score</h3>

@@ -22,6 +22,13 @@
             <div class="panel panel-success">
                 <div class="panel-heading">Add Accommodation Photos</div>
                 <div class="panel-body">
+                    <div class="row">
+                        @if($acco->photos->count() < 15)
+                            <div class="col-md-12">
+                                <div class="alert alert-info">Try adding atleast 15 photos to your accommodation, Now added {{ $acco->photos->count() }} of 15 Photos</div>
+                            </div>
+                        @endif
+                    </div>
                     <section id="gallery">
                         <form action="{{ url()->current() }}/new" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
@@ -64,6 +71,13 @@
                     <div class="panel-heading">Add Room Photos</div>
                     <div class="panel-body">
                         @foreach($acco->rooms as $room)
+                            <div class="row">
+                                @if($room->photos->count() < 4)
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info">Try adding atleast 15 photos to your room, Now added {{ $room->photos->count() }} of 4 Photos</div>
+                                    </div>
+                                @endif
+                            </div>
                             <div>
                                 <section id="gallery">
                                     <form action="{{ url()->current() }}/room/{{ $room->id }}" method="post" enctype="multipart/form-data">

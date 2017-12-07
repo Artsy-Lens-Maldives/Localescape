@@ -1,0 +1,169 @@
+@extends('layouts.app')
+
+@section('content')
+
+
+<div class="container">
+<br>
+<center><h2>Booking Form</h2></center>
+<br>
+      <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            
+            @endif
+        @endforeach
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form class="form-horizontal" action="{{ url('booking/create/success') }}" method="POST">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Full Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Email</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control" id="email" placeholder="Email" name="email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Check in date</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control" id="checkin" placeholder="Check In Time" name="checkin">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Check out date</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control" id="checkout" placeholder="Check Out Time" name="checkout">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Estimated Time Arrival</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control" id="eta" placeholder="Check Out Time" name="eta">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Flight Number</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control" id="flightnumber" placeholder="Flight Number" name="flightnumber">
+                  </div>
+                </div>
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="form-group">        
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="panel panel-success">
+            <div class="panel-heading">Booking Summary</div>
+            <div class="panel-body">
+              <h3><strong>{{ $room->room_type }}</strong><h3>
+              <img src="{{ Helper::s3_url_gen($room_photo->thumbnail) }}" class="img-responsive img-thumbnail" alt="{{ $room->room_type }} image">
+              <hr>
+              <h4>Booking info</h4>
+              <ul>
+                <li>
+                  <div class="info">
+                    Check In:
+                  </div>
+                  <div class="value">
+                    {{ $check_in->format('d/m/Y') }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    Check Out:
+                  </div>
+                  <div class="value">
+                    {{ $check_out->format('d/m/Y') }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    Nights:
+                  </div>
+                  <div class="value">
+                    {{ $days }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    Adults:
+                  </div>
+                  <div class="value">
+                    {{ $adults }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    Child:
+                  </div>
+                  <div class="value">
+                    {{ $child }}
+                  </div>
+                </li>
+              </ul>
+              <hr>
+              <h4>Room info</h4>
+              <ul>
+                <li>
+                  <div class="info">
+                    Total Adult: ${{ $room->price_adult }} X {{ $adults }}
+                  </div>
+                  <div class="value">
+                    ${{ $tp_adult }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    Total Child: ${{ $room->price_child }} X {{ $child }}
+                  </div>
+                  <div class="value">
+                    ${{ $tp_child }}
+                  </div>
+                </li>
+              </ul>
+              <hr>
+              <h4>Total Cost</h4>
+              <ul>
+                <li>
+                  <div class="info">
+                    Total
+                  </div>
+                  <div class="value">
+                    ${{ $total }}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('css')
+<style>
+.info {
+  float: left;
+}
+.value {
+  float: right;
+  font-weight: bold;
+}
+</style>
+@endsection

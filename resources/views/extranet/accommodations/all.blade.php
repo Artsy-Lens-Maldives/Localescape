@@ -49,7 +49,7 @@
                                 <a style="margin:1px" class="btn btn-warning" href="/extranet/accommodations/edit/{{ $acco->id }}">Edit</a>
                                 <a style="margin:1px" class="btn btn-info" href="/extranet/accommodations/rooms/{{ $acco->id }}">Rooms</a>
                                 <a style="margin:1px" class="btn btn-success" href="/extranet/accommodations/images/{{ $acco->id }}">Images</a>
-                                <a style="margin:1px" class="btn btn-success" href="/extranet/accommodations/preview/{{ $acco->id }}">Preview</a>
+                                <a style="margin:1px" class="btn btn-primary" href="/extranet/accommodations/preview/{{ $acco->id }}">Preview</a>
                             </td>
                         </tr>
 

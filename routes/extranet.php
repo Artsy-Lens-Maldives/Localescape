@@ -47,8 +47,8 @@ Route::prefix('accommodations')->group(function () {
             }
             //File names and location
             $fileName = $room->room_type.'-'.time().'-'.$photo->getClientOriginalName();
-            $location_o = $accommodations->type.'/'.$accommodations->slug.'/rooms'.$room->room_type.'/original'.'/'.$fileName;
-            $location_t = $accommodations->type.'/'.$accommodations->slug.'/rooms'.$room->room_type.'/thumbnail'.'/'.$fileName;
+            $location_o = $accommodations->type.'/'.$accommodations->slug.'/rooms'.'/'.$room->room_type.'/original'.'/'.$fileName;
+            $location_t = $accommodations->type.'/'.$accommodations->slug.'/rooms'.'/'.$room->room_type.'/thumbnail'.'/'.$fileName;
             
             $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
 

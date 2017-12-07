@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span>Top Picks</span> 
+    <span>Bills</span> 
     @if(app('request')->input('create') == 'athikonly')
         <a class="btn btn-success" href="{{ url()->current() }}/create?create=athikonly">Create Bill</a>     
     @endif
