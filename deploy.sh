@@ -1,7 +1,6 @@
 #!/bin/sh
 cd /var/www/laravel/Localescape
-git fetch --all
-git pull origin master
+git pull
 composer install --optimize-autoloader
 composer update
 npm run production
