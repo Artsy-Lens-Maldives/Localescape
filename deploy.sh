@@ -1,5 +1,4 @@
 #!/bin/sh
-cd /var/www/laravel/Localescape
 git pull
 composer install --optimize-autoloader
 composer update
