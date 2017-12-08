@@ -156,57 +156,58 @@ Route::get('/blog', function () {
 
 //Auth Routes (start)
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'extranet'], function () {
-    Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm')->name('login');
+    Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm');
     Route::post('/login', 'ExtranetAuth\LoginController@login');
-    Route::post('/logout', 'ExtranetAuth\LoginController@logout')->name('logout');
+    Route::post('/logout', 'ExtranetAuth\LoginController@logout');
 
-    Route::get('/register', 'ExtranetAuth\RegisterController@showRegistrationForm')->name('register');
+    Route::get('/register', 'ExtranetAuth\RegisterController@showRegistrationForm');
     Route::post('/register', 'ExtranetAuth\RegisterController@register');
 
-    Route::post('/password/email', 'ExtranetAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-    Route::post('/password/reset', 'ExtranetAuth\ResetPasswordController@reset')->name('password.email');
-    Route::get('/password/reset', 'ExtranetAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+    Route::post('/password/email', 'ExtranetAuth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('/password/reset', 'ExtranetAuth\ResetPasswordController@reset');
+    Route::get('/password/reset', 'ExtranetAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'ExtranetAuth\ResetPasswordController@showResetForm');
 });
 Route::group(['prefix' => 'admin'], function () {
-  Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
+  Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
   Route::post('/login', 'AdminAuth\LoginController@login');
-  Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+  Route::get('/logout', 'AdminAuth\LoginController@logout');
 
-  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
   Route::post('/register', 'AdminAuth\RegisterController@register');
 
-  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
+  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 });
 Route::group(['prefix' => 'divepackage'], function () {
-    Route::get('/login', 'DivepackageAuth\LoginController@showLoginForm')->name('login');
+    Route::get('/login', 'DivepackageAuth\LoginController@showLoginForm');
     Route::post('/login', 'DivepackageAuth\LoginController@login');
-    Route::post('/logout', 'DivepackageAuth\LoginController@logout')->name('logout');
+    Route::post('/logout', 'DivepackageAuth\LoginController@logout');
 
-    Route::get('/register', 'DivepackageAuth\RegisterController@showRegistrationForm')->name('register');
+    Route::get('/register', 'DivepackageAuth\RegisterController@showRegistrationForm');
     Route::post('/register', 'DivepackageAuth\RegisterController@register');
 
-    Route::post('/password/email', 'DivepackageAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-    Route::post('/password/reset', 'DivepackageAuth\ResetPasswordController@reset')->name('password.email');
-    Route::get('/password/reset', 'DivepackageAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+    Route::post('/password/email', 'DivepackageAuth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('/password/reset', 'DivepackageAuth\ResetPasswordController@reset');
+    Route::get('/password/reset', 'DivepackageAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'DivepackageAuth\ResetPasswordController@showResetForm');
 });
 Route::group(['prefix' => 'photopackage'], function () {
-    Route::get('/login', 'PhotopackageAuth\LoginController@showLoginForm')->name('login');
+    Route::get('/login', 'PhotopackageAuth\LoginController@showLoginForm');
     Route::post('/login', 'PhotopackageAuth\LoginController@login');
-    Route::post('/logout', 'PhotopackageAuth\LoginController@logout')->name('logout');
+    Route::post('/logout', 'PhotopackageAuth\LoginController@logout');
 
-    Route::get('/register', 'PhotopackageAuth\RegisterController@showRegistrationForm')->name('register');
+    Route::get('/register', 'PhotopackageAuth\RegisterController@showRegistrationForm');
     Route::post('/register', 'PhotopackageAuth\RegisterController@register');
 
-    Route::post('/password/email', 'PhotopackageAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-    Route::post('/password/reset', 'PhotopackageAuth\ResetPasswordController@reset')->name('password.email');
-    Route::get('/password/reset', 'PhotopackageAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+    Route::post('/password/email', 'PhotopackageAuth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('/password/reset', 'PhotopackageAuth\ResetPasswordController@reset');
+    Route::get('/password/reset', 'PhotopackageAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'PhotopackageAuth\ResetPasswordController@showResetForm');
 });
 //Auth Routes (end)
@@ -245,3 +246,30 @@ Route::get('/booking', function (Request $request) {
 });
 
 //Bookings and Inquiry (end)
+
+//Mail Test URLS
+Route::group(['prefix' => 'mailTest'], function () {
+    Route::get('/customer/sign-up', function () {
+        $user = App\User::find(1);
+        
+        return new App\Mail\SignUpCustomer($user);
+    });
+
+    Route::get('/extranet/sign-up', function () {
+        $user = App\Extranet::find(1);
+        
+        return new App\Mail\SignUpExtranet($user);
+    });
+
+    Route::get('/extranet/booking', function () {
+        $user = App\Extranet::find(1);
+        
+        return new App\Mail\BookingExtranet;
+    });
+
+    Route::get('/customer/booking', function () {
+        $user = App\Extranet::find(1);
+        
+        return new App\Mail\BookingCustomer;
+    });
+});

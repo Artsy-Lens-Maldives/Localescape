@@ -6,8 +6,8 @@ body, body *:not(html):not(style):not(br):not(tr):not(code) {
 }
 
 body {
-    background-color: #f5f8fa;
-    color: #74787E;
+    background-color: #e9f7ff;
+    color: #555555;
     height: 100%;
     hyphens: auto;
     line-height: 1.4;
@@ -30,7 +30,7 @@ blockquote {
 }
 
 a {
-    color: #3869D4;
+    color: #3869d4;
 }
 
 a img {
@@ -64,7 +64,7 @@ h3 {
 }
 
 p {
-    color: #74787E;
+    color: #555555;
     font-size: 16px;
     line-height: 1.5em;
     margin-top: 0;
@@ -82,7 +82,7 @@ img {
 /* Layout */
 
 .wrapper {
-    background-color: #f5f8fa;
+    background-color: #e9f7ff;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -108,19 +108,19 @@ img {
 }
 
 .header a {
-    color: #bbbfc3;
+    color: #ffffff;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
-    text-shadow: 0 1px 0 white;
+    text-shadow: 0 1px 0 #666666;
 }
 
 /* Body */
 
 .body {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #EDEFF2;
-    border-top: 1px solid #EDEFF2;
+    background-color: #ffffff;
+    border-bottom: 1px solid #edeff2;
+    border-top: 1px solid #edeff2;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -130,7 +130,7 @@ img {
 }
 
 .inner-body {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     margin: 0 auto;
     padding: 0;
     width: 570px;
@@ -142,7 +142,7 @@ img {
 /* Subcopy */
 
 .subcopy {
-    border-top: 1px solid #EDEFF2;
+    border-top: 1px solid #edeff2;
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -164,7 +164,7 @@ img {
 }
 
 .footer p {
-    color: #AEAEAE;
+    color: #000000;
     font-size: 12px;
     text-align: center;
 }
@@ -180,12 +180,13 @@ img {
 }
 
 .table th {
-    border-bottom: 1px solid #EDEFF2;
+    color: #555555;
+    border-bottom: 1px solid #edeff2;
     padding-bottom: 8px;
 }
 
 .table td {
-    color: #74787E;
+    color: #555555;
     font-size: 15px;
     line-height: 18px;
     padding: 10px 0;
@@ -210,18 +211,18 @@ img {
 .button {
     border-radius: 3px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
-    color: #FFF;
+    color: #ffffff;
     display: inline-block;
     text-decoration: none;
     -webkit-text-size-adjust: none;
 }
 
 .button-blue {
-    background-color: #3097D1;
-    border-top: 10px solid #3097D1;
-    border-right: 18px solid #3097D1;
-    border-bottom: 10px solid #3097D1;
-    border-left: 18px solid #3097D1;
+    background-color: #3097d1;
+    border-top: 10px solid #3097d1;
+    border-right: 18px solid #3097d1;
+    border-bottom: 10px solid #3097d1;
+    border-left: 18px solid #3097d1;
 }
 
 .button-green {
@@ -247,7 +248,7 @@ img {
 }
 
 .panel-content {
-    background-color: #EDEFF2;
+    background-color: #d4eeff;
     padding: 16px;
 }
 
