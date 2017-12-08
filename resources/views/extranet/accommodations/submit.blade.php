@@ -72,7 +72,7 @@
                                 <h3>Special Offer? <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="right" title="Have a special offer? Tick here and Enter the details"></i></h3>
                                 <div class="form-group-inline vertical-align-middle">
                                     <div class="form-group">
-                                        <label class="no-margin"><input type="checkbox" value="1" name="special_offer">Special Offer</label>
+                                        <label class="no-margin"><input type="checkbox" value="0" name="special_offer">Special Offer</label>
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group width-20">
@@ -325,4 +325,14 @@
 
 <script type="text/javascript" src="/js/jQuery.MultiFile.min.js"></script>
 
+<script>
+    $(function(){
+        $(':checkbox').on('change', function() {
+            if (this.checked == true)
+                $(this).val("1"); 
+            else
+                $(this).val("0");
+        });
+    }); 
+</script>
 @endsection

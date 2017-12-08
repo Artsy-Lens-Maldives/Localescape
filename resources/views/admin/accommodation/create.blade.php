@@ -61,13 +61,18 @@
                 <!--end row-->
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Special Offer? <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="right" title="Have a special offer? Tick here and Enter the details"></i></h3>
+                        <div class="title">
+                            <h2>Special Offer </h2>
+                        </div>
                         <div class="form-group-inline vertical-align-middle">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="1" name="special_offer">Special Offer</label>
-                                    </div>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="special_offer" value="1">On
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="special_offer" value="0">Off
+                                    </label>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
@@ -90,15 +95,24 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-2">
-                                <h3>Receive Reviews <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Tick Here if you want to turn off review emails about your accommodation. (Feature Comming Soon.)"></i></h3>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" name="receive_reviews" value="1">Receive Reviews in Email</label>
+                                <div class="title">
+                                    <h3>Receive Reviews in Email</h3>
+                                </div>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="receive_reviews" value="1">On
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="receive_reviews" value="0">Off
+                                    </label>
                                 </div>
                             </div>
                                 
                             <!--end col-md-7-->
                             <div class="col-md-2">
-                                <h3>Minimum Stay <i class="fa fa-question-circle tooltip-question" data-toggle="tooltip" data-placement="top" title="Enter the minimum nights required to book your accommodation"></i></h3>
+                                <div class="title">
+                                    <h3>Minimum Stay </h3>
+                                </div>
                                 <input type="number" min="1" class="form-control" id="minimum-stay" name="minimum_stay" placeholder="2">
                             </div>
                             <!--end col-md-5-->
@@ -176,9 +190,10 @@
                 <div class="title">
                     <h2>Gallery</h2>
                 </div>
-                <div class="file-upload-previews"></div>
+                <div id="image_preview_text"></div>
+                <div id="image_preview" style="margin-top: 10px"></div>
                 <div class="file-upload">
-                    <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png">
+                    <input type="file" id="images" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" onchange="preview_images();" accept="gif|jpg|png">
                     <span>Click to add images</span>
                 </div>
             </section>
@@ -253,8 +268,16 @@
                                     <!--end form-group-->
                                 </div>
                                 <!--end form-group-inline-->
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="1" name="early_check_in">Early Check-in</label>
+                                <div class="title">
+                                    <h3>Early Check-in</h3>
+                                </div>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="early_check_in" value="1">On
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="early_check_in" value="0">Off
+                                    </label>
                                 </div>
                             </div>
                             <!--end col-md-6-->
@@ -279,8 +302,16 @@
                                     </div>
                                 </div>
                                 <!--end form-group-inline-->
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="1" name="late_check_out">Late Check-out</label>
+                                <div class="title">
+                                    <h3>Late Check-out</h3>
+                                </div>
+                                <div class="">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="late_check_out" value="1">On
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="late_check_out" value="0">Off
+                                    </label>
                                 </div>
                             </div>
                             <!--end col-md-6-->
@@ -304,6 +335,66 @@
 
 @section('js')
     
-   
+<script>
+    function preview_images() {
+        var total_file = document.getElementById("images").files.length;
+        $('#image_preview').empty();
+        $('#image_preview_text').html('<h3>Upload Preview</h3>')
+        for (var i = 0; i < total_file; i++) {
+            $('#image_preview').append("<img src='" + URL.createObjectURL(event.target.files[i]) + "'>");
+        }
+    }
+</script>
 
+@endsection
+
+@section('css')
+    <style>
+        #image_preview {
+            /* Prevent vertical gaps */
+            line-height: 0;
+
+            -webkit-column-count: 5;
+            -webkit-column-gap:   0px;
+            -moz-column-count:    5;
+            -moz-column-gap:      0px;
+            column-count:         5;
+            column-gap:           0px;
+        }
+
+        #image_preview img {
+            /* Just in case there are inline attributes */
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 1200px) {
+            #image_preview {
+                -moz-column-count:    4;
+                -webkit-column-count: 4;
+                column-count:         4;
+            }
+        }
+        @media (max-width: 1000px) {
+            #image_preview {
+                -moz-column-count:    3;
+                -webkit-column-count: 3;
+                column-count:         3;
+            }
+        }
+        @media (max-width: 800px) {
+            #image_preview {
+                -moz-column-count:    2;
+                -webkit-column-count: 2;
+                column-count:         2;
+            }
+        }
+        @media (max-width: 400px) {
+            #image_preview {
+                -moz-column-count:    1;
+                -webkit-column-count: 1;
+                column-count:         1;
+            }
+        }
+    </style>
 @endsection
