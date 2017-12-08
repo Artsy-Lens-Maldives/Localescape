@@ -47,4 +47,9 @@ class Accomodations extends Model
     {
         return $this->hasMany('App\accommo_room', 'accommo_id');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\booking', 'accommo_id');
+    }
 }

@@ -20,7 +20,7 @@ class AccommoRoomController extends Controller
         $acco = Accomodations::find($id);
         if($acco->user_id == Auth::guard('extranet')->user()->id){
             $rooms = \App\accommo_room::where('accommo_id', $id)->get();
-            return view('extranet.accommodations.rooms.all', compact('rooms'));
+            return view('extranet.accommodations.rooms.newAll', compact('rooms'));
         } else {
             return redirect('extranet/accommodations');
         }

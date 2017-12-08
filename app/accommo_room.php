@@ -17,4 +17,9 @@ class accommo_room extends Model
     {
         return $query->where('main', '1');
     }
+
+    public function accommodation()
+    {
+        return $this->belongsTo('App\Accomodations', 'accommo_id');
+    }
 }

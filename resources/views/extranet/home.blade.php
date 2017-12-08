@@ -13,9 +13,9 @@
                         <div class="panel-heading">Dashboard</div>
 
                         <div class="panel-body">
-                            @if($users->phone === null OR $users->street === null OR $users->zip === null OR $users->city === null OR $users->state === null OR $users->country === null)
+                            @if($users->phone === null OR $users->street === null OR $users->city === null OR $users->country === null)
                                 <div class="alert alert-info">
-                                    <strong>Please complete profile before adding a Accommodation <a href="{{ url('extranet/profile') }}">Go to Profile</a> </strong>
+                                    <strong>Please complete your profile before adding a Accommodation <a href="{{ url('extranet/profile') }}">Go to Profile</a> </strong>
                                 </div>      
                             @endif              
                         </div>

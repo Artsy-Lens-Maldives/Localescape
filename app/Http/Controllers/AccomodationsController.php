@@ -31,7 +31,7 @@ class AccomodationsController extends Controller
     public function all()
     {
         $accommodations = Accomodations::where('user_id', Auth::guard('extranet')->user()->id)->get();
-        return view('extranet.accommodations.all', compact('accommodations'));
+        return view('extranet.accommodations.newAll', compact('accommodations'));
     }
 
     public function create()

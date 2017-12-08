@@ -122,7 +122,7 @@
               <ul>
                 <li>
                   <div class="info">
-                    Total Adult: ${{ $room->price_adult }} X {{ $adults }}
+                    Total Adult: <strong>${{ $room->price_adult }}</strong> per Adult
                   </div>
                   <div class="value">
                     ${{ $tp_adult }}
@@ -130,7 +130,7 @@
                 </li>
                 <li>
                   <div class="info">
-                    Total Child: ${{ $room->price_child }} X {{ $child }}
+                    Total Child: <strong>${{ $room->price_child }}</strong> per Child
                   </div>
                   <div class="value">
                     ${{ $tp_child }}
@@ -140,6 +140,32 @@
               <hr>
               <h4>Total Cost</h4>
               <ul>
+                @if($tax->tax == '1')
+                <li>
+                  <div class="info">
+                    Total Before Tax
+                  </div>
+                  <div class="value">
+                    ${{ $total }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    {{ $tax->tax_percentage }}% Tax
+                  </div>
+                  <div class="value">
+                    ${{ $tax_total - $total }}
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    Total After Tax
+                  </div>
+                  <div class="value" style="border-top: 1px solid;">
+                    ${{ $tax_total }}
+                  </div>
+                </li>
+                @else
                 <li>
                   <div class="info">
                     Total
@@ -148,6 +174,7 @@
                     ${{ $total }}
                   </div>
                 </li>
+                @endif
               </ul>
             </div>
           </div>

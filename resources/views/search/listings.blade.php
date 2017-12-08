@@ -67,6 +67,8 @@
                                             ?>  
                                             @if($watch_count > 0)
                                                 <figure class="live-info"><b>{{ $watch_count }} watching this now!</b></figure>    
+                                            @else
+                                                
                                             @endif
                                             <p>
                                                 {{ $accommodation->description }}

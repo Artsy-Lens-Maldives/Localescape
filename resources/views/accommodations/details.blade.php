@@ -72,8 +72,6 @@
                                         @foreach($myArray as $arrayI)
                                             @if($arrayI == $facility->id)
                                                 <li>{{ $facility->name }}</li>
-                                            @else
-                                                
                                             @endif
                                         @endforeach
                                     @endforeach   
@@ -82,6 +80,7 @@
                                 <section id="map">
                                     <h2>Map</h2>
                                     <div id="map-item-detail" class="map height-300 box"></div>
+                                    <div id="availability"></div>
                                     <!--end map-->
                                 </section>
                             </div>
@@ -104,25 +103,63 @@
                             <!--end col-md-4-->
                         </div>
                         <!--end row-->
-                        <section id="availability">
-                            <h2>Availability</h2> <a class="btn btn-lg btn-info" href="http://127.0.0.1:8000/booking/?accommodation=1&room=1&check_in=12%2F21%2F2017&check_out=12%2F25%2F2017&adults=2&child=1"> Room rate calculation Test Link for yaniu, Add a room and room photo first </a>
-                            <form class="labels-uppercase" id="form-availability">
+                        <section id="availabilitys">
+                            <h2>Availability </h2> <a class="btn btn-lg btn-info" href="{{ url('booking') }}/?accommodation=1&room=1&check_in=12%2F21%2F2017&check_out=12%2F25%2F2017&adults=2&child=1"> Room rate calculation Test Link for yaniu, Add a room and room photo first </a>
+                            <form class="labels-uppercase" id="form-availability" action="{{ url()->current() }}/#availability" method="GET">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="form-availability-check-in">Check In</label>
-                                            <input type="text" class="form-control date" id="form-availability-check-in" name="check-in" placeholder="Check In">
+                                            <label for="form-availability-check-in">Adults</label>
+                                            <input type="number" class="form-control" name="adults" placeholder="Enter Number of adults" min="1"
+                                            @if(request()->exists('adults'))
+                                                value="{{ request()->adults }}"
+                                            @else
+                                                value="1"
+                                            @endif
+                                            >
                                         </div>
                                     </div>
                                     <!--end col-md-3-->
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="form-availability-check-out">Check In</label>
-                                            <input type="text" class="form-control date" id="form-availability-check-out" name="check-out" placeholder="Check In">
+                                            <label for="form-availability-check-out">Children</label>
+                                            <input type="number" class="form-control" name="child" placeholder="Enter Number of Children" min="0"
+                                            @if(request()->exists('child'))
+                                                value="{{ request()->child }}"
+                                            @else
+                                                value="0"
+                                            @endif
+                                            >
                                         </div>
                                     </div>
                                     <!--end col-md-3-->
                                     <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="form-availability-check-in">Check In</label>
+                                            <input type="text" class="form-control date" id="form-availability-check-in" name="check_in" placeholder="Check In Date"
+                                            @if(request()->exists('check_in'))
+                                                value="{{ request()->check_in }}"
+                                            @else
+                                                
+                                            @endif
+                                            >
+                                        </div>
+                                    </div>
+                                    <!--end col-md-3-->
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="form-availability-check-out">Check Out</label>
+                                            <input type="text" class="form-control date" id="form-availability-check-out" name="check_out" placeholder="Check Out Date"
+                                            @if(request()->exists('check_out'))
+                                                value="{{ request()->check_out }}"
+                                            @else
+                                                
+                                            @endif
+                                            >
+                                        </div>
+                                    </div>
+                                    <!--end col-md-3-->
+                                    <div class="col-md-6 col-md-offset-3">
                                         <div class="form-group">
                                             <label class="invisible">Hidden label</label>
                                             <button type="submit" class="btn btn-primary btn-rounded btn-framed form-control">Search</button>
@@ -132,53 +169,135 @@
                                 </div>
                                 <!--end row-->
                             </form>
+                            @if(request()->exists('adults') AND request()->exists('child') AND request()->exists('check_in') AND request()->exists('check_out'))
+
+                                <div class="form-reservations">
+                                    @if($accommodation->rooms->isempty())
+                                        <h4>No Rooms added for this Accommodation </h4> 
+                                    @else
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Room Type</th>
+                                                        <th>Persons</th>
+                                                        <th>Price</th>
+                                                        <th>Book</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        @foreach($accommodation->rooms as $room)
+                                            @if(request()->adults <= $room->no_adult AND request()->child <= $room->no_children)
+                                                <form id="room_1">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="room">
+                                                                <td>
+                                                                    <a href=""><h3>{{ $room->room_type }}</h3></a>
+                                                                    <p>{{ $room->description }}</p>
+                                                                </td>
+                                                                <td>{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
+                                                                <td>${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <center>
+                                                                            <a href="{{ url('booking') }}/?accommodation={{ $accommodation->id }}&room={{ $room->id }}&check_in={{ request()->check_in }}&check_out={{ request()->check_out }}&adults={{ request()->adults }}&child={{ request()->child }}" class="btn btn-primary btn-rounded">Book Now</a>
+                                                                            <a href="{{ url('inquiry') }}/?accommodation={{ $accommodation->id }}&room={{ $room->id }}&check_in={{ request()->check_in }}&check_out={{ request()->check_out }}&adults={{ request()->adults }}&child={{ request()->child }}" class="btn btn-info btn-rounded">Send Inquiry</a>
+                                                                        </center>
+                                                                    </div>
+                                                                    <!--end form-group-->
+                                                                </td>
+                                                            </tr>
+                                                            <!--end tr.room-->
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end table-->
+                                                </form>
+                                            @elseif (request()->adults >= $room->no_adult AND request()->child <= $room->no_children )
+                                                <form id="room_1">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="room">
+                                                                <td>
+                                                                    <a href=""><h3>{{ $room->room_type }}</h3></a>
+                                                                    <p>{{ $room->description }}</p>
+                                                                </td>
+                                                                <td>{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
+                                                                <td>${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <p style="text-align: left; font-weight:bold; font-size:18px;"> Too Many adults for this room</p>
+                                                                    </div>
+                                                                    <!--end form-group-->
+                                                                </td>
+                                                            </tr>
+                                                            <!--end tr.room-->
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end table-->
+                                                </form>
+                                            @elseif (request()->child >= $room->no_children AND request()->adults <= $room->no_adult)
+                                                <form id="room_1">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="room">
+                                                                <td>
+                                                                    <a href=""><h3>{{ $room->room_type }}</h3></a>
+                                                                    <p>{{ $room->description }}</p>
+                                                                </td>
+                                                                <td>{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
+                                                                <td>${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <p style="text-align: left; font-weight:bold; font-size:18px;"> Too Many children for this room</p>
+                                                                    </div>
+                                                                    <!--end form-group-->
+                                                                </td>
+                                                            </tr>
+                                                            <!--end tr.room-->
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end table-->
+                                                </form>
+                                            @elseif (request()->child >= $room->no_children AND request()->adults >= $room->no_adult)
+                                                <form id="room_1">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="room">
+                                                                <td>
+                                                                    <a href=""><h3>{{ $room->room_type }}</h3></a>
+                                                                    <p>{{ $room->description }}</p>
+                                                                </td>
+                                                                <td>{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
+                                                                <td>${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <p style="text-align: left; font-weight:bold; font-size:18px;"> Too Many people for this room</p>
+                                                                    </div>
+                                                                    <!--end form-group-->
+                                                                </td>
+                                                            </tr>
+                                                            <!--end tr.room-->
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end table-->
+                                                </form>
+                                            @endif
+                                        @endforeach 
+                                    @endif
+                                </div>
+                                <!--end form-reservations-->    
+                            @else
 
                             <div class="form-reservations">
-                                @if($accommodation->rooms->isempty())
-                                    <h4>No Rooms added for this Accommodation </h4> 
-                                @else
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Room Type</th>
-                                                <th>Persons</th>
-                                                <th>Price</th>
-                                                <th>Book</th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                    @foreach($accommodation->rooms as $room)
-                                        <form id="room_1">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr class="room">
-                                                        <td>
-                                                            <a href=""><h3>{{ $room->room_type }}</h3></a>
-                                                            <p>{{ $room->description }}</p>
-                                                        </td>
-                                                        <td>{{ $room->no_adult }} Adults <br> {{ $room->no_children }} Children</td>
-                                                        <td>${{ $room->price_adult }} Adults <br> ${{ $room->price_child }} Children</td>
-                                                        <td>
-                                                            <div class="form-group">
-                                                                <center>
-                                                                    <a href="{{ url('booking') }}/{{ $accommodation->id }}/{{ $room->id }}" class="btn btn-primary btn-rounded">Book Now</a>
-                                                                    <a href="{{ url('inquiry') }}/{{ $accommodation->id }}/{{ $room->id }}" class="btn btn-info btn-rounded">Send Inquiry</a>
-                                                                </center>
-                                                            </div>
-                                                            <!--end form-group-->
-                                                        </td>
-                                                    </tr>
-                                                    <!--end tr.room-->
-                                                </tbody>
-                                            </table>
-                                            <!--end table-->
-                                        </form>
-                                    @endforeach 
-                                @endif
+                                <h4>Enter your details above</h4>
                             </div>
                             <!--end form-reservations-->
+                                
+                            @endif
+                            
+                            
                         </section>
                         <section id="additional-information">
                             <h2>Additional Information</h2>

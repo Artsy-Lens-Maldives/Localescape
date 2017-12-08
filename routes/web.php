@@ -219,7 +219,7 @@ Route::group(['prefix' => 'photopackage'], function () {
     // Route::post('/inquery/{acco_id}/{room_id}', 'InqueryController@store');
 
 Route::get('/booking', function (Request $request) {
-    //Variables
+    $tax = \App\Settings::find('1');
     // Testing Route http://127.0.0.1:8000/booking/?accommodation=1&room=1&check_in=12%2F21%2F2017&check_out=12%2F25%2F2017&adults=2&child=1
     $accommodation = Accomodations::find($request->accommodation);
     $room = \App\accommo_room::find($request->room);
@@ -231,11 +231,17 @@ Route::get('/booking', function (Request $request) {
     $days = $check_out->diffInDays($check_in);
     $tp_adult = $adults * $room->price_adult * $days;
     $tp_child = $child * $room->price_child * $days;
-    $total = $tp_adult + $tp_child;
-
+    
+    if ($tax->tax == '1') {
+        $total = $tp_adult + $tp_child;
+        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+    } else {
+        $total = $tp_adult + $tp_child;
+    }
+    
     $room_photo = $room->photos->where('main', 1)->first();
 
-    return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo'));
+    return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
 });
 
 //Bookings and Inquiry (end)
