@@ -29,7 +29,7 @@
                             <p>
                             {{ $blog->description }}
                             </p>
-                            <a href="blog-detail" class="btn btn-rounded btn-default btn-framed btn-small">Read More</a>
+                            <a href="{{ url('blog') }}/{{ $blog->slug }}" class="btn btn-rounded btn-default btn-framed btn-small">Read More</a>
                         </article><!-- /.blog-post -->    
                         @endforeach
                         <!-- Pagination -->
