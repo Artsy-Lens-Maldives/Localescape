@@ -12,3 +12,4 @@ yarn-error.log
 .env
 Local Escape.sublime-project
 Local Escape.sublime-workspace
+deploy.sh
