@@ -19,6 +19,16 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->string('profile_image')->default('extranet/default/person.jpg');
+            $table->string('mobile')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('street')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('additional_address')->nullable();
+            
             $table->timestamps();
         });
     }
