@@ -152,6 +152,10 @@ Route::get('/blog', function () {
     $blogs = \App\blog::all();
     return view('blog.all', compact('blogs'));
 });
+Route::get('/blog/{slug}', function ($slug) {
+    $blog = \App\blog::where('slug', $slug)->first();
+    return view('blog.detail', compact('blog'));
+});
 //Blog (end)
 
 //Auth Routes (start)
