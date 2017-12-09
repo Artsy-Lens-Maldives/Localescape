@@ -17,7 +17,15 @@
                         </div>
                         <!--end title-->
                         <article class="blog-post">
-                            <a href="blog-detail"><img src="{{ Helper::s3_url_gen($blog->photourl) }}"></a>
+                            <div class="gallery">
+                                @foreach($blog->photos as $photo)
+                                    @if($photo->main == '1')
+                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
+                                    @else
+                                        <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
+                                    @endif
+                                @endforeach
+                            </div>
                             <header><a href="blog-detail"><h2>{{ $blog->title }}</h2></a></header>
                             <figure class="meta">
                                 <a href="#" class="link-icon"><i class="fa fa-user"></i>{{ $blog->author }}</a>
