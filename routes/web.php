@@ -277,3 +277,7 @@ Route::group(['prefix' => 'mailTest'], function () {
         return new App\Mail\BookingCustomer;
     });
 });
+
+Route::get('/newLogin', function () {
+    return view('newlogin');
+});
