@@ -14,7 +14,6 @@
                                 <div class="element">
                                     <select>
                                         <option>$</option>
-                                        <option>€</option>
                                     </select>
                                 </div>
                                 <!--end element-->
@@ -33,9 +32,6 @@
                                 <div class="element">
                                     <select>
                                         <option>EN</option>
-                                        <option>DE</option>
-                                        <option>RU</option>
-                                        <option>ES</option>
                                     </select>
                                 </div>
                                 <!--end element-->
