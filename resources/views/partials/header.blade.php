@@ -1,4 +1,4 @@
-    <div id="page-header">
+<div id="page-header">
         <header>
             <div class="container">
                 <div class="secondary-nav">
@@ -55,9 +55,14 @@
                         <nav id="primary-nav">
                             <ul>
                                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                                <li>
+                                <a  class="has-child">Categories</a>
+                                <ul class="child-nav">
                                 @foreach($categories as $category)
                                     <li><a href="/accommodation/{{ Helper::slug_gen($category) }}">{{ $category }}</a></li>    
                                 @endforeach
+                                </ul>
+                                </li>
                                 <li>
                                     <a href="{{ url('/tours') }}" class="has-child">Tours</a>
                                     <ul class="child-nav">
