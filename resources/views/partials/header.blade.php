@@ -17,17 +17,34 @@
                                     </select>
                                 </div>
                                 <!--end element-->
+                                @guest
                                 <div class="element">
-                                    <a href="#tab-sign-in" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Sign In</a>
+                                    <a href="{{ url('login') }}">Sign In</a>
                                 </div>
                                 <!--end element-->
-                                <div class="element">
-                                    <a href="#tab-register" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Register</a>
-                                </div>
-                                <!--end element-->
-                                <div class="element">
-                                    <a href="{{ url('extranet/login') }}">Extranet</a>
-                                </div>
+                                    <div class="element">
+                                        <a href="{{ url('register') }}">Register</a>
+                                    </div>
+                                    <!--end element-->
+                                    <div class="element">
+                                        <a href="{{ url('extranet/login') }}">Extranet</a>
+                                    </div>
+                                @else
+                                    <div class="element">
+                                            <a href="{{ url('home') }}">Welcome {{ Auth::user()->name }}</a>
+                                    </div>
+                                    <div class="element">
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                    </div>
+                                @endguest    
                                 <!--end element-->
                                 <div class="element">
                                     <select>

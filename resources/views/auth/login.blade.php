@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+               <center> <div class="panel-heading" style="font-size:20px;">Welcome To Local Escape Extranet</div> </center>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -60,6 +67,14 @@
                                 </a>
                             </div>
                         </div>
+                        <hr>
+                        <center> <div class="panel-heading" style="font-size:20px;">Login Using </div> </center>
+                        <hr>
+                        <center><i class="fa fa-facebook-official" style="font-size:45px;color:#3b5998"></i></center>
+                        <hr>
+                        <center><i class="fa fa-twitter" style="font-size:45px;color:#0084b4"></i></center>
+                        <hr>
+                        <center><i class="fa fa-google-plus" style="font-size:45px;color:#d34836"></i></center>
                     </form>
                 </div>
             </div>
