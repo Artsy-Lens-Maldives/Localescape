@@ -13,9 +13,8 @@
             @import url('https://fonts.googleapis.com/css?family=Poiret+One');
 
             body, html {
-                height: 100%;
                 background-repeat: no-repeat;    /*background-image: linear-gradient(rgb(12, 97, 33),rgb(104, 145, 162));*/
-                background:black;
+                background:#5285d2;
                 position: relative;
             }
             #login-box {
@@ -26,7 +25,7 @@
                 width: 350px;
                 margin: 0 auto;
                 border: 1px solid black;
-                background: rgba(48, 46, 45, 1);
+                background: rgb(1, 15, 41);
                 min-height: 250px;
                 padding: 20px;
                 z-index: 9999;
@@ -38,7 +37,7 @@
                 margin-bottom: 0px;
             }
             #login-box .logo .tweak {
-                color: #ff5252;
+                color: #526fff;
             }
             #login-box .controls {
                 padding-top: 30px;
@@ -64,7 +63,7 @@
             #login-box button.btn-custom {
                 border-radius: 2px;
                 margin-top: 8px;
-                background:#ff5252;
+                background: #526fff;
                 border-color: rgba(48, 46, 45, 1);
                 color: white;
                 font-family: 'Nunito', sans-serif;
@@ -76,7 +75,7 @@
                 -o-transition: all 500ms ease;
                 transition: all 500ms ease;
                 background: rgba(48, 46, 45, 1);
-                border-color: #ff5252;
+                border-color: #526fff;
             }
             #particles-js{
                 width: 100%;
@@ -87,19 +86,26 @@
                 top: 0px;
                 z-index:1;
             }
+            .vertical-center {
+                min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+                min-height: 100vh; /* These two lines are counted as one :-)       */
+
+                display: flex;
+                align-items: center;
+            }
         </style>
     </head>
     <body>
 
-            <div class="container" style="margin-top: 100px">
+            <div class="container vertical-center">
                 <div id="login-box">
                     <div class="logo">
-                        <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img img-responsive img-circle center-block"/>
-                        <h1 class="logo-caption"><span class="tweak">L</span>ogin</h1>
+                        <img src="{{ url('img/logo-invert.png') }}" class="img img-responsive center-block"/>
+                        <h1 class="logo-caption"><span class="tweak">Admin</span> Login</h1>
                     </div><!-- /.logo -->
                     <div class="controls">
-                        <input type="text" name="username" placeholder="Username" class="form-control" />
-                        <input type="text" name="username" placeholder="Password" class="form-control" />
+                        <input type="text" name="email" placeholder="Email" class="form-control" />
+                        <input type="text" name="password" placeholder="Password" class="form-control" />
                         <button type="button" class="btn btn-default btn-block btn-custom">Login</button>
                     </div><!-- /.controls -->
                 </div><!-- /#login-box -->
