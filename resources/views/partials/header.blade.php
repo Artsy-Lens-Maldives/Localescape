@@ -1,4 +1,4 @@
-    <div id="page-header">
+<div id="page-header">
         <header>
             <div class="container">
                 <div class="secondary-nav">
@@ -14,28 +14,41 @@
                                 <div class="element">
                                     <select>
                                         <option>$</option>
-                                        <option>€</option>
                                     </select>
                                 </div>
                                 <!--end element-->
+                                @guest
                                 <div class="element">
-                                    <a href="#tab-sign-in" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Sign In</a>
+                                    <a href="{{ url('login') }}">Sign In</a>
                                 </div>
                                 <!--end element-->
-                                <div class="element">
-                                    <a href="#tab-register" data-toggle="modal" data-tab="true" data-target="#sign-in-register-modal">Register</a>
-                                </div>
-                                <!--end element-->
-                                <div class="element">
-                                    <a href="{{ url('extranet/login') }}">Extranet</a>
-                                </div>
+                                    <div class="element">
+                                        <a href="{{ url('register') }}">Register</a>
+                                    </div>
+                                    <!--end element-->
+                                    <div class="element">
+                                        <a href="{{ url('extranet/login') }}">Extranet</a>
+                                    </div>
+                                @else
+                                    <div class="element">
+                                            <a href="{{ url('home') }}">Welcome {{ Auth::user()->name }}</a>
+                                    </div>
+                                    <div class="element">
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                    </div>
+                                @endguest    
                                 <!--end element-->
                                 <div class="element">
                                     <select>
                                         <option>EN</option>
-                                        <option>DE</option>
-                                        <option>RU</option>
-                                        <option>ES</option>
                                     </select>
                                 </div>
                                 <!--end element-->
@@ -59,9 +72,14 @@
                         <nav id="primary-nav">
                             <ul>
                                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                                <li>
+                                <a  class="has-child">Categories</a>
+                                <ul class="child-nav">
                                 @foreach($categories as $category)
                                     <li><a href="/accommodation/{{ Helper::slug_gen($category) }}">{{ $category }}</a></li>    
                                 @endforeach
+                                </ul>
+                                </li>
                                 <li>
                                     <a href="{{ url('/tours') }}" class="has-child">Tours</a>
                                     <ul class="child-nav">

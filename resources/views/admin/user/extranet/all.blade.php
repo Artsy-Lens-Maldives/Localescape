@@ -12,6 +12,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Password</th>
                     <th>Created At</th>
                     <th>Action</th>
                 </tr>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->password }}</td>
                     <td>{{ $user->created_at->diffForHumans() }}</td>
                     <td style="text-align: center;">
                         <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/delete/{{ $user->id }}" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')"><i class="fa fa-trash-o"></i> Delete</a>
