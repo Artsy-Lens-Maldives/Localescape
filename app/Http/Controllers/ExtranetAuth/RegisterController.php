@@ -66,7 +66,7 @@ class RegisterController extends Controller
         return Extranet::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password'],
+            'password' => bcrypt($data['password']),
         ]);
     }
 
