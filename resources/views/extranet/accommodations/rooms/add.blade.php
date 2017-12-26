@@ -69,7 +69,7 @@
                         <label class="control-label col-sm-2" for="price_child">Images</label>
                         <div class="col-sm-10">
                             <div class="file-upload">
-                                <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png" required>
+                                <input type="file" name="image[]" class="" multiple title="Click to add files" accept="gif|jpg|png">
                                 <span>Click to add images</span>
                             </div>
                         </div>
