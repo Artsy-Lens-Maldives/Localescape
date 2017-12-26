@@ -64,16 +64,6 @@
                             <input type="text" class="form-control" id="price_child" placeholder="Price per child" name="price_child">
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="price_child">Images</label>
-                        <div class="col-sm-10">
-                        
-                            <input type="file" name="image[]" class="" multiple title="Click to add files" accept="gif|jpg|png">
-                            <span>Click to add images</span>
-                        
-                        </div>
-                    </div>
                     
                     <div class="form-group">        
                         <div class="col-sm-offset-2 col-sm-10">
