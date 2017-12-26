@@ -46,7 +46,7 @@ class AccommoRoomController extends Controller
     {
         $accommodations = Accomodations::find($id);
         
-        $room = \App\accommo_room::create(Input::except('_token'));
+        $room = \App\accommo_room::create(Input::except('_token', 'image'));
         $url = 'extranet/accommodations/rooms/' . $id ; 
 
         $i = 0;
