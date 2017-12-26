@@ -68,7 +68,10 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="price_child">Images</label>
                         <div class="col-sm-10">
-                            <p class="form-control">To add Images goto the images section in accommodation after adding the room</p>
+                            <div class="file-upload">
+                                <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png" required>
+                                <span>Click to add images</span>
+                            </div>
                         </div>
                     </div>
                     
