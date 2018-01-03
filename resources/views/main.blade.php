@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="hero-section" data-height="600">
-            <form id="form-hero">
+            <form id="form-hero" action="{{ url('search') }}" method="get">
                 <div class="hero-inner">
                     <div class="hero-wrapper" >
                         <div class="caption">
