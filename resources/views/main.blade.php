@@ -13,19 +13,19 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label class="label-on-input" for="address-autocomplete">Location</label>
-                                                <input type="text" class="form-control" id="address-autocomplete" name="location" placeholder="Enter Location or Place Name">
+                                                <input type="text" class="form-control" id="address-autocomplete" name="q" placeholder="Enter Location or Place Name">
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-sm-2">
                                             <div class="form-group">
                                                 <label class="label-on-input" for="form-check-in">Check In</label>
-                                                <input type="text" class="form-control date" id="form-check-in" name="nights" placeholder="Check In Date">
+                                                <input type="text" class="form-control date" id="form-check-in" name="check_in" placeholder="Check In Date">
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-sm-2">
                                             <div class="form-group">
-                                                <label class="label-on-input" for="form-nights">Nights</label>
-                                                <input type="number" min="1" class="form-control" id="form-nights" name="nights" placeholder="Nights">
+                                                <label class="label-on-input" for="form-check-out">Check Out</label>
+                                                <input type="text" class="form-control date" id="form-check-out" name="check_out" placeholder="Check In Date">
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-sm-2">
