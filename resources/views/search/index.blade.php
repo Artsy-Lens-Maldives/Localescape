@@ -61,7 +61,7 @@
                                         <div class="info">
                                             <a href="{{ url()->current() }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
                                             <figure class="location">{{ $accommodation->location }}</figure>
-                                            <figure class="label label-info">{{ Helper::un_slug_gen($type) }}</figure>
+                                            <figure class="label label-info">{{ Helper::un_slug_gen($accommodation->type) }}</figure>
                                             <?php
                                                 $watch_count = rand(-100,100);
                                             ?>  
