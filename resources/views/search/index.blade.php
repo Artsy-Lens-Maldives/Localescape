@@ -83,7 +83,7 @@
                                 
                             @endforeach
 
-                            {{ $accommodations->links() }}
+                            <!-- for github -->
 
                         @else
 
