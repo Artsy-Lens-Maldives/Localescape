@@ -21,7 +21,7 @@ use Carbon\Carbon;
 
 Route::get('/', function () {
     $top_picks = \App\Accomodations::where('top_acco', '1')->get();
-    $recent_acco = \App\Accomodations::where('active', '1')->take(8);
+    $recent_acco = \App\Accomodations::where('active', '1')->orderBy('created_at', 'desc')->take(8)->get();    
     return view('main', compact('top_picks', 'recent_acco'));
 });
 

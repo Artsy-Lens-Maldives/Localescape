@@ -297,13 +297,13 @@
                                             <div class="info">
                                                 <figure class="label label-info">{{ Helper::slug_gen($accommodation->type) }}</figure>
                                                 <aside>
-                                                    <h3>{{ $accommodation->name }}</h3>
+                                                    <h3>{{ $accommodation->title }}</h3>
                                                 </aside>
                                             </div>
                                             <div class="wrapper">
                                                 <div class="gallery">
-                                                    @foreach ($accommodation->phots as $photo)
-                                                        <img src="{{ Helper::s3_url_gen(thumnail) }}" alt="">    
+                                                    @foreach ($accommodation->photos as $photo)
+                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">    
                                                     @endforeach
                                                 </div>
                                             </div>
