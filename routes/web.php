@@ -286,7 +286,8 @@ Route::get('/newLogin', function () {
 //Search
 Route::group(['prefix' => 'search'], function () {
     Route::get('/', function (Request $request) {
-        $accommodations = \App\Accomodations::search("test")->get();
+        $q = $request->q;
+        $accommodations = \App\Accomodations::search($q)->get();
         // return view('search.index', compact('accommodations'));
         return $accommodations;
     });
