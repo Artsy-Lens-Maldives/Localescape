@@ -11,9 +11,16 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 use Image;
+use Twilio\Rest\Client;
 
 class AccomodationsController extends Controller
 {
+    public function __construct(Client $client)
+    {
+        $this->middleware('auth');
+        $this->client = $client;
+    }
+    
     public function listing($type)
     {
         $accommodations = Accomodations::where('type', $type)->where('active', '1')->paginate(25);
@@ -48,7 +55,9 @@ class AccomodationsController extends Controller
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         $accommodations->user_id = Auth::guard('extranet')->user()->id;
         $accommodations->save();
-
+        
+        $user = Auth::guard('extranet')->user()->name;
+        
         $array = $request->facilities;
         if($array) {
             $accommodations->facilities = implode("," ,$array);
@@ -74,7 +83,22 @@ class AccomodationsController extends Controller
             ]);
         }
 
-        return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
+        $message = 'New accommodation has been added to localescape - '.$accommodations->title . 'by '. $user;
+        $phoneNumbers = '9105616';
+        $from = 'Taviyani';
+
+        //dd($from);
+
+        $phoneNumber = '+960'.$phoneNumbers;
+
+        try {
+            $this->sendMessage($phoneNumber, $message, $from);
+            return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
+
+        } 
+        catch ( \Twilio\Exceptions\RestException  $e ) {
+            return redirect('extranet/accommodations')->with('alert-danger', $e->getMessage());
+        }
     }
 
     public function edit($id)
@@ -172,5 +196,19 @@ class AccomodationsController extends Controller
         $facilities = \App\facilities::all();
         $accommodation = Accomodations::where('id', $id)->first();
         return view('extranet.accommodations.details', compact('accommodation', 'facilities'));
+    }
+
+    private function sendMessage($phoneNumber, $message, $from)
+    {
+        $twilioPhoneNumber = config('services.twilio')['phoneNumber'];
+        $messageParams = array(
+            'from' => $from,
+            'body' => $message
+        );
+
+        $this->client->messages->create(
+            $phoneNumber,
+            $messageParams
+        );
     }
 }

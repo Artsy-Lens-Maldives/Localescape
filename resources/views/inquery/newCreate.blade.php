@@ -5,7 +5,7 @@
 
 <div class="container">
 <br>
-<center><h2>Booking Form</h2></center>
+<center><h2>Inquiry Form</h2></center>
 <br>
       <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -20,7 +20,7 @@
         <div class="col-md-9">
           <div class="panel panel-default">
             <div class="panel-body">
-              <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
+              <form class="form-horizontal" action="{{ url('inquiry') }}" method="POST">
                 <input type="hidden" name="acco_id" value="{{ request()->accommodation }}">
                 <input type="hidden" name="room_id" value="{{ request()->room }}">
                 <div class="form-group">
@@ -36,27 +36,15 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd">Check in date</label>
+                  <label class="control-label col-sm-2" for="pwd">Contact Number</label>
                   <div class="col-sm-10">          
-                    <input type="text" class="form-control" value="{{ request()->check_in }}" id="checkin" placeholder="Check In Time" name="checkin">
+                    <input type="text" class="form-control" id="checkin" placeholder="Contact Number" name="contact">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd">Check out date</label>
+                  <label class="control-label col-sm-2" for="pwd">Details</label>
                   <div class="col-sm-10">          
-                    <input type="text" class="form-control" value="{{ request()->check_out }}" id="checkout" placeholder="Check Out Time" name="checkout">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd">Estimated Time Arrival</label>
-                  <div class="col-sm-10">          
-                    <input type="text" class="form-control" id="eta" placeholder="Check Out Time" name="eta">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="pwd">Flight Number</label>
-                  <div class="col-sm-10">          
-                    <input type="text" class="form-control" id="flightnumber" placeholder="Flight Number" name="flightnumber">
+                    <input type="text" class="form-control" id="checkout" placeholder="Details about inquiry" name="details">
                   </div>
                 </div>
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -71,12 +59,12 @@
         </div>
         <div class="col-md-3">
           <div class="panel panel-success">
-            <div class="panel-heading">Booking Summary</div>
+            <div class="panel-heading">Inquiry Summary</div>
             <div class="panel-body">
               <h3><strong>{{ $room->room_type }}</strong><h3>
               <img src="{{ Helper::s3_url_gen($room_photo->thumbnail) }}" class="img-responsive img-thumbnail" alt="{{ $room->room_type }} image">
               <hr>
-              <h4>Booking info</h4>
+              <h4>Inquiry info</h4>
               <ul>
                 <li>
                   <div class="info">
@@ -204,4 +192,3 @@
   @include('sweet::alert')
 
 @endsection
-

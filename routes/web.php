@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Carbon\Carbon;
+// use Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -224,8 +225,7 @@ Route::group(['prefix' => 'photopackage'], function () {
     // Route::post('/inquery/{acco_id}/{room_id}', 'InqueryController@store');
 
 Route::get('/booking', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    // Testing Route http://127.0.0.1:8000/booking/?accommodation=1&room=1&check_in=12%2F21%2F2017&check_out=12%2F25%2F2017&adults=2&child=1
+    $tax = \App\Settings::find('1');    
     $accommodation = Accomodations::find($request->accommodation);
     $room = \App\accommo_room::find($request->room);
     $check_in = Carbon::parse($request->check_in);
@@ -247,6 +247,84 @@ Route::get('/booking', function (Request $request) {
     $room_photo = $room->photos->where('main', 1)->first();
 
     return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
+});
+Route::get('/inquiry', function (Request $request) {
+    $tax = \App\Settings::find('1');
+    $accommodation = Accomodations::find($request->accommodation);
+    $room = \App\accommo_room::find($request->room);
+    $check_in = Carbon::parse($request->check_in);
+    $check_out = Carbon::parse($request->check_out);
+    $adults = $request->adults;
+    $child = $request->child;
+
+    $days = $check_out->diffInDays($check_in);
+    $tp_adult = $adults * $room->price_adult * $days;
+    $tp_child = $child * $room->price_child * $days;
+    
+    if ($tax->tax == '1') {
+        $total = $tp_adult + $tp_child;
+        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+    } else {
+        $total = $tp_adult + $tp_child;
+    }
+    
+    $room_photo = $room->photos->where('main', 1)->first();
+
+    return view('inquery.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
+});
+
+Route::post('/booking', function (Request $request) {
+    $tax = \App\Settings::find('1');
+    $accommodation = Accomodations::find($request->acco_id);
+    $room = \App\accommo_room::find($request->room_id);
+    $check_in = Carbon::parse($request->check_in);
+    $check_out = Carbon::parse($request->check_out);
+    $adults = $request->adults;
+    $child = $request->child;
+
+    $days = $check_out->diffInDays($check_in);
+    $tp_adult = $adults * $room->price_adult * $days;
+    $tp_child = $child * $room->price_child * $days;
+    
+    if ($tax->tax == '1') {
+        $total = $tp_adult + $tp_child;
+        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+    } else {
+        $total = $tp_adult + $tp_child;
+    }
+    
+    $booking = \App\booking::create(Input::except('_token'));
+
+    Alert::success('Booking Successfully created');
+    
+    return redirect()->back();
+});
+
+Route::post('/inquiry', function (Request $request) {
+    $tax = \App\Settings::find('1');
+    $accommodation = Accomodations::find($request->acco_id);
+    $room = \App\accommo_room::find($request->room_id);
+    $check_in = Carbon::parse($request->check_in);
+    $check_out = Carbon::parse($request->check_out);
+    $adults = $request->adults;
+    $child = $request->child;
+
+    $days = $check_out->diffInDays($check_in);
+    $tp_adult = $adults * $room->price_adult * $days;
+    $tp_child = $child * $room->price_child * $days;
+    
+    if ($tax->tax == '1') {
+        $total = $tp_adult + $tp_child;
+        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+    } else {
+        $total = $tp_adult + $tp_child;
+    }
+    
+    $booking = \App\inquery::create(Input::except('_token'));
+
+    Alert::success('Inquiry Successfully created');
+    
+    return redirect()->back();
 });
 
 //Bookings and Inquiry (end)
