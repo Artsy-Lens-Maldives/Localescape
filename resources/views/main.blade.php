@@ -358,20 +358,20 @@
                     <h2 class="center">Blog Posts</h2>
                 </div>
                 <!--end title-->
-                @foreach ($blogs as $blog)
                     <div class="gallery-carousel">
-                        <div class="gallery-item">
-                            <a href="{{ url('blog') }}/{{ $blog->slug }}"><div class="image"><img src="{{ Helper::s3_url_gen($blog->photourl) }}" alt=""></div></a>
-                            <div class="description">
-                                <a href="{{ url('blog') }}/{{ $blog->slug }}"><h3>{{ $blog->title }}</h3></a>
-                                <figure>Blog</figure>
-                                <a href="{{ url('blog') }}/{{ $blog->slug }}" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
+                        @foreach ($blogs as $blog)
+                            <div class="gallery-item">
+                                <a href="{{ url('blog') }}/{{ $blog->slug }}"><div class="image"><img src="{{ Helper::s3_url_gen($blog->photourl) }}" alt=""></div></a>
+                                <div class="description">
+                                    <a href="{{ url('blog') }}/{{ $blog->slug }}"><h3>{{ $blog->title }}</h3></a>
+                                    <figure>Blog</figure>
+                                    <a href="{{ url('blog') }}/{{ $blog->slug }}" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
+                                </div>
                             </div>
-                        </div>
-                        <!--end gallery-item-->
+                            <!--end gallery-item-->
+                        @endforeach
                     </div>
                     <!--end gallery-carousel-->    
-                @endforeach
             </div>
             <!--end container-->
         </div>
