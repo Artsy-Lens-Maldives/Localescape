@@ -370,3 +370,11 @@ Route::group(['prefix' => 'search'], function () {
         // return $accommodations;
     });
 });
+
+Route::get('/about-us', function () {
+    return view('about.about-us');
+});
+
+Route::get('/contact-us', function () {
+    return view('about.contact-us');
+});

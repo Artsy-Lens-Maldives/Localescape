@@ -6,7 +6,7 @@
                     <div id="secondary-nav">
                         <nav>
                             <div class="left opacity-60">
-                                <a href="phone:+9609999777"><i class="fa fa-phone"></i>+960 9999777</a>
+                                <a href="phone:+9609555544"><i class="fa fa-phone"></i>+960 9555544</a>
                                 <a href="mailto:info@localescapemaldives.com"><i class="fa fa-envelope"></i>info@localescapemaldives.com</a>
                             </div>
                             <!--end left-->
@@ -14,15 +14,11 @@
                                 <div class="element">
                                     <select>
                                         <option>$</option>
-                                        <option>€</option>
                                     </select>
                                 </div>
                                 <div class="element">
                                     <select>
                                         <option>EN</option>
-                                        <option>DE</option>
-                                        <option>RU</option>
-                                        <option>ES</option>
                                     </select>
                                 </div>
                                 <!--end element-->
