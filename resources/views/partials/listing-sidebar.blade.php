@@ -5,7 +5,7 @@
                             <form id="form-filter" class="labels-uppercase">
                                 <div class="form-group">
                                     <label for="form-filter-destination">Destination</label>
-                                    <input type="text" class="form-control" id="form-filter-destination" name="destination" placeholder="Destination">
+                                    <input type="text" class="form-control" id="form-filter-destination" name="q" placeholder="Destination">
                                 </div>
                                 <!--end form-group-->
                                 <div class="form-group-inline">
