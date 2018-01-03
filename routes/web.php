@@ -288,7 +288,7 @@ Route::group(['prefix' => 'search'], function () {
     Route::get('/', function (Request $request) {
         $q = $request->q;
         $accommodations = \App\Accomodations::search($q)->get();
-        // return view('search.index', compact('accommodations'));
-        return $accommodations;
+        return view('search.index', compact('accommodations'));
+        // return $accommodations;
     });
 });
