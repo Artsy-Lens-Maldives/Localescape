@@ -176,7 +176,7 @@
                                             @if($accommodation->top_acco == "1")
                                                 <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
                                             @endif
-                                            <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="wrapper">
+                                            <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}" class="wrapper">
                                                 @foreach($accommodation->photos as $photo)
                                                     @if($photo->main == '1')
                                                         <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
@@ -192,7 +192,7 @@
                                         <div class="description">
                                             <div class="info">
                                                 <figure class="label label-info">{{ Helper::un_slug_gen($accommodation->type) }}</figure>
-                                                <a href="{{ url()->current() }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
+                                                <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
                                             </div>
                                         </div>
                                         <!--end description-->
@@ -289,234 +289,33 @@
                 <div class="row">
                     <div class="col-md-9 col-sm-8">
                         <div class="row">
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Hotel</figure>
-                                            <aside>
-                                                <h3>Celestial Hotel & Spa</h3>
-                                                <figure class="location">Norway</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/01.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>8.9</span>
-                                            <span><i class="fa fa-bed"></i>250</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
                             <!--end col-md-3-->
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Apartment</figure>
-                                            <aside>
-                                                <h3>Spring Hotel</h3>
-                                                <figure class="location">Austria</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/05.jpg" alt="">
+                            @foreach ($recent_acco as $accommodation)
+                                <div class="col-md-3 col-sm-6">
+                                    <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}" class="item small">
+                                        <div class="image">
+                                            <div class="info">
+                                                <figure class="label label-info">{{ Helper::slug_gen($accommodation->type) }}</figure>
+                                                <aside>
+                                                    <h3>{{ $accommodation->name }}</h3>
+                                                </aside>
+                                            </div>
+                                            <div class="wrapper">
+                                                <div class="gallery">
+                                                    @foreach ($accommodation->phots as $photo)
+                                                        <img src="{{ Helper::s3_url_gen(thumnail) }}" alt="">    
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>8.2</span>
-                                            <span><i class="fa fa-bed"></i>82</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
-                            <!--end col-md-3-->
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Cottage</figure>
-                                            <aside>
-                                                <h3>Rose Brook Resort</h3>
-                                                <figure class="location">France</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/07.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>9.4</span>
-                                            <span><i class="fa fa-bed"></i>348</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
-                            <!--end col-md-3-->
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Hotel</figure>
-                                            <aside>
-                                                <h3>Secret Angel Hotel</h3>
-                                                <figure class="location">Switzerland</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/08.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>9.8</span>
-                                            <span><i class="fa fa-bed"></i>37</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
-                            <!--end col-md-3-->
-
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Hotel</figure>
-                                            <aside>
-                                                <h3>Mountain Paradise</h3>
-                                                <figure class="location">Norway</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/03.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>8.9</span>
-                                            <span><i class="fa fa-bed"></i>250</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
-                            <!--end col-md-3-->
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Apartment</figure>
-                                            <aside>
-                                                <h3>Twin Oaks Resort</h3>
-                                                <figure class="location">Austria</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/02.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>8.2</span>
-                                            <span><i class="fa fa-bed"></i>82</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
-                            <!--end col-md-3-->
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Cottage</figure>
-                                            <aside>
-                                                <h3>Sunrise Sanctum</h3>
-                                                <figure class="location">France</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/04.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>9.4</span>
-                                            <span><i class="fa fa-bed"></i>348</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
-                            <!--end col-md-3-->
-                            <div class="col-md-3 col-sm-6">
-                                <a href="detail.html" class="item small">
-                                    <div class="image">
-                                        <div class="info">
-                                            <figure class="label label-info">Hotel</figure>
-                                            <aside>
-                                                <h3>Primal Court Resort</h3>
-                                                <figure class="location">Switzerland</figure>
-                                            </aside>
-                                        </div>
-                                        <div class="wrapper">
-                                            <div class="gallery">
-                                                <img src="assets/img/items/06.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end image-->
-                                    <div class="description">
-                                        <div class="meta">
-                                            <span><i class="fa fa-star"></i>9.8</span>
-                                            <span><i class="fa fa-bed"></i>37</span>
-                                        </div>
-                                    </div>
-                                    <!--end description-->
-                                </a>
-                                <!--end item-->
-                            </div>
+                                        <!--end image-->
+                                    </a>
+                                    <!--end item-->
+                                </div>
+                            @endforeach
                             <!--end col-md-3-->
                         </div>
-                        <!--end row-->
-                        <a href="listing.html" class="pull-right">View All</a>
+                        <!--end row--> 
                     </div>
                     <div class="col-md-3 col-sm-4">
                         <a href="#" class="advertising-banner">
