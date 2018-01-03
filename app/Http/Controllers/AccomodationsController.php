@@ -11,14 +11,14 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 use Image;
-use Twilio\Rest\Client;
+//use Twilio\Rest\Client;
 
 class AccomodationsController extends Controller
 {
-    public function __construct(Client $client)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->client = $client;
+        //$this->client = $client;
     }
     
     public function listing($type)
@@ -83,22 +83,23 @@ class AccomodationsController extends Controller
             ]);
         }
 
-        $message = 'New accommodation has been added to localescape - '.$accommodations->title . 'by '. $user;
-        $phoneNumbers = '9105616';
-        $from = 'Taviyani';
+        //$message = 'New accommodation has been added to localescape - '.$accommodations->title . 'by '. $user;
+        //$phoneNumbers = '9105616';
+        //$from = 'Taviyani';
 
         //dd($from);
 
-        $phoneNumber = '+960'.$phoneNumbers;
+        //$phoneNumber = '+960'.$phoneNumbers;
 
-        try {
-            $this->sendMessage($phoneNumber, $message, $from);
-            return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
+        // try {
+        //     $this->sendMessage($phoneNumber, $message, $from);
+        //     return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
 
-        } 
-        catch ( \Twilio\Exceptions\RestException  $e ) {
-            return redirect('extranet/accommodations')->with('alert-danger', $e->getMessage());
-        }
+        // } 
+        // catch ( \Twilio\Exceptions\RestException  $e ) {
+        //     return redirect('extranet/accommodations')->with('alert-danger', $e->getMessage());
+        // }
+        return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
     }
 
     public function edit($id)
