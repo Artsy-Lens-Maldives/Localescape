@@ -368,6 +368,8 @@ Route::group(['prefix' => 'search'], function () {
         $accommodations = \App\Accomodations::search($q)->where('active', '1')->get();
         return view('search.index', compact('accommodations'));
         // return $accommodations;
+        
+        // for github
     });
 });
 
