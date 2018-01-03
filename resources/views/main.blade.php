@@ -361,7 +361,7 @@
                     <div class="gallery-carousel">
                         @foreach ($blogs as $blog)
                             <div class="gallery-item">
-                                <a href="{{ url('blog') }}/{{ $blog->slug }}"><div class="image"><img src="{{ Helper::s3_url_gen($blog->photourl) }}" alt=""></div></a>
+                                <a href="{{ url('blog') }}/{{ $blog->slug }}"><div class="image"><img src="{{ Helper::s3_url_gen($blogs->photos[0]->photourl) }}" alt=""></div></a>
                                 <div class="description">
                                     <a href="{{ url('blog') }}/{{ $blog->slug }}"><h3>{{ $blog->title }}</h3></a>
                                     <figure>Blog</figure>
