@@ -4,8 +4,8 @@
 
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Listing</a></li>
+                <li><a href="{{ url('') }}">Home</a></li>
+                <li><a href="{{ url('blog') }}">Blog</a></li>
                 <li class="active">Detail</li>
             </ol>
             <!--end breadcrumb-->

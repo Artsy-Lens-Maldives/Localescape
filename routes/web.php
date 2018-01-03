@@ -157,7 +157,7 @@ Route::get('/blog', function () {
 });
 Route::get('/blog/{slug}', function ($slug) {
     $blog = \App\blog::where('slug', $slug)->first();
-    return view('blog.detail', compact('blog'));
+    return view('blog.view', compact('blog'));
 });
 //Blog (end)
 
@@ -370,8 +370,6 @@ Route::group(['prefix' => 'search'], function () {
         $accommodations = \App\Accomodations::search($q)->where('active', '1')->get();
         return view('search.index', compact('accommodations'));
         // return $accommodations;
-        
-        // for github
     });
 });
 
