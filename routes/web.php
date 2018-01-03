@@ -281,3 +281,13 @@ Route::group(['prefix' => 'mailTest'], function () {
 Route::get('/newLogin', function () {
     return view('newlogin');
 });
+
+
+//Search
+Route::group(['prefix' => 'search'], function () {
+    Route::get('/', function (Request $request) {
+        $accommodations = \App\Accomodations::search("test")->get();
+        // return view('search.index', compact('accommodations'));
+        return $accommodations;
+    });
+});

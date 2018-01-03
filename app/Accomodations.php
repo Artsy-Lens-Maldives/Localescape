@@ -5,13 +5,33 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Laravel\Scout\Searchable;
 
 class Accomodations extends Model
 {
     use SoftDeletes;
     use Sluggable;
+    use Searchable;
     
     protected $guarded = [];
+    
+    public $asYouType = false;
+    
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id, // required
+            'title' => $this->title,
+            'type' => $this->type,
+            'description' => $this->description,
+            'address' => $this->address,
+        ];
+    }
 
     /**
     * Return the sluggable configuration array for this model.

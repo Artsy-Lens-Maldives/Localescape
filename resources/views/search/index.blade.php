@@ -5,7 +5,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                <li class="active"><a href="">{{ Helper::un_slug_gen($type) }}</a></li>
+                <li class="active"><a href="">Search</a></li>
             </ol>
             <!--end breadcrumb-->
             <div class="row">
@@ -14,7 +14,7 @@
                 <div class="col-md-9">
                     <div class="main-content">
                         <div class="title">
-                            <h1>{{ Helper::un_slug_gen($type) }}</h1>
+                            <h1>Search - You searched for {{ request()->q }}</h1>
                         </div>
                         
                         @if($accommodations->count() > 0)
@@ -87,7 +87,7 @@
 
                         @else
 
-                            <h3>No {{ Helper::un_slug_gen($type) }} found</h3>
+                            <h3>"{{ request()->q }}" not found</h3>
                         
                         @endif
                         

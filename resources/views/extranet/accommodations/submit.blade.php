@@ -208,7 +208,7 @@
                         </div>
                         <div class="file-upload-previews"></div>
                         <div class="file-upload">
-                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" required>
+                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files">
                             <span>Click to add images</span>
                         </div>
                     </section>

@@ -16,7 +16,8 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "pyaesone17/active-state": "1.1.1"
+        "pyaesone17/active-state": "1.1.1",
+        "teamtnt/laravel-scout-tntsearch-driver": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
