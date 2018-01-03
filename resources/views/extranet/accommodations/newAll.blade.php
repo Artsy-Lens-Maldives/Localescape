@@ -74,7 +74,7 @@
                                         <hr style="margin: 10px;">
                                         <div class="in-line" style="float: right; margin-bottom: 10px;">
                                             <center>
-                                                <a style="" class="btn btn-danger btn-lg" href="/extranet/accommodations/delete/{{ $accommodation->id }}" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')">Delete</a>
+                                                <a style="" class="btn btn-danger btn-lg" href="/extranet/accommodations/delete/{{ $accommodation->id }}" onclick="return confirm('Are you sure you would like to delete this Accommodation. This will also delete the rooms added to this accommodation.This process cannot be reversed.')">Delete</a>
                                                 <a style="" class="btn btn-warning btn-lg" href="/extranet/accommodations/edit/{{ $accommodation->id }}">Edit</a>
                                                 <a style="" class="btn btn-info btn-lg" href="/extranet/accommodations/rooms/{{ $accommodation->id }}">Rooms</a>
                                                 <a style="" class="btn btn-success btn-lg" href="/extranet/accommodations/images/{{ $accommodation->id }}">Images</a>
@@ -99,18 +99,81 @@
         <!--end container-->    
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
-@endsection
-
 @section('js')
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script src="//unpkg.com/sweetalert2@7.3.1/dist/sweetalert2.all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
-    <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-    </script>
+<script>
+    var deleter = {
+
+        linkSelector          : "a[data-delete]",
+        modalTitle            : "Are you sure?",
+        modalMessage          : "You will not be able to recover this entry?",
+        modalConfirmButtonText: "Yes, delete it!",
+        laravelToken          : null,
+        url                   : "/",
+
+        init: function() {
+            $(this.linkSelector).on('click', {self:this}, this.handleClick);
+        },
+
+        handleClick: function(event) {
+            event.preventDefault();
+            
+            var self = event.data.self;
+            var link = $(this);
+
+            self.modalTitle             = link.data('title') || self.modalTitle;
+            self.modalMessage           = link.data('message') || self.modalMessage;
+            self.modalConfirmButtonText = link.data('button-text') || self.modalConfirmButtonText;
+            self.url                    = link.attr('href');
+            self.laravelToken           = $("meta[name=token]").attr('content');
+
+            self.confirmDelete();
+        },
+
+        confirmDelete: function() {
+            swal({
+                    title             : this.modalTitle,
+                    text              : this.modalMessage,
+                    type              : "warning",
+                    showCancelButton  : true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText : this.modalConfirmButtonText,
+                    closeOnConfirm    : true
+                },
+                function() {
+                    console.log("message");
+                    this.makeDeleteRequest()
+                }.bind(this)
+            );
+        },
+
+        makeDeleteRequest: function() {
+            var form =
+                $('<form>', {
+                    'method': 'POST',
+                    'action': this.url
+                });
+
+            var token =
+                $('<input>', {
+                    'type': 'hidden',
+                    'name': '_token',
+                    'value': this.laravelToken
+                });
+
+            var hiddenInput =
+                $('<input>', {
+                    'name': '_method',
+                    'type': 'hidden',
+                    'value': 'DELETE'
+                });
+
+            return form.append(token, hiddenInput).appendTo('body').submit();
+        }
+    };
+    deleter.init();
+</script>
 
 @endsection

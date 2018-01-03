@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Accomodations;
 use App\accommo_room;
+use App\Room_Image;
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +50,26 @@ class AccommoRoomController extends Controller
         
         $room = \App\accommo_room::create(Input::except('_token', 'image'));
         $url = 'extranet/accommodations/rooms/' . $id ; 
+
+        $i = 0;
+        foreach ($request->image as $photo) {
+            $i++;
+            $m = ($i == '1') ? '1' : '0';
+            //File names and location
+            $fileName = $room->room_type.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = $accommodations->type.'/'.$accommodations->slug.'/rooms'.'/'.$room->room_type;
+
+            $original = Helper::photo_upload_original_s3($photo, $fileName, $location);
+            $thumbnail = Helper::photo_upload_thumbnail_s3($photo, $fileName, $location);
+
+            Room_Image::create([
+                'accommo_id' => $accommodations->id,
+                'room_id' => $room->id,
+                'main' => $m,
+                'photo_url' => $original,
+                'thumbnail' => $thumbnail,
+            ]);
+        }
 
         return redirect($url)->with('alert-success', 'Successfully added new room');
     }
@@ -108,11 +130,23 @@ class AccommoRoomController extends Controller
      */
     public function destroy(accommo_room $accommo_room)
     {
+        $room = $accommo_room;
         $acco = Accomodations::find($accommo_room->accommo_id);
-        if($acco->user_id == Auth::guard('extranet')->user()->id){
-            $accommo_room->delete();
+
+        if($acco->user_id == Auth::guard('extranet')->user()->id) {
+            //Delete Room Photos
+            $room_photos = $room->photos;
+            if(!$room_photos->isEmpty()){
+                foreach ($room_photos as $room_photo) {
+                    $r_original = Helper::delete_image_s3($room_photo->photo_url);
+                    $r_thumbnail = Helper::delete_image_s3($room_photo->thumbnail);
+                }
+            }
+
+            $room->delete();
             return redirect()->back()->with('alert-success', 'Successfully deleted the room');
-        } else {
+        } 
+        else {
             return redirect('extranet/accommodations');
         } 
     }

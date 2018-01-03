@@ -26,7 +26,7 @@ Route::prefix('accommodations')->group(function () {
     Route::post('/add', 'AccomodationsController@store');
     Route::get('/edit/{id}', 'AccomodationsController@edit');
     Route::post('/edit/{id}', 'AccomodationsController@update');
-    Route::get('/delete/{accomodations}', 'AccomodationsController@destroy');
+    Route::get('/delete/{id}', 'AccomodationsController@destroy');
 
     Route::get('/images/{id}', 'AccommoPhotoController@index');
     Route::get('/images/{id}/{accommo_photo}/delete', 'AccommoPhotoController@destroy');

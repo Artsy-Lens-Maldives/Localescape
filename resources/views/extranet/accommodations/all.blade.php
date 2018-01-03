@@ -4,7 +4,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Extranet</a></li>
+                <li><a href="#">Extranet - Test</a></li>
                 <li class="active">Accommodations</li>
             </ol>
             <!--end breadcrumb-->
@@ -45,7 +45,7 @@
                             <td>{{ $acco->created_at->diffForHumans() }}</td>
                             <td>{{ $acco->updated_at->diffForHumans() }}</td>
                             <td style="text-align: center;">
-                                <a style="margin:1px" class="btn btn-danger" href="/extranet/accommodations/delete/{{ $acco->id }}" onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')">Delete</a>
+                                <button style="margin:1px" class="delete-button btn btn-danger" data-id="{{ $acco->id }}" onclick="">Delete</button>
                                 <a style="margin:1px" class="btn btn-warning" href="/extranet/accommodations/edit/{{ $acco->id }}">Edit</a>
                                 <a style="margin:1px" class="btn btn-info" href="/extranet/accommodations/rooms/{{ $acco->id }}">Rooms</a>
                                 <a style="margin:1px" class="btn btn-success" href="/extranet/accommodations/images/{{ $acco->id }}">Images</a>
@@ -65,18 +65,45 @@
         <!--end container-->    
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
-@endsection
 
 @section('js')
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script src="//unpkg.com/sweetalert2@7.3.1/dist/sweetalert2.all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
     <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
+        const swal = require('sweetalert2');
+
+        $(document).on('click', '.button', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                title: "Are you sure!",
+                type: 'warning',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            },
+            function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('/extranet/accommodations/delete') }}",
+                    data: {id : id},
+                    success: function (data) {
+                        if(data){
+                            swal("Deleted", "Accommodation was successfully deleted!", "success");
+                        } 
+                        else {
+                            swal("Oops", "Your accommodation could not be deleted 😞", "error");
+                        }
+                    }         
+                });
+            });
+        });
+
+
     </script>
 
 @endsection

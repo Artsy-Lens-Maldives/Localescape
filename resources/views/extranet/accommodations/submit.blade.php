@@ -208,7 +208,7 @@
                         </div>
                         <div class="file-upload-previews"></div>
                         <div class="file-upload">
-                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" accept="gif|jpg|png">
+                            <input type="file" name="image[]" class="file-upload-input with-preview" multiple title="Click to add files" required>
                             <span>Click to add images</span>
                         </div>
                     </section>
@@ -278,7 +278,7 @@
                                             <!--end form-group-->
                                         </div>
                                         <!--end form-group-inline-->
-                                        <label><input type="checkbox" value="1" name="early_check_in">Early Check-in</label>
+                                        <label><input type="checkbox" onClick="changeValue()" value="0" name="early_check_in">Early Check-in</label>
                                     </div>
                                     <!--end col-md-6-->
                                     <div class="col-md-6">
@@ -296,7 +296,7 @@
                                             <!--end form-group-->
                                         </div>
                                         <!--end form-group-inline-->
-                                        <label><input type="checkbox" value="1" name="late_check_out">Late Check-out</label>
+                                        <label><input class="checkboxx" type="checkbox" onClick="changeValue()" value="0" name="late_check_out">Late Check-out</label>
                                     </div>
                                     <!--end col-md-6-->
                                 </div>
@@ -327,12 +327,9 @@
 
 <script>
     $(function(){
-        $(':checkbox').on('change', function() {
-            if (this.checked == true)
-                $(this).val("1"); 
-            else
-                $(this).val("0");
+        $(".checkboxx").click(function(){
+            console.log('clicked');
         });
-    }); 
+     });
 </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Accomodations;
 use App\accommo_photo;
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -45,49 +46,31 @@ class AccomodationsController extends Controller
     public function store(Request $request)
     {
         $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
+        $accommodations->user_id = Auth::guard('extranet')->user()->id;
+        $accommodations->save();
+
         $array = $request->facilities;
         if($array) {
             $accommodations->facilities = implode("," ,$array);
-            $accommodations->user_id = Auth::guard('extranet')->user()->id;
-            $accommodations->save();
-        } else {
-            $accommodations->user_id = Auth::guard('extranet')->user()->id;
             $accommodations->save();
         }
         
         $i = 0;
         foreach ($request->image as $photo) {
             $i++;
-            if ($i == '1'){
-                $m = '1';
-            } else {
-                $m = '0';
-            }
+            $m = ($i == '1') ? '1' : '0';
             //File names and location
             $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
-            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
-            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
-            
-            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+            $location = $accommodations->type.'/'.$accommodations->slug;
 
-            //Original Image
-            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_o, $original->stream()->__toString(), 'public');
-            //Thumbnail image
-            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+            $original = Helper::photo_upload_original_s3($photo, $fileName, $location);
+            $thumbnail = Helper::photo_upload_thumbnail_s3($photo, $fileName, $location);
 
             accommo_photo::create([
                 'accommo_id' => $accommodations->id,
                 'main' => $m,
-                'photo_url' => $location_o,
-                'thumbnail' => $location_t,
+                'photo_url' => $original,
+                'thumbnail' => $thumbnail,
             ]);
         }
 
@@ -148,10 +131,36 @@ class AccomodationsController extends Controller
         return redirect('extranet/accommodations')->with('alert-success', 'Successfully edited accommodation');
     }
 
-    public function destroy(Accomodations $accomodations)
+    public function destroy($id)
     {
-        if($accomodations->user_id == Auth::guard('extranet')->user()->id){
-            $accomodations->delete();
+        $accommodation = Accomodations::find($id);
+
+        if($accommodation->user_id == Auth::guard('extranet')->user()->id){    
+            //Delete Photos
+            $photos = $accommodation->photos;
+            if(!$photos->isEmpty()){
+                foreach ($photos as $photo) {
+                    $original = Helper::delete_image_s3($photo->photo_url);
+                    $thumbnail = Helper::delete_image_s3($photo->thumbnail);
+                }
+            }
+            $rooms = $accommodation->rooms;
+            //Delete Rooms
+            if(!$rooms->isEmpty()){
+                foreach ($rooms as $room) {
+                    //Delete Room Photos
+                    $room_photos = $room->photos;
+                    if(!$room_photos->isEmpty()){
+                        foreach ($room_photos as $room_photo) {
+                            $r_original = Helper::delete_image_s3($room_photo->photo_url);
+                            $r_thumbnail = Helper::delete_image_s3($room_photo->thumbnail);
+                        }
+                    }
+                    $room->delete();
+                }
+            }
+
+            $accommodation->delete();
             return redirect()->back()->with('alert-success', 'Successfully deleted the accommodation');
         } else {
             return redirect('extranet/accommodations');
