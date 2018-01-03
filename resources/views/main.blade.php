@@ -358,69 +358,20 @@
                     <h2 class="center">Blog Posts</h2>
                 </div>
                 <!--end title-->
-                <div class="gallery-carousel">
-                    <div class="gallery-item">
-                        <a href="blog-detail.html"><div class="image"><img src="assets/img/items/tip-01.jpg" alt=""></div></a>
-                        <div class="description">
-                            <a href="blog-detail.html"><h3>Silver Peak Resort</h3></a>
-                            <figure>Austria</figure>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis. Donec </p>
-                            <a href="blog-detail.html" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
+                @foreach ($blogs as $blog)
+                    <div class="gallery-carousel">
+                        <div class="gallery-item">
+                            <a href="{{ url('blog') }}/{{ $blog->slug }}"><div class="image"><img src="{{ Helper::s3_url_gen($blog->photourl) }}" alt=""></div></a>
+                            <div class="description">
+                                <a href="{{ url('blog') }}/{{ $blog->slug }}"><h3>{{ $blog->title }}</h3></a>
+                                <figure>Blog</figure>
+                                <a href="{{ url('blog') }}/{{ $blog->slug }}" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
+                            </div>
                         </div>
+                        <!--end gallery-item-->
                     </div>
-                    <!--end gallery-item-->
-                    <div class="gallery-item">
-                        <a href="blog-detail.html"><div class="image"><img src="assets/img/items/tip-02.jpg" alt=""></div></a>
-                        <div class="description">
-                            <a href="blog-detail.html"><h3>Silver Peak Resort</h3></a>
-                            <figure>Austria</figure>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis. Donec </p>
-                            <a href="blog-detail.html" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
-                        </div>
-                    </div>
-                    <!--end gallery-item-->
-                    <div class="gallery-item">
-                        <a href="blog-detail.html"><div class="image"><img src="assets/img/items/tip-03.jpg" alt=""></div></a>
-                        <div class="description">
-                            <a href="blog-detail.html"><h3>Silver Peak Resort</h3></a>
-                            <figure>Austria</figure>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis. Donec </p>
-                            <a href="blog-detail.html" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
-                        </div>
-                    </div>
-                    <!--end gallery-item-->
-                    <div class="gallery-item">
-                        <a href="blog-detail.html"><div class="image"><img src="assets/img/items/tip-01.jpg" alt=""></div></a>
-                        <div class="description">
-                            <a href="blog-detail.html"><h3>Silver Peak Resort</h3></a>
-                            <figure>Austria</figure>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis. Donec </p>
-                            <a href="blog-detail.html" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
-                        </div>
-                    </div>
-                    <!--end gallery-item-->
-                    <div class="gallery-item">
-                        <a href="blog-detail.html"><div class="image"><img src="assets/img/items/tip-02.jpg" alt=""></div></a>
-                        <div class="description">
-                            <a href="blog-detail.html"><h3>Silver Peak Resort</h3></a>
-                            <figure>Austria</figure>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis. Donec </p>
-                            <a href="blog-detail.html" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
-                        </div>
-                    </div>
-                    <!--end gallery-item-->
-                    <div class="gallery-item">
-                        <a href="blog-detail.html"><div class="image"><img src="assets/img/items/tip-03.jpg" alt=""></div></a>
-                        <div class="description">
-                            <a href="blog-detail.html"><h3>Silver Peak Resort</h3></a>
-                            <figure>Austria</figure>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis. Donec </p>
-                            <a href="blog-detail.html" class="btn btn-default btn-small btn-framed btn-rounded">More</a>
-                        </div>
-                    </div>
-                    <!--end gallery-item-->
-                </div>
-                <!--end gallery-carousel-->
+                    <!--end gallery-carousel-->    
+                @endforeach
             </div>
             <!--end container-->
         </div>
