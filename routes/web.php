@@ -374,7 +374,8 @@ Route::group(['prefix' => 'search'], function () {
 });
 
 Route::get('/about-us', function () {
-    return view('about.about-us');
+    $about = \App\AboutUs::find(1);
+    return view('about.about-us', compact('about'));
 });
 
 Route::get('/contact-us', function () {
