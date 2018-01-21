@@ -382,6 +382,6 @@ Route::get('/contact-us', function () {
 });
 
 Route::get('/tour/{slug}', function ($slug) {
-    $tour = \App\Tour::where('slug', $slug)->get();
+    $tour = \App\tour::where('slug', $slug)->get();
     return view('tour.detail', compact('tour'));
 });
