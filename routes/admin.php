@@ -609,7 +609,7 @@ Route::group(['prefix' => 'bills'], function () {
 Route::group(['prefix' => 'about-us'], function () {
     Route::get('/create', function () {
         $about = AboutUs::find(1);
-        return view('about-us.admin.create', compact('about'));
+        return view('about.admin.create', compact('about'));
     });
     Route::post('/create', function (Request $request) {
         $about = AboutUs::find(1);
