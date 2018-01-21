@@ -3,6 +3,7 @@
 use App\Accomodations;
 use App\accommo_photo;
 use App\facilities;
+use App\AboutUs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Filesystem\Filesystem;
@@ -601,5 +602,19 @@ Route::group(['prefix' => 'bills'], function () {
         $bill->save();
         
         return redirect()->back()->with('alert-success', 'Successfully added new bill');
+    });
+});
+
+
+Route::group(['prefix' => 'about-us'], function () {
+    Route::get('/create', function () {
+        $about = AboutUs::find(1);
+        return view('about-us.admin.create', compact('about'));
+    });
+    Route::post('/create', function (Request $request) {
+        $about = AboutUs::find(1);
+        $about->title = $request->title;
+        $about->description = $request->description;
+        return redirect('admin/about-us/create')
     });
 });

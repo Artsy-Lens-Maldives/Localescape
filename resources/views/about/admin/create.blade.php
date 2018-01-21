@@ -18,24 +18,18 @@
       </div>
       <form class="form-horizontal" action="{{ url()->current() }}" method="POST" enctype="multipart/form-data">        
         <div class="form-group">
-          <label class="control-label col-sm-2" for="email">Blog Title</label>
+          <label class="control-label col-sm-2" for="email">Title</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" placeholder="Your Blog Title" name="title">
+            <input type="text" value="{{ $about->title }}" class="form-control" id="title" placeholder="Your Blog Title" name="title">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Blog Post</label>
-          <div class="col-sm-10">          
-            <textarea name="description" form="form-control"  id="description" placeholder="" style="width: 100%;" rows="30" ></textarea>
+          <label class="control-label col-sm-2" for="email">Description</label>
+          <div class="col-sm-10">
+            <textarea name="description">{{ $about->description }}</textarea>
           </div>
         </div>
-         <div class="form-group">
-          <label class="control-label col-sm-2" for="pwd">Author</label>
-          <div class="col-sm-10">          
-            <input type="text" class="form-control" id="author" placeholder="Author Name" name="author">
-          </div>
-        </div>
-        
+
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
