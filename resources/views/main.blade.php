@@ -300,6 +300,7 @@
                                                     <h3>{{ $accommodation->title }}</h3>
                                                 </aside>
                                             </div>
+
                                             <div class="wrapper">
                                                 <div class="gallery">
                                                     {{--  @foreach ($accommodation->photos as $photo)
@@ -307,6 +308,7 @@
                                                     @endforeach  --}}
                                                 </div>
                                             </div>
+
                                         </div>
                                         <!--end image-->
                                     </a>
@@ -376,5 +378,6 @@
             <!--end container-->
         </div>
         <!--end block-->
+        <!--end col-md-3-->
 
 @endsection
