@@ -26,7 +26,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Description</label>
           <div class="col-sm-10">
-            <textarea name="description">{{ $about->description }}</textarea>
+            <textarea id="text-field" name="description">{{ $about->description }}</textarea>
           </div>
         </div>
 
@@ -39,4 +39,17 @@
       </form>
     </div>
 
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{ url('css/froala_editor.min.css') }}">
+@endsection
+
+@section('js')
+    <script src="{{ url('js/froala_editor.min.js') }}"></script>
+    <script>
+      $(function() {
+        $('#myEditor').froalaEditor({toolbarInline: false})
+      });
+    </script>
 @endsection
