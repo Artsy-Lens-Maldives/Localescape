@@ -177,13 +177,7 @@
                                                 <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>
                                             @endif
                                             <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}" class="wrapper">
-                                                {{--  @foreach($accommodation->photos as $photo)
-                                                    @if($photo->main == '1')
-                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
-                                                    @else
-                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
-                                                    @endif
-                                                @endforeach  --}}
+                                                <!--Photo-->
                                             </a>
                                             <div class="owl-navigation"></div>
                                             <!--end owl-navigation-->
