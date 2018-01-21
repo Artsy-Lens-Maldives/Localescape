@@ -22,7 +22,7 @@
                                         <div class="image">
                                             <div class="mark-circle description" data-toggle="tooltip" data-placement="right" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis erat vel quam aliquet hendrerit semper eget elit. Aenean tincidunt ultrices bibendum. Proin nisi erat, iaculis non pulvinar a, scelerisque ut est. "><i class="fa fa-question"></i></div>
                                             <div class="mark-circle map" data-toggle="tooltip" data-placement="right" title="Show on map"><i class="fa fa-map-marker"></i></div>
-                                            <a href="detail" class="wrapper">
+                                            <a href="/tour/{{ $tour->slug }}" class="wrapper">
                                                 <div class="gallery">
                                                 @foreach($tour->photos as $photo)
                                                     @if($photo->main == '1')
@@ -40,7 +40,7 @@
                                         <div class="description">
                                             <div class="info">
                                                 <figure class="label label-info">Tour</figure>
-                                                <a href="detail"><h3>{{ $tour->name }}</h3></a>
+                                                <a href="/tour/{{ $tour->slug }}"><h3>{{ $tour->name }}</h3></a>
                                                 <figure class="location">Price ${{ $tour->price }}</figure>
                                             </div>
                                         </div>

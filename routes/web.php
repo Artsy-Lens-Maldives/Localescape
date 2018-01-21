@@ -380,3 +380,8 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('about.contact-us');
 });
+
+Route::get('/tour/{slug}', function ($slug) {
+    $tour = \App\Tour::where('slug', $slug)->get();
+    return view('tour.detail', compact('tour'));
+});

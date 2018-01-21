@@ -65,7 +65,7 @@ class Helper
         //Upload thumbnail
         try {
             $s3->put($upload_location, $thumbnail->stream()->__toString(), 'public');
-        } 
+        }
         catch (S3Exception $e) {
             return var_dump($e);
         }
