@@ -50,6 +50,7 @@
                         <!--<li><a href="{{ url('admin/message') }}"><i class="fa fa-envelope"></i> Message</a></li>-->
                         <li><a href="{{ url('admin/top-picks') }}"><i class="fa fa-certificate"></i> Top Picks</a></li>
                         <li><a href="{{ url('admin/settings') }}"><i class="fa fa-cog"></i> Settings</a></li>
+                        <li><a href="{{ url('admin/about-us/create') }}"><i class="fa fa-cog"></i> About Us</a></li>
                       </ul>
                     </li>
                     
