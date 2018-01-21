@@ -615,6 +615,6 @@ Route::group(['prefix' => 'about-us'], function () {
         $about = AboutUs::find(1);
         $about->title = $request->title;
         $about->description = $request->description;
-        return redirect('admin/about-us/create')
+        return redirect('admin/about-us/create');
     });
 });
