@@ -49,7 +49,7 @@
     <script src="{{ url('js/froala_editor.min.js') }}"></script>
     <script>
       $(function() {
-        $('#myEditor').froalaEditor({toolbarInline: false})
+        $('#text-field').froalaEditor({toolbarInline: false})
       });
     </script>
 @endsection

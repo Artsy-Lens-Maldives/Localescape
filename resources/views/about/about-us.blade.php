@@ -32,7 +32,7 @@
                         </div>
                         <!--end title-->
                         <section>
-                            <div>{{ $about->description }}</div>
+                            <div>{!! $about->description !!}</div>
                         </section>
                         <!--<section>
                             <h2>Our Team</h2>
