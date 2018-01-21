@@ -42,14 +42,20 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{ url('css/froala_editor.min.css') }}">
+  <link rel="stylesheet" href="{{ url('css/froala_editor.pkgd.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 @endsection
 
 @section('js')
-    <script src="{{ url('js/froala_editor.min.js') }}"></script>
-    <script>
-      $(function() {
-        $('#text-field').froalaEditor({toolbarInline: false})
-      });
-    </script>
+  <script src="{{ url('js/froala_editor.pkgd.min.js') }}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+  <script>
+    $(function() {
+      $('#text-field').froalaEditor({
+        toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'help', 'html', '|', 'undo', 'redo'],
+        pluginsEnabled: null
+      })
+    });
+  </script>
 @endsection
