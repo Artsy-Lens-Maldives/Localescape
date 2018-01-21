@@ -383,5 +383,5 @@ Route::get('/contact-us', function () {
 
 Route::get('/tour/{slug}', function ($slug) {
     $tour = \App\tour::where('slug', $slug)->get();
-    return view('tour.detail', compact('tour'));
+    return view('tours.detail', compact('tour'));
 });
