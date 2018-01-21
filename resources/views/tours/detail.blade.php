@@ -5,7 +5,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="{{ url('') }}">Home</a></li>
-                <li><a href="{{ url('blog') }}">Tour</a></li>
+                <li><a href="{{ url('tours') }}">Tour</a></li>
                 <li class="active">Detail</li>
             </ol>
             <!--end breadcrumb-->
@@ -18,13 +18,13 @@
                         <!--end title-->
                         <article class="blog-post">
                             <div class="gallery">
-                                @foreach($tour->photos as $photo)
+                                {{--  @foreach($tour->photos as $photo)
                                     @if($photo->main == '1')
                                         <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
                                     @else
                                         <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
                                     @endif
-                                @endforeach
+                                @endforeach  --}}
                             </div>
                             <header><a href="blog-detail"><h2>{{ $tour->title }} - {{ $tour->price }}</h2></a></header>
                             <p>
