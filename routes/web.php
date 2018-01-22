@@ -157,7 +157,7 @@ Route::get('/blog', function () {
 });
 Route::get('/blog/{slug}', function ($slug) {
     $blog = \App\blog::where('slug', $slug)->first();
-    return view('blog.view', compact('blog'));
+    return view('blog.detail', compact('blog'));
 });
 //Blog (end)
 
