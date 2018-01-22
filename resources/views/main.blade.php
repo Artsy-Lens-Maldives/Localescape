@@ -365,7 +365,8 @@
                             <div class="gallery-item">
                                 <a href="{{ url('blog') }}/{{ $blog->slug }}">
                                     <div class="image">
-                                        <img src="{{ Helper::s3_url_gen($blogs->photos[0]->photo_url) }}" alt="">
+                                        <?php $photo = $blog->photos ?>
+                                        <img src="{{ Helper::s3_url_gen($photo[0]->photo_url) }}" alt="">
                                     </div>
                                 </a>
                                 <div class="description">
