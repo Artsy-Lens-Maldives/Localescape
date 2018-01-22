@@ -32,7 +32,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Blog Post</label>
           <div class="col-sm-10">          
-            <textarea name="description" form="form-control"  id="description" placeholder="" style="width: 100%;" rows="30" ></textarea>
+            <textarea name="description" form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" ></textarea>
           </div>
         </div>
          <div class="form-group">
@@ -51,4 +51,23 @@
       </form>
     </div>
 
+@endsection
+
+@section('css')
+  <link rel="stylesheet" href="{{ url('css/froala_editor.pkgd.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+@endsection
+
+@section('js')
+  <script src="{{ url('js/froala_editor.pkgd.min.js') }}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+  <script>
+    $(function() {
+      $('#text-field').froalaEditor({
+        toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'help', 'html', '|', 'undo', 'redo'],
+        pluginsEnabled: null
+      })
+    });
+  </script>
 @endsection

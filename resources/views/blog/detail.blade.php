@@ -32,7 +32,7 @@
                                 <a href="#" class="link-icon"><i class="fa fa-calendar"></i>{{ $blog->created_at->format("d/m/Y") }}</a>
                             </figure>
                             <p>
-                                {{ $blog->description }}
+                                {!! $blog->description !!}
                             </p>
                         </article><!-- /.blog-post-listing -->
                       
