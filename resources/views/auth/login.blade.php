@@ -73,7 +73,7 @@
 
                         <center>
                             <div class="row">
-                                <div class="col-xs-6 col-md-2 ">
+                                <div class="col-xs-6 col-md-2 col-offset-2">
                                    
                                 </div>  
                                 <div class="col-xs-6 col-md-2 ">

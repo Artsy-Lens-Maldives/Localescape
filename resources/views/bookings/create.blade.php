@@ -16,17 +16,18 @@
             @endif
         @endforeach
       </div>
+      <?php dd(auth()->user()) ?>
       <form class="form-horizontal" action="{{ url('booking/create/success') }}" method="POST">
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">Full Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+            <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ auth()->user()->name }}">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Email</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="email" placeholder="Email" name="email">
+            <input type="text" class="form-control" id="email" placeholder="Email" name="email" value="{{ auth()->user()->email }}">
           </div>
         </div>
         <div class="form-group">

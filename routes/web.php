@@ -254,7 +254,7 @@ Route::get('/booking', function (Request $request) {
     $room_photo = $room->photos->where('main', 1)->first();
 
     return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
-});
+})->middleware('auth');
 Route::get('/inquiry', function (Request $request) {
     $tax = \App\Settings::find('1');
     $accommodation = Accomodations::find($request->accommodation);
@@ -278,7 +278,7 @@ Route::get('/inquiry', function (Request $request) {
     $room_photo = $room->photos->where('main', 1)->first();
 
     return view('inquery.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
-});
+})->middleware('auth');
 
 Route::post('/booking', function (Request $request) {
     $tax = \App\Settings::find('1');
@@ -301,11 +301,13 @@ Route::post('/booking', function (Request $request) {
     }
     
     $booking = \App\booking::create(Input::except('_token'));
+    $booking->user_id = auth()->user()->id;
+    $booking->save();
 
     Alert::success('Booking Successfully created');
     
     return redirect()->back();
-});
+})->middleware('auth');
 
 Route::post('/inquiry', function (Request $request) {
     $tax = \App\Settings::find('1');
@@ -328,11 +330,13 @@ Route::post('/inquiry', function (Request $request) {
     }
     
     $booking = \App\inquery::create(Input::except('_token'));
+    $booking->user_id = auth()->user()->id;
+    $booking->save();
 
     Alert::success('Inquiry Successfully created');
     
     return redirect()->back();
-});
+})->middleware('auth');
 
 //Bookings and Inquiry (end)
 
