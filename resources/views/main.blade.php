@@ -44,7 +44,7 @@
                                     <!--end favorite-searches-->
                                 </div>
                                 <!--end container-->
-                                <div class="bg-transfer"><img src="assets/img/bg-hero.jpg" alt=""></div>
+                                <div class="bg-transfer"><img src="assets/img/a.jpg" alt=""></div>
                                 <!--end bg-transfer-->
                             </div>
                             <!--end inner-->
