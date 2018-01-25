@@ -38,7 +38,6 @@
                                         <th>Flight Number</th>
                                         <th>Accomodation Booked</th>
                                         <th>Date</th>
-                                        <th></th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
