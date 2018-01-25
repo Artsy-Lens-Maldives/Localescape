@@ -169,7 +169,6 @@ Route::get('/blog/{slug}', function ($slug) {
 //Auth Routes (start)
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'extranet'], function () {
     Route::get('/login', 'ExtranetAuth\LoginController@showLoginForm');
     Route::post('/login', 'ExtranetAuth\LoginController@login');
@@ -401,6 +400,8 @@ Route::post('/subscribe/post', function (Request $request) {
     Alert::success('Subscribed successfully');
     return redirect()->back();
 });
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/bookings', function () {
     $bookings = \App\booking::where('user_id', auth()->user()->id)->get();

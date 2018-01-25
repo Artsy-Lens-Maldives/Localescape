@@ -26,7 +26,7 @@
                                     @endif
                                 @endforeach  --}}
                             </div>
-                            <header><a href="blog-detail"><h2>{{ $tour->title }} - {{ $tour->price }}</h2></a></header>
+                            <header><a href="blog-detail"><h2>{{ $tour->name }} - ${{ $tour->price }}</h2></a></header>
                             <p>
                                 {{ $tour->description }}
                             </p>
