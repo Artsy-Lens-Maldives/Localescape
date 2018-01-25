@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-               <center> <div class="panel-heading" style="font-size:20px;">Welcome To Local Escape Extranet</div> </center>
+               <center> <div class="panel-heading" style="font-size:20px;">Welcome To Local Escape Customer Panel</div> </center>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -70,11 +70,21 @@
                         <hr>
                         <center> <div class="panel-heading" style="font-size:20px;">Login Using </div> </center>
                         <hr>
-                        <center><i class="fa fa-facebook-official" style="font-size:45px;color:#3b5998"></i></center>
-                        <hr>
-                        <center><i class="fa fa-twitter" style="font-size:45px;color:#0084b4"></i></center>
-                        <hr>
-                        <center><i class="fa fa-google-plus" style="font-size:45px;color:#d34836"></i></center>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-md-2 col-md-offset-1">
+                                <i class="fa fa-facebook-official" style="font-size:45px;color:#3b5998"></i>
+                            </div>      
+                            
+                            <div class="col-xs-6 col-md-2">
+                                <i class="fa fa-twitter" style="font-size:45px;color:#0084b4"></i>
+                            </div>      
+                            
+                            <divclass="col-xs-6 col-md-2">
+                                <i class="fa fa-google-plus" style="font-size:45px;color:#d34836"></i>
+                            </div> 
+                        </div>
+
                     </form>
                 </div>
             </div>
