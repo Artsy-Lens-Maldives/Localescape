@@ -58,7 +58,7 @@
                                         <div class="col-md-8 col-sm-7">
                                             <ul class="checkboxes inline list-unstyled">
                                                @foreach($categories as $category)
-                                                <li><label><input type="checkbox" name="{{ $category }}"><li>{{ $category }}</li> </label></li>
+                                                <li><label><input type="checkbox"><li>{{ $category }}</li> </label></li>
                                                 @endforeach
                                             </ul>
                                             <!--end checkboxes-->
