@@ -2,21 +2,21 @@
                     <div class="sidebar">
                         <div class="box filter">
                             <h2>Search</h2>
-                            <form id="form-filter" class="labels-uppercase">
+                            <form id="form-filter" action="/search" method="GET" class="labels-uppercase">
                                 <div class="form-group">
                                     <label for="form-filter-destination">Destination</label>
-                                    <input type="text" class="form-control" id="form-filter-destination" name="q" placeholder="Destination">
+                                    <input type="text" class="form-control" value="{{ request()->q }}" id="form-filter-destination" name="q" placeholder="Destination" required>
                                 </div>
                                 <!--end form-group-->
                                 <div class="form-group-inline">
                                     <div class="form-group">
                                         <label for="form-filter-check-in">Check In</label>
-                                        <input type="text" class="form-control date" id="form-filter-check-in" name="check-in" placeholder="Check In">
+                                        <input type="text" class="form-control date" value="{{ request()->check_in }}" id="form-filter-check-in" name="check_in" placeholder="Check In" required>
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group">
-                                        <label for="form-filter-check-out">Nights</label>
-                                        <input type="number" class="form-control" id="form-filter-check-out" name="check-out" placeholder="2">
+                                        <label for="form-filter-check-in">Check Out</label>
+                                        <input type="text" class="form-control date" value="{{ request()->check_out }}" id="form-filter-check-in" name="check_out" placeholder="Check Out" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>

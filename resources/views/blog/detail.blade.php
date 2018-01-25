@@ -26,17 +26,15 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <header><a href="blog-detail"><h2>{{ $blog->title }}</h2></a></header>
+                            <header>
+                                <h2>{{ $blog->title }}</h2>
+                            </header>
                             <figure class="meta">
                                 <a href="#" class="link-icon"><i class="fa fa-user"></i>{{ $blog->author }}</a>
                                 <a href="#" class="link-icon"><i class="fa fa-calendar"></i>{{ $blog->created_at->format("d/m/Y") }}</a>
                             </figure>
-                            <p>
-                                {!! $blog->description !!}
-                            </p>
+                            {!! html_entity_decode($blog->description) !!}
                         </article><!-- /.blog-post-listing -->
-                      
-                        
                     </div>
                     <!--end main-content-->
                 </div>

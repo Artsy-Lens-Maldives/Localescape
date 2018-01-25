@@ -30,6 +30,12 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Short Description</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="short_description" placeholder="Write a short description to show in all blog post section" name="short_description">
+          </div>
+        </div>
+        <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Blog Post</label>
           <div class="col-sm-10">          
             <textarea name="description" form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" ></textarea>

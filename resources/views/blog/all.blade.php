@@ -16,8 +16,8 @@
                         <!--end title-->
                         @foreach($blogs as $blog)
                             <article class="blog-post">
-                                <a href="blog-detail"><img src="{{ Helper::s3_url_gen($blog->photos[0]->thumbnail) }}"></a>
-                                <header><a href="blog-detail"><h2>{{ $blog->title }}</h2></a></header>
+                                <a href="/blog/{{ $blog->slug }}"><img src="{{ Helper::s3_url_gen($blog->photos[0]->thumbnail) }}"></a>
+                                <header><a href="/blog/{{ $blog->slug }}"><h2>{{ $blog->title }}</h2></a></header>
                                 <figure class="meta">
                                     <a href="#" class="link icon"><i class="fa fa-user"></i>{{ $blog->author }}</a>
                                     <a href="#" class="link icon"><i class="fa fa-calendar"></i>{{ $blog->created_at->format("d/m/Y") }}</a>
@@ -27,7 +27,7 @@
                                     </div>
                                 </figure>
                                 <p>
-                                {{ $blog->description }}
+                                {{ $blog->short_description }}
                                 </p>
                                 <a href="{{ url('blog') }}/{{ $blog->slug }}" class="btn btn-rounded btn-default btn-framed btn-small">Read More</a>
                             </article><!-- /.blog-post -->    
