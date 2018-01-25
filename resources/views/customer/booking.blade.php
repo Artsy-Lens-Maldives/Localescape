@@ -38,6 +38,7 @@
                                         <th>Flight Number</th>
                                         <th>Accomodation Booked</th>
                                         <th>Date</th>
+                                        <th></th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -52,7 +53,6 @@
                                         <td>{{ $booking->flightnumber }}</td>
                                         <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
                                         <td>{{ $booking->created_at->diffForHumans() }}</td>
-                                        <td>{{ $booking->user->name }}</td>
                                         <td>
                                             <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>
                                         </td>
