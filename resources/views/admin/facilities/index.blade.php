@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span><i class="fa fa-check" aria-hidden="true"></i> All Facilities</span> <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> <a class="btn btn-warning" href="{{ url('dontdumpthis') }}">Add facilities after migrate:refresh (temp link)</a> 
+    <span><i class="fa fa-check" aria-hidden="true"></i> All Facilities</span> <a class="btn btn-success" href="{{ url()->current() }}/add">Create a Facility</a> 
 @endsection
 
 @section('content')
