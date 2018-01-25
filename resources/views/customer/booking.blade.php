@@ -27,7 +27,39 @@
                         </ul>
                  </nav>
                  <div class="panel-body">
-                    Your Email is : {{ Auth::user()->email }}
+                        <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>                            
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        <th>Estimated Time Arrival</th>
+                                        <th>Flight Number</th>
+                                        <th>Accomodation Booked</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($bookings as $booking)
+                                    <tr>
+                                        <td>{{ $booking->name }}</th>
+                                        <td>{{ $booking->email }}</td>
+                                        <td>{{ $booking->checkin }}</td>
+                                        <td>{{ $booking->checkout }}</td>
+                                        <td>{{ $booking->eta }}</td>
+                                        <td>{{ $booking->flightnumber }}</td>
+                                        <td>{{ $booking->accomodation->title }} -{{ $booking->room_type }}</td>
+                                        <td>{{ $booking->created_at->toFormattedDateString() }}</td>
+                                        <td>{{ $booking->user->name }}</td>
+                                        <td>
+                                            <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>
+                                        </td>
+                                    </tr>                            
+                                    @endforeach
+                                </tbody>
+                        </table>
                 </div>
             </div>
         </div>
