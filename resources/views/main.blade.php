@@ -36,15 +36,15 @@
                                     </div>
                                     <div class="favorite-search">
                                         <span>Favorite Searches</span>
-                                        <a href="">Bourges</a>
-                                        <a href="">Orléans</a>
-                                        <a href="">Rouen</a>
-                                        <a href="">Toulouse</a>
+                                        <a href="">Rasdhoo</a>
+                                        <a href="">Male'</a>
+                                        <a href="">Hulhumale</a>
+                                        <a href="">Maafushi</a>
                                     </div>
                                     <!--end favorite-searches-->
                                 </div>
                                 <!--end container-->
-                                <div class="bg-transfer"><img src="assets/img/bg-hero.jpg" alt=""></div>
+                                <div class="bg-transfer"><img src="assets/img/background/back.jpg" alt=""></div>
                                 <!--end bg-transfer-->
                             </div>
                             <!--end inner-->
@@ -57,14 +57,9 @@
                                     <div class="row">
                                         <div class="col-md-8 col-sm-7">
                                             <ul class="checkboxes inline list-unstyled">
-                                                <li><label><input type="checkbox" name="hotel">Hotel</label></li>
-                                                <li><label><input type="checkbox" name="apartment">Apartment</label></li>
-                                                <li><label><input type="checkbox" name="breakfast-only">Breakfast Only</label></li>
-                                                <li><label><input type="checkbox" name="spa-wellness">Spa & Wellness</label></li>
-                                                <li><label><input type="checkbox" name="ski-center">Ski Center</label></li>
-                                                <li><label><input type="checkbox" name="cottage">Cottage</label></li>
-                                                <li><label><input type="checkbox" name="hostel">Hostel</label></li>
-                                                <li><label><input type="checkbox" name="boat">Boat</label></li>
+                                               @foreach($categories as $category)
+                                                <li><label><input type="checkbox" name="{{ $category }}"><li>{{ $category }}</li> </label></li>
+                                                @endforeach
                                             </ul>
                                             <!--end checkboxes-->
                                         </div>
@@ -229,8 +224,7 @@
                             </aside>
                             <figure>
                                 <h3>200+ Accommodations</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
+                                <p>Best Travel Agent Including 200 + vacation rentals – from cozy country homes to funky city apartments
                                 </p>
                             </figure>
                         </div>
@@ -244,8 +238,7 @@
                             </aside>
                             <figure>
                                 <h3>Easy Booking System</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
+                                <p>Trust & Safety 30-Day Money-Back Guarantee for all bookings
                                 </p>
                             </figure>
                         </div>
@@ -259,8 +252,7 @@
                             </aside>
                             <figure>
                                 <h3>Great Support</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
+                                <p>Best Price Guarantee New deals listed daily – for every budget!
                                 </p>
                             </figure>
                         </div>
