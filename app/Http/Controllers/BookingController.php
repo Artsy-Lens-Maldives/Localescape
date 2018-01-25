@@ -40,7 +40,7 @@ class BookingController extends Controller
         $booking = booking::create(Input::except('_token'));
         $booking->acco_id = $acco_id;
         $booking->room_id = $room_id;
-        $booking->user_id = Auth::user()->id;
+        $booking->user_id = auth()->id();
         $booking->save();
         return redirect()->back()->with('alert-success', 'Booking Successful !');
     }
