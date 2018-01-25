@@ -57,12 +57,14 @@
                                     <div class="row">
                                         <div class="col-md-8 col-sm-7">
                                             <ul class="checkboxes inline list-unstyled">
-                                               
-                                                <li><label><input type="checkbox" name="Hotel"><li> Hotel </li> </label></li>
-                                                <li><label><input type="checkbox" name="Resort"><li> Resort </li> </label></li>
-                                                <li><label><input type="checkbox" name="Safari"><li> Safari </li> </label></li>
-                                                <li><label><input type="checkbox" name="Guest House"><li> Guest House </li> </label></li>
-                                               
+                                                <li><label><input type="checkbox" name="hotel">Hotel</label></li>
+                                                <li><label><input type="checkbox" name="apartment">Apartment</label></li>
+                                                <li><label><input type="checkbox" name="breakfast-only">Breakfast Only</label></li>
+                                                <li><label><input type="checkbox" name="spa-wellness">Spa & Wellness</label></li>
+                                                <li><label><input type="checkbox" name="ski-center">Ski Center</label></li>
+                                                <li><label><input type="checkbox" name="cottage">Cottage</label></li>
+                                                <li><label><input type="checkbox" name="hostel">Hostel</label></li>
+                                                <li><label><input type="checkbox" name="boat">Boat</label></li>
                                             </ul>
                                             <!--end checkboxes-->
                                         </div>
