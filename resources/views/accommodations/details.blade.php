@@ -301,42 +301,6 @@
                         </section>
                         <section id="additional-information">
                             <h2>Additional Information</h2>
-                            <dl class="info">
-                                @if($accommodation->getAttribute('check-in-from') !== null)
-                                    <dt>Check-in:</dt>
-                                    <dd><strong>{{ $accommodation->getAttribute('check-in-from') }} - {{ $accommodation->getAttribute('check-in-to') }} </strong> @if($accommodation->early_check_in == '1') Early Check in available @endif </dd>    
-                                @endif
-                                
-                                @if($accommodation->getAttribute('check-out-from') !== null)
-                                    <dt>Check-out:</dt>
-                                    <dd><strong>{{ $accommodation->getAttribute('check-out-from') }} - {{ $accommodation->getAttribute('check-out-to') }} </strong> @if($accommodation->late_check_out == '1') Late Check out available @endif </dd>
-                                @endif
-                                
-                                @if($accommodation->cancellation !== null)
-                                    <dt>Cancellation:</dt>
-                                    <br>
-                                    <dd>{{ $accommodation->cancellation }}</dd>
-                                @endif
-                                
-                                @if($accommodation->charge_childeren !== null)
-                                    <dt>Children:</dt>
-                                    <br>
-                                    <dd>{{ $accommodation->charge_childeren }}</dd>
-                                @endif
-                                
-                                @if($accommodation->pets !== null)
-                                    <dt>Pets:</dt>
-                                    <br>
-                                    <dd>{{ $accommodation->pets }}</dd>
-                                @endif
-
-                                @if($accommodation->other_policies !== null)
-                                    <dt>Other Policies:</dt>
-                                    <br>
-                                    <dd>{{ $accommodation->other_policies }}</dd>
-                                @endif
-                            </dl>
-                            <!--end info-->
                             <table class="table">
                                 <thead>
                                     <th>Field</th>
@@ -383,9 +347,14 @@
                                     
                                     @if($accommodation->pets !== null)
                                         <tr>
-                                            <td>Pets:</td>
+                                            <td>Pets</td>
                                             <td>{{ $accommodation->pets }}</td>
                                         </tr>
+                                    @endif
+
+                                    @if($accommodation->other_policies !== null)
+                                        <td>Other Policies:</td>
+                                        <td>{{ $accommodation->other_policies }}</td>
                                     @endif
                                 </tbody>
                             </table>
