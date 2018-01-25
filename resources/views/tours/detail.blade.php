@@ -18,21 +18,20 @@
                         <!--end title-->
                         <article class="blog-post">
                             <div class="gallery">
-                                {{--  @foreach($tour->photos as $photo)
+                                <?php $photos = $tour->photos ?>
+                                @foreach($tour->photos as $photo)
                                     @if($photo->main == '1')
                                         <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
                                     @else
                                         <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
                                     @endif
-                                @endforeach  --}}
+                                @endforeach
                             </div>
                             <header><a href="blog-detail"><h2>{{ $tour->name }} - ${{ $tour->price }}</h2></a></header>
                             <p>
                                 {{ $tour->description }}
                             </p>
                         </article><!-- /.blog-post-listing -->
-                      
-                        
                     </div>
                     <!--end main-content-->
                 </div>
