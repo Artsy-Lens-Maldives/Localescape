@@ -16,8 +16,8 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Navigation <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="{{ url('/bookings') }}">All Bookings</a></li>
-                                                <li><a href="{{ url('/inquiries') }}">All Inquiries</a></li>
+                                                <li><a href="{{ url('/home/bookings') }}">All Bookings</a></li>
+                                                <li><a href="{{ url('/home/inquiries') }}">All Inquiries</a></li>
                                                 <li role="separator" class="divider"></li>
                                                 <li><a href="{{ url('/settings') }}">Settings</a></li>
                                           </ul>
@@ -47,7 +47,6 @@
                                         <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
                                         <td>{{ $booking->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>
                                             <a style="margin:1px" class="btn btn-info" href="/home/inquiries/{{ $booking->id }}">View</a>
                                         </td>
                                     </tr>                            
