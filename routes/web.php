@@ -28,9 +28,14 @@ Route::get('/', function () {
 
 //Test Routes (start)
 //Route::get('/all', 'Api/ApiAccomodationsController@index');
-Route::get('/all2', function () {
-    $flights = App\Accomodations::all();
-    return $flights;
+Route::get('/api/accommodations', function () {
+    $accommodations = Accomodations::all();
+    $names = array();
+    foreach($accommodations as $accommodation) {
+        array_push($names, $accommodation->title);
+        array_push($names, $accommodation->address);
+    }
+    return array_unique($names);
 });
 Route::get('/{type}/{slug}/photo/{filename}/thumb', function ($type, $slug, $filename) {
     $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
@@ -367,7 +372,7 @@ Route::get('/newLogin', function () {
 Route::group(['prefix' => 'search'], function () {
     Route::get('/', function (Request $request) {
         $q = $request->q;
-        $accommodations = \App\Accomodations::search($q)->where('active', '1')->get();
+        $accommodations = \App\Accomodations::search($q)->where('active', '1')->paginate(15);
         return view('search.index', compact('accommodations'));
         // return $accommodations;
     });

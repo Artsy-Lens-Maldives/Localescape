@@ -81,7 +81,7 @@
                                 
                             @endforeach
 
-                            {{ $accommodations->links() }}
+                            {{ $accommodations->appends(['q', 'check_in', 'check_out'])->links() }}
 
                         @else
 

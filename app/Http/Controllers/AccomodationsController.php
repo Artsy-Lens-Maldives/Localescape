@@ -23,7 +23,7 @@ class AccomodationsController extends Controller
     
     public function listing($type)
     {
-        $accommodations = Accomodations::where('type', $type)->where('active', '1')->paginate(25);
+        $accommodations = Accomodations::where('type', $type)->where('active', '1')->paginate(15);
         return view('accommodations.listings', compact('type', 'accommodations'));
     }
 

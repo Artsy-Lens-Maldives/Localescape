@@ -10,7 +10,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                    <center> <div class="panel-heading" style="font-size:20px;">Welcome To Local Escape Extranet</div> </center>
+                    <center> 
+                        <div class="panel-heading" style="font-size:20px;">Welcome To Local Escape Extranet</div> 
+                    </center>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/extranet/login') }}">
                         {{ csrf_field() }}

@@ -82,7 +82,7 @@
                                 
                             @endforeach
 
-                            <!-- for github -->
+                            {{ $accommodations->appends(['q' => request()->q, 'check_in' => request()->check_in, 'check_out' => request()->check_out])->links() }}
 
                         @else
 
