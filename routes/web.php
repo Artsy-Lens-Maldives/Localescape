@@ -391,3 +391,9 @@ Route::get('/tour/{slug}', function ($slug) {
     $tour = \App\tour::where('slug', $slug)->get();
     return view('tours.detail', compact('tour'));
 });
+
+Route::get('/home/bookings', function () {
+    $this->middleware('auth');
+    $bookings = \App\booking::get();
+    return view('customer.booking',compact('bookings'));
+});
