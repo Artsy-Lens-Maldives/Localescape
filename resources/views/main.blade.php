@@ -36,10 +36,10 @@
                                     </div>
                                     <div class="favorite-search">
                                         <span>Favorite Searches</span>
-                                        <a href="">Rasdhoo</a>
-                                        <a href="">Male'</a>
-                                        <a href="">Hulhumale</a>
-                                        <a href="">Maafushi</a>
+                                        <a href="/search?q=Rasdhoo">Rasdhoo</a>
+                                        <a href="/search?q=Male">Male'</a>
+                                        <a href="/search?q=Hulhumale">Hulhumale</a>
+                                        <a href="/search?q=Maafushi">Maafushi</a>
                                     </div>
                                     <!--end favorite-searches-->
                                 </div>
@@ -330,17 +330,19 @@
         <!-- subscribe-section -->        
         <div class="container">
             <div class="block">
-                <form class="marketing-form">
+                <form class="marketing-form" id="subForm" method="POST" action="{{ url('subscribe/post') }}">
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <div class="form-group-inline vertical-align-middle no-margin">
                                 <div class="form-group">
-                                    <h3 class="font-color-white no-margin"> Subscribe to recivie exclusive deals</h3>
+                                    <h4 class="font-color-white no-margin"> Subscribe to recivie exclusive deals</h4>
                                     <p class="font-color-white no-margin">Secret Deals – for our subscribers only</p>
                                 </div>
                                 <div class="form-group width-50">
-                                    <input type="email" class="form-control input-dark" name="location" placeholder="Your email">
+                                    {{ csrf_field() }}
+                                    <input type="email" class="form-control input-dark" name="email" placeholder="Your email">
                                 </div>
+                                <button style="margin-top: 3px;" class="btn" type="submit">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -382,4 +384,33 @@
         <!--end block-->
         <!--end col-md-3-->
 
+@endsection
+
+
+@section('js-after')
+    <script>
+        $('#subForm').on('keyup keypress', function(e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) { 
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    
+    @include('sweet::alert')
+@endsection
+
+@section('css')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+  <style>
+    .info {
+      float: left;
+    }
+    .value {
+      float: right;
+      font-weight: bold;
+    }
+  </style>
 @endsection

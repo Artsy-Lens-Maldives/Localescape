@@ -396,6 +396,12 @@ Route::get('/tour/{slug}', function ($slug) {
     return view('tours.detail', compact('tour'));
 });
 
+Route::post('/subscribe/post', function (Request $request) {
+    $subscribe = \App\Subscriber::create(Input::except('_token'));
+    Alert::success('Subscribed successfully');
+    return redirect()->back();
+});
+
 Route::get('/home/bookings', function () {
     $bookings = \App\booking::where('user_id', auth()->user()->id)->get();
     return view('customer.booking',compact('bookings'));
