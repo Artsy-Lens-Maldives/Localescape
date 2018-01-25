@@ -50,7 +50,7 @@
                                         <td>{{ $booking->checkout }}</td>
                                         <td>{{ $booking->eta }}</td>
                                         <td>{{ $booking->flightnumber }}</td>
-                                        <td>{{ $booking->accomodation->title }} -{{ $booking->room_type }}</td>
+                                        <td>{{ $booking->accomodation->title }} -{{ $booking->room->room_type }}</td>
                                         <td>{{ $booking->created_at->toFormattedDateString() }}</td>
                                         <td>{{ $booking->user->name }}</td>
                                         <td>
