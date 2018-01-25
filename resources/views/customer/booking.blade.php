@@ -5,7 +5,7 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <nav class="navbar navbar-inverse">
                     <a class="navbar-brand" href="#">Welcome {{ Auth::user()->name }}</a>
@@ -50,8 +50,8 @@
                                         <td>{{ $booking->checkout }}</td>
                                         <td>{{ $booking->eta }}</td>
                                         <td>{{ $booking->flightnumber }}</td>
-                                        <td>{{ $booking->accomodation->title }} -{{ $booking->room->room_type }}</td>
-                                        <td>{{ $booking->created_at->toFormattedDateString() }}</td>
+                                        <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
+                                        <td>{{ $booking->created_at->diffForHumans() }}</td>
                                         <td>{{ $booking->user->name }}</td>
                                         <td>
                                             <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>

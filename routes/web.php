@@ -397,7 +397,6 @@ Route::get('/tour/{slug}', function ($slug) {
 });
 
 Route::get('/home/bookings', function () {
-    $this->middleware('auth');
-    $bookings = \App\booking::get();
+    $bookings = \App\booking::with('room')->where('user_id', auth()->user()->id)->get();
     return view('customer.booking',compact('bookings'));
-});
+})->middleware('auth');
