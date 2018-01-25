@@ -49,6 +49,16 @@
 <script type="text/javascript" src="/js/custom.js"></script>
 
 @yield('js-after')
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92445511-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92445511-2');
+</script>
+
 
 <!--[if lte IE 9]>
 <script src="/js/ie.js"></script>
