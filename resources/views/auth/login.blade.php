@@ -73,7 +73,7 @@
 
                         <center>
                             <div class="row">
-                                <div class="col-xs-6 col-md-2 col-md-offset-1">
+                                <div class="col-xs-6 col-md-2 ">
                                     <i class="fa fa-facebook-official" style="font-size:45px;color:#3b5998"></i>
                                 </div>      
                                 
@@ -81,7 +81,7 @@
                                     <i class="fa fa-twitter" style="font-size:45px;color:#0084b4"></i>
                                 </div>      
                                 
-                                <divclass="col-xs-6 col-md-2">
+                                <div class="col-xs-6 col-md-2">
                                     <i class="fa fa-google-plus" style="font-size:45px;color:#d34836"></i>
                                 </div> 
                             </div>
