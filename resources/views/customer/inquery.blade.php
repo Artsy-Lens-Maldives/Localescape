@@ -32,11 +32,8 @@
                                     <tr>                            
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Check In</th>
-                                        <th>Check Out</th>
-                                        <th>Estimated Time Arrival</th>
-                                        <th>Flight Number</th>
-                                        <th>Accomodation Booked</th>
+                                        <th>Contact</th>
+                                        <th>Accomodation Detail</th>
                                         <th>Date</th>
                                         <th>Actions</th>
                                     </tr>
@@ -46,14 +43,12 @@
                                     <tr>
                                         <td>{{ $booking->name }}</th>
                                         <td>{{ $booking->email }}</td>
-                                        <td>{{ $booking->checkin }}</td>
-                                        <td>{{ $booking->checkout }}</td>
-                                        <td>{{ $booking->eta }}</td>
-                                        <td>{{ $booking->flightnumber }}</td>
+                                        <td>{{ $booking->contact }}</td>
                                         <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
                                         <td>{{ $booking->created_at->diffForHumans() }}</td>
                                         <td>
                                             <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>
+                                            <a style="margin:1px" class="btn btn-info" href="/home/inquiries/{{ $booking->id }}">View</a>
                                         </td>
                                     </tr>                            
                                     @endforeach
