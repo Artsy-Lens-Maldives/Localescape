@@ -57,9 +57,12 @@
                                     <div class="row">
                                         <div class="col-md-8 col-sm-7">
                                             <ul class="checkboxes inline list-unstyled">
-                                               @foreach($categories as $category)
-                                                <li><label><input type="checkbox"><li>{{ $category }}</li> </label></li>
-                                                @endforeach
+                                               
+                                                <li><label><input type="checkbox" name="Hotel"><li> Hotel </li> </label></li>
+                                                <li><label><input type="checkbox" name="Resort"><li> Resort </li> </label></li>
+                                                <li><label><input type="checkbox" name="Safari"><li> Safari </li> </label></li>
+                                                <li><label><input type="checkbox" name="Guest House"><li> Guest House </li> </label></li>
+                                               
                                             </ul>
                                             <!--end checkboxes-->
                                         </div>
