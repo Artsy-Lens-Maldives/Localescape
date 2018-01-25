@@ -337,6 +337,32 @@
                                 @endif
                             </dl>
                             <!--end info-->
+                            <table>
+                                <thead>
+                                    <th></th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Check in</td>
+                                        <td>
+                                            <strong>{{ $accommodation->getAttribute('check-in-from') }} - {{ $accommodation->getAttribute('check-in-to') }} </strong> 
+                                            @if($accommodation->early_check_in == '1') 
+                                                Early Check in available 
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Check out</td>
+                                        <strong>{{ $accommodation->getAttribute('check-out-from') }} - {{ $accommodation->getAttribute('check-out-to') }} </strong> 
+                                        @if($accommodation->late_check_out == '1') 
+                                            Late Check out available 
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </section>
                         
                     </div>
