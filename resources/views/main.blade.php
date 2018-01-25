@@ -342,7 +342,7 @@
                                     {{ csrf_field() }}
                                     <input type="email" class="form-control input-dark" name="email" placeholder="Your email">
                                 </div>
-                                <button style="margin-top: 3px;" class="btn" type="submit">Submit</button>
+                                <button style="margin-top: 3px;" class="btn btn-default" type="submit">Submit</button>
                             </div>
                         </div>
                     </div>
