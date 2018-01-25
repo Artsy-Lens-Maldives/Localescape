@@ -29,8 +29,7 @@
                                             <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>    
                                         @endif
                                         <div class="image">
-                                            <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="wrapper">
-                                                
+                                            <a href="/accommodation/{{ $accommodation->type }}/{{ $accommodation->slug }}?check_in={{ request()->check_in }}&check_out={{ request()->check_out }}" class="wrapper">
                                                 <div class="gallery">
                                                     @foreach($accommodation->photos as $photo)
                                                         @if($photo->main == '1')
@@ -59,7 +58,7 @@
                                         </div> -->
                                         <!--end meta-->
                                         <div class="info">
-                                            <a href="{{ url()->current() }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
+                                            <a href="/accommodation/{{ $accommodation->type }}/{{ $accommodation->slug }}?check_in={{ request()->check_in }}&check_out={{ request()->check_out }}"><h3>{{ $accommodation->title }}</h3></a>
                                             <figure class="location">{{ $accommodation->location }}</figure>
                                             <figure class="label label-info">{{ Helper::un_slug_gen($accommodation->type) }}</figure>
                                             <?php
@@ -74,7 +73,7 @@
                                                 {{ $accommodation->description }}
                                             </p>
                                             <!-- <div class="price-info">From<span class="price">${{ $accommodation->price }}</span><span class="appendix">/night</span></div> -->
-                                            <a href="{{ url()->current() }}/{{ $accommodation->slug }}" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
+                                            <a href="/accommodation/{{ $accommodation->type }}/{{ $accommodation->slug }}?check_in={{ request()->check_in }}&check_out={{ request()->check_out }}" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
                                         </div>
                                         <!--end info-->
                                     </div>
