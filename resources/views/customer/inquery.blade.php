@@ -48,6 +48,7 @@
                                         <td>{{ $booking->created_at->diffForHumans() }}</td>
                                         <td>
                                             <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>
+                                            <a style="margin:1px" class="btn btn-info" href="">View</a>
                                         </td>
                                     </tr>                            
                                     @endforeach
