@@ -400,3 +400,8 @@ Route::get('/home/bookings', function () {
     $bookings = \App\booking::where('user_id', auth()->user()->id)->get();
     return view('customer.booking',compact('bookings'));
 })->middleware('auth');
+
+Route::get('/home/inquiry', function () {
+    $bookings = \App\inquery::where('user_id', auth()->user()->id)->get();
+    return view('customer.booking',compact('bookings'));
+})->middleware('auth');
