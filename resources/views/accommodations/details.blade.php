@@ -337,30 +337,56 @@
                                 @endif
                             </dl>
                             <!--end info-->
-                            <table>
+                            <table class="table">
                                 <thead>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Field</th>
+                                    <th>Detail</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Check in</td>
-                                        <td>
-                                            <strong>{{ $accommodation->getAttribute('check-in-from') }} - {{ $accommodation->getAttribute('check-in-to') }} </strong> 
-                                            @if($accommodation->early_check_in == '1') 
-                                                Early Check in available 
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Check out</td>
-                                        <strong>{{ $accommodation->getAttribute('check-out-from') }} - {{ $accommodation->getAttribute('check-out-to') }} </strong> 
-                                        @if($accommodation->late_check_out == '1') 
-                                            Late Check out available 
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                    </tr>
+                                    @if($accommodation->getAttribute('check-in-from') !== null)
+                                        <tr>
+                                            <td>Check in</td>
+                                            <td>
+                                                <strong>{{ $accommodation->getAttribute('check-in-from') }} - {{ $accommodation->getAttribute('check-in-to') }} </strong> 
+                                                @if($accommodation->early_check_in == '1') 
+                                                    Early Check in available 
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    
+                                    @if($accommodation->getAttribute('check-out-from') !== null)
+                                        <tr>
+                                            <td>Check out</td>
+                                            <td>
+                                                <strong>{{ $accommodation->getAttribute('check-out-from') }} - {{ $accommodation->getAttribute('check-out-to') }} </strong>
+                                                @if($accommodation->late_check_out == '1') 
+                                                    Late Check out available 
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    
+                                    @if($accommodation->cancellation !== null)
+                                        <tr>
+                                            <td>Cancellation</td>
+                                            <td>{{ $accommodation->cancellation }}</td>
+                                        </tr>
+                                    @endif
+                                    
+                                    @if($accommodation->charge_childeren !== null)
+                                        <tr>
+                                            <td>Children:</td>
+                                            <td>{{ $accommodation->charge_childeren }}</td>
+                                        </tr>
+                                    @endif
+                                    
+                                    @if($accommodation->pets !== null)
+                                        <tr>
+                                            <td>Pets:</td>
+                                            <td>{{ $accommodation->pets }}</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </section>
