@@ -44,7 +44,7 @@
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="pwd">Details</label>
                   <div class="col-sm-10">          
-                    <input type="text" class="form-control" id="checkout" placeholder="Details about inquiry" name="details">
+                    <textarea type="text" class="form-control" id="checkout" placeholder="Details about inquiry" name="details"></textarea>
                   </div>
                 </div>
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
