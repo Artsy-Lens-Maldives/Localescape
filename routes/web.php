@@ -405,3 +405,8 @@ Route::get('/home/inquiries', function () {
     $bookings = \App\inquery::where('user_id', auth()->user()->id)->get();
     return view('customer.inquery',compact('bookings'));
 })->middleware('auth');
+
+Route::get('/home/inquiries/{$inquery}', function ($id) {
+    $bookings = \App\inquery::findorfail($id);
+    return view('customer.inquerydetail',compact('bookings'));
+})->middleware('auth');
