@@ -1,29 +1,7 @@
     <footer id="page-footer">
         {{--  <div class="row-one">
             <div class="container">
-                <div class="logos">
-                    <div class="logo">
-                        <a href="#"><img src="https://via.placeholder.com/120x35?text=Our%20Partner" alt=""></a>
-                    </div>
-                    <!--/ .logo-->
-                    <div class="logo">
-                        <a href="#"><img src="https://via.placeholder.com/120x35?text=Our%20Partner" alt=""></a>
-                    </div>
-                    <!--/ .logo-->
-                    <div class="logo">
-                        <a href="#"><img src="https://via.placeholder.com/120x35?text=Our%20Partner" alt=""></a>
-                    </div>
-                    <!--/ .logo-->
-                    <div class="logo">
-                        <a href="#"><img src="https://via.placeholder.com/120x35?text=Our%20Partner" alt=""></a>
-                    </div>
-                    <!--/ .logo-->
-                    <div class="logo">
-                        <a href="#"><img src="https://via.placeholder.com/120x35?text=Our%20Partner" alt=""></a>
-                    </div>
-                    <!--/ .logo-->
-                </div>
-                <!--/ .logos-->
+                
             </div>
         </div>  --}}
         <!--end row-one-->
