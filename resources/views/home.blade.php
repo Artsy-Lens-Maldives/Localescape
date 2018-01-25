@@ -49,11 +49,67 @@
                                 <td>{{ $last_booking->checkout }}</td>
                                 <td>{{ $last_booking->eta }}</td>
                                 <td>{{ $last_booking->flightnumber }}</td>
-                                <td>{{ $last_booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
+                                <td>{{ $last_booking->room->accommodation->title }} - {{ $last_booking->room->room_type }}</td>
                                 <td>{{ $last_booking->created_at->diffForHumans() }}</td>
                             </tr>
                         </tbody>
                     </table>
+                    <hr>
+                    <h3>Upcoming Booking</h3>
+                    <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>                   
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Estimated Time Arrival</th>
+                                <th>Flight Number</th>
+                                <th>Accomodation Booked</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $upcoming_booking->name }}</th>
+                                <td>{{ $upcoming_booking->email }}</td>
+                                <td>{{ $upcoming_booking->checkin }}</td>
+                                <td>{{ $upcoming_booking->checkout }}</td>
+                                <td>{{ $upcoming_booking->eta }}</td>
+                                <td>{{ $upcoming_booking->flightnumber }}</td>
+                                <td>{{ $upcoming_booking->room->accommodation->title }} - {{ $upcoming_booking->room->room_type }}</td>
+                                <td>{{ $upcoming_booking->created_at->diffForHumans() }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <h3>Recommend Accommodation</h3>
+                    <div class="row">
+                        @foreach ($accommodations as $accommodation)
+                            <div class="col-md-3 col-sm-6">
+                                <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}" class="item small">
+                                    <div class="image">
+                                        <div class="info">
+                                            <figure class="label label-info">{{ Helper::slug_gen($accommodation->type) }}</figure>
+                                            <aside>
+                                                <h3>{{ $accommodation->title }}</h3>
+                                            </aside>
+                                        </div>
+                                        <div class="wrapper">
+                                            <div class="gallery">
+                                                @foreach ($accommodation->photos as $photo)
+                                                    <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end image-->
+                                </a>
+                                <!--end item-->
+                            </div>
+                        @endforeach
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>
