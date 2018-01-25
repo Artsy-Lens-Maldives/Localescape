@@ -403,5 +403,5 @@ Route::get('/home/bookings', function () {
 
 Route::get('/home/inquiry', function () {
     $bookings = \App\inquery::where('user_id', auth()->user()->id)->get();
-    return view('customer.booking',compact('bookings'));
+    return view('customer.inquery',compact('bookings'));
 })->middleware('auth');
