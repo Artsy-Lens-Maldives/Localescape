@@ -36,10 +36,10 @@
                                     </div>
                                     <div class="favorite-search">
                                         <span>Favorite Searches</span>
-                                        <a href="">Bourges</a>
-                                        <a href="">Orléans</a>
-                                        <a href="">Rouen</a>
-                                        <a href="">Toulouse</a>
+                                        <a href="">Rasdhoo</a>
+                                        <a href="">Male'</a>
+                                        <a href="">Hulhumale</a>
+                                        <a href="">Maafushi</a>
                                     </div>
                                     <!--end favorite-searches-->
                                 </div>
@@ -229,8 +229,7 @@
                             </aside>
                             <figure>
                                 <h3>200+ Accommodations</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
+                                <p>Best Travel Agent Including 200 + vacation rentals – from cozy country homes to funky city apartments
                                 </p>
                             </figure>
                         </div>
@@ -244,8 +243,7 @@
                             </aside>
                             <figure>
                                 <h3>Easy Booking System</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
+                                <p>Trust & Safety 30-Day Money-Back Guarantee for all bookings
                                 </p>
                             </figure>
                         </div>
@@ -259,8 +257,7 @@
                             </aside>
                             <figure>
                                 <h3>Great Support</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum luctus posuere mattis.
-                                    Donec id nulla nisl.
+                                <p>Best Price Guarantee New deals listed daily – for every budget!
                                 </p>
                             </figure>
                         </div>

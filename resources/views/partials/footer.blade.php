@@ -1,9 +1,9 @@
     <footer id="page-footer">
-        <div class="row-one">
+        {{--  <div class="row-one">
             <div class="container">
                 
             </div>
-        </div>
+        </div>  --}}
         <!--end row-one-->
         <div class="row-two clearfix">
             <div class="container">

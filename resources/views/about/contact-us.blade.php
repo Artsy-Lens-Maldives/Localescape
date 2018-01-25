@@ -36,13 +36,13 @@
                                 <div class="col-md-4">
                                     <h2>Address</h2>
                                     <address>
-                                        <strong>Your Company</strong><br>
-                                        4877 Spruce Drive<br>
-                                        West Newton, PA 15089<br>
+                                        <strong>Local Escape Maldives</strong><br>
+                                        Enlodge ,Alif Alif Rasdhoo<br>
+                                        North Ari Atoll 09020 ,Maldives<br>
                                         <br>
-                                        +1 (734) 123-4567<br>
-                                        <a href="#">hello@example.com</a><br>
-                                        <strong>skype:</strong> your.company
+                                        +960 9555544<br>
+                                        <a href="#">info@localescapemaldives.com</a><br>
+
                                     </address>
                                     <h2>Social Profiles</h2>
                                     <div class="social-icons">
@@ -55,7 +55,7 @@
                                 <!--end col-md-8-->
                                 <div class="col-md-8">
                                     <h2>Map</h2>
-                                    <div id="contact-map" class="map"></div>
+                                    <div id="map-item" class="map"></div>
                                     <!--end contact-map-->
                                 </div>
                                 <!--end col-md-8-->
