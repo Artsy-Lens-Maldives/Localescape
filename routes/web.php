@@ -412,7 +412,7 @@ Route::get('/home/inquiries', function () {
     return view('customer.inquery',compact('bookings'));
 })->middleware('auth');
 
-Route::get('/home/inquiries/{$inquery}', function ($id) {
+Route::get('/home/inquiries/{id}', function ($id) {
     $bookings = \App\inquery::findorfail($id);
     return view('customer.inquerydetail',compact('bookings'));
 })->middleware('auth');
