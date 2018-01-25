@@ -301,6 +301,8 @@ Route::post('/booking', function (Request $request) {
     }
     
     $booking = \App\booking::create(Input::except('_token'));
+    $booking->user_id = auth()->user()->id;
+    $booking->save();
 
     Alert::success('Booking Successfully created');
     
@@ -328,6 +330,8 @@ Route::post('/inquiry', function (Request $request) {
     }
     
     $booking = \App\inquery::create(Input::except('_token'));
+    $booking->user_id = auth()->user()->id;
+    $booking->save();
 
     Alert::success('Inquiry Successfully created');
     
