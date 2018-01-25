@@ -423,8 +423,8 @@ function bigMap(_latitude,_longitude, element, useAjax){
 }
 
 
-var _latitude = 4.1744154;
-var _longitude = 73.5088892;
+var _latitude = 4.1755227;
+var _longitude = 73.5128235;
 var element = "map-item";
 var useAjax = true;
 bigMap(_latitude,_longitude, element, useAjax);
