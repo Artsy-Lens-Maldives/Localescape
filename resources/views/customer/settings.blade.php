@@ -20,8 +20,8 @@
                             </div>
                         </ul>
                  </nav>
-                 <div class="panel-heading">Change password</div>
                  <div class="panel-body">
+                     <center>Change Password</center>
                     @if (session('error'))
                         <div class="alert alert-danger">
                         {{ session('error') }}
