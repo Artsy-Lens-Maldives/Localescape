@@ -39,34 +39,20 @@ class AccommoPhotoController extends Controller
      */
     public function store($id, Request $request)
     {
-        $accommodations = Accomodations::find($id);
+        $accommodation = Accomodations::find($id);
 
-        foreach ($request->image as $photo) {            
-            //File names and location
-            $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
-            $location_o = $accommodations->type.'/'.$accommodations->slug.'/original'.'/'.$fileName;
-            $location_t = $accommodations->type.'/'.$accommodations->slug.'/thumbnail'.'/'.$fileName;
-            
-            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
+        foreach ($request->image as $photo) {
+            $file_name = $accommodation->slug.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = $accommodation->type.'/'.$accommodation->slug;
 
-            //Original Image
-            $original = Image::make($photo)->resize(1080, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_o, $original->stream()->__toString(), 'public');
-            //Thumbnail image
-            $thumbnail = Image::make($photo)->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+            $url_original = Upload::upload_original($photo, $file_name, $location);
+            $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
 
             accommo_photo::create([
-                'accommo_id' => $accommodations->id,
+                'accommo_id' => $accommodation->id,
                 'main' => '0',
-                'photo_url' => $location_o,
-                'thumbnail' => $location_t,
+                'photo_url' => $url_original,
+                'thumbnail' => $url_thumbnail,
             ]);
         }
 

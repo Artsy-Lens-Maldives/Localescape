@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Accomodations;
+use App\accommo_photo;
+use App\accommo_room;
 use App\Room_Image;
 use Illuminate\Http\Request;
 
@@ -33,9 +36,31 @@ class RoomImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, $room_id, Request $request)
     {
-        //
+        $accommodation = Accomodations::find($id);
+        $room = accommo_room::find($room_id);
+
+        $i = 0;
+        foreach ($request->image as $photo) {
+            $i++;
+            $m = ($i == '1') ? '1' : '0';
+
+            $file_name = $room->room_type.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = $accommodation->type.'/'.$accommodation->slug.'/rooms'.'/'.$room->room_type;
+
+            $url_original = Upload::upload_original($photo, $file_name, $location);
+            $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+            Room_Image::create([
+                'accommo_id' => $id,
+                'room_id' => $room_id,
+                'main' => $m,
+                'photo_url' => $url_original,
+                'thumbnail' => $url_thumbnail,
+            ]);
+        }
+        return redirect()->back()->with('alert-success', 'Successfully added new image(s) to the room');
     }
 
     /**

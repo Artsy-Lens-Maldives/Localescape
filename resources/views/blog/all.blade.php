@@ -16,7 +16,10 @@
                         <!--end title-->
                         @foreach($blogs as $blog)
                             <article class="blog-post">
-                                <a href="/blog/{{ $blog->slug }}"><img src="{{ Helper::s3_url_gen($blog->photos[0]->thumbnail) }}"></a>
+                                <a href="/blog/{{ $blog->slug }}">
+                                    <?php $photo = $blog->photos ?>
+                                    <img src="{{ Helper::s3_url_gen($photo[0]->thumbnail) }}">
+                                </a>
                                 <header><a href="/blog/{{ $blog->slug }}"><h2>{{ $blog->title }}</h2></a></header>
                                 <figure class="meta">
                                     <a href="#" class="link icon"><i class="fa fa-user"></i>{{ $blog->author }}</a>

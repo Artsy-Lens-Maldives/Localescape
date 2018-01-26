@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tours_photo;
 use App\tour;
 use Illuminate\Http\Request;
+use Mohamedathik\PhotoUpload\Upload;
 
 class ToursPhotoController extends Controller
 {
@@ -34,9 +35,27 @@ class ToursPhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($slug, Request $request)
     {
-        //
+        $tour = tour::where('slug', $slug)->first();
+
+        foreach ($request->image as $photo) {
+            //File names and location
+            $file_name = $tour->slug.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = 'tour/'.$tour->slug;
+            
+            $url_original = Upload::upload_original($photo, $file_name, $location);
+            $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+            
+            Tours_photo::create([
+                'tour_id' => $tour->id,
+                'main' => '0',
+                'photo_url' => $url_original,
+                'thumbnail' => $url_thumbnail,
+            ]);
+        }
+
+        return redirect()->back()->with('alert-success', 'Successfully added new image(s) to the tour');
     }
 
     /**
@@ -91,8 +110,12 @@ class ToursPhotoController extends Controller
      * @param  \App\Tours_photo  $tours_photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tours_photo $tours_photo)
+    public function destroy($slug, Tours_photo $tours_photo)
     {
-        //
+        $original = Upload::delete_image($tours_photo->photo_url);
+        $thumbnail = Upload::delete_image($tours_photo->thumbnail);
+        $tours_photo->delete();
+
+        return redirect()->back()->with('alert-success', 'Successfully deleted the tour photo');
     }
 }

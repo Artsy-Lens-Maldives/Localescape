@@ -22,9 +22,34 @@ class BlogPhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(blog $blog)
     {
-        //
+        //Delete Photos
+        $photos = $blog->photos;
+        if(!$photos->isEmpty()){
+            foreach ($photos as $photo) {
+                $original = Helper::delete_image_s3($photo->photo_url);
+                $thumbnail = Helper::delete_image_s3($photo->thumbnail);
+                $photo->delete();
+            }
+        }
+
+        //File name and location
+        $photo = $request->image;
+        $file_name = $blog->slug.'-'.time().'-'.$photo->getClientOriginalName();
+        $location = 'blog/'.$blog->slug;
+        
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+
+        Blog_photo::create([
+            'blog_id' => $blog->id,
+            'main' => '1',
+            'photo_url' => $url_original,
+            'thumbnail' => $url_thumbnail,
+        ]);
+
+        return redirect('admin/blog')->with('alert-success', 'Successfully added blog photo');
     }
 
     /**

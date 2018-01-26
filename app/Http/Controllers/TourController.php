@@ -6,7 +6,8 @@ use App\tour;
 use App\Tours_photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Image;
+use Mohamedathik\PhotoUpload\Upload;
+use App\Helpers\Helper;
 
 class TourController extends Controller
 {
@@ -17,7 +18,8 @@ class TourController extends Controller
      */
     public function index()
     {
-        //
+        $tours = \App\tour::all();
+        return view('tours.view', compact('tours'));
     }
 
     /**
@@ -40,32 +42,22 @@ class TourController extends Controller
     {
         $tour = tour::create(Input::except('_token', 'image'));
 
+        $i = 0;
         foreach ($request->image as $photo) {
+            $i++;
+            $m = ($i == '1') ? '1' : '0';
             //File names and location
-            $fileName = $tour->slug.'-'.time().'-'.$photo->getClientOriginalName();
-            $location_o = 'tour/'.$tour->slug.'/original'.'/'.$fileName;
-            $location_t = 'tour/'.$tour->slug.'/thumbnail'.'/'.$fileName;
+            $file_name = $tour->slug.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = 'tour/'.$tour->slug;
             
-            $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
-
-            //Original Image
-            $original = Image::make($photo->getRealPath())->resize(1080, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_o, $original->stream()->__toString(), 'public');
-            //Thumbnail image
-            $thumbnail = Image::make($photo->getRealPath())->resize(null, 200, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
-
+            $url_original = Upload::upload_original($photo, $file_name, $location);
+            $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
+            
             Tours_photo::create([
                 'tour_id' => $tour->id,
-                'main' => '1',
-                'photo_url' => $location_o,
-                'thumbnail' => $location_t,
+                'main' => $m,
+                'photo_url' => $url_original,
+                'thumbnail' => $url_thumbnail,
             ]);
         }
 
@@ -91,7 +83,7 @@ class TourController extends Controller
      */
     public function edit($slug)
     {
-        $tour = \App\tour::where('slug', $slug)->first();
+        $tour = tour::where('slug', $slug)->first();
         return view('tours.edit', compact('tour'));
     }
 
@@ -104,7 +96,7 @@ class TourController extends Controller
      */
     public function update($slug, Request $request)
     {
-        $tour = \App\tour::where('slug', $slug)->first();
+        $tour = tour::where('slug', $slug)->first();
         $tour->name = $request->name;
         $tour->price = $request->price;
         $tour->description = $request->description;
@@ -121,7 +113,7 @@ class TourController extends Controller
      */
     public function destroy($slug)
     {
-        $tour = \App\tour::where('slug', $slug)->first();
+        $tour = tour::where('slug', $slug)->first();
         $tour->delete();
         return redirect('admin/tours')->with('alert-success', 'Successfully deleted the tour');
     }

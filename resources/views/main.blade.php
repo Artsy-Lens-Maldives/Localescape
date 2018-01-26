@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
                                     <div class="favorite-search">
-                                        <span>Favorite Searches</span>
+                                        <span>Favorite Searches: </span>
                                         <a href="/search?q=Rasdhoo">Rasdhoo</a>
                                         <a href="/search?q=Male">Male'</a>
                                         <a href="/search?q=Hulhumale">Hulhumale</a>
@@ -300,9 +300,8 @@
 
                                             <div class="wrapper">
                                                 <div class="gallery">
-                                                    @foreach ($accommodation->photos as $photo)
-                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
-                                                    @endforeach
+                                                    <?php $photo = $accommodation->mainPhoto ?>
+                                                    <img src="{{ Helper::s3_url_gen($photo[0]->thumbnail) }}" alt="">
                                                 </div>
                                             </div>
 

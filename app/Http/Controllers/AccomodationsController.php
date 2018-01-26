@@ -11,6 +11,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 use Image;
+use Mohamedathik\PhotoUpload\Upload;
 //use Twilio\Rest\Client;
 
 class AccomodationsController extends Controller
@@ -51,53 +52,34 @@ class AccomodationsController extends Controller
 
     public function store(Request $request)
     {
-        $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
-        $accommodations->user_id = Auth::guard('extranet')->user()->id;
-        $accommodations->save();
-        
-        $user = Auth::guard('extranet')->user()->name;
-        
+        $accommodation = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         $array = $request->facilities;
         if($array) {
-            $accommodations->facilities = implode("," ,$array);
-            $accommodations->save();
+            $accommodation->facilities = implode("," ,$array);
         }
-        
+        $accommodation->user_id = '0';
+        $accommodation->save();
+
+        // Upload image
         $i = 0;
         foreach ($request->image as $photo) {
             $i++;
             $m = ($i == '1') ? '1' : '0';
-            //File names and location
-            $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
-            $location = $accommodations->type.'/'.$accommodations->slug;
 
-            $original = Helper::photo_upload_original_s3($photo, $fileName, $location);
-            $thumbnail = Helper::photo_upload_thumbnail_s3($photo, $fileName, $location);
+            $file_name = $accommodation->slug.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = $accommodation->type.'/'.$accommodation->slug;
+
+            $url_original = Upload::upload_original($photo, $file_name, $location);
+            $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
 
             accommo_photo::create([
-                'accommo_id' => $accommodations->id,
+                'accommo_id' => $accommodation->id,
                 'main' => $m,
-                'photo_url' => $original,
-                'thumbnail' => $thumbnail,
+                'photo_url' => $url_original,
+                'thumbnail' => $url_thumbnail,
             ]);
         }
-
-        //$message = 'New accommodation has been added to localescape - '.$accommodations->title . 'by '. $user;
-        //$phoneNumbers = '9105616';
-        //$from = 'Taviyani';
-
-        //dd($from);
-
-        //$phoneNumber = '+960'.$phoneNumbers;
-
-        // try {
-        //     $this->sendMessage($phoneNumber, $message, $from);
-        //     return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
-
-        // } 
-        // catch ( \Twilio\Exceptions\RestException  $e ) {
-        //     return redirect('extranet/accommodations')->with('alert-danger', $e->getMessage());
-        // }
+        
         return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
     }
 
@@ -166,8 +148,10 @@ class AccomodationsController extends Controller
                 foreach ($photos as $photo) {
                     $original = Helper::delete_image_s3($photo->photo_url);
                     $thumbnail = Helper::delete_image_s3($photo->thumbnail);
+                    $photo->delete();
                 }
             }
+
             $rooms = $accommodation->rooms;
             //Delete Rooms
             if(!$rooms->isEmpty()){
@@ -178,6 +162,7 @@ class AccomodationsController extends Controller
                         foreach ($room_photos as $room_photo) {
                             $r_original = Helper::delete_image_s3($room_photo->photo_url);
                             $r_thumbnail = Helper::delete_image_s3($room_photo->thumbnail);
+                            $room_photo->delete();
                         }
                     }
                     $room->delete();

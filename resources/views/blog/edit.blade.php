@@ -32,7 +32,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Blog Post</label>
           <div class="col-sm-10">          
-            <textarea name="description" form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" value="{{ $blog->description }}" ></textarea>
+            <textarea name="theDesc form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" value="{{ $blog->description }}" ></textarea>
           </div>
         </div>
          <div class="form-group">
@@ -49,7 +49,30 @@
           </div>
         </div>
       </form>
+      <hr>
+      @foreach ($blog->photos as $image)
+      <div class="clearfix col-lg-2 col-md-2 col-sm-4 col-xs-6" style="width: 200px; height:100%; margin-top: 10px; margin-bottom: 10px;">
+        <a href="{{ Helper::s3_url_gen($image->thumbnail) }}" data-title="Blog image" data-toggle="lightbox">
+          <img class='img-responsive img-thumbnail' src="{{ Helper::s3_url_gen($image->thumbnail) }}" style="width: 200px; height:130px;">
+        </a>
+      </div>
+      @endforeach
     </div>
+      <form class="form-horizontal" action="{{ url()->current() }}/photo" method="POST" enctype="multipart/form-data">        
+        <h3>Replace blog photo</h3>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">New Image</label>
+          <div class="col-sm-10">
+            <input type="file" name="image">
+          </div>
+        </div>
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
 @endsection
 
 @section('css')

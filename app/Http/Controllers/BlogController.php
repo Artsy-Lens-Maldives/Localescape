@@ -7,6 +7,8 @@ use App\Blog_photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Image;
+use App\Helpers\Helper;
+use Mohamedathik\PhotoUpload\Upload;
 
 class BlogController extends Controller
 {
@@ -17,7 +19,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        $blogs = \App\blog::all();
+        return view('blog.view', compact('blogs'));
     }
 
     /**
@@ -38,35 +41,23 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = blog::create(Input::except('_token', 'image'));
+        $blog = blog::create(Input::except('_token', 'image','theDesc'));
+        $blog->description = $request->theDesc;
+        $blog->save();
         
+        //File name and location
         $photo = $request->image;
-
-        //File names and location
-        $fileName = $blog->slug.'-'.time().'-'.$photo->getClientOriginalName();
-        $location_o = 'blog/'.$blog->slug.'/original'.'/'.$fileName;
-        $location_t = 'blog/'.$blog->slug.'/thumbnail'.'/'.$fileName;
+        $file_name = $blog->slug.'-'.time().'-'.$photo->getClientOriginalName();
+        $location = 'blog/'.$blog->slug;
         
-        $s3 = \Storage::disk(env('UPLOAD_TYPE', 'public'));
-
-        //Original Image
-        $original = Image::make($photo->getRealPath())->resize(1080, null, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-        $s3->put($location_o, $original->stream()->__toString(), 'public');
-        //Thumbnail image
-        $thumbnail = Image::make($photo->getRealPath())->resize(null, 200, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-        $s3->put($location_t, $thumbnail->stream()->__toString(), 'public');
+        $url_original = Upload::upload_original($photo, $file_name, $location);
+        $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
 
         Blog_photo::create([
             'blog_id' => $blog->id,
             'main' => '1',
-            'photo_url' => $location_o,
-            'thumbnail' => $location_t,
+            'photo_url' => $url_original,
+            'thumbnail' => $url_thumbnail,
         ]);
 
         return redirect('admin/blog')->with('alert-success', 'Successfully added new blog post');
@@ -91,7 +82,7 @@ class BlogController extends Controller
      */
     public function edit(blog $blog)
     {
-        //
+        return view('blog.edit', compact('blog'));
     }
 
     /**
@@ -103,7 +94,11 @@ class BlogController extends Controller
      */
     public function update(Request $request, blog $blog)
     {
-        //
+        $blog->title = $request->title;
+        $blog->description = $request->theDesc;
+        $blog->author = $request->author;
+        $blog->save();
+        return redirect('admin/blog')->with('alert-success', 'Successfully edited the blog');
     }
 
     /**
@@ -114,6 +109,17 @@ class BlogController extends Controller
      */
     public function destroy(blog $blog)
     {
-        //
+        //Delete Photos
+        $photos = $blog->photos;
+        if(!$photos->isEmpty()){
+            foreach ($photos as $photo) {
+                $original = Helper::delete_image_s3($photo->photo_url);
+                $thumbnail = Helper::delete_image_s3($photo->thumbnail);
+                $photo->delete();
+            }
+        }
+
+        $blog->delete();
+        return redirect('admin/blog')->with('alert-success', 'Successfully deleted the blog post');
     }
 }

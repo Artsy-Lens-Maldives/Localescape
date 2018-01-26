@@ -19,8 +19,15 @@
         "pyaesone17/active-state": "1.1.1",
         "teamtnt/laravel-scout-tntsearch-driver": "^3.0",
         "twilio/sdk": "^5.16",
-        "uxweb/sweet-alert": "^1.4"
+        "uxweb/sweet-alert": "^1.4",
+        "mohamedathik/photo-upload": "1.*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:mohamedathik/photo-upload.git"
+        }
+    ],
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
