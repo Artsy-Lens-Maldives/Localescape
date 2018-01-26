@@ -1,24 +1,23 @@
 @component('mail::message')
-    # Introduction
+# Hey Customer,
 
-    The body of your message.
+We have recieved a booking request on Local Escape Boutique -Delexue Room on (today's date 21.05.2018).You will see the booking details below 
 
-    @component('mail::table')
-    | Laravel       | Table         | Example  |
-    | ------------- |:-------------:| --------:|
-    | Col 2 is      | Centered      | $10      |
-    | Col 3 is      | Right-Aligned | $20      |
-    @endcomponent
+@component('mail::table')
+| Accomodation Details      |  Price  |
+| ------------- |:---------:|
+| Local Escape Boutique - Deluxe Room ( Chech In = 21.05.2018 and Checkout = 25.06.2019 )       |  $1000      |
+@endcomponent
 
-    @component('mail::panel')
-    This is the panel content.
-    @endcomponent
+@component('mail::panel')
+Our Agents will send you a booking confirmation as soon as possible.
+@endcomponent
 
-    @component('mail::button', ['url' => ''])
-    View Booking
-    @endcomponent
+@component('mail::button', ['url' => ''])
+View Booking
+@endcomponent
 
 
-    Thanks,<br>
-    {{ config('app.name') }}
+Thanks,<br>
+{{ config('app.name') }}
 @endcomponent
