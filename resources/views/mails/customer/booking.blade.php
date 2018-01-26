@@ -7,9 +7,8 @@ We have recieved a booking request on Local Escape Boutique -Delexue Room on (to
 | Accomodation Details      |  Price  |
 | ------------- |:---------:|
 | Local Escape Boutique - Deluxe Room       |  $1000      |
-| Subtotal      |  $1000  |
 | Tax (12%)      |  $120  |
-| Total      |  $1200  |
+| Total      |  $1120  |
 @endcomponent
 
 @component('mail::panel')
