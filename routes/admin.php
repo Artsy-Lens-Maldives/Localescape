@@ -423,6 +423,10 @@ Route::group(['prefix' => 'inquiries'], function () {
         $inquiries = \App\inquery::all();
         return view('inquery.view', compact('inquiries'));
     }); 
+    Route::get('/{$id}', function ($id) {
+        $inquiries = \App\inquery::findorfail($id);
+        return view('inquery.viewa', compact('inquiries'));
+    }); 
 });
 
 Route::group(['prefix' => 'gallery'], function () {
