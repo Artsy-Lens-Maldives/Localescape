@@ -63,7 +63,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="price_child">Images</label>
                 <div class="col-sm-10">
-                    <p class="form-control">To edit Images goto the images section in accommodation saving the changes</p>
+                    <p class="form-control">To edit Images goto the images section in accommodation after saving the changes</p>
                 </div>
             </div>
             

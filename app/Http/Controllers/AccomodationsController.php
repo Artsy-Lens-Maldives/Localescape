@@ -51,53 +51,34 @@ class AccomodationsController extends Controller
 
     public function store(Request $request)
     {
-        $accommodations = Accomodations::create(Input::except('_token', 'image', 'facilities'));
-        $accommodations->user_id = Auth::guard('extranet')->user()->id;
-        $accommodations->save();
-        
-        $user = Auth::guard('extranet')->user()->name;
-        
+        $accommodation = Accomodations::create(Input::except('_token', 'image', 'facilities'));
         $array = $request->facilities;
         if($array) {
-            $accommodations->facilities = implode("," ,$array);
-            $accommodations->save();
+            $accommodation->facilities = implode("," ,$array);
         }
-        
+        $accommodation->user_id = Auth::guard('extranet')->user()->id;
+        $accommodation->save();
+
+        // Upload image
         $i = 0;
         foreach ($request->image as $photo) {
             $i++;
             $m = ($i == '1') ? '1' : '0';
-            //File names and location
-            $fileName = $accommodations->slug . '-' . time() . '-' . $photo->getClientOriginalName();
+
+            $file_name = $accommodations->slug.'-'.time().'-'.$photo->getClientOriginalName();
             $location = $accommodations->type.'/'.$accommodations->slug;
 
-            $original = Helper::photo_upload_original_s3($photo, $fileName, $location);
-            $thumbnail = Helper::photo_upload_thumbnail_s3($photo, $fileName, $location);
+            $url_original = Upload::upload_original($photo, $file_name, $location);
+            $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);
 
             accommo_photo::create([
-                'accommo_id' => $accommodations->id,
+                'accommo_id' => $accommodation->id,
                 'main' => $m,
-                'photo_url' => $original,
-                'thumbnail' => $thumbnail,
+                'photo_url' => $url_original,
+                'thumbnail' => $url_thumbnail,
             ]);
         }
-
-        //$message = 'New accommodation has been added to localescape - '.$accommodations->title . 'by '. $user;
-        //$phoneNumbers = '9105616';
-        //$from = 'Taviyani';
-
-        //dd($from);
-
-        //$phoneNumber = '+960'.$phoneNumbers;
-
-        // try {
-        //     $this->sendMessage($phoneNumber, $message, $from);
-        //     return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
-
-        // } 
-        // catch ( \Twilio\Exceptions\RestException  $e ) {
-        //     return redirect('extranet/accommodations')->with('alert-danger', $e->getMessage());
-        // }
+        
         return redirect('extranet/accommodations')->with('alert-success', 'Successfully added new accommodation');
     }
 

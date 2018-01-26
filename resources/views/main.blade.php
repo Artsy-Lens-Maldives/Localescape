@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
                                     <div class="favorite-search">
-                                        <span>Favorite Searches</span>
+                                        <span>Favorite Searches: </span>
                                         <a href="/search?q=Rasdhoo">Rasdhoo</a>
                                         <a href="/search?q=Male">Male'</a>
                                         <a href="/search?q=Hulhumale">Hulhumale</a>

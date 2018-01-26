@@ -1,7 +1,7 @@
 @extends('layouts.admin-no')
 
 @section('title')
-    <span>Edit {{ $acco->title }}'s Photos</span> <a href="{{ url('admin/accommodations') }}" class="btn btn-lg btn-success">Go Back</a>
+    <span>Edit {{ $acco->title }}'s Photos</span> <a href="{{ url('admin/accommodations') }}" class="btn btn-success">Go Back</a>
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                         @endif
                     </div>
                     <section id="gallery">
-                        <form action="{{ url()->current() }}/new" method="post" enctype="multipart/form-data">
+                        <form action="{{ url()->current() }}/new" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="file-upload">
                                 <input id="input-b1" name="image[]" type="file" class="file" multiple accept="gif|jpg|png" required>
@@ -111,7 +111,6 @@
                                                     <a href="" class="btn btn-warning disabled" style="margin-top: 3px;" disabled>Current Main</a>
                                                 @endif
                                             </center>
-                                            
                                         </div>
                                     @endforeach
                                 </div>    
