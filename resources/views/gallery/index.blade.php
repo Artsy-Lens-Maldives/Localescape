@@ -3,7 +3,7 @@
 @section('content')
     <div class="container gallery-container">
         <h1>Our Gallery</h1>
-        <p class="page-description text-center">(Tell us something to write here)</p>    
+        {{--  <p class="page-description text-center">(Tell us something to write here)</p>      --}}
         <div class="tz-gallery">
             <div class="row">
                 @foreach($gallery_images as $image)
