@@ -21,7 +21,19 @@
                         </ul>
                  </nav>
                  <div class="panel-body">
+                   <br>
+                   <div class="row">
+                        <div class="col-sm">
+                            <h5>User Name: {{ Auth::user()->name }}</h5>
+                        </div>
+                        <div class="col-sm">
+                            <h5>Email: {{ Auth::user()->email }}</h5>
+                        </div>
+                      </div>
+                   <br>
+                   <br>  
                      <center><h3>Change Password</h3></center>
+                     <br>
                     @if (session('error'))
                         <div class="alert alert-danger">
                         {{ session('error') }}
