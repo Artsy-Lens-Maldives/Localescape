@@ -31,7 +31,6 @@
               <td>{{ $booking->eta }}</td>
               <td>{{ $booking->flightnumber }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-danger" href="" onclick="return confirm('Are you sure you would like to delete this Booking. This process cannot be reversed.')">Delete</a>
                 <a style="margin:1px" class="btn btn-warning" href="">Edit</a>                     
               </td>
             </tr>
