@@ -11,9 +11,9 @@ We have recieved a booking request on Local Escape Boutique -Delexue Room on (to
 | Checkout = 25.06.2019       |      |
 | Email: imperialaeiou@gmail.com      |      |
 | Contact: +9607779423      |      |
-| ##Subtotal      |  $1000  |
-| ##Tax (12%)      |  $120  |
-| ##Total      |  $1200  |
+| Subtotal      |  $1000  |
+| Tax (12%)      |  $120  |
+| #Total      |  $1200  |
 @endcomponent
 
 @component('mail::panel')
