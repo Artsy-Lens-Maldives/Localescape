@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <span style="font-size:14px;">Inquiry Detail of  {{ $inquiry->user->name }} as  {{ $inquiry->name }} to {{ $inquiry->room->accommodation->title }} - {{ $inquiry->room->room_type }} </span>
+    <span style="font-size:18px;">Inquiry Detail of  {{ $inquiry->user->name }} to {{ $inquiry->room->accommodation->title }} - {{ $inquiry->room->room_type }} </span>
 @endsection
 
 @section('content')
