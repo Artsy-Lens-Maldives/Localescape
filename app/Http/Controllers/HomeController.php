@@ -7,6 +7,7 @@ use App\booking;
 use App\Accomodations;
 use Carbon\Carbon;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
