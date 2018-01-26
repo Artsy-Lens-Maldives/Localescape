@@ -418,5 +418,5 @@ Route::get('/home/inquiries/{id}', function ($id) {
     return view('customer.inquerydetail', compact('booking'));
 })->middleware('auth');
 
-Route::get('/changePassword','HomeController@showChangePasswordForm');
+Route::get('/home/settings/change-password','HomeController@settings');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');

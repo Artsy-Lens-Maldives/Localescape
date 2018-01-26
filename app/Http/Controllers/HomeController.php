@@ -21,43 +21,51 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $last_booking = booking::where('user_id', auth()->user()->id)->latest()->first();
+        $now = Carbon::now();
+        $skip = $now->month + 5;
+        $accommodations = Accomodations::skip($skip)->take(4)->get();
+        return view('home', compact('last_booking', 'upcoming_booking', 'accommodations'));
+    }
+
+    public function settings()
+    {
+        $user = Auth::user();
+        return view('customer.settings', compact('user'));
+    }
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
-    public function showChangePasswordForm(){
-        return view('customer.settings');
+    public function changePass()
+    {
+        return view('customer.changePass');
     }
-    public function changePassword(Request $request){
+
+    public function changePassword(Request $request)
+    {
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-       
-        return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+            return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-       
         return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
         }
 
         $validatedData = $request->validate([
-        'current-password' => 'required',
-        'new-password' => 'required|string|min:6|confirmed',
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:6|confirmed',
         ]);
      
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
         $user->save();
         return redirect()->back()->with("success","Password changed successfully !");
-        }
-        
-    public function index()
-    {
-        $last_booking = booking::where('user_id', auth()->user()->id)->latest()->first();
-        $upcoming_booking = booking::where('user_id', auth()->user()->id)->latest()->first();
-        $now = Carbon::now();
-        $skip = $now->month + 5;
-        $accommodations = Accomodations::skip($skip)->take(4)->get();
-        return view('home', compact('last_booking', 'upcoming_booking', 'accommodations'));
     }
+        
+    
 }

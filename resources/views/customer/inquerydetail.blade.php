@@ -19,7 +19,7 @@
                                                 <li><a href="{{ url('/bookings') }}">All Bookings</a></li>
                                                 <li><a href="{{ url('/inquiries') }}">All Inquiries</a></li>
                                                 <li role="separator" class="divider"></li>
-                                                <li><a href="{{ url('/changePassword') }}">Settings</a></li>
+                                                <li><a href="{{ url('/home/settings') }}">Settings</a></li>
                                           </ul>
                                       </li>
                                 </ul>

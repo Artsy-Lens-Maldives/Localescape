@@ -15,70 +15,68 @@
                                 <li class="active"><a href="{{ url('/home') }}">Customer Dashboard</a></li>
                                 <li><a href="{{ url('/home/bookings') }}">All Bookings</a></li>
                                 <li><a href="{{ url('/home/inquiries') }}">All Inquiries</a></li>
-                                <li><a href="{{ url('/changePassword') }}">Settings</a></li>
+                                <li><a href="{{ url('/settings') }}">Settings</a></li>
 
                             </ul>
                         </div>
                     </ul>
                  </nav>
                  <div class="panel-body">
-                    <h3>Your Last Booking was on {{ $last_booking->created_at->toFormattedDateString() }}</h3>
-                    <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr> 
-                                <th>Accomodation Booked</th>                  
-                                <th>Check In</th>
-                                <th>Check Out</th>
-                                <th>ETA</th>
-                                <th>Flight Number</th>
-                                <th>Email</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $last_booking->room->accommodation->title }} - {{ $last_booking->room->room_type }}</td>
-                                <td>{{ $last_booking->checkin }}</td>
-                                <td>{{ $last_booking->checkout }}</td>
-                                <td>{{ $last_booking->eta }}</td>
-                                <td>{{ $last_booking->flightnumber }}</td>
-                                <td>{{ $last_booking->email }}</td>
-                                <td>{{ $last_booking->created_at->diffForHumans() }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <hr>
-                    <h3>Upcoming Booking</h3>
-                    <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>                   
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Check In</th>
-                                <th>Check Out</th>
-                                <th>Estimated Time Arrival</th>
-                                <th>Flight Number</th>
-                                <th>Accomodation Booked</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $upcoming_booking->name }}</th>
-                                <td>{{ $upcoming_booking->email }}</td>
-                                <td>{{ $upcoming_booking->checkin }}</td>
-                                <td>{{ $upcoming_booking->checkout }}</td>
-                                <td>{{ $upcoming_booking->eta }}</td>
-                                <td>{{ $upcoming_booking->flightnumber }}</td>
-                                <td>{{ $upcoming_booking->room->accommodation->title }} - {{ $upcoming_booking->room->room_type }}</td>
-                                <td>{{ $upcoming_booking->created_at->diffForHumans() }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <hr>
-                    <hr>
+                    @if (!$last_booking == null)
+                        <div class="last-booking">
+                            <h3>Your Last Booking was on {{ $last_booking->created_at->toFormattedDateString() }}</h3>
+                            <?php $accommodation = $last_booking->room->accommodation ?>
+                            <div class="item list">
+                                <div class="image-wrapper">
+                                    @if($accommodation->top_acco == "1")
+                                        <div class="mark-circle top" data-toggle="tooltip" data-placement="right" title="Top accommodation"><i class="fa fa-thumbs-up"></i></div>    
+                                    @endif
+                                    <div class="image">
+                                        <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}" class="wrapper">
+                                            <div class="gallery">
+                                                @foreach($accommodation->photos as $photo)
+                                                    @if($photo->main == '1')
+                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
+                                                    @else
+                                                        <img src="#" class="owl-lazy" alt="" data-src="{{ Helper::s3_url_gen($photo->thumbnail) }}">
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </a>
+                                        <!--end map-item-->
+                                        <div class="owl-navigation"></div>
+                                        <!--end owl-navigation-->
+                                    </div>
+                                </div>
+                                <!--end image-->
+                                <div class="description">
+                                    <div class="info">
+                                        <a href="{{ url('accommodation') }}/{{ $accommodation->type }}/{{ $accommodation->slug }}"><h3>{{ $accommodation->title }}</h3></a>
+                                        <figure class="label label-info">{{ Helper::un_slug_gen($accommodation->type) }}</figure>
+                                    </div>
+                                    <!--end info-->
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <ul>
+                                                <li>
+                                                    Booking Status: <button class="btn">Confirmed</button>
+                                                </li>
+                                                <li>
+                                                    Booking Confirmation Number: <?php echo mt_rand(100000,999999) ?>
+                                                </li>
+                                                <li>Check in: {{ $last_booking->checkin }}</li>
+                                                <li>Check out: {{ $last_booking->checkout }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end description-->
+                            </div>
+                        </div>
+                        <hr>
+                    @endif
                     <h3>Recommend Accommodations for {{ Auth::user()->name }}</h3>
-                    <br>
                     <div class="row">
                         @foreach ($accommodations as $accommodation)
                             <div class="col-md-3 col-sm-6">
@@ -92,9 +90,8 @@
                                         </div>
                                         <div class="wrapper">
                                             <div class="gallery">
-                                                @foreach ($accommodation->photos as $photo)
-                                                    <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
-                                                @endforeach
+                                                <?php $photo = $accommodation->mainPhoto ?>
+                                                <img src="{{ Helper::s3_url_gen($photo[0]->thumbnail) }}" alt="">
                                             </div>
                                         </div>
                                     </div>

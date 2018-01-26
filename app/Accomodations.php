@@ -58,6 +58,11 @@ class Accomodations extends Model
         return $this->hasMany('App\accommo_photo', 'accommo_id');
     }
 
+    public function mainPhoto()
+    {
+        return $this->photos()->where('main', '1');
+    }
+
     public function scopeMain_photo($query)
     {
         return $query->where('main', '1');
