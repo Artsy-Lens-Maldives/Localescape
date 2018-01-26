@@ -140,6 +140,7 @@ class AccommoRoomController extends Controller
                 foreach ($room_photos as $room_photo) {
                     $r_original = Helper::delete_image_s3($room_photo->photo_url);
                     $r_thumbnail = Helper::delete_image_s3($room_photo->thumbnail);
+                    $room_photo->delete();
                 }
             }
 

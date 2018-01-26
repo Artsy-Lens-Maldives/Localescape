@@ -113,10 +113,7 @@ Route::group(['prefix' => 'user'], function () {
 
 // Tours
 Route::group(['prefix' => 'tours'], function () {
-    Route::get('/', function () {
-        $tours = \App\tour::all();
-        return view('tours.view', compact('tours'));
-    });
+    Route::get('/', 'TourController@index');
     Route::get('/add', 'TourController@create');
     Route::post('/add', 'TourController@store');
     Route::get('/delete/{slug}', 'TourController@destroy');
@@ -124,7 +121,7 @@ Route::group(['prefix' => 'tours'], function () {
     Route::group(['prefix' => 'edit'], function () {
         Route::get('/{slug}', 'TourController@edit');
         Route::post('/{slug}', 'TourController@update');
-        
+        Route::post('/{slug}/photo/new', 'ToursPhotoController@store');
         Route::get('/{slug}/{tours_photo}/main', 'ToursPhotoController@main');
         Route::get('/{slug}/{tours_photo}/delete', 'ToursPhotoController@destroy');
     });
@@ -136,33 +133,15 @@ Route::group(['prefix' => 'tours'], function () {
 
 // Blog
 Route::group(['prefix' => 'blog'], function () {
-    Route::get('/', function () {
-        $blogs = \App\blog::all();
-        return view('blog.view', compact('blogs'));
-    });
-    Route::get('/create', function () {
-        return view('blog.create');
-    }); 
+    Route::get('/', 'BlogController@index');
+    Route::get('/create', 'BlogController@create');
     Route::post('/create', 'BlogController@store');
 
-    Route::get('/delete/{id}', function ($id) {
-        $blog = \App\blog::find($id);
-        $blog->delete();
-        return redirect('admin/blog')->with('alert-success', 'Successfully deleted the blog post');
-    });
+    Route::get('/delete/{blog}', 'BlogController@destroy');
     
-    Route::get('/edit/{id}', function ($id) {
-        $blog = \App\blog::find($id);
-        return view('blog.edit', compact('blog'));
-    });
-    Route::post('/edit/{id}', function ($id, Request $request) {
-        $blog = \App\blog::find($id);
-        $blog->title = $request->title;
-        $blog->description = $request->description;
-        $blog->author = $request->author;
-        $blog->save();
-        return redirect('admin/blog')->with('alert-success', 'Successfully edited the blog');
-    });
+    Route::get('/edit/{blog}', 'BlogController@edit');
+    Route::post('/edit/{blog}', 'BlogController@update');
+    Route::post('/edit/{blog}/photo', 'BlogPhotoController@store');
 });
 // Blog
 
