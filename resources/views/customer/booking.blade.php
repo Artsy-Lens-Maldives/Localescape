@@ -12,7 +12,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#">Customer Dashboard</a></li>
+                                    <li><a href="{{ url('/home') }}">Customer Dashboard</a></li>
                                     <li><a class="active" href="{{ url('/home/bookings') }}">All Bookings</a></li>
                                     <li><a href="{{ url('/home/inquiries') }}">All Inquiries</a></li>
                                     <li><a href="{{ url('/settings') }}">Settings</a></li>
