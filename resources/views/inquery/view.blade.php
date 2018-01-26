@@ -25,7 +25,7 @@
               <td>{{ $inquiry->contact }}</td>
               <td>{{ $inquiry->room->accommodation->title }} - {{ $inquiry->room->room_type }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-success" href="">View</a>                     
+                <a style="margin:1px" class="btn btn-success" href="/admin/inquiries/{{ $inquiry->id }}">View</a>                     
               </td>
             </tr>
           @endforeach
