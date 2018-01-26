@@ -21,7 +21,7 @@
                         </ul>
                  </nav>
                  <div class="panel-body">
-                     <center>Change Password</center>
+                     <center><h3>Change Password</h3></center>
                     @if (session('error'))
                         <div class="alert alert-danger">
                         {{ session('error') }}
