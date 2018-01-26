@@ -17,8 +17,8 @@ Chech In = 21.05.2018
 Checkout = 25.06.2019	
 Email: imperialaeiou@gmail.com	
 Contact: +9607779423
-Our Agents will send you a booking confirmation as soon as possible.
 @endcomponent
+Our Agents will send you a booking confirmation as soon as possible.
 
 @component('mail::button', ['url' => ''])
 View Booking
