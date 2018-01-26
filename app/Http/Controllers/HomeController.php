@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\booking;
 use App\Accomodations;
 use Carbon\Carbon;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,7 @@ class HomeController extends Controller
        
         return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
         }
-        
+
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
        
         return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
