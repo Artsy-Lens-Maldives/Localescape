@@ -23,7 +23,7 @@
         <tbody>
           @foreach($bookings as $booking)
             <tr>
-              <td>{{ $booking->user->name }}</td>
+              <td>{{ $booking->name }}</td>
               <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
               <td>{{ $booking->email }}</td>
               <td>{{ $booking->checkin }}</td>
@@ -31,7 +31,7 @@
               <td>{{ $booking->eta }}</td>
               <td>{{ $booking->flightnumber }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-warning" href="">Edit</a>                     
+                <a style="margin:1px" class="btn btn-warning" href="/admin/bookings/accommodations/{{ $booking->id }}/edit">Edit</a>                     
               </td>
             </tr>
           @endforeach

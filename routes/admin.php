@@ -409,6 +409,8 @@ Route::group(['prefix' => 'bookings'], function () {
             $bookings = \App\booking::all();
             return view('bookings.view', compact('bookings'));
         }); 
+        Route::get('/{id}/edit','BookingController@edit');
+        Route::post('/{id}/edit','BookingController@update');
     });
     Route::group(['prefix' => 'tours'], function () {
         Route::get('/', function () {
