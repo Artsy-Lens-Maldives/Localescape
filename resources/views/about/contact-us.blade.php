@@ -37,8 +37,8 @@
                                     <h2>Address</h2>
                                     <address>
                                         <strong>Local Escape Maldives</strong><br>
-                                        Enlodge ,Alif Alif Rasdhoo<br>
-                                        North Ari Atoll 09020 ,Maldives<br>
+                                        G.Villa Shabnamee,<br>
+                                        Handhuvarudhey Goalhi, Malé 20101<br>
                                         <br>
                                         +960 9555544<br>
                                         <a href="#">info@localescapemaldives.com</a><br>
@@ -46,7 +46,7 @@
                                     </address>
                                     <h2>Social Profiles</h2>
                                     <div class="social-icons">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://www.facebook.com/localescapemaldives/"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
                                         <a href="#"><i class="fa fa-instagram"></i></a>
                                         <a href="#"><i class="fa fa-youtube"></i></a>
