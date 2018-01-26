@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Contact Number</th>
+            <th>Accomodation Inquiried</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -22,9 +23,9 @@
               <td>{{ $inquiry->name }}</td>
               <td>{{ $inquiry->email }}</td>
               <td>{{ $inquiry->contact }}</td>
+              <td>{{ $inquiry->room->accommodation->title }} - {{ $inquiry->room->room_type }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-danger" href="" onclick="return confirm('Are you sure you would like to delete this accommodation. This process cannot be reversed.')">Delete</a>
-                <a style="margin:1px" class="btn btn-warning" href="">Edit</a>                     
+                <a style="margin:1px" class="btn btn-success" href="">View</a>                     
               </td>
             </tr>
           @endforeach
