@@ -6,7 +6,11 @@ We have recieved a booking request on Local Escape Boutique -Delexue Room on (to
 @component('mail::table')
 | Accomodation Details      |  Price  |
 | ------------- |:---------:|
-| Local Escape Boutique - Deluxe Room ( Chech In = 21.05.2018 and Checkout = 25.06.2019 )       |  $1000      |
+| Local Escape Boutique - Deluxe Room       |  $1000      |
+| Chech In = 21.05.2018       |      |
+| Checkout = 25.06.2019       |      |
+| Email: imperialaeiou@gmail.com      |      |
+| Contact: +9607779423      |      |
 @endcomponent
 
 @component('mail::panel')
