@@ -1,19 +1,19 @@
 @component('mail::message')
-# Introduction
+    # Introduction
 
-The body of your message.
+    The body of your message.
 
-@component('mail::table')
-| Laravel       | Table         | Example  |
-| ------------- |:-------------:| --------:|
-| Col 2 is      | Centered      | $10      |
-| Col 3 is      | Right-Aligned | $20      |
-@endcomponent
+    @component('mail::table')
+    | Laravel       | Table         | Example  |
+    | ------------- |:-------------:| --------:|
+    | Col 2 is      | Centered      | $10      |
+    | Col 3 is      | Right-Aligned | $20      |
+    @endcomponent
 
-@component('mail::button', ['url' => ''])
-View Booking
-@endcomponent
+    @component('mail::button', ['url' => ''])
+    View Booking
+    @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

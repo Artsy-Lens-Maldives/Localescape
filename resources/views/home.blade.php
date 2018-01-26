@@ -15,7 +15,7 @@
                                 <li class="active"><a href="{{ url('/home') }}">Customer Dashboard</a></li>
                                 <li><a href="{{ url('/home/bookings') }}">All Bookings</a></li>
                                 <li><a href="{{ url('/home/inquiries') }}">All Inquiries</a></li>
-                                <li><a href="{{ url('/settings') }}">Settings</a></li>
+                                <li><a href="{{ url('/home/settings') }}">Settings</a></li>
 
                             </ul>
                         </div>
