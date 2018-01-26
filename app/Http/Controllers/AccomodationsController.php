@@ -11,6 +11,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 use Image;
+use Mohamedathik\PhotoUpload\Upload;
 //use Twilio\Rest\Client;
 
 class AccomodationsController extends Controller
@@ -56,7 +57,7 @@ class AccomodationsController extends Controller
         if($array) {
             $accommodation->facilities = implode("," ,$array);
         }
-        $accommodation->user_id = Auth::guard('extranet')->user()->id;
+        $accommodation->user_id = '0';
         $accommodation->save();
 
         // Upload image
@@ -65,8 +66,8 @@ class AccomodationsController extends Controller
             $i++;
             $m = ($i == '1') ? '1' : '0';
 
-            $file_name = $accommodations->slug.'-'.time().'-'.$photo->getClientOriginalName();
-            $location = $accommodations->type.'/'.$accommodations->slug;
+            $file_name = $accommodation->slug.'-'.time().'-'.$photo->getClientOriginalName();
+            $location = $accommodation->type.'/'.$accommodation->slug;
 
             $url_original = Upload::upload_original($photo, $file_name, $location);
             $url_thumbnail = Upload::upload_thumbnail($photo, $file_name, $location);

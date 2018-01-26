@@ -45,10 +45,10 @@ class CreateAccomodationsTable extends Migration
             $table->longText('pets')->nullable();
             $table->longText('other_policies')->nullable();
 
-            $table->integer('early_check_in')->default("0");
+            $table->integer('early_check_in')->default("0")->nullable();
             $table->string('check-in-from')->nullable();
             $table->string('check-in-to')->nullable();
-            $table->integer('late_check_out')->default("0");
+            $table->integer('late_check_out')->default("0")->nullable();
             $table->string('check-out-from')->nullable();
             $table->string('check-out-to')->nullable();
 

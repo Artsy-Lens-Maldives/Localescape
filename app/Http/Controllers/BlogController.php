@@ -41,7 +41,9 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = blog::create(Input::except('_token', 'image'));
+        $blog = blog::create(Input::except('_token', 'image','theDesc'));
+        $blog->description = $request->theDesc;
+        $blog->save();
         
         //File name and location
         $photo = $request->image;
@@ -93,7 +95,7 @@ class BlogController extends Controller
     public function update(Request $request, blog $blog)
     {
         $blog->title = $request->title;
-        $blog->description = $request->description;
+        $blog->description = $request->theDesc;
         $blog->author = $request->author;
         $blog->save();
         return redirect('admin/blog')->with('alert-success', 'Successfully edited the blog');

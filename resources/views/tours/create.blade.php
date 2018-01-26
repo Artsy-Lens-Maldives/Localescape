@@ -38,7 +38,7 @@
          <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Description</label>
           <div class="col-sm-10">          
-            <input type="text" class="form-control" id="description" placeholder="Your Description" name="description">
+              <textarea name="description" form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" ></textarea>
           </div>
         </div>
         <div class="form-group">

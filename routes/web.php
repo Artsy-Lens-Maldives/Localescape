@@ -143,6 +143,10 @@ Route::get('/tours', function() {
     $tours = \App\tour::all();
     return view('tours.all', compact('type', 'tours'));
 });
+Route::get('/tour/{slug}', function ($slug) {
+    $tour = \App\tour::where('slug', $slug)->first();
+    return view('tours.detail', compact('tour'));
+});
 Route::get('/diving-package', function() {
     $type = 'Diving Pacakages';
     $dives = \App\dive::all();
@@ -388,11 +392,6 @@ Route::get('/about-us', function () {
 
 Route::get('/contact-us', function () {
     return view('about.contact-us');
-});
-
-Route::get('/tour/{slug}', function ($slug) {
-    $tour = \App\tour::where('slug', $slug)->get();
-    return view('tours.detail', compact('tour'));
 });
 
 Route::post('/subscribe/post', function (Request $request) {

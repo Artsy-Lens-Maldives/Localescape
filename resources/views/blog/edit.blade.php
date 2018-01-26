@@ -32,7 +32,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="pwd">Blog Post</label>
           <div class="col-sm-10">          
-            <textarea name="description" form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" value="{{ $blog->description }}" ></textarea>
+            <textarea name="theDesc form="form-control" id="text-field" placeholder="" style="width: 100%;" rows="30" value="{{ $blog->description }}" ></textarea>
           </div>
         </div>
          <div class="form-group">
@@ -57,8 +57,9 @@
         </a>
       </div>
       @endforeach
+    </div>
       <form class="form-horizontal" action="{{ url()->current() }}/photo" method="POST" enctype="multipart/form-data">        
-        <h3>Replace or Upload new Blog photo</h3>
+        <h3>Replace blog photo</h3>
         <div class="form-group">
           <label class="control-label col-sm-2" for="email">New Image</label>
           <div class="col-sm-10">
@@ -72,7 +73,6 @@
           </div>
         </div>
       </form>
-    </div>
 @endsection
 
 @section('css')

@@ -300,9 +300,8 @@
 
                                             <div class="wrapper">
                                                 <div class="gallery">
-                                                    @foreach ($accommodation->photos as $photo)
-                                                        <img src="{{ Helper::s3_url_gen($photo->thumbnail) }}" alt="">
-                                                    @endforeach
+                                                    <?php $photo = $accommodation->mainPhoto ?>
+                                                    <img src="{{ Helper::s3_url_gen($photo[0]->thumbnail) }}" alt="">
                                                 </div>
                                             </div>
 
