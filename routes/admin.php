@@ -58,11 +58,7 @@ Route::group(['prefix' => 'accommodations'], function () {
         Route::get('{id}/add', 'AdminRoomController@create');
         Route::post('{id}/add', 'AdminRoomController@store');
         Route::get('{id}/delete/{room_id}', 'AdminRoomController@destroy');
-        Route::get('{id}/edit/{room_id}', function ($id, $room_id) {
-            $accommodation = Accomodations::find($id);
-            $room = \App\accommo_room::find($room_id);
-            return view('admin.accommodation.rooms.edit', compact('accommodation', 'room'));
-        });
+        Route::get('{id}/edit/{room_id}', 'AdminRoomController@edit');
         Route::post('{id}/edit/{room_id}', function ($id, $room_id, Request $request) {
             $accommodation = Accomodations::find($id);
             $room = \App\accommo_room::find($room_id);

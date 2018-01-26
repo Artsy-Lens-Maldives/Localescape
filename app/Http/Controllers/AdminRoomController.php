@@ -40,7 +40,6 @@ class AdminRoomController extends Controller
      */
     public function store(Request $request)
     {
-        $accommodation = Accomodations::find($id);
         $rooms = \App\accommo_room::create(Input::except('_token'));
         $url = 'admin/accommodations/rooms/' . $id ; 
         return redirect($url)->with('alert-success', 'Successfully added new room');
@@ -77,9 +76,20 @@ class AdminRoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, $room_id, Request $request)
     {
-        //
+        $room = accommo_room::find($room_id);
+        $room->room_type = $request->room_type;
+        $room->short_description = $request->short_description;
+        $room->description = $request->description;
+        $room->no_adult = $request->no_adult;
+        $room->price_adult = $request->price_adult;
+        $room->no_children = $request->no_children;
+        $room->price_child = $request->price_child;
+        $room->save();
+
+        $url = 'admin/accommodations/rooms/' . $id ; 
+        return redirect($url)->with('alert-success', 'Successfully edited the room');
     }
 
     /**
