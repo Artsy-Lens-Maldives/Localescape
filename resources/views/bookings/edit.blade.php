@@ -8,6 +8,8 @@
     
     <div class="container">
         <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
+            <input type="hidden" name="acco_id" value="{{ $booking->acco_id }}">
+            <input type="hidden" name="room_id" value="{{ $booking->room_id }}">
             <div class="form-group">
               <label class="control-label col-sm-2" for="email">Full Name</label>
               <div class="col-sm-10">
