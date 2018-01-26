@@ -27,7 +27,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showChangePasswordForm(){
-        return view('auth.changepassword');
+        return view('customer.settings');
     }
     public function changePassword(Request $request){
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
