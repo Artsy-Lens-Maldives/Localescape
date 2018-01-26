@@ -23,7 +23,7 @@
         <tbody>
           @foreach($bookings as $booking)
             <tr>
-              <td>{{ $booking->user->name }}</td>
+              <td>{{ $booking->name }}</td>
               <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
               <td>{{ $booking->email }}</td>
               <td>{{ $booking->checkin }}</td>
