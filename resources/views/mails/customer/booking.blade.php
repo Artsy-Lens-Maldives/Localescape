@@ -13,7 +13,7 @@ We have recieved a booking request on Local Escape Boutique -Delexue Room on (to
 | Contact: +9607779423      |      |
 | Subtotal      |  $1000  |
 | Tax (12%)      |  $120  |
-| #Total      |  $1200  |
+| Total      |  $1200  |
 @endcomponent
 
 @component('mail::panel')
