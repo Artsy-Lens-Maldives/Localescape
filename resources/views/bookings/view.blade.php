@@ -31,7 +31,7 @@
               <td>{{ $booking->eta }}</td>
               <td>{{ $booking->flightnumber }}</td>
               <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-warning" href="/admin/bookings/accommodations/{id}/edit">Edit</a>                     
+                <a style="margin:1px" class="btn btn-warning" href="/admin/bookings/accommodations/{{ $booking->id }}/edit">Edit</a>                     
               </td>
             </tr>
           @endforeach
