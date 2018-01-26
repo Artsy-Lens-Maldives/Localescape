@@ -22,29 +22,27 @@
                     </ul>
                  </nav>
                  <div class="panel-body">
-                    <h3>Your Last Booking</h3>
+                    <h3>Your Last Booking was on {{ $last_booking->created_at->toFormattedDateString() }}</h3>
                     <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
-                            <tr>                   
-                                <th>Name</th>
-                                <th>Email</th>
+                            <tr> 
+                                <th>Accomodation Booked</th>                  
                                 <th>Check In</th>
                                 <th>Check Out</th>
-                                <th>Estimated Time Arrival</th>
+                                <th>ETA</th>
                                 <th>Flight Number</th>
-                                <th>Accomodation Booked</th>
+                                <th>Email</th>
                                 <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $last_booking->name }}</th>
-                                <td>{{ $last_booking->email }}</td>
+                                <td>{{ $last_booking->room->accommodation->title }} - {{ $last_booking->room->room_type }}</td>
                                 <td>{{ $last_booking->checkin }}</td>
                                 <td>{{ $last_booking->checkout }}</td>
                                 <td>{{ $last_booking->eta }}</td>
                                 <td>{{ $last_booking->flightnumber }}</td>
-                                <td>{{ $last_booking->room->accommodation->title }} - {{ $last_booking->room->room_type }}</td>
+                                <td>{{ $last_booking->email }}</td>
                                 <td>{{ $last_booking->created_at->diffForHumans() }}</td>
                             </tr>
                         </tbody>
@@ -78,7 +76,9 @@
                         </tbody>
                     </table>
                     <hr>
-                    <h3>Recommend Accommodation</h3>
+                    <hr>
+                    <h3>Recommend Accommodations for {{ Auth::user()->name }}</h3>
+                    <br>
                     <div class="row">
                         @foreach ($accommodations as $accommodation)
                             <div class="col-md-3 col-sm-6">
