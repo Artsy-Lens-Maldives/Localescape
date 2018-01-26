@@ -18,7 +18,7 @@
     View Booking
     @endcomponent
 
-
-    Thanks,<br>
+    Thanks,
+    <br>
     {{ config('app.name') }}
 @endcomponent

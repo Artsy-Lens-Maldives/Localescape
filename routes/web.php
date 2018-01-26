@@ -418,6 +418,6 @@ Route::get('/home/inquiries/{id}', function ($id) {
     return view('customer.inquerydetail', compact('booking'));
 })->middleware('auth');
 Route::get('/home/settings','HomeController@settings');
-
+Route::post('/home/settings/profile','HomeController@profile');
 Route::get('/home/settings/change-password','HomeController@changePass');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');

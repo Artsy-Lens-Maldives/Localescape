@@ -36,6 +36,18 @@ class HomeController extends Controller
         return view('customer.settings', compact('user'));
     }
 
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+        $user->phone = $request->phone;
+        $user->street = $request->street;
+        $user->city = $request->city;
+        $user->country = $request->country;
+        $user->zip = $request->zip;
+        $user->save();
+        return redirect()->back();
+    }
+
     /**
      * Show the application dashboard.
      *
