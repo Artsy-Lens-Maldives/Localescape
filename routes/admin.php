@@ -424,8 +424,8 @@ Route::group(['prefix' => 'inquiries'], function () {
         return view('inquery.view', compact('inquiries'));
     }); 
     Route::get('/{$id}', function ($id) {
-        $inquiries = \App\inquery::findorfail($id);
-        return view('inquery.viewa', compact('inquiries'));
+        $inquiry = \App\inquery::findorfail($id);
+        return view('inquery.viewa', compact('inquiry'));
     }); 
 });
 
