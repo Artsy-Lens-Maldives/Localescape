@@ -7,16 +7,16 @@ We have recieved a booking request on Local Escape Boutique -Delexue Room on (to
 | Accomodation Details      |  Price  |
 | ------------- |:---------:|
 | Local Escape Boutique - Deluxe Room       |  $1000      |
-| Chech In = 21.05.2018       |      |
-| Checkout = 25.06.2019       |      |
-| Email: imperialaeiou@gmail.com      |      |
-| Contact: +9607779423      |      |
 | Subtotal      |  $1000  |
 | Tax (12%)      |  $120  |
 | Total      |  $1200  |
 @endcomponent
 
 @component('mail::panel')
+Chech In = 21.05.2018	
+Checkout = 25.06.2019	
+Email: imperialaeiou@gmail.com	
+Contact: +9607779423
 Our Agents will send you a booking confirmation as soon as possible.
 @endcomponent
 
