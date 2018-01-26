@@ -78,7 +78,8 @@ class Helper
 
         if($s3->exists($location)) {
             $s3->delete($location);
+            return true;
         }
-        return;
+        return false;
     }
 }

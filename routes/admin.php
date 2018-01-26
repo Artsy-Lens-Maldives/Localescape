@@ -59,22 +59,7 @@ Route::group(['prefix' => 'accommodations'], function () {
         Route::post('{id}/add', 'AdminRoomController@store');
         Route::get('{id}/delete/{room_id}', 'AdminRoomController@destroy');
         Route::get('{id}/edit/{room_id}', 'AdminRoomController@edit');
-        Route::post('{id}/edit/{room_id}', function ($id, $room_id, Request $request) {
-            $accommodation = Accomodations::find($id);
-            $room = \App\accommo_room::find($room_id);
-
-            $room->room_type = $request->room_type;
-            $room->short_description = $request->short_description;
-            $room->description = $request->description;
-            $room->no_adult = $request->no_adult;
-            $room->price_adult = $request->price_adult;
-            $room->no_children = $request->no_children;
-            $room->price_child = $request->price_child;
-            $room->save();
-
-            $url = 'admin/accommodations/rooms/' . $id ; 
-            return redirect($url)->with('alert-success', 'Successfully edited the room');
-        });
+        Route::post('{id}/edit/{room_id}', 'AdminRoomController@update');
     });
     
 });

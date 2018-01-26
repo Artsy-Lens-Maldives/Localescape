@@ -6,6 +6,7 @@ use App\Accomodations;
 use App\accommo_room;
 use App\Room_Image;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use Mohamedathik\PhotoUpload\Upload;
 
 class AdminRoomController extends Controller
@@ -38,9 +39,9 @@ class AdminRoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        $rooms = \App\accommo_room::create(Input::except('_token'));
+        $rooms = accommo_room::create(Input::except('_token'));
         $url = 'admin/accommodations/rooms/' . $id ; 
         return redirect($url)->with('alert-success', 'Successfully added new room');
     }
