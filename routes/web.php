@@ -417,3 +417,10 @@ Route::get('/home/inquiries/{id}', function ($id) {
     $booking = \App\inquery::findorfail($id);
     return view('customer.inquerydetail', compact('booking'));
 })->middleware('auth');
+
+Route::get('/home/settings', function () {
+    return view('customer.settings');
+})->middleware('auth');
+
+Route::get('/changePassword','HomeController@showChangePasswordForm');
+Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
