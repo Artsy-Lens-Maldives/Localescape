@@ -53,35 +53,26 @@ Route::prefix('accommodations')->group(function () {
 
 //Booking Routes
 Route::prefix('bookings')->group(function () {
-    Route::get('/bookings', function () {
+    Route::get('/', function () {
         $bookings = \App\booking::all();
         return view('extranet.bookings.index', compact('bookings'));
-    }); 
-    
-    Route::get('/bookings/cancel/{id}', function ($id) {
+    });
+    Route::get('/cancel/{id}', function ($id) {
         $booking = \App\booking::findOrFail($id);
-    
         $booking->booking_cancelled = 1;
-        
         $booking->booking_requested = 0;
         $booking->booking_confirmed = 0;
         $booking->booking_cancellation_requested = 0;
         $booking->save();
-    
         return redirect()->back();
-        
-    }); 
-    
-    Route::get('/bookings/confirm/{id}', function ($id) {
+    });
+    Route::get('/confirm/{id}', function ($id) {
         $booking = \App\booking::findOrFail($id);
-    
         $booking->booking_confirmed = 1;
-    
         $booking->booking_requested = 0;
         $booking->booking_cancelled = 0;
         $booking->booking_cancellation_requested = 0;
         $booking->save();
-    
         return redirect()->back();
     }); 
 });
