@@ -14,7 +14,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $gallery_images = \App\Gallery::all();
+        return view('gallery.index', compact('gallery_images'));
     }
 
     /**

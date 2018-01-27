@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\booking;
+use App\Settings;
+use App\Accomodations;
+use App\accommo_room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
+use Alert;
 
 class BookingController extends Controller
 {
@@ -24,9 +29,28 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view("bookings.create");
+        $tax = Settings::find('1');    
+        $accommodation = Accomodations::find($request->accommodation);
+        $room = accommo_room::find($request->room);
+        $check_in = Carbon::parse($request->check_in);
+        $check_out = Carbon::parse($request->check_out);
+        $adults = $request->adults;
+        $child = $request->child;
+
+        $days = $check_out->diffInDays($check_in);
+        $tp_adult = $adults * $room->price_adult * $days;
+        $tp_child = $child * $room->price_child * $days;
+        
+        $total = $tp_adult + $tp_child;
+        if ($tax->tax == '1') {
+            $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+        }
+        
+        $room_photo = $room->photos->where('main', 1)->first();
+
+        return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
     }
 
     /**
@@ -35,14 +59,37 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($acco_id, $room_id, Request $request)
+    public function store(Request $request)
     {
+        $tax = Settings::find('1');
+        $accommodation = Accomodations::find($request->acco_id);
+        $room = accommo_room::find($request->room_id);
+        $check_in = Carbon::parse($request->checkin);
+        $check_out = Carbon::parse($request->checkout);
+        $adults = $request->adults;
+        $child = $request->children;
+
+        $days = $check_out->diffInDays($check_in);
+        $tp_adult = $adults * $room->price_adult * $days;
+        $tp_child = $child * $room->price_child * $days;
+        
         $booking = booking::create(Input::except('_token'));
-        $booking->acco_id = $acco_id;
-        $booking->room_id = $room_id;
-        $booking->user_id = Auth::user()->id;
+        $booking->user_id = auth()->user()->id;
+        $booking->adults = $adults;
+        $booking->nights = $days;
+
+        $total = $tp_adult + $tp_child;
+        if ($tax->tax == '1') {
+            $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+            $booking->price = $tax_total;
+        } else {
+            $booking->price = $total;
+        }
         $booking->save();
-        return redirect()->back()->with('alert-success', 'Booking Successful !');
+
+        Alert::success('Booking Successfully created');
+        
+        return redirect()->back();
     }
 
     /**
@@ -64,8 +111,7 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        $booking = \App\booking::findorfail($id);
-        return view ('bookings.edit', compact('booking'));
+        //
     }
 
     /**
@@ -77,14 +123,7 @@ class BookingController extends Controller
      */
     public function update(Request $request, booking $booking)
     {
-        $booking->name = $request->name;
-        $booking->email = $request->email;
-        $booking->checkin = $request->checkin;
-        $booking->checkout = $request->checkout;
-        $booking->eta = $request->eta;
-        $booking->flightnumber = $request->flightnumber;
-        $booking->save();
-        return redirect('/admin/bookings/accommodations')->with('alert-success', 'Successfully Edited the Booking');
+        //
     }
 
     /**
@@ -97,4 +136,45 @@ class BookingController extends Controller
     {
         //
     }
+
+    public function cancellation_request($id)
+    {
+        $booking = booking::findOrFail($id);
+        
+        if ($booking->cancellation_request == 0){
+            $booking->booking_cancellation_requested = 1;
+            $booking->booking_confirmed = 0;
+            $booking->booking_requested = 0;
+            $booking->save();
+
+            //Send Booking Cancellation Request Mail
+            return redirect()->back()->with('alert-success', 'Booking cancellation request sent');
+        } else {
+            return redirect()->back();
+        }
+        
+    }
+
+    public function cancel($id)
+    {
+        $booking = booking::findOrFail($id);
+        $booking->booking_cancelled = 1;
+        $booking->booking_requested = 0;
+        $booking->booking_confirmed = 0;
+        $booking->booking_cancellation_requested = 0;
+        $booking->save();
+        return redirect()->back();        
+    }
+
+    public function confirm($id)
+    {
+        $booking = booking::findOrFail($id);
+        $booking->booking_confirmed = 1;
+        $booking->booking_requested = 0;
+        $booking->booking_cancelled = 0;
+        $booking->booking_cancellation_requested = 0;
+        $booking->save();
+        return redirect()->back();
+    }
+
 }

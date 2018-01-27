@@ -28,108 +28,20 @@ Route::get('/', function () {
 
 //Test Routes (start)
 //Route::get('/all', 'Api/ApiAccomodationsController@index');
-Route::get('/api/accommodations', function () {
-    $accommodations = Accomodations::all();
-    $names = array();
-    foreach($accommodations as $accommodation) {
-        array_push($names, $accommodation->title);
-        array_push($names, $accommodation->address);
-    }
-    return array_unique($names);
-});
-Route::get('/{type}/{slug}/photo/{filename}/thumb', function ($type, $slug, $filename) {
-    $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
-    $path = storage_path($fileloc);
-
-    $failed = "It failed";
-    
-    if (!File::exists($path)) {
-      return $failed;
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $img = Image::cache(function($image) use ($file) {
-        $image->make($file)->resize(null, 200, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-    }, 100, false);
-    
-    $response = Response::make($img, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
-Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename) {
-    $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
-    $path = storage_path($fileloc);
-
-    $failed = "It failed";
-    
-    if (!File::exists($path)) {
-      return $failed;
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
+Route::get('/api/accommodations', 'TestRoutesController@ApiAccommodationNameList');
+Route::get('/{type}/{slug}/photo/{filename}/thumb', 'TestRoutesController@ImageFromStorageWithResize');
+Route::get('/{type}/{slug}/photo/{filename}', 'TestRoutesController@ImageFromStorage');
 Route::get('/photo/create', 'PhotopanelController@create');
 Route::post('/photo/create/package', 'PhotopanelController@store');
-Route::get('/imagetest', function(){
-    $img = Image::make('https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg')->resize(300, 200);
-    return $img->response('jpg');
-});
-Route::get('/image/{folder}/{type}/{filename}', function ($folder, $type, $filename) {
-    $fileloc = 'app/public/'.$folder.'/'.$type.'/'.$filename;
-    $path = storage_path($fileloc);
-
-    $failed = "It failed";
-    
-    if (!File::exists($path)) {
-      return $failed;
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    /*$img = Image::cache(function($image) use ($file) {
-        $image->make($file)->resize(null, 1080, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-    }, 100, false); */
-    
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
-Route::get('/dontdumpthis', function () {
-    $stuffs = 'Shower, Bathtub, Free toiletries, Toilet, Hairdryer, Bathroom, Satellite channels, Flat-screen TV, TV, Desk, Sofa, Sitting area, Dining area, Room Service, Packed Lunches, Car Rental, Shuttle Service, Tour Desk, Ticket Service, Baggage Storage, Concierge Service, Laundry, Dry Cleaning, Safe, Non-smoking Rooms, Family Rooms, Elevator, Airport Shuttle, 24-Hour Front Desk, Soundproof Rooms, Heating, Iron';
-    $array_items = explode(', ', $stuffs);
-    foreach ($array_items as $name) {
-        $flight = new \App\facilities;
-        $flight->name = $name;
-        $flight->save();
-        echo 'Done';
-    }
-    echo 'Fully DOne';
-});
+Route::get('/imagetest', 'TestRoutesController@ImageTest');
+Route::get('/dontdumpthis', 'TestRoutesController@FacilitiesDump');
 Route::get('/newExtranet/login', function () {
     return view('extranet.auth.newLogin');
 });
 //Test Routes (end)
 
 //Gallery (start)
-Route::get('/gallery', function () {
-    $gallery_images = \App\Gallery::all();
-    return view('gallery.index', compact('gallery_images'));
-});
+Route::get('/gallery', 'GalleryController@index');
 //Gallery (end)
 
 // Accommodation Routes (start)
@@ -228,119 +140,10 @@ Route::group(['prefix' => 'photopackage'], function () {
 //Auth Routes (end)
 
 //Bookings and Inquiry (start)
-
-    // Route::get('/booking/{acco_id}/{room_id}', 'BookingController@create');
-    // Route::post('/booking/{acco_id}/{room_id}', 'BookingController@store');
-    // Route::get('/inquery/{acco_id}/{room_id}', 'InqueryController@create');
-    // Route::post('/inquery/{acco_id}/{room_id}', 'InqueryController@store');
-
-Route::get('/booking', function (Request $request) {
-    $tax = \App\Settings::find('1');    
-    $accommodation = Accomodations::find($request->accommodation);
-    $room = \App\accommo_room::find($request->room);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $room_photo = $room->photos->where('main', 1)->first();
-
-    return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
-})->middleware('auth');
-Route::get('/inquiry', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    $accommodation = Accomodations::find($request->accommodation);
-    $room = \App\accommo_room::find($request->room);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $room_photo = $room->photos->where('main', 1)->first();
-
-    return view('inquery.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
-})->middleware('auth');
-
-Route::post('/booking', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    $accommodation = Accomodations::find($request->acco_id);
-    $room = \App\accommo_room::find($request->room_id);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $booking = \App\booking::create(Input::except('_token'));
-    $booking->user_id = auth()->user()->id;
-    $booking->save();
-
-    Alert::success('Booking Successfully created');
-    
-    return redirect()->back();
-})->middleware('auth');
-
-Route::post('/inquiry', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    $accommodation = Accomodations::find($request->acco_id);
-    $room = \App\accommo_room::find($request->room_id);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $booking = \App\inquery::create(Input::except('_token'));
-    $booking->user_id = auth()->user()->id;
-    $booking->save();
-
-    Alert::success('Inquiry Successfully created');
-    
-    return redirect()->back();
-})->middleware('auth');
-
+Route::get('/booking', 'BookingController@create')->middleware('auth');
+Route::post('/booking', 'BookingController@store')->middleware('auth');
+Route::get('/inquiry', 'InqueryController@create')->middleware('auth');
+Route::post('/inquiry', 'InqueryController@store')->middleware('auth');
 //Bookings and Inquiry (end)
 
 //Mail Test URLS
@@ -394,29 +197,29 @@ Route::get('/contact-us', function () {
     return view('about.contact-us');
 });
 
+// Subsribe
+Route::group(['prefix' => 'subscribe'], function () {
+    
+});
+
 Route::post('/subscribe/post', function (Request $request) {
     $subscribe = \App\Subscriber::create(Input::except('_token'));
     Alert::success('Subscribed successfully');
     return redirect()->back();
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Customer Panel
+Route::group(['prefix' => 'home'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    
+    Route::get('/bookings', 'HomeController@bookings');
+    Route::get('/bookings/cancel/{id}', 'BookingController@cancellation_request');
 
-Route::get('/home/bookings', function () {
-    $bookings = \App\booking::where('user_id', auth()->user()->id)->get();
-    return view('customer.booking',compact('bookings'));
-})->middleware('auth');
-
-Route::get('/home/inquiries', function () {
-    $bookings = \App\inquery::where('user_id', auth()->user()->id)->get();
-    return view('customer.inquery',compact('bookings'));
-})->middleware('auth');
-
-Route::get('/home/inquiries/{id}', function ($id) {
-    $booking = \App\inquery::findorfail($id);
-    return view('customer.inquerydetail', compact('booking'));
-})->middleware('auth');
-Route::get('/home/settings','HomeController@settings');
-Route::post('/home/settings/profile','HomeController@profile');
-Route::get('/home/settings/change-password','HomeController@changePass');
-Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+    Route::get('/inquiries', 'HomeController@inquiry');
+    Route::get('/inquiries/{id}', 'HomeController@inquiryView');
+    
+    Route::get('/settings','HomeController@settings');
+    Route::post('/settings/profile','HomeController@profile');
+    Route::get('/settings/change-password','HomeController@changePass');
+    Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+});

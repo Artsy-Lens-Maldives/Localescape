@@ -60,7 +60,26 @@
                                         <div class="col-md-8">
                                             <ul>
                                                 <li>
-                                                    Booking Status: <button class="btn">Confirmed</button>
+                                                    Booking Status: 
+                                                    @if ($last_booking->booking_confirmed == 1)
+                                                        <button class="btn btn-success disabled">Confirmed</button>
+                                                    @endif
+                                                    
+                                                    @if ($last_booking->booking_not_available == 1)
+                                                        <button class="btn btn-danger disabled">Booking Not Available</button>
+                                                    @endif
+                                                    
+                                                    @if ($last_booking->booking_requested == 1)
+                                                        <button class="btn btn-primary disabled">Booking Requested</button>
+                                                    @endif
+                                                    
+                                                    @if ($last_booking->booking_cancellation_requested == 1)
+                                                        <button class="btn btn-info disabled">Booking Cancellation Requested</button>
+                                                    @endif
+                                                    
+                                                    @if ($last_booking->booking_cancelled == 1)
+                                                        <button class="btn btn-danger disabled">Booking Cancelled</button>
+                                                    @endif
                                                 </li>
                                                 <li>
                                                     Booking Confirmation Number: <?php echo mt_rand(100000,999999) ?>

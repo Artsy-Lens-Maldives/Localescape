@@ -53,7 +53,7 @@
                                         <li><a href="{{ url('/extranet/accommodations/add') }}">Add New</a></li>
                                     </ul>
                                 </li>
-
+                                <li><a href="{{ url('/extranet/bookings') }}">Bookings</a></li>
                                 <li><a href="{{ url('/extranet/profile') }}">Profile</a></li>
                                 <li>
                                     <a href="{{ url('/extranet/logout') }}"

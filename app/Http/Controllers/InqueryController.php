@@ -25,7 +25,26 @@ class InqueryController extends Controller
      */
     public function create()
     {
-        return view("inquery.create");
+        $tax = \App\Settings::find('1');
+        $accommodation = Accomodations::find($request->accommodation);
+        $room = \App\accommo_room::find($request->room);
+        $check_in = Carbon::parse($request->check_in);
+        $check_out = Carbon::parse($request->check_out);
+        $adults = $request->adults;
+        $child = $request->child;
+
+        $days = $check_out->diffInDays($check_in);
+        $tp_adult = $adults * $room->price_adult * $days;
+        $tp_child = $child * $room->price_child * $days;
+        
+        $total = $tp_adult + $tp_child;
+        if ($tax->tax == '1') {
+            $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+        }
+        
+        $room_photo = $room->photos->where('main', 1)->first();
+
+        return view('inquery.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
     }
 
     /**
@@ -36,8 +55,30 @@ class InqueryController extends Controller
      */
     public function store(Request $request)
     {
-        inquery::create(Input::except('_token'));
-        return redirect()->back()->with('alert-success', 'Inquery Successfully Sent');
+        $tax = \App\Settings::find('1');
+        $accommodation = Accomodations::find($request->acco_id);
+        $room = \App\accommo_room::find($request->room_id);
+        $check_in = Carbon::parse($request->check_in);
+        $check_out = Carbon::parse($request->check_out);
+        $adults = $request->adults;
+        $child = $request->child;
+
+        $days = $check_out->diffInDays($check_in);
+        $tp_adult = $adults * $room->price_adult * $days;
+        $tp_child = $child * $room->price_child * $days;
+        
+        $total = $tp_adult + $tp_child;
+        if ($tax->tax == '1') {
+            $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+        }
+        
+        $booking = \App\inquery::create(Input::except('_token'));
+        $booking->user_id = auth()->user()->id;
+        $booking->save();
+
+        Alert::success('Inquiry Successfully created');
+        
+        return redirect()->back();
     }
 
     /**

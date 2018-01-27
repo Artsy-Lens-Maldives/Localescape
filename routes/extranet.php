@@ -36,10 +36,6 @@ Route::prefix('accommodations')->group(function () {
 
     Route::get('/preview/{id}', 'AccomodationsController@preview');
 
-    //Booking Route
-    Route::get('/bookings', function () {
-        return view('extranet.accommodations.bookings');
-    }); 
     //Review Route
     Route::get('/reviews', function () {
         return view('extranet.accommodations.reviews');
@@ -53,4 +49,14 @@ Route::prefix('accommodations')->group(function () {
         Route::get('delete/{accommo_room}', 'AccommoRoomController@destroy');
     });
 
+});
+
+//Booking Routes
+Route::prefix('bookings')->group(function () {
+    Route::get('/', function () {
+        $bookings = \App\booking::all();
+        return view('extranet.bookings.index', compact('bookings'));
+    });
+    Route::get('/cancel/{id}', 'BookingController@cancel');
+    Route::get('/confirm/{id}', 'BookingController@confirm');
 });

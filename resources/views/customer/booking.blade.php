@@ -21,34 +21,77 @@
                         </ul>
                  </nav>
                  <div class="panel-body">
+                    <div class="flash-message">
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+                
+                            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                            
+                            @endif
+                        @endforeach
+                    </div>
                     <table id="taxi" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>                            
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>Accomodation Booked</th>
                                 <th>Check In</th>
                                 <th>Check Out</th>
-                                <th>Estimated Time Arrival</th>
-                                <th>Flight Number</th>
-                                <th>Accomodation Booked</th>
                                 <th>Date</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($bookings as $booking)
                             <tr>
-                                <td>{{ $booking->name }}</th>
-                                <td>{{ $booking->email }}</td>
+                                <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
                                 <td>{{ $booking->checkin }}</td>
                                 <td>{{ $booking->checkout }}</td>
-                                <td>{{ $booking->eta }}</td>
-                                <td>{{ $booking->flightnumber }}</td>
-                                <td>{{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}</td>
-                                <td>{{ $booking->created_at->diffForHumans() }}</td>
-                                <td>
-                                    <a style="margin:1px" class="btn btn-warning" href="">Delete Request</a>
-                                </td>
+                                <td>{{ $booking->created_at->toFormattedDateString() }}</td>
+                                @if ($booking->booking_confirmed == 1)
+                                    <td>
+                                        <button class="btn btn-success disabled">Confirmed</button>
+                                    </td>
+                                    <td>
+                                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/cancel/{{ $booking->id }}">Delete Request</a>
+                                    </td>
+                                @endif
+                                
+                                @if ($booking->booking_not_available == 1)
+                                    <td>
+                                        <button class="btn btn-danger disabled">Booking Not Available</button>
+                                    </td>
+                                    <td>
+                                        <a style="margin:1px" class="btn btn-warning" href="">Book again</a>
+                                    </td>
+                                @endif
+                                
+                                @if ($booking->booking_requested == 1)
+                                    <td>
+                                        <button class="btn btn-primary disabled">Booking Requested</button>
+                                    </td>
+                                    <td>
+                                        <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/cancel/{{ $booking->id }}">Delete Request</a>
+                                    </td>
+                                @endif
+                                
+                                @if ($booking->booking_cancellation_requested == 1)
+                                    <td>                                        
+                                        <button class="btn btn-info disabled">Booking Cancellation Requested</button>
+                                    </td>
+                                    <td>
+                                        <a style="margin:1px" class="btn btn-warning" href="">Book again</a>
+                                    </td>
+                                @endif
+                                
+                                @if ($booking->booking_cancelled == 1)
+                                    <td>
+                                        <button class="btn btn-danger disabled">Booking Cancelled</button>
+                                    </td>
+                                    <td>
+                                        <a style="margin:1px" class="btn btn-warning" href="">Book again</a>
+                                    </td>
+                                @endif
                             </tr>                            
                             @endforeach
                         </tbody>
