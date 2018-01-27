@@ -28,98 +28,13 @@ Route::get('/', function () {
 
 //Test Routes (start)
 //Route::get('/all', 'Api/ApiAccomodationsController@index');
-Route::get('/api/accommodations', function () {
-    $accommodations = Accomodations::all();
-    $names = array();
-    foreach($accommodations as $accommodation) {
-        array_push($names, $accommodation->title);
-        array_push($names, $accommodation->address);
-    }
-    return array_unique($names);
-});
-Route::get('/{type}/{slug}/photo/{filename}/thumb', function ($type, $slug, $filename) {
-    $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
-    $path = storage_path($fileloc);
-
-    $failed = "It failed";
-    
-    if (!File::exists($path)) {
-      return $failed;
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $img = Image::cache(function($image) use ($file) {
-        $image->make($file)->resize(null, 200, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-    }, 100, false);
-    
-    $response = Response::make($img, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
-Route::get('/{type}/{slug}/photo/{filename}', function ($type, $slug, $filename) {
-    $fileloc = 'app/public/' . $slug . '/' . 'images/' . $filename;
-    $path = storage_path($fileloc);
-
-    $failed = "It failed";
-    
-    if (!File::exists($path)) {
-      return $failed;
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
+Route::get('/api/accommodations', 'TestRoutesController@ApiAccommodationNameList');
+Route::get('/{type}/{slug}/photo/{filename}/thumb', 'TestRoutesController@ImageFromStorageWithResize');
+Route::get('/{type}/{slug}/photo/{filename}', 'TestRoutesController@ImageFromStorage');
 Route::get('/photo/create', 'PhotopanelController@create');
 Route::post('/photo/create/package', 'PhotopanelController@store');
-Route::get('/imagetest', function(){
-    $img = Image::make('https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg')->resize(300, 200);
-    return $img->response('jpg');
-});
-Route::get('/image/{folder}/{type}/{filename}', function ($folder, $type, $filename) {
-    $fileloc = 'app/public/'.$folder.'/'.$type.'/'.$filename;
-    $path = storage_path($fileloc);
-
-    $failed = "It failed";
-    
-    if (!File::exists($path)) {
-      return $failed;
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    /*$img = Image::cache(function($image) use ($file) {
-        $image->make($file)->resize(null, 1080, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-    }, 100, false); */
-    
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
-Route::get('/dontdumpthis', function () {
-    $stuffs = 'Shower, Bathtub, Free toiletries, Toilet, Hairdryer, Bathroom, Satellite channels, Flat-screen TV, TV, Desk, Sofa, Sitting area, Dining area, Room Service, Packed Lunches, Car Rental, Shuttle Service, Tour Desk, Ticket Service, Baggage Storage, Concierge Service, Laundry, Dry Cleaning, Safe, Non-smoking Rooms, Family Rooms, Elevator, Airport Shuttle, 24-Hour Front Desk, Soundproof Rooms, Heating, Iron';
-    $array_items = explode(', ', $stuffs);
-    foreach ($array_items as $name) {
-        $flight = new \App\facilities;
-        $flight->name = $name;
-        $flight->save();
-        echo 'Done';
-    }
-    echo 'Fully DOne';
-});
+Route::get('/imagetest', 'TestRoutesController@ImageTest');
+Route::get('/dontdumpthis', 'TestRoutesController@FacilitiesDump');
 Route::get('/newExtranet/login', function () {
     return view('extranet.auth.newLogin');
 });
