@@ -197,29 +197,29 @@ Route::get('/contact-us', function () {
     return view('about.contact-us');
 });
 
+// Subsribe
+Route::group(['prefix' => 'subscribe'], function () {
+    
+});
+
 Route::post('/subscribe/post', function (Request $request) {
     $subscribe = \App\Subscriber::create(Input::except('_token'));
     Alert::success('Subscribed successfully');
     return redirect()->back();
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Customer Panel
+Route::group(['prefix' => 'home'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    
+    Route::get('/bookings', 'HomeController@bookings');
+    Route::get('/bookings/cancel/{id}', 'BookingController@cancellation_request');
 
-Route::get('/home/bookings', function () {
-    $bookings = \App\booking::where('user_id', auth()->user()->id)->get();
-    return view('customer.booking',compact('bookings'));
-})->middleware('auth');
-
-Route::get('/home/inquiries', function () {
-    $bookings = \App\inquery::where('user_id', auth()->user()->id)->get();
-    return view('customer.inquery',compact('bookings'));
-})->middleware('auth');
-
-Route::get('/home/inquiries/{id}', function ($id) {
-    $booking = \App\inquery::findorfail($id);
-    return view('customer.inquerydetail', compact('booking'));
-})->middleware('auth');
-Route::get('/home/settings','HomeController@settings');
-Route::post('/home/settings/profile','HomeController@profile');
-Route::get('/home/settings/change-password','HomeController@changePass');
-Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+    Route::get('/inquiries', 'HomeController@inquiry');
+    Route::get('/inquiries/{id}', 'HomeController@inquiryView');
+    
+    Route::get('/settings','HomeController@settings');
+    Route::post('/settings/profile','HomeController@profile');
+    Route::get('/settings/change-password','HomeController@changePass');
+    Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+});

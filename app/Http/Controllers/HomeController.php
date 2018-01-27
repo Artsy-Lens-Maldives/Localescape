@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\booking;
 use App\Accomodations;
+use App\App\inquery;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Support\Facades\Auth;
@@ -48,11 +49,6 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function changePass()
     {
         return view('customer.changePass');
@@ -79,5 +75,22 @@ class HomeController extends Controller
         return redirect()->back()->with("success","Password changed successfully !");
     }
         
+    public function bookings()
+    {
+        $bookings = booking::where('user_id', auth()->user()->id)->get();
+        return view('customer.booking',compact('bookings'));
+    }
+
+    public function inquiry()
+    {
+        $bookings = inquery::where('user_id', auth()->user()->id)->get();
+        return view('customer.inquery',compact('bookings'));
+    }
+
+    public function inquiryView()
+    {
+        $booking = inquery::findorfail($id);
+        return view('customer.inquerydetail', compact('booking'));
+    }
     
 }

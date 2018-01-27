@@ -80,8 +80,6 @@
                                                     @if ($last_booking->booking_cancelled == 1)
                                                         <button class="btn btn-danger disabled">Booking Cancelled</button>
                                                     @endif
-
-
                                                 </li>
                                                 <li>
                                                     Booking Confirmation Number: <?php echo mt_rand(100000,999999) ?>

@@ -130,4 +130,21 @@ class BookingController extends Controller
     {
         //
     }
+
+    public function cancellation_request(booking $booking)
+    {
+        if ($booking->cancellation_request == 0){
+            $booking->booking_cancellation_request = 1;
+            $booking->booking_confirmed = 0;
+            $booking->booking_requested = 0;
+            $booking->save();
+
+            //Send Booking Cancellation Request Mail
+            return redirect()->back()->with('alert-success', 'Booking cancellation request sent');
+        } else {
+            return redirect()->back();
+        }
+        
+    }
+
 }
