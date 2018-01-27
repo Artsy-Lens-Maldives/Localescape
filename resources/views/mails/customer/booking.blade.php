@@ -1,7 +1,7 @@
 @component('mail::message')
-# Hey Customer Name ,
+# Hey {{ $booking->user->name }} ,
 
-We have recieved a booking request on Local Escape Boutique -Delexue Room on  21.05.20xx .You will see the booking details below 
+We have recieved a booking request on {{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }} on  {{ $booking->created_at->toFormattedDateString() }} .You will see the booking details below 
 
 @component('mail::table')
 | Accomodation Details      |  Price  |
