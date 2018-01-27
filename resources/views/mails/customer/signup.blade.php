@@ -1,17 +1,16 @@
 @component('mail::message')
-    # Welcome to {{ config('app.name') }}
+# Welcome to {{ config('app.name') }}
 
-    Hi {{ $user->name }}
-    Thanks so much for joining us.
+Hi {{ $user->name }}
 
-    @component('mail::promotion')
-    Coupon Code for Discounts upto 60% : WD2D 3NF3 NR3W 2RDC
-    @endcomponent
+Greetings from Local Escape.Thanks so much for joining us here.
 
-    @component('mail::button', ['url' => ''])
-    Button Text
-    @endcomponent
+If you have any questions do not hesitate to Mail us at info@localescapemaldives.com.Our agents then will reply within 24hrs.
 
-    Thanks,<br>
-    {{ config('app.name') }}
+@component('mail::button', ['url' => 'http://localescapemaldives.com/extranet/profile'])
+Complete Your Profile
+@endcomponent
+
+Thanks,<br>
+Ahmed Nilsham (CEO)
 @endcomponent

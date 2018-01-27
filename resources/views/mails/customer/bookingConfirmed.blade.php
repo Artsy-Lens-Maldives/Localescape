@@ -1,24 +1,36 @@
+<?php
+$tax = round( $booking->price  * 12/112 ,2 )
+?>
+
 @component('mail::message')
-    # Introduction
+# Hey {{ $booking->user->name }} ,
 
-    The body of your message.
+We have confirmed your booking request on {{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }} on  {{ $booking->created_at->toFormattedDateString() }} .You will see the booking details below 
 
-    @component('mail::table')
-    | Laravel       | Table         | Example  |
-    | ------------- |:-------------:| --------:|
-    | Col 2 is      | Centered      | $10      |
-    | Col 3 is      | Right-Aligned | $20      |
-    @endcomponent
+@component('mail::table')
+| Accomodation Details      |  Price  |
+| ------------- |:---------:|
+| {{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }}       |  {{ $booking->price - $tax }}     |
+| Tax (12%)      |  {{ round( $booking->price  * 12/112 ,2 ) }} |
+| Total      |  {{ $booking->price }} |
+@endcomponent
 
-    @component('mail::panel')
-    This is the panel content.
-    @endcomponent
+@component('mail::panel')
+Chech In = {{ $booking->checkin }}	
+Checkout = {{ $booking->checkout }}	
+Email: {{ $booking->email }}	
+Contact: {{ $booking->user->phone }}
+@endcomponent
 
-    @component('mail::button', ['url' => ''])
-    View Booking
-    @endcomponent
+You can pay {{ $booking->price }} on arrival. 
 
-    Thanks,
-    <br>
-    {{ config('app.name') }}
+@component('mail::button', ['url' => 'localescapemaldives.com/home/bookings'])
+View Booking
+@endcomponent
+
+Thank you for booking from Local Escape
+
+
+Thanks,<br>
+{{ config('app.name') }}
 @endcomponent
