@@ -17,7 +17,7 @@
                 <!--end title-->
                 <div class="row">
                     <div class="col-md-9">
-                        <form id="form-profile" class="labels-uppercase" method="post" action="?" enctype="multipart/form-data">
+                        <form id="form-profile" class="labels-uppercase" method="post" action="{{ url()->current() }}" enctype="multipart/form-data">
                             <div class="row">
                                 <!--Profile Picture-->
                                 <div class="col-md-3 col-sm-3">
@@ -42,7 +42,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}">
+                                                    <input type="text" class="form-control" id="" value="{{ $users->name }}" disabled>
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -50,7 +50,7 @@
                                             <div class="col-md-6 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $users->email }}">
+                                                    <input type="email" class="form-control" id="" value="{{ $users->email }}" disabled>
                                                 </div>
                                                 <!--end form-group-->
                                             </div>
@@ -98,7 +98,7 @@
                                                     <label for="zip">ZIP</label>
                                                     <input type="text" class="form-control" id="zip" name="zip"
                                                     @if($users->zip !== null)
-                                                        value="{{ $users->mobile }}"
+                                                        value="{{ $users->zip }}"
                                                     @endif>
                                                 </div>
                                                 <!--end form-group-->

@@ -148,29 +148,59 @@ Route::post('/inquiry', 'InqueryController@store')->middleware('auth');
 
 //Mail Test URLS
 Route::group(['prefix' => 'mailTest'], function () {
+    // Sign Up
     Route::get('/customer/sign-up', function () {
         $user = App\User::find(1);
-        
         return new App\Mail\SignUpCustomer($user);
     });
-
     Route::get('/extranet/sign-up', function () {
-        $user = App\Extranet::find(1);
-        
+        $user = App\Extranet::find(1); 
         return new App\Mail\SignUpExtranet($user);
     });
-
+    
+    // Booking
     Route::get('/extranet/booking', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        
         return new App\Mail\BookingExtranet($booking);
     });
-
     Route::get('/customer/booking', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        
+        return new App\Mail\BookingCustomer($booking);
+    });
+
+    // Confimed
+    Route::get('/extranet/booking/confirmed', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingExtranet($booking);
+    });
+    Route::get('/customer/booking/confirmed', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingCustomer($booking);
+    });
+
+    Route::get('/extranet/booking/cancel-request', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingExtranet($booking);
+    });
+    Route::get('/customer/booking/cancel-request', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingCustomer($booking);
+    });
+
+    Route::get('/extranet/booking/cancel-request', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingExtranet($booking);
+    });
+    Route::get('/customer/booking/cancel-request', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
         return new App\Mail\BookingCustomer($booking);
     });
 });

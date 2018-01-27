@@ -19,6 +19,20 @@ Route::get('/profile', function () {
     return view('extranet.profile', compact('users'));
 });
 
+Route::post('/profile', function (Request $request) {
+    $user = Auth::guard('extranet')->user();
+    $user->mobile = $request->mobile;
+    $user->phone = $request->phone;
+    $user->street = $request->street;
+    $user->zip = $request->zip;
+    $user->additional_address = $request->additional_address;
+    $user->state = $request->state;
+    $user->city = $request->city;
+    $user->country = $request->country;
+    return redirect()->back();
+    
+});
+
 Route::prefix('accommodations')->group(function () {
     //Accommodation Route
     Route::get('/', 'AccomodationsController@all');
