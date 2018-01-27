@@ -154,6 +154,8 @@ class BookingController extends Controller
             $booking->booking_cancellation_requested = 1;
             $booking->booking_confirmed = 0;
             $booking->booking_requested = 0;
+            $booking->booking_not_available = 0;
+            $booking->booking_cancelled = 0;
             $booking->save();
 
             Mail::to($booking->email)
@@ -175,6 +177,7 @@ class BookingController extends Controller
         $booking->booking_requested = 0;
         $booking->booking_confirmed = 0;
         $booking->booking_cancellation_requested = 0;
+        $booking->booking_not_available = 0;
         $booking->save();
 
         Mail::to($booking->email)
@@ -193,6 +196,7 @@ class BookingController extends Controller
         $booking->booking_requested = 0;
         $booking->booking_cancelled = 0;
         $booking->booking_cancellation_requested = 0;
+        $booking->booking_not_available = 0;
         $booking->save();
 
         Mail::to($booking->email)
@@ -200,6 +204,25 @@ class BookingController extends Controller
 
         Mail::to($booking->room->accommodation->extranet->email)
             ->send(new \App\Mail\bookingConfirmedExtranet($booking));
+        
+        return redirect()->back();
+    }
+
+    public function notAvailable($id)
+    {
+        $booking = booking::findOrFail($id);
+        $booking->booking_not_available = 1;
+        $booking->booking_confirmed = 0;
+        $booking->booking_requested = 0;
+        $booking->booking_cancelled = 0;
+        $booking->booking_cancellation_requested = 0;
+        $booking->save();
+
+        Mail::to($booking->email)
+            ->send(new \App\Mail\bookingNotAvailableCustomer($booking));
+
+        Mail::to($booking->room->accommodation->extranet->email)
+            ->send(new \App\Mail\bookingNotAvailableExtranet($booking));
         
         return redirect()->back();
     }
