@@ -31,6 +31,6 @@ class SignUpExtranet extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.extranet.signup');
+        return $this->subject('Welcome to Local Escape')->markdown('mails.extranet.signup');
     }
 }

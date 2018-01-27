@@ -32,6 +32,6 @@ class SignUpCustomer extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.customer.signup');
+        return $this->subject('Welcome to Local Escape')->markdown('mails.customer.signup');
     }
 }
