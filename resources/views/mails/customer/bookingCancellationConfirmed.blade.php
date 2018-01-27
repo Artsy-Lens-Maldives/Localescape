@@ -3,9 +3,9 @@ $tax = round( $booking->price  * 12/112 ,2 )
 ?>
 
 @component('mail::message')
-# Hey {{ $booking->room->accommodation->extranet->name }},
+# Hey {{ $booking->user->name }} ,
 
-You have confirmed a booking request on {{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }} on  {{ $booking->created_at->toFormattedDateString() }} .You will see the booking details below 
+Your request on cancelling the  booking on {{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }} on  {{ $booking->created_at->toFormattedDateString() }} was confirmed by {{ $booking->room->accommodation->title }} .You will see the booking details below 
 
 @component('mail::table')
 | Accomodation Details      |  Price  |
@@ -20,13 +20,12 @@ Chech In = {{ $booking->checkin }}
 Checkout = {{ $booking->checkout }}	
 Email: {{ $booking->email }}	
 Contact: {{ $booking->user->phone }}
-@endcomponent
- 
+@endcomponent 
 
-@component('mail::button', ['url' => 'localescapemaldives.com/extranet/bookings'])
+
+@component('mail::button', ['url' => 'localescapemaldives.com/home/bookings'])
 View Booking
 @endcomponent
-
 
 
 Thanks,<br>
