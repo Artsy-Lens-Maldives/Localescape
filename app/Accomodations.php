@@ -77,4 +77,9 @@ class Accomodations extends Model
     {
         return $this->hasMany('App\booking', 'accommo_id');
     }
+
+    public function extranet()
+    {
+        return $this->belongsTo('App\Extranet', 'user_id');
+    }
 }
