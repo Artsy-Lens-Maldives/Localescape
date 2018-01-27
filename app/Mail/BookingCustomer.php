@@ -17,12 +17,12 @@ class BookingCustomer extends Mailable
      *
      * @return void
      */
-    // public $booking;
+    public $booking;
     
-    // public function __construct(booking $booking)
-    // {
-    //     $this->booking = $booking;
-    // }
+    public function __construct(booking $booking)
+    {
+        $this->booking = $booking;
+    }
 
     /**
      * Build the message.

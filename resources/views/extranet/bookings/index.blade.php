@@ -38,7 +38,7 @@
                             <td>{{ $booking->checkin }}</td>
                             <td>{{ $booking->checkout }}</td>
                             <td>{{ $booking->nights }}</td>
-                            <td>{{ $booking->adult }}</td>
+                            <td>{{ $booking->adults }}</td>
                             <td>{{ $booking->children }}</td>
                             <td>{{ $booking->price }}</td>
                             <td>{{ $booking->created_at->toFormattedDateString() }}</td>
