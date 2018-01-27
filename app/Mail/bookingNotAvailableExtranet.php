@@ -30,6 +30,6 @@ class bookingNotAvailableExtranet extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.extranet.bookingNotAvailable');
+        return $this->subject('Booking Not Available')->markdown('mails.extranet.bookingNotAvailable');
     }
 }

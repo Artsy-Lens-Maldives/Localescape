@@ -30,6 +30,6 @@ class bookingCancellationRequestCustomer extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.customer.bookingCancellationRequest');
+        return $this->subject('Booking Cancellation Request')->markdown('mails.customer.bookingCancellationRequest');
     }
 }

@@ -30,6 +30,6 @@ class bookingCancellationRequestExtranet extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.extranet.bookingCancellationRequest');
+        return $this->subject('Booking Cancellation Request')->markdown('mails.extranet.bookingCancellationRequest');
     }
 }

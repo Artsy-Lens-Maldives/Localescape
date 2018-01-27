@@ -30,6 +30,6 @@ class bookingNotAvailableCustomer extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.customer.bookingNotAvailable');
+        return $this->subject('Booking Not Available')->markdown('mails.customer.bookingNotAvailable');
     }
 }

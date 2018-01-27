@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Alert;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -89,6 +90,12 @@ class BookingController extends Controller
 
         Alert::success('Booking Successfully created');
         
+        Mail::to($request->email)
+            ->send(new \App\Mail\bookingCustomer($booking));
+
+        Mail::to($booking->room->accommodation->extranet->email)
+            ->send(new \App\Mail\bookingExtranet($booking));
+
         return redirect()->back();
     }
 
@@ -149,7 +156,11 @@ class BookingController extends Controller
             $booking->booking_requested = 0;
             $booking->save();
 
-            //Send Booking Cancellation Request Mail
+            Mail::to($booking->email)
+                ->send(new \App\Mail\bookingCancellationRequestCustomer($booking));
+
+            Mail::to($booking->room->accommodation->extranet->email)
+                ->send(new \App\Mail\bookingCancellationRequestExtranet($booking));
             return redirect()->back()->with('alert-success', 'Booking cancellation request sent');
         } else {
             return redirect()->back();
@@ -176,6 +187,13 @@ class BookingController extends Controller
         $booking->booking_cancelled = 0;
         $booking->booking_cancellation_requested = 0;
         $booking->save();
+
+        Mail::to($booking->email)
+            ->send(new \App\Mail\bookingConfirmedCustomer($booking));
+
+        Mail::to($booking->room->accommodation->extranet->email)
+            ->send(new \App\Mail\bookingConfirmedExtranet($booking));
+        
         return redirect()->back();
     }
 

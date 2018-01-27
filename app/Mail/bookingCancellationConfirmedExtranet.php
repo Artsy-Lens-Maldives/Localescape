@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\booking;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -30,6 +31,6 @@ class bookingCancellationConfirmedExtranet extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.extranet.bookingCancellationConfirmed');
+        return $this->subject('Booking Cancellation Confirmed')->markdown('mails.extranet.bookingCancellationConfirmed');
     }
 }

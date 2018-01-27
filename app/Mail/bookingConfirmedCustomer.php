@@ -31,6 +31,6 @@ class bookingConfirmedCustomer extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        return $this->markdown('mails.customer.bookingConfirmed');
+        return $this->subject('Booking Confirmed')->markdown('mails.customer.bookingConfirmed');
     }
 }

@@ -32,6 +32,6 @@ class BookingCustomer extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.customer.booking');
+        return $this->subject('Booking Requested')->markdown('mails.customer.booking');
     }
 }
