@@ -16,9 +16,11 @@ class bookingNotAvailableCustomer extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $booking;
+    
+    public function __construct(booking $booking)
     {
-        //
+        $this->booking = $booking;
     }
 
     /**
@@ -28,6 +30,6 @@ class bookingNotAvailableCustomer extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('mails.customer.bookingNotAvailable');
     }
 }

@@ -174,34 +174,48 @@ Route::group(['prefix' => 'mailTest'], function () {
     Route::get('/extranet/booking/confirmed', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        return new App\Mail\BookingExtranet($booking);
+        return new App\Mail\BookingConfirmedExtranet($booking);
     });
     Route::get('/customer/booking/confirmed', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        return new App\Mail\BookingCustomer($booking);
+        return new App\Mail\BookingConfirmedCustomer($booking);
     });
 
+    // Not Available
+    Route::get('/extranet/booking/not-available', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingNotAvailableExtranet($booking);
+    });
+    Route::get('/customer/booking/not-available', function () {
+        $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
+        return new App\Mail\BookingNotAvailableCustomer($booking);
+    });
+
+    // Cancellation Request
     Route::get('/extranet/booking/cancel-request', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        return new App\Mail\BookingExtranet($booking);
+        return new App\Mail\BookingCancellationRequestExtranet($booking);
     });
     Route::get('/customer/booking/cancel-request', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        return new App\Mail\BookingCustomer($booking);
+        return new App\Mail\BookingCancellationRequestCustomer($booking);
     });
 
-    Route::get('/extranet/booking/cancel-request', function () {
+    // Cancellation Confirmed
+    Route::get('/extranet/booking/cancel-confirmed', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        return new App\Mail\BookingExtranet($booking);
+        return new App\Mail\BookingCancellationConfirmedExtranet($booking);
     });
-    Route::get('/customer/booking/cancel-request', function () {
+    Route::get('/customer/booking/cancel-confirmed', function () {
         $user = App\Extranet::find(1);
         $booking = \App\booking::find(1);
-        return new App\Mail\BookingCustomer($booking);
+        return new App\Mail\BookingCancellationConfirmedCustomer($booking);
     });
 });
 
