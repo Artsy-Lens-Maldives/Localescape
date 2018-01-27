@@ -36,10 +36,6 @@ Route::prefix('accommodations')->group(function () {
 
     Route::get('/preview/{id}', 'AccomodationsController@preview');
 
-    //Booking Route
-    Route::get('/bookings', function () {
-        return view('extranet.accommodations.bookings');
-    }); 
     //Review Route
     Route::get('/reviews', function () {
         return view('extranet.accommodations.reviews');
@@ -54,3 +50,36 @@ Route::prefix('accommodations')->group(function () {
     });
 
 });
+
+//Booking Route
+Route::get('/bookings', function () {
+    $bookings = \App\booking::all();
+    return view('extranet.bookings.index', compact('bookings'));
+}); 
+
+Route::get('/bookings/cancel/{id}', function ($id) {
+    $booking = \App\booking::findOrFail($id);
+
+    $booking->booking_cancelled = 1;
+    
+    $booking->booking_requested = 0;
+    $booking->booking_confirmed = 0;
+    $booking->booking_cancellation_requested = 0;
+    $booking->save();
+
+    return redirect()->back();
+    
+}); 
+
+Route::get('/bookings/confirm/{id}', function ($id) {
+    $booking = \App\booking::findOrFail($id);
+
+    $booking->booking_confirmed = 1;
+
+    $booking->booking_requested = 0;
+    $booking->booking_cancelled = 0;
+    $booking->booking_cancellation_requested = 0;
+    $booking->save();
+
+    return redirect()->back();
+}); 

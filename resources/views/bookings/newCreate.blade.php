@@ -23,6 +23,8 @@
               <form class="form-horizontal" action="{{ url()->current() }}" method="POST">
                 <input type="hidden" name="acco_id" value="{{ request()->accommodation }}">
                 <input type="hidden" name="room_id" value="{{ request()->room }}">
+                <input type="hidden" name="adults" value="{{ request()->adults }}">
+                <input type="hidden" name="children" value="{{ request()->child }}">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="email">Full Name</label>
                   <div class="col-sm-10">

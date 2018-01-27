@@ -9,6 +9,7 @@ use App\accommo_room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use Alert;
 
 class BookingController extends Controller
 {
@@ -28,7 +29,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $tax = Settings::find('1');    
         $accommodation = Accomodations::find($request->accommodation);
@@ -58,27 +59,32 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($acco_id, $room_id, Request $request)
+    public function store(Request $request)
     {
         $tax = Settings::find('1');
         $accommodation = Accomodations::find($request->acco_id);
         $room = accommo_room::find($request->room_id);
-        $check_in = Carbon::parse($request->check_in);
-        $check_out = Carbon::parse($request->check_out);
+        $check_in = Carbon::parse($request->checkin);
+        $check_out = Carbon::parse($request->checkout);
         $adults = $request->adults;
-        $child = $request->child;
+        $child = $request->children;
 
         $days = $check_out->diffInDays($check_in);
         $tp_adult = $adults * $room->price_adult * $days;
         $tp_child = $child * $room->price_child * $days;
         
+        $booking = booking::create(Input::except('_token'));
+        $booking->user_id = auth()->user()->id;
+        $booking->adults = $adults;
+        $booking->nights = $days;
+
         $total = $tp_adult + $tp_child;
         if ($tax->tax == '1') {
             $tax_total = $total + ($total * ($tax->tax_percentage / 100));
+            $booking->price = $tax_total;
+        } else {
+            $booking->price = $total;
         }
-        
-        $booking = booking::create(Input::except('_token'));
-        $booking->user_id = auth()->user()->id;
         $booking->save();
 
         Alert::success('Booking Successfully created');
@@ -131,10 +137,12 @@ class BookingController extends Controller
         //
     }
 
-    public function cancellation_request(booking $booking)
+    public function cancellation_request($id)
     {
+        $booking = booking::findOrFail($id);
+        
         if ($booking->cancellation_request == 0){
-            $booking->booking_cancellation_request = 1;
+            $booking->booking_cancellation_requested = 1;
             $booking->booking_confirmed = 0;
             $booking->booking_requested = 0;
             $booking->save();
