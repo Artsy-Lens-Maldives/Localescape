@@ -162,14 +162,16 @@ Route::group(['prefix' => 'mailTest'], function () {
 
     Route::get('/extranet/booking', function () {
         $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
         
-        return new App\Mail\BookingExtranet;
+        return new App\Mail\BookingExtranet($booking);
     });
 
     Route::get('/customer/booking', function () {
         $user = App\Extranet::find(1);
+        $booking = \App\booking::find(1);
         
-        return new App\Mail\BookingCustomer;
+        return new App\Mail\BookingCustomer($booking);
     });
 });
 

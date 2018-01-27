@@ -17,6 +17,7 @@
             <th>Checkout</th>
             <th>Estimated Time of Arrival</th>
             <th>Flight Number</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -30,9 +31,51 @@
               <td>{{ $booking->checkout }}</td>
               <td>{{ $booking->eta }}</td>
               <td>{{ $booking->flightnumber }}</td>
-              <td style="text-align: center;">
-                <a style="margin:1px" class="btn btn-warning" href="/admin/bookings/accommodations/{{ $booking->id }}/edit">Edit</a>                     
-              </td>
+              @if ($booking->booking_confirmed == 1)
+                  <td>
+                      <button class="btn btn-success disabled">Confirmed</button>
+                  </td>
+                  <td>
+                      <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/cancel/{{ $booking->id }}">Cancel Booking</a>
+                  </td>
+              @endif
+              
+              @if ($booking->booking_not_available == 1)
+                  <td>
+                      <button class="btn btn-danger disabled">Booking Not Available</button>
+                  </td>
+                  <td>
+                      <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/confirm/{{ $booking->id }}">Confirm Booking</a>
+                  </td>
+              @endif
+              
+              @if ($booking->booking_requested == 1)
+                  <td>
+                      <button class="btn btn-primary disabled">Booking Requested</button>
+                  </td>
+                  <td>
+                      <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/confirm/{{ $booking->id }}">Confirm Booking</a>
+                      <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/cancel/{{ $booking->id }}">Decline Booking</a>
+                  </td>
+              @endif
+              
+              @if ($booking->booking_cancellation_requested == 1)
+                  <td>                                        
+                      <button class="btn btn-info disabled">Booking Cancellation Requested</button>
+                  </td>
+                  <td>
+                      <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/cancel/{{ $booking->id }}">Cancel Booking</a>
+                  </td>
+              @endif
+              
+              @if ($booking->booking_cancelled == 1)
+                  <td>
+                      <button class="btn btn-danger disabled">Booking Cancelled</button>
+                  </td>
+                  <td>
+                      <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/confirm/{{ $booking->id }}">Confirm Booking</a>
+                  </td>
+              @endif
             </tr>
           @endforeach
         </tbody>

@@ -111,7 +111,9 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $booking = booking::findOrFail($id);
+        return view('bookings.edit', compact('booking'));
+
     }
 
     /**
