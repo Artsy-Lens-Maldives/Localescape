@@ -176,6 +176,13 @@ class BookingController extends Controller
         $booking->booking_confirmed = 0;
         $booking->booking_cancellation_requested = 0;
         $booking->save();
+
+        Mail::to($booking->email)
+            ->send(new \App\Mail\bookingCancellationConfirmedCustomer($booking));
+
+        Mail::to($booking->room->accommodation->extranet->email)
+            ->send(new \App\Mail\bookingCancellationConfirmedExtranet($booking));
+
         return redirect()->back();        
     }
 
