@@ -3,7 +3,7 @@ $tax = round( $booking->price  * 12/112 ,2 )
 ?>
 
 @component('mail::message')
-# Hey {{ $booking->room->accommodation->user->name }} ,
+# Hey {{ $booking->room->accommodation->extranet->name }} ,
 
 You have recieved a booking request on {{ $booking->room->accommodation->title }} - {{ $booking->room->room_type }} on  {{ $booking->created_at->toFormattedDateString() }} .You will see the booking details below 
 
