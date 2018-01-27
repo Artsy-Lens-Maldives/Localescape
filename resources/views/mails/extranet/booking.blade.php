@@ -16,12 +16,13 @@ You have recieved a booking request on {{ $booking->room->accommodation->title }
 @endcomponent
 
 @component('mail::panel')
+Customer Information
 Chech In = {{ $booking->checkin }}	
 Checkout = {{ $booking->checkout }}	
 Email: {{ $booking->email }}	
 Contact: {{ $booking->user->phone }}
 @endcomponent
-Chek this Booking from your Extranet panel to either confirm or reject the booking.
+Check this Booking from your Extranet panel to either confirm or reject the booking.
 
 @component('mail::button', ['url' => 'localescapemaldives.com/extranet/bookings'])
 View Booking
