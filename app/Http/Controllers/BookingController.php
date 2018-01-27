@@ -155,4 +155,15 @@ class BookingController extends Controller
         
     }
 
+    public function cancel($id)
+    {
+        $booking = booking::findOrFail($id);
+        $booking->booking_cancelled = 1;
+        $booking->booking_requested = 0;
+        $booking->booking_confirmed = 0;
+        $booking->booking_cancellation_requested = 0;
+        $booking->save();
+        return redirect()->back();        
+    }
+
 }
