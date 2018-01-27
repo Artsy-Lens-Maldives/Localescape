@@ -126,10 +126,7 @@ Route::get('/newExtranet/login', function () {
 //Test Routes (end)
 
 //Gallery (start)
-Route::get('/gallery', function () {
-    $gallery_images = \App\Gallery::all();
-    return view('gallery.index', compact('gallery_images'));
-});
+Route::get('/gallery', 'GalleryController@index');
 //Gallery (end)
 
 // Accommodation Routes (start)
@@ -228,119 +225,10 @@ Route::group(['prefix' => 'photopackage'], function () {
 //Auth Routes (end)
 
 //Bookings and Inquiry (start)
-
-    // Route::get('/booking/{acco_id}/{room_id}', 'BookingController@create');
-    // Route::post('/booking/{acco_id}/{room_id}', 'BookingController@store');
-    // Route::get('/inquery/{acco_id}/{room_id}', 'InqueryController@create');
-    // Route::post('/inquery/{acco_id}/{room_id}', 'InqueryController@store');
-
-Route::get('/booking', function (Request $request) {
-    $tax = \App\Settings::find('1');    
-    $accommodation = Accomodations::find($request->accommodation);
-    $room = \App\accommo_room::find($request->room);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $room_photo = $room->photos->where('main', 1)->first();
-
-    return view('bookings.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
-})->middleware('auth');
-Route::get('/inquiry', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    $accommodation = Accomodations::find($request->accommodation);
-    $room = \App\accommo_room::find($request->room);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $room_photo = $room->photos->where('main', 1)->first();
-
-    return view('inquery.newCreate', compact('room', 'check_in', 'check_out','adults' , 'child', 'days', 'tp_adult', 'tp_child', 'total', 'room_photo', 'tax', 'tax_total'));
-})->middleware('auth');
-
-Route::post('/booking', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    $accommodation = Accomodations::find($request->acco_id);
-    $room = \App\accommo_room::find($request->room_id);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $booking = \App\booking::create(Input::except('_token'));
-    $booking->user_id = auth()->user()->id;
-    $booking->save();
-
-    Alert::success('Booking Successfully created');
-    
-    return redirect()->back();
-})->middleware('auth');
-
-Route::post('/inquiry', function (Request $request) {
-    $tax = \App\Settings::find('1');
-    $accommodation = Accomodations::find($request->acco_id);
-    $room = \App\accommo_room::find($request->room_id);
-    $check_in = Carbon::parse($request->check_in);
-    $check_out = Carbon::parse($request->check_out);
-    $adults = $request->adults;
-    $child = $request->child;
-
-    $days = $check_out->diffInDays($check_in);
-    $tp_adult = $adults * $room->price_adult * $days;
-    $tp_child = $child * $room->price_child * $days;
-    
-    if ($tax->tax == '1') {
-        $total = $tp_adult + $tp_child;
-        $tax_total = $total + ($total * ($tax->tax_percentage / 100));
-    } else {
-        $total = $tp_adult + $tp_child;
-    }
-    
-    $booking = \App\inquery::create(Input::except('_token'));
-    $booking->user_id = auth()->user()->id;
-    $booking->save();
-
-    Alert::success('Inquiry Successfully created');
-    
-    return redirect()->back();
-})->middleware('auth');
-
+Route::get('/booking', 'BookingController@create')->middleware('auth');
+Route::post('/booking', 'BookingController@store')->middleware('auth');
+Route::get('/inquiry', 'InqueryController@create')->middleware('auth');
+Route::post('/inquiry', 'InqueryController@store')->middleware('auth');
 //Bookings and Inquiry (end)
 
 //Mail Test URLS
