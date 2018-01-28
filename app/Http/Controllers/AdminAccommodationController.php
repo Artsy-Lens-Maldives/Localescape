@@ -12,6 +12,7 @@ use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Mohamedathik\PhotoUpload\Upload;
+use App\facilities;
 
 class AdminAccommodationController extends Controller
 {

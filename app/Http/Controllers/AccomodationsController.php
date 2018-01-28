@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 use Image;
 use Mohamedathik\PhotoUpload\Upload;
+use App\facilities;
 //use Twilio\Rest\Client;
 
 class AccomodationsController extends Controller
