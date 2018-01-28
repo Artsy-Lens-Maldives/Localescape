@@ -66,7 +66,7 @@
                                 </td>
                                 <td>
                                     <a style="margin:1px" class="btn btn-warning" href="{{ url()->current() }}/confirm/{{ $booking->id }}">Confirm Booking</a>
-                                    <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/cancel/{{ $booking->id }}">Decline Booking</a>
+                                    <a style="margin:1px" class="btn btn-danger" href="{{ url()->current() }}/not-available/{{ $booking->id }}">Decline Booking</a>
                                 </td>
                             @endif
                             

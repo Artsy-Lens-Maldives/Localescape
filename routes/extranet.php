@@ -73,4 +73,5 @@ Route::prefix('bookings')->group(function () {
     });
     Route::get('/cancel/{id}', 'BookingController@cancel');
     Route::get('/confirm/{id}', 'BookingController@confirm');
+    Route::get('/not-available/{id}', 'BookingController@notAvailable');
 });
