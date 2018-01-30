@@ -31,7 +31,7 @@
 <!-- Script Tags -->
 <script type="text/javascript" src="/js/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyAG39AdqTOn4i_dCVIOFvef5QOwO44zzzo&libraries=places"></script>
+<script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDxQkMlkHAypPQGKuG4AA_IZ4tqAS_SYNA&libraries=places"></script>
 <script type="text/javascript" src="/js/infobox.js"></script>
 <script type="text/javascript" src="/js/markerclusterer_packed.js"></script>
 <script type="text/javascript" src="/js/richmarker-compiled.js"></script>
