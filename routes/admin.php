@@ -16,8 +16,12 @@ Route::get('/home', function () {
     $users[] = Auth::guard('admin')->user();
 
     // dd($users);
+    $recent_bookings = \App\booking::orderBy('created_at', 'desc')->take(5)->get();
+    $recent_inquires = \App\inquery::orderBy('created_at', 'desc')->take(5)->get();
+    $recent_customers = \App\User::orderBy('created_at', 'desc')->take(5)->get();
+    $recent_extranets = \App\Extranet::orderBy('created_at', 'desc')->take(5)->get();
 
-    return view('admin.home');
+    return view('admin.home', compact('recent_bookings', 'recent_inquires', 'recent_customers', 'recent_extranets'));
 })->name('home');
 
 Route::get('/testone', function () {
