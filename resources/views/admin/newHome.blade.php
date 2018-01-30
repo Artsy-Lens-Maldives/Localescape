@@ -73,7 +73,6 @@
                         <thead>
                             <tr>                            
                                 <th>Name</th>
-                                <th>Email</th>
                                 <th>Contact</th>
                                 <th>Address</th>
                                 <th>Date</th>
@@ -83,10 +82,9 @@
                             @foreach($recent_customers as $booking)
                             <tr>
                                 <td>{{ $booking->name }}</td>
-                                <td>{{ $booking->email }}</td>
                                 <td>{{ $booking->mobile }}/{{ $booking->phone }}</td>
                                 <td>{{ $booking->street }}/{{ $booking->zip }}/{{ $booking->city }}/{{ $booking->state }}/{{ $booking->country }} </td>
-                                <td>{{ $booking->created_at>toFormattedDateString() }}</td>
+                                <td>{{ $booking->created_at->toFormattedDateString() }}</td>
                             </tr>                            
                             @endforeach
                         </tbody>
