@@ -91,10 +91,10 @@ class BookingController extends Controller
         Alert::success('Booking Successfully created');
         
         Mail::to($request->email)
-            ->send(new \App\Mail\bookingCustomer($booking));
+            ->send(new \App\Mail\BookingCustomer($booking));
 
         Mail::to($booking->room->accommodation->extranet->email)
-            ->send(new \App\Mail\bookingExtranet($booking));
+            ->send(new \App\Mail\BookingExtranet($booking));
 
         return redirect()->back();
     }
