@@ -36,11 +36,16 @@
                                 <div class="col-md-4">
                                     <h2>Address</h2>
                                     <address>
-                                        <strong>Local Escape Maldives</strong><br>
-                                        G.Villa Shabnamee,<br>
-                                        Handhuvarudhey Goalhi, Malé 20101<br>
+                                        <strong>Local Escape Maldives</strong>
                                         <br>
-                                        +960 9555544<br>
+                                        G.Villa Shabnamee,
+                                        <br>
+                                        Handhuvarudhey Goalhi, Malé 20101
+                                        <br>
+                                        Phone: 4008800
+                                        <br>                                        
+                                        Fax: 4008811
+                                        <br>
                                         <a href="#">info@localescapemaldives.com</a><br>
 
                                     </address>
